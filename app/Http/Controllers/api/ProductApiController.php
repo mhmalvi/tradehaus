@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
 use App\Models\Type;
-use Illuminate\Support\Facades\DB;
 
-class ProductController extends Controller
+class ProductApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +16,23 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    public function show_all()
-    {
-        $products = Product::orderBy('id', 'DESC')->with('types')->get();
-        return view('home', compact('products'));
+        // $product = Product::orderBy('id', 'DESC')->get();
+        $product = Product::orderBy('id', 'DESC')->with('types')->get();
+        return $product;
+        // for ($i = 0; $i < count($product); $i++) {
+        //     // $type[] = $product[$i]['id'];
+        //     if()
+        // }
+        // dd($type);
+        if (!$product->isEmpty()) {
+            return response()->json([
+                'data' => $product
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'failed'
+            ], 424);
+        }
     }
 
     /**
@@ -83,10 +92,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        // dd($id);
-        $products = Product::find($id);
-        $type = Type::where('product_id', $id)->get();
-        return view('product_details', compact('products','type'));
+        return $products = Product::find($id);
     }
 
     /**
@@ -109,7 +115,6 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->all());
         $product = Product::find($request->id);
         $product->product_name = $request->product_name;
         // $product->product_price = $request->product_price;

@@ -186,54 +186,67 @@
                                 </div>
                             </div>
                             <div class="ec-single-price-stoke">
+                            <?php
+                                //$price=array();
+                                for($k=0;$k<count($type);$k++){
+                                    $price[] = $type[$k]['original_price'];
+                                }
+                                $low_price = min($price);
+                            ?>
                                 <div class="ec-single-price">
                                     <span class="ec-single-ps-title">As low as</span>
-                                    <?php
-                                    //echo $products->product_price;
-                                        $discount_price = $products->product_price*($products->product_discount/100);
-                                        ?>
-                                    <span class="new-price">$<?=$discount_price;?></span>
+                                    
+                                    <span class="new-price">${{ $low_price }}</span>
+
                                 </div>
                                 <div class="ec-single-stoke">
                                     <span class="ec-single-ps-title">IN STOCK</span>
                                     <span class="ec-single-sku">SKU#: WH12</span>
                                 </div>
+                                {{-- @endforeach --}}
                             </div>
+                            
 
                             <div class="ec-pro-variation">
+                            
+
                                 <div class="ec-pro-variation-inner ec-pro-variation-size">
+                                
+
                                     <span>SIZE</span>
+                                    
+
                                     <div class="ec-pro-variation-content">
                                         <ul>
-                                            <?php
-                                                    $sizes = explode(',',$products['product_size']);
-                                                    for($i=0;$i<count($sizes);$i++){
+                                        @foreach($type as $types)
 
-                                                ?>
-                                            <li class="active"><span><?=$sizes[$i];?></span></li>
-                                            {{-- <li><span>M</span></li>
-                                                    <li><span>L</span></li>
-                                                    <li><span>XL</span></li> --}}
-                                            <?php } ?>
+                                            <li class="active"><span>{{ $types->size }}</span></li>
+                                            @endforeach
+
                                         </ul>
                                     </div>
+                                    
+
+
                                 </div>
                                 <div class="ec-pro-variation-inner ec-pro-variation-color">
                                     <span>Color</span>
                                     <div class="ec-pro-variation-content">
                                         <ul>
-                                            <?php
-                                                $color = explode(',',$products->product_color);
-                                                for($j=0;$j<count($color);$j++){
-                                                    ?>
-                                            <li class="active"><span style="background-color:<?=$color[$j];?>"></span></li>
-                                            <?php
-                                                }
-                                                ?>
+
+                                        @foreach($type as $types)
+
+                                            <li class="active"><span style="background-color:{{ $types->color }}"></span></li>
+                                        @endforeach
+
                                         </ul>
                                     </div>
                                 </div>
+                                
+
                             </div>
+                            
+
                             <div class="ec-single-qty">
                                 <div class="qty-plus-minus">
                                     <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
@@ -299,10 +312,21 @@
                     <div id="ec-spt-nav-info" class="tab-pane fade">
                         <div class="ec-single-pro-tab-moreinfo">
                             <ul>
-                                <li><span>Weight</span> {{ $products->product_weight }} g</li>
+                            <?php
+                                for($i=0;$i<count($type);$i++){
+                                    $weight[]=$type[$i]['weight'];
+                                    $color[]=$type[$i]['color'];
+                                }
+                                $weight = implode(', ',$weight);
+                                $color = implode(', ',$color);
+
+
+
+                                ?>
+                                <li><span>Weight</span> {{ $weight }} g</li>
                                 <li><span>Dimensions</span> {{ $products->product_dimension }}</li>
 
-                                <li><span>Color</span> {{ $products->product_color }}</li>
+                                <li><span>Color</span> {{ $color }}</li>
 
                             </ul>
                         </div>

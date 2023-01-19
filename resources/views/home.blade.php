@@ -168,13 +168,13 @@
                                                 if($product->product_discount!==0){
                                                     $discount_price = $product->product_price*($product->product_discount/100);
                                                     ?>
-                                            <span class="new-price">${{ $discount_price }}</span>
+                                            {{-- <span class="new-price">${{ $discount_price }}</span> --}}
 
-                                            <?php
+                                        <?php
                                                 }else{
                                             ?>
-                                            <span class="new-price">${{ $product->product_price }}</span>
-                                            <?php
+                                        <span class="new-price">${{ $product->product_price }}</span>
+                                        <?php
                                                 }
                                             ?>
                                         </span>
@@ -195,15 +195,9 @@
                                             <div class="ec-pro-size">
                                                 <span class="ec-pro-opt-label">Size</span>
                                                 <ul class="ec-opt-size">
-                                                    <?php
-                                                    $sizes = explode(',',$product->product_size);
-                                                    for($j=0;$j<count($sizes);$j++){
-                                                    ?>
-                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small"><?=$sizes[$j];?></a></li>
-
-                                                    <?php
-                                                    }
-                                                    ?>
+                                                    @foreach($product->types as $types)
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $types->size }}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>

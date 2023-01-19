@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Category;
 use App\Models\Type;
-use Illuminate\Support\Facades\DB;
-
-class ProductController extends Controller
+class TypeApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    public function show_all()
-    {
-        $products = Product::orderBy('id', 'DESC')->with('types')->get();
-        return view('home', compact('products'));
+        return Type::all();
     }
 
     /**
@@ -44,18 +35,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
+        $product = new Type();
 
-        $product->product_name = $request->product_name;
+        $product->size = $request->size;
         // $product->product_price = $request->product_price;
         // $product->product_size = $request->product_size;
         // $product->product_discount = $request->product_discount;
         // $product->product_weight = $request->product_weight;
-        $product->product_color = $request->product_color;
-        $product->product_short_description = $request->product_short_description;
+        $product->price = $request->price;
+        $product->weight = $request->weight;
         // $product->product_dimension = $request->product_dimension;
-        $product->product_details = $request->product_details;
-        $product->category_id = $request->category_id;
+        $product->dimension = $request->dimension;
+        $product->discount = $request->discount;
+        $product->product_id = $request->product_id;
         if ($request->product_image) {
 
             $fileName = time() . '.' . $request->product_image->getClientOriginalExtension();
@@ -83,10 +75,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        // dd($id);
-        $products = Product::find($id);
-        $type = Type::where('product_id', $id)->get();
-        return view('product_details', compact('products','type'));
+        //
     }
 
     /**
@@ -107,20 +96,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $product = Product::find($request->id);
-        $product->product_name = $request->product_name;
+        $product = Type::find($id);
+        $product->size = $request->size;
         // $product->product_price = $request->product_price;
         // $product->product_size = $request->product_size;
         // $product->product_discount = $request->product_discount;
         // $product->product_weight = $request->product_weight;
-        $product->product_color = $request->product_color;
-        $product->product_short_description = $request->product_short_description;
+        $product->price = $request->price;
+        $product->weight = $request->weight;
         // $product->product_dimension = $request->product_dimension;
-        $product->product_details = $request->product_details;
-        $product->category_id = $request->category_id;
+        $product->dimension = $request->dimension;
+        $product->discount = $request->discount;
+        $product->product_id = $request->product_id;
         if ($request->product_image) {
 
             $fileName = time() . '.' . $request->product_image->getClientOriginalExtension();
@@ -128,8 +117,8 @@ class ProductController extends Controller
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image = $file_path;
         }
-        $update = $product->save();
-        if ($update) {
+        $save = $product->save();
+        if ($save) {
             return response()->json([
                 'message' => 'updated'
             ], 200);
@@ -146,18 +135,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $product = Product::find($request->id);
-        $data = $product->delete();
-        if ($data) {
-            return response()->json([
-                'message' => 'deleted'
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'failed'
-            ], 424);
-        }
+        $type=Type::find($id);
+        $type->delete();
     }
 }

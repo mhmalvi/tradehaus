@@ -24,4 +24,4 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/',[CategoryController::class, 'show_all']);
 Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
-// Route::get('/get-products', [ProductController::class, 'show_all']);
+
