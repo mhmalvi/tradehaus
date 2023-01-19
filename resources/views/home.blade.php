@@ -142,7 +142,7 @@
                                                 <img class="hover-image" src="{{ env('APP_URL') }}/{{ $product->product_image }}" alt="Product" />
 
                                             </a>
-                                            <span class="percentage">{{ $product->product_discount }}%</span>
+                                            <span class="percentage">{{ $product->product_discount }}</span>
                                             <a href="#" class="quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
                                             <div class="ec-pro-actions">
                                                 <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare.svg" class="svg_img pro_svg" alt="" /></a>
@@ -152,7 +152,7 @@
                                         </div>
                                     </div>
                                     <div class="ec-pro-content">
-                                        <h5 class="ec-pro-title"><a href="product-left-sidebar.html">{{ $product->product_name }}</a></h5>
+                                        <h5 class="ec-pro-title"><a href="{{ route('product.details',['id'=>$product->id]) }}">{{ $product->product_name }}</a></h5>
                                         <div class="ec-pro-rating">
                                             <i class="ecicon eci-star fill"></i>
                                             <i class="ecicon eci-star fill"></i>

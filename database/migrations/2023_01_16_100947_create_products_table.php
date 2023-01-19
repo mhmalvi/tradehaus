@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('product_size')->nullable();
             $table->integer('product_price');
             $table->integer('product_weight');
-            $table->float('product_dimension');
+            $table->text('product_dimension');
             $table->text('product_color')->nullable();
             $table->string('product_image');
             $table->string('product_discount')->nullable();
