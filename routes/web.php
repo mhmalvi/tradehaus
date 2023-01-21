@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 // Route::prefix('/',function(){
     
 // });
 // Route::get('/',[CategoryController::class, 'show_all']);
-Route::get('/', [ProductController::class, 'show_all']);
-Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
+// Route::get('/', [ProductController::class, 'show_all']);
+// Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
 
