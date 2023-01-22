@@ -1,6 +1,6 @@
 <template>
     <div>
-    <h1>Welcome vuwers</h1>
+    <router-view />
 </div>
 </template>
 <script>
