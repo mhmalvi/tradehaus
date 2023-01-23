@@ -5,6 +5,8 @@
         </p>
     </div>
 </footer>
+
+
 <script src="{{ asset('admin/assets/plugins/jquery/jquery-3.5.1.min.js') }}"></script>
 
 <script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>

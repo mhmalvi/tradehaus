@@ -53,14 +53,23 @@ class ProductApiController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $product = new Product();
 
         $product->product_name = $request->product_name;
         // $product->product_price = $request->product_price;
-        // $product->product_size = $request->product_size;
+        $product->size1 = $request->size1;
+        $product->size2 = $request->size2;
+        $product->size3 = $request->size3;
+        $product->size4 = $request->size4;
+        $product->size5 = $request->size5;
         // $product->product_discount = $request->product_discount;
         // $product->product_weight = $request->product_weight;
-        $product->product_color = $request->product_color;
+        $product->color_1 = $request->color_1;
+        $product->color_2 = $request->color_2;
+        $product->color_3 = $request->color_3;
+        $product->color_4 = $request->color_4;
+        $product->product_code_name = $request->product_code_name;
         $product->product_short_description = $request->product_short_description;
         // $product->product_dimension = $request->product_dimension;
         $product->product_details = $request->product_details;
@@ -122,6 +131,7 @@ class ProductApiController extends Controller
         // $product->product_discount = $request->product_discount;
         // $product->product_weight = $request->product_weight;
         $product->product_color = $request->product_color;
+        $product->product_code_name = $request->product_code_name;
         $product->product_short_description = $request->product_short_description;
         // $product->product_dimension = $request->product_dimension;
         $product->product_details = $request->product_details;

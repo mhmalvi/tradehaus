@@ -24,12 +24,14 @@ use Illuminate\Support\Facades\Route;
     
 // });
 Route::get('/',[CategoryController::class, 'show_all']);
-// Route::get('/', [ProductController::class, 'show_all']);
+Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
-
 // Route::get('admin',[AdminCategoryController::class,'index']);
 Route::prefix('admin')->group(function(){
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
+    Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
+    Route::get('/edit-product', [AdminProductController::class, 'edit'])->name('edit.product');
+    Route::get('/get-productList', [AdminProductController::class, 'product_list'])->name('product.list');
     Route::get('/add-category', [AdminCategoryController::class, 'index'])->name('add.category');
     Route::get('/edit-category', [AdminCategoryController::class, 'edit'])->name('edit.category');
     Route::get('/edit-subcategory', [AdminCategoryController::class, 'edit_subCategory'])->name('edit.sub-category');

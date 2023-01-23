@@ -186,46 +186,60 @@
                                 </div>
                             </div>
                             <div class="ec-single-price-stoke">
-                            <?php
+                                <?php
                                 //$price=array();
-                                for($k=0;$k<count($type);$k++){
-                                    $price[] = $type[$k]['original_price'];
-                                }
-                                $low_price = min($price);
+                                
                             ?>
                                 <div class="ec-single-price">
                                     <span class="ec-single-ps-title">As low as</span>
-                                    
-                                    <span class="new-price">${{ $low_price }}</span>
+
+                                    <span class="new-price">${{ $products->product_price }}</span>
 
                                 </div>
                                 <div class="ec-single-stoke">
                                     <span class="ec-single-ps-title">IN STOCK</span>
-                                    <span class="ec-single-sku">SKU#: WH12</span>
+                                    <span class="ec-single-sku">{{ $products->product_code_name }}</span>
                                 </div>
                                 {{-- @endforeach --}}
                             </div>
-                            
+
 
                             <div class="ec-pro-variation">
-                            
+
 
                                 <div class="ec-pro-variation-inner ec-pro-variation-size">
-                                
+
 
                                     <span>SIZE</span>
-                                    
+
 
                                     <div class="ec-pro-variation-content">
                                         <ul>
-                                        @foreach($type as $types)
+                                            @if(isset($products->size1))
+                                            <li class="active"><span>{{ $products->size1 }}</span></li>
 
-                                            <li class="active"><span>{{ $types->size }}</span></li>
-                                            @endforeach
+
+                                            @endif
+                                            @if(isset($products->size2))
+
+                                            <li class="active"><span>{{ $products->size2 }}</span></li>
+                                            @endif
+                                            @if(isset($products->size3))
+
+                                            <li class="active"><span>{{ $products->size3 }}</span></li>
+                                            @endif
+                                            @if(isset($products->size4))
+
+                                            <li class="active"><span>{{ $products->size4 }}</span></li>
+                                            @endif
+                                            @if(isset($products->size5))
+
+                                            <li class="active"><span>{{ $products->size5 }}</span></li>
+                                            @endif
 
                                         </ul>
                                     </div>
-                                    
+
 
 
                                 </div>
@@ -234,18 +248,23 @@
                                     <div class="ec-pro-variation-content">
                                         <ul>
 
-                                        @foreach($type as $types)
 
-                                            <li class="active"><span style="background-color:{{ $types->color }}"></span></li>
-                                        @endforeach
+                                            <li class="active"><span style="background-color:{{ $products->color_1 }}"></span></li>
+                                            <li class="active"><span style="background-color:{{ $products->color_2 }}"></span></li>
+
+                                            <li class="active"><span style="background-color:{{ $products->color_3 }}"></span></li>
+
+                                            <li class="active"><span style="background-color:{{ $products->color_4 }}"></span></li>
+
+
 
                                         </ul>
                                     </div>
                                 </div>
-                                
+
 
                             </div>
-                            
+
 
                             <div class="ec-single-qty">
                                 <div class="qty-plus-minus">
@@ -286,9 +305,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-details" role="tablist">Detail</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-info" role="tablist">More Information</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-review" role="tablist">Reviews</a>
                         </li>
@@ -298,39 +317,28 @@
                     <div id="ec-spt-nav-details" class="tab-pane fade show active">
                         <div class="ec-single-pro-tab-desc">
                             <p>
-                                {{ $products->product_details }}
+                                {!! $products->product_details !!}
 
                             </p>
-                            <ul>
+                            {{-- <ul>
                                 <li>Any Product types that You want - Simple, Configurable</li>
                                 <li>Downloadable/Digital Products, Virtual Products</li>
                                 <li>Inventory Management with Backordered items</li>
                                 <li>Flatlock seams throughout.</li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
-                    <div id="ec-spt-nav-info" class="tab-pane fade">
+                    {{-- <div id="ec-spt-nav-info" class="tab-pane fade">
                         <div class="ec-single-pro-tab-moreinfo">
                             <ul>
-                            <?php
-                                for($i=0;$i<count($type);$i++){
-                                    $weight[]=$type[$i]['weight'];
-                                    $color[]=$type[$i]['color'];
-                                }
-                                $weight = implode(', ',$weight);
-                                $color = implode(', ',$color);
+                                <li><span>Weight</span>g</li>
+                                <li><span>Dimensions</span> </li>
 
-
-
-                                ?>
-                                <li><span>Weight</span> {{ $weight }} g</li>
-                                <li><span>Dimensions</span> {{ $products->product_dimension }}</li>
-
-                                <li><span>Color</span> {{ $color }}</li>
+                                <li><span>Color</span></li>
 
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div id="ec-spt-nav-review" class="tab-pane fade">
                         <div class="row">

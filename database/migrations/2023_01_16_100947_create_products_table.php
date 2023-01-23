@@ -33,6 +33,7 @@ class CreateProductsTable extends Migration
             $table->string('product_image_6')->nullable();
             $table->string('product_discount')->nullable();
             $table->integer('product_quantity')->nullable();
+            // $table->string('tags')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->timestamps();

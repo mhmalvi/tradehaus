@@ -17,12 +17,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     public function show_all()
     {
-        $products = Product::orderBy('id', 'DESC')->with('types')->get();
+        $products = Product::orderBy('id', 'DESC')->get();
         return view('home', compact('products'));
     }
 
@@ -47,10 +47,12 @@ class ProductController extends Controller
         $product = new Product();
 
         $product->product_name = $request->product_name;
-        // $product->product_price = $request->product_price;
-        // $product->product_size = $request->product_size;
-        // $product->product_discount = $request->product_discount;
-        // $product->product_weight = $request->product_weight;
+        $product->product_price = $request->product_price;
+        $product->product_size = $request->product_size;
+        $product->product_discount = $request->product_discount;
+        $product->slug = $request->slug;
+        $product->product_quantity = $request->product_quantity;
+        $product->tags = $request->tags;
         $product->product_color = $request->product_color;
         $product->product_short_description = $request->product_short_description;
         // $product->product_dimension = $request->product_dimension;
@@ -62,6 +64,48 @@ class ProductController extends Controller
             $request->product_image->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image = $file_path;
+        }
+        if ($request->product_image_1) {
+
+            $fileName = time() . '.' . $request->product_image_1->getClientOriginalExtension();
+            $request->product_image_1->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_1 = $file_path;
+        }
+        if ($request->product_image_2) {
+
+            $fileName = time() . '.' . $request->product_image_2->getClientOriginalExtension();
+            $request->product_image_2->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_2 = $file_path;
+        }
+        if ($request->product_image_3) {
+
+            $fileName = time() . '.' . $request->product_image_3->getClientOriginalExtension();
+            $request->product_image_3->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image = $file_path;
+        }
+        if ($request->product_image_4) {
+
+            $fileName = time() . '.' . $request->product_image_4->getClientOriginalExtension();
+            $request->product_image_4->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_4 = $file_path;
+        }
+        if ($request->product_image_5) {
+
+            $fileName = time() . '.' . $request->product_image_5->getClientOriginalExtension();
+            $request->product_image_5->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_5 = $file_path;
+        }
+        if ($request->product_image_6) {
+
+            $fileName = time() . '.' . $request->product_image_6->getClientOriginalExtension();
+            $request->product_image_6->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_6 = $file_path;
         }
         $save = $product->save();
         if ($save) {
@@ -85,8 +129,7 @@ class ProductController extends Controller
     {
         // dd($id);
         $products = Product::find($id);
-        $type = Type::where('product_id', $id)->get();
-        return view('product_details', compact('products','type'));
+        return view('product_details', compact('products'));
     }
 
     /**
@@ -112,21 +155,65 @@ class ProductController extends Controller
         // dd($request->all());
         $product = Product::find($request->id);
         $product->product_name = $request->product_name;
-        // $product->product_price = $request->product_price;
-        // $product->product_size = $request->product_size;
-        // $product->product_discount = $request->product_discount;
-        // $product->product_weight = $request->product_weight;
+        $product->product_price = $request->product_price;
+        $product->product_size = $request->product_size;
+        $product->product_discount = $request->product_discount;
+        $product->slug = $request->slug;
+        $product->tags = $request->tags;
+        $product->product_quantity = $request->product_quantity;
         $product->product_color = $request->product_color;
         $product->product_short_description = $request->product_short_description;
         // $product->product_dimension = $request->product_dimension;
         $product->product_details = $request->product_details;
         $product->category_id = $request->category_id;
         if ($request->product_image) {
-
+            unlink($product->product_image);
             $fileName = time() . '.' . $request->product_image->getClientOriginalExtension();
             $request->product_image->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image = $file_path;
+        }
+        if ($request->product_image_1) {
+            unlink($product->product_image_1);
+            $fileName = time() . '.' . $request->product_image_1->getClientOriginalExtension();
+            $request->product_image_1->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_1 = $file_path;
+        }
+        if ($request->product_image_2) {
+            unlink($product->product_image_2);
+            $fileName = time() . '.' . $request->product_image_2->getClientOriginalExtension();
+            $request->product_image_2->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_2 = $file_path;
+        }
+        if ($request->product_image_3) {
+            unlink($product->product_image_3);
+            $fileName = time() . '.' . $request->product_image_3->getClientOriginalExtension();
+            $request->product_image_3->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image = $file_path;
+        }
+        if ($request->product_image_4) {
+            unlink($product->product_image_4);
+            $fileName = time() . '.' . $request->product_image_4->getClientOriginalExtension();
+            $request->product_image_4->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_4 = $file_path;
+        }
+        if ($request->product_image_5) {
+            unlink($product->product_image_5);
+            $fileName = time() . '.' . $request->product_image_5->getClientOriginalExtension();
+            $request->product_image_5->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_5 = $file_path;
+        }
+        if ($request->product_image_6) {
+            unlink($product->product_image_6);
+            $fileName = time() . '.' . $request->product_image_6->getClientOriginalExtension();
+            $request->product_image_6->move(public_path('assets/img/products'), $fileName);
+            $file_path = "assets/img/products/" . $fileName;
+            $product->product_image_6 = $file_path;
         }
         $update = $product->save();
         if ($update) {
@@ -150,6 +237,13 @@ class ProductController extends Controller
     {
         $product = Product::find($request->id);
         $data = $product->delete();
+        unlink($product->product_image);
+        unlink($product->product_image_1);
+        unlink($product->product_image_2);
+        unlink($product->product_image_3);
+        unlink($product->product_image_4);
+        unlink($product->product_image_5);
+        unlink($product->product_image_6);
         if ($data) {
             return response()->json([
                 'message' => 'deleted'

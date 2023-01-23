@@ -139,7 +139,7 @@
 
                                                 <img style="height: 217px;" class="main-image" src="{{ env('APP_URL') }}/{{ $product->product_image }}" alt="Product" />
 
-                                                <img class="hover-image" src="{{ env('APP_URL') }}/{{ $product->product_image }}" alt="Product" />
+                                                {{-- <img class="hover-image" src="{{ env('APP_URL') }}/{{ $product->product_image }}" alt="Product" /> --}}
 
                                             </a>
                                             <span class="percentage">{{ $product->product_discount }}</span>
@@ -162,8 +162,9 @@
                                         </div>
                                         <div class="ec-pro-list-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dutmmy text ever since the 1500s, when an unknown printer took a galley.</div>
                                         <span class="ec-price">
-
+                                            @if(isset($product->product_discount))
                                             <span class="old-price">{{ $product->product_price }}</span>
+                                            @endif
                                             <?php
                                                 if($product->product_discount!==0){
                                                     $discount_price = $product->product_price*($product->product_discount/100);
@@ -182,22 +183,38 @@
                                             <div class="ec-pro-color">
                                                 <span class="ec-pro-opt-label">Color</span>
                                                 <ul class="ec-opt-swatch ec-change-img">
-                                                    <?php
-                                                $colors = explode(',',$product->product_color);
-                                                for($i=0;$i<count($colors);$i++){
-                                                    ?>
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/6_1.jpg" data-src-hover="assets/images/product-image/6_1.jpg" data-tooltip="Gray"><span style="background-color:<?=$colors[$i];?>"></span></a></li>
-                                                    <?php
-                                                }
-                                                ?>
+
+                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/6_1.jpg" data-src-hover="assets/images/product-image/6_1.jpg" data-tooltip="Gray"><span style="background-color:{{ $product->color_1 }}"></span></a></li>
+                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/6_1.jpg" data-src-hover="assets/images/product-image/6_1.jpg" data-tooltip="Gray"><span style="background-color:{{ $product->color_2 }}"></span></a></li>
+
+                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/6_1.jpg" data-src-hover="assets/images/product-image/6_1.jpg" data-tooltip="Gray"><span style="background-color:{{ $product->color_3 }}"></span></a></li>
+
+                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/6_1.jpg" data-src-hover="assets/images/product-image/6_1.jpg" data-tooltip="Gray"><span style="background-color:{{ $product->color_4 }}"></span></a></li>
+
                                                 </ul>
                                             </div>
                                             <div class="ec-pro-size">
                                                 <span class="ec-pro-opt-label">Size</span>
                                                 <ul class="ec-opt-size">
-                                                    @foreach($product->types as $types)
-                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $types->size }}</a></li>
-                                                    @endforeach
+                                                    @if(isset($product->size1))
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size1 }}</a></li>
+
+
+                                                    @endif
+                                                    @if(isset($product->size2))
+
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size2 }}</a></li>
+                                                    @endif
+                                                    @if(isset($product->size3))
+
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size3 }}</a></li>
+                                                    @endif
+                                                    @if(isset($product->size4))
+
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size4 }}</a></li>
+                                                    @endif
+
+                                                    {{-- @endforeach --}}
                                                 </ul>
                                             </div>
                                         </div>
