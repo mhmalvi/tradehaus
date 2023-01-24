@@ -214,61 +214,173 @@
 
 
                                     <div class="ec-pro-variation-content">
-                                        <ul>
+
+                                        <ul id="myForm">
+
                                             @if(isset($products->size1))
-                                            <li class="active"><span>{{ $products->size1 }}</span></li>
+                                            {{-- <li class="active"><span style="{{ $products->size1 }}" name="size1">{{ $products->size1 }}</span></li> --}}
+                                            {{-- <div class="form-check form-check-inline"> --}}
+                                            {{-- <div class="form-group" style="display:flex;"> --}}
+                                            <input type="radio" class="form-control size-radio" name="size" value="{{ $products->size1 }}">
 
+                                            <label class=" mr-3">{{ $products->size1 }}</label>
 
+                                            {{-- </div> --}}
                                             @endif
+
+
+
+
+
+
                                             @if(isset($products->size2))
 
-                                            <li class="active"><span>{{ $products->size2 }}</span></li>
+                                            {{-- <li class="active"><span style="{{ $products->size2 }}" name="size2">{{ $products->size2 }}</span></li> --}}
+                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size2 }}">
+
+                                            <label class=" mr-3">{{ $products->size2 }}</label>
+
+
+
                                             @endif
                                             @if(isset($products->size3))
 
-                                            <li class="active"><span>{{ $products->size3 }}</span></li>
+                                            {{-- <li class="active"><span style="{{ $products->size3 }}" name="size3">{{ $products->size3 }}</span></li> --}}
+                                            <input type="radio" class="size-radio" name="size" value="">
+
+                                            <label class=" mr-3">{{ $products->size3 }}</label>
+
+
+
                                             @endif
                                             @if(isset($products->size4))
 
-                                            <li class="active"><span>{{ $products->size4 }}</span></li>
+                                            {{-- <li class="active"><span style="{{ $products->size4 }}" name="size4">{{ $products->size4 }}</span></li> --}}
+                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size4 }}">
+
+
+                                            <label class=" mr-3">{{ $products->size4 }}</label>
+
+
+
                                             @endif
                                             @if(isset($products->size5))
 
-                                            <li class="active"><span>{{ $products->size5 }}</span></li>
+                                            {{-- <li class="active"><span name="size5" style="{{ $products->size5 }}">{{ $products->size5 }}</span></li> --}}
+                                            <input type="radio" class="size-radio mr-3" name="size" value="{{ $products->size5 }}">
+
+
+                                            <label class=" mr-3">{{ $products->size5 }}</label>
+
+
+
                                             @endif
 
                                         </ul>
                                     </div>
 
-
-
                                 </div>
-                                <div class="ec-pro-variation-inner ec-pro-variation-color">
-                                    <span>Color</span>
-                                    <div class="ec-pro-variation-content">
-                                        <ul>
 
-
-                                            <li class="active"><span style="background-color:{{ $products->color_1 }}"></span></li>
-                                            <li class="active"><span style="background-color:{{ $products->color_2 }}"></span></li>
-
-                                            <li class="active"><span style="background-color:{{ $products->color_3 }}"></span></li>
-
-                                            <li class="active"><span style="background-color:{{ $products->color_4 }}"></span></li>
-
-
-
-                                        </ul>
-                                    </div>
-                                </div>
 
 
                             </div>
+                            <div class="ec-pro-variation-inner ec-pro-variation-color">
+                                <span>Color</span>
+                                <div class="ec-pro-variation-content">
+                                    <div style="display:flex" class="mb-3" id="color-form">
+
+                                        <div class="form-group" id="">
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+
+
+
+
+
+                                            <input class="form-control form-control-color" id="color_1" style="width:84%;min-height: 10px; background:{{ $products->color_1 }};" title="Choose your color" />
+
+
+                                        </div>
+                                        <div class="form-group">
+
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+
+
+
+
+
+
+                                            <input class="form-control form-control-color" style="width:84%;min-height: 10px; background:{{ $products->color_2 }};" id="color_2" title="Choose your color" />
+
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;margin-left: 28%;min-height: 10px;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+
+
+
+
+
+
+                                            <input style=" width:84%;background:{{ $products->color_3 }};min-height: 10px;" class="form-control form-control-color" id="color_3" title="Choose your color" />
+
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+
+
+
+
+
+                                            <input style=" background:{{ $products->color_4 }};width:84%;min-height: 10px;" class="form-control form-control-color" id="color_4" title="Choose your color" />
+
+                                        </div>
+
+
+
+
+
+
+
+
+
+                                        {{-- <ul>
+
+
+                                            <li class="active form-control-color"><span value="{{ $products->color_1 }}" name="color_1" style="background-color:{{ $products->color_1 }}"></span></li>
+
+
+
+                                        <li class="active form-control-color"><span value="{{ $products->color_2 }}" name="color_2" style="background-color:{{ $products->color_2 }}"></span></li>
+
+
+
+
+                                        <li class="active"><span value="{{ $products->color_3 }}" name="color_3" style="background-color:{{ $products->color_3 }}"></span></li>
+
+
+
+                                        <li class="active"><span name="color_4" value="{{ $products->color_4 }}" style="background-color:{{ $products->color_4 }}"></span></li>
+
+                                        </ul> --}}
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
 
 
                             <div class="ec-single-qty">
                                 <div class="qty-plus-minus">
-                                    <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                                    <input class="qty-input" type="text" name="quantity" value="1" />
                                 </div>
                                 <div class="ec-single-cart ">
                                     <button class="btn btn-primary">Add To Cart</button>
@@ -1339,7 +1451,33 @@
         </div>
     </div>
 </div>
+<style>
+    .size-radio {
+        height: 16px;
+        width: 4%;
 
+    }
+
+</style>
+<script>
+    color - form
+
+    $('#myForm input').on('change', function() {
+        alert($('input[name="size"]:checked', '#myForm').val());
+    });
+    $('#color-form input').on('change', function() {
+
+        alert($('input[name="color"]:checked', '#color-form').val());
+
+    });
+    function save(){
+        $.ajax({
+            type:"post"
+            url:""
+        })
+    }
+
+</script>
 
 
 @endsection
