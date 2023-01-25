@@ -216,12 +216,12 @@
                                     <div class="ec-pro-variation-content">
 
                                         <ul id="myForm">
-
+                                            <input type="hidden" name="id" id="product_id" value="{{ $products->id }}" />
                                             @if(isset($products->size1))
                                             {{-- <li class="active"><span style="{{ $products->size1 }}" name="size1">{{ $products->size1 }}</span></li> --}}
                                             {{-- <div class="form-check form-check-inline"> --}}
                                             {{-- <div class="form-group" style="display:flex;"> --}}
-                                            <input type="radio" class="form-control size-radio" name="size" value="{{ $products->size1 }}">
+                                            <input type="radio"  class="form-control size-radio" name="size" value="{{ $products->size1 }}">
 
                                             <label class=" mr-3">{{ $products->size1 }}</label>
 
@@ -287,10 +287,11 @@
                             <div class="ec-pro-variation-inner ec-pro-variation-color">
                                 <span>Color</span>
                                 <div class="ec-pro-variation-content">
-                                    <div style="display:flex" class="mb-3" id="color-form">
+                                    <div style="display:flex" class="mb-3 required checkbox-group" id="color-form">
+
 
                                         <div class="form-group" id="">
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
 
 
 
@@ -302,7 +303,7 @@
                                         </div>
                                         <div class="form-group">
 
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
 
 
 
@@ -316,7 +317,7 @@
 
                                         <div class="form-group">
 
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;margin-left: 28%;min-height: 10px;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;margin-left: 28%;min-height: 10px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
 
 
 
@@ -330,7 +331,7 @@
 
                                         <div class="form-group">
 
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color_1" value="{{ $products->color_1 }}" title="Choose your color" />
+                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
 
 
 
@@ -380,7 +381,7 @@
 
                             <div class="ec-single-qty">
                                 <div class="qty-plus-minus">
-                                    <input class="qty-input" type="text" name="quantity" value="1" />
+                                    <input class="qty-input" type="text" name="product_quantity" value="1" />
                                 </div>
                                 <div class="ec-single-cart ">
                                     <button class="btn btn-primary">Add To Cart</button>
@@ -1476,6 +1477,9 @@
             url:""
         })
     }
+
+    $('div.checkbox-group.required :checkbox:checked').length > 0
+
 
 </script>
 
