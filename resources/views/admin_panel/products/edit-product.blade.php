@@ -30,7 +30,7 @@
 
                     <div class="card-body">
                         <div class="row ec-vendor-uploads">
-                            <form action="{{ route('store.product') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('update.product',[$product->id]) }}" method="post" enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
                                 <div class="row">
@@ -39,14 +39,17 @@
                                             <div class="ec-vendor-main-img">
                                                 <div class="avatar-upload">
                                                     <div class="avatar-edit">
+                                                        {{-- {{ $product->id }} --}}
+
                                                         <input type='file' name="product_image" value="{{ $product->product_image }}" id="imageUpload" class="ec-image-upload" accept=".png, .jpg, .jpeg" />
 
 
-                                                        <label for="imageUpload"><img src="" class="svg_img header_svg" alt="edit" /></label>
+                                                        <label for="imageUpload"><img src="{{ asset(env('APP_URL').'/'.$product->product_image) }}" class="svg_img header_svg" alt="edit" /></label>
                                                     </div>
                                                     <div class="avatar-preview ec-preview">
                                                         <div class="imagePreview ec-div-preview">
-                                                            <img class="ec-image-preview" name="product_image_1" src="assets/img/products/vender-upload-preview.jpg" alt="edit" />
+                                                            <img class="ec-image-preview" name="product_image_1" src="{{ asset(env('APP_URL').'/'.$product->product_image) }}" alt="edit" />
+
 
                                                         </div>
                                                     </div>
@@ -58,22 +61,44 @@
 
                                                             <label for="imageUpload"><img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" /></label>
                                                         </div>
+                                                        @if(isset($product->product_image_1))
+
+                                                        <div class="thumb-preview ec-preview">
+                                                            <div class="image-thumb-preview">
+                                                                <img class="image-thumb-preview ec-image-preview" src="{{ asset(env('APP_URL').'/'.$product->product_image_1) }}" alt="edit" />
+
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="thumb-preview ec-preview">
                                                             <div class="image-thumb-preview">
                                                                 <img class="image-thumb-preview ec-image-preview" src="assets/img/products/vender-upload-thumb-preview.jpg" alt="edit" />
                                                             </div>
                                                         </div>
+                                                        @endif
+
                                                     </div>
                                                     <div class="thumb-upload">
                                                         <div class="thumb-edit">
                                                             <input type='file' id="thumbUpload02" name="product_image_3" class="ec-image-upload" accept=".png, .jpg, .jpeg" />
                                                             <label for="imageUpload"><img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" /></label>
                                                         </div>
+                                                        @if(isset($product->product_image_2))
+
+                                                        <div class="thumb-preview ec-preview">
+                                                            <div class="image-thumb-preview">
+                                                                <img class="image-thumb-preview ec-image-preview" src="{{ asset(env('APP_URL').'/'.$product->product_image_2) }}" alt="edit" />
+
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="thumb-preview ec-preview">
                                                             <div class="image-thumb-preview">
                                                                 <img class="image-thumb-preview ec-image-preview" src="assets/img/products/vender-upload-thumb-preview.jpg" alt="edit" />
                                                             </div>
                                                         </div>
+                                                        @endif
+
                                                     </div>
                                                     <div class="thumb-upload">
                                                         <div class="thumb-edit">
@@ -81,11 +106,22 @@
 
                                                             <label for="imageUpload"><img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" /></label>
                                                         </div>
+                                                        @if(isset($product->product_image_3))
+
+                                                        <div class="thumb-preview ec-preview">
+                                                            <div class="image-thumb-preview">
+                                                                <img class="image-thumb-preview ec-image-preview" src="{{ asset(env('APP_URL').'/'.$product->product_image_3) }}" alt="edit" />
+
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="thumb-preview ec-preview">
                                                             <div class="image-thumb-preview">
                                                                 <img class="image-thumb-preview ec-image-preview" src="assets/img/products/vender-upload-thumb-preview.jpg" alt="edit" />
                                                             </div>
                                                         </div>
+                                                        @endif
+
                                                     </div>
                                                     <div class="thumb-upload">
                                                         <div class="thumb-edit">
@@ -93,11 +129,22 @@
 
                                                             <label for="imageUpload"><img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" /></label>
                                                         </div>
+                                                        @if(isset($product->product_image_4))
+
+                                                        <div class="thumb-preview ec-preview">
+                                                            <div class="image-thumb-preview">
+                                                                <img class="image-thumb-preview ec-image-preview" src="{{ asset(env('APP_URL').'/'.$product->product_image_4) }}" alt="edit" />
+
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="thumb-preview ec-preview">
                                                             <div class="image-thumb-preview">
                                                                 <img class="image-thumb-preview ec-image-preview" src="assets/img/products/vender-upload-thumb-preview.jpg" alt="edit" />
                                                             </div>
                                                         </div>
+                                                        @endif
+
                                                     </div>
                                                     <div class="thumb-upload">
                                                         <div class="thumb-edit">
@@ -105,22 +152,44 @@
 
                                                             <label for="imageUpload"><img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" /></label>
                                                         </div>
+                                                        @if(isset($product->product_image_5))
+
+                                                        <div class="thumb-preview ec-preview">
+                                                            <div class="image-thumb-preview">
+                                                                <img class="image-thumb-preview ec-image-preview" src="{{ asset(env('APP_URL').'/'.$product->product_image_5) }}" alt="edit" />
+
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="thumb-preview ec-preview">
                                                             <div class="image-thumb-preview">
                                                                 <img class="image-thumb-preview ec-image-preview" src="assets/img/products/vender-upload-thumb-preview.jpg" alt="edit" />
                                                             </div>
                                                         </div>
+                                                        @endif
+
                                                     </div>
                                                     <div class="thumb-upload">
                                                         <div class="thumb-edit">
                                                             <input type='file' id="thumbUpload06" class="ec-image-upload" accept=".png, .jpg, .jpeg" />
                                                             <label for="imageUpload"><img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" /></label>
                                                         </div>
+                                                        @if(isset($product->product_image_6))
+
+                                                        <div class="thumb-preview ec-preview">
+                                                            <div class="image-thumb-preview">
+                                                                <img class="image-thumb-preview ec-image-preview" src="{{ asset(env('APP_URL').'/'.$product->product_image_6) }}" alt="edit" />
+
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="thumb-preview ec-preview">
                                                             <div class="image-thumb-preview">
                                                                 <img class="image-thumb-preview ec-image-preview" src="assets/img/products/vender-upload-thumb-preview.jpg" alt="edit" />
                                                             </div>
                                                         </div>
+                                                        @endif
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,6 +251,20 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
+                                                    <label for="" class="col-12 col-form-label">Status</label>
+                                                    <div class="col-12">
+                                                        <select name="status" class="form-control">
+                                                            <option value="A" {{ $product->status=='A' ? 'selected' : '' }}</option>Active</option>
+                                                            <option value="I" {{ $product->status=='I' ? 'selected' : '' }}>Inactive</option>
+
+
+                                                        </select>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
                                                     <label for="" class="col-12 col-form-label">Discount</label>
                                                     <div class="col-12">
                                                         <input id="product_discount" value="{{ $product->product_discount }}" name="product_discount" class="form-control here " type="text">
@@ -192,7 +275,7 @@
 
                                                 <div class="col-md-12">
                                                     <label class="form-label">Short Description</label>
-                                                    <textarea class="form-control" name="product_short_description" rows="2" >{{ $product->product_short_description }}</textarea>
+                                                    <textarea class="form-control" name="product_short_description" rows="2">{{ $product->product_short_description }}</textarea>
 
 
 
@@ -237,7 +320,8 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label">Price <span>( In USD
                                                             )</span></label>
-                                                    <input type="number" value="{{ $product->product_price }}name="product_price" class="form-control" id="price1" required>
+
+                                                    <input type="number" value="{{ $product->product_price }}" name="product_price" class="form-control" id="price1" required>
 
                                                 </div>
                                                 <div class="col-md-6">
@@ -283,4 +367,3 @@
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
 @endsection
-

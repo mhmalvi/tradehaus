@@ -130,20 +130,20 @@
                 <div class="shop-pro-content">
                     <div class="shop-pro-inner">
                         <div class="row">
-                            @foreach($products as $product)
-                            @if($product->status=='A')
+                            {{-- @foreach($products as $product) --}}
+                            {{-- @if($product->status=='A') --}}
                             <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 mb-6 pro-gl-content">
                                 <div class="ec-product-inner">
                                     <div class="ec-pro-image-outer">
                                         <div class="ec-pro-image">
                                             <a href="" class="image">
 
-                                                <img style="height: 217px;" class="main-image" src="{{ env('APP_URL') }}/{{ $product->product_image }}" alt="Product" />
+                                                <img style="height: 217px;" class="main-image" src="" alt="Product" />
 
                                                 {{-- <img class="hover-image" src="{{ env('APP_URL') }}/{{ $product->product_image }}" alt="Product" /> --}}
 
                                             </a>
-                                            <span class="percentage">{{ $product->product_discount }}</span>
+                                            <span class="percentage"></span>
                                             <a href="#" class="quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
                                             <div class="ec-pro-actions">
                                                 <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare.svg" class="svg_img pro_svg" alt="" /></a>
@@ -153,7 +153,7 @@
                                         </div>
                                     </div>
                                     <div class="ec-pro-content">
-                                        <h5 class="ec-pro-title"><a href="{{ route('product.details',['id'=>$product->id]) }}">{{ $product->product_name }}</a></h5>
+                                        <h5 class="ec-pro-title"><a href=""</a></h5>
                                         <div class="ec-pro-rating">
                                             <i class="ecicon eci-star fill"></i>
                                             <i class="ecicon eci-star fill"></i>
@@ -163,8 +163,8 @@
                                         </div>
                                         <div class="ec-pro-list-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dutmmy text ever since the 1500s, when an unknown printer took a galley.</div>
                                         <span class="ec-price">
-                                            @if(isset($product->product_discount))
-                                            <span class="old-price">{{ $product->product_price }}</span>
+                                            {{-- @if(isset($product->product_discount)) --}}
+                                            <span class="old-price"></span>
                                             @endif
 
                                             <?php
@@ -201,23 +201,23 @@
                                             <div class="ec-pro-size">
                                                 <span class="ec-pro-opt-label">Size</span>
                                                 <ul class="ec-opt-size">
-                                                    @if(isset($product->size1))
-                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size1 }}</a></li>
+                                                    {{-- @if(isset($product->size1)) --}}
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small"></a></li>
 
 
-                                                    @endif
-                                                    @if(isset($product->size2))
+                                                    {{-- @endif
+                                                    @if(isset($product->size2)) --}}
 
-                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size2 }}</a></li>
-                                                    @endif
-                                                    @if(isset($product->size3))
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small"></a></li>
+                                                    {{-- @endif
+                                                    @if(isset($product->size3)) --}}
 
-                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size3 }}</a></li>
-                                                    @endif
-                                                    @if(isset($product->size4))
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small"></a></li>
+                                                    {{-- @endif --}}
+                                                    {{-- @if(isset($product->size4)) --}}
 
-                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small">{{ $product->size4 }}</a></li>
-                                                    @endif
+                                                    <li class="active"><a href="#" class="ec-opt-sz" data-old="$25.00" data-new="$20.00" data-tooltip="Small"></a></li>
+                                                    {{-- @endif --}}
 
                                                     {{-- @endforeach --}}
                                                 </ul>
@@ -414,3 +414,4 @@
 </section>
 
 @endsection
+

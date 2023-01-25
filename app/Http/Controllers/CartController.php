@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use RealRashid\SweetAlert\Facades\Alert;
+// use RealRashid\SweetAlert\Facades\Alert;
+use Alert;
 
 class CartController extends Controller
 {
@@ -15,6 +16,8 @@ class CartController extends Controller
      */
     public function index()
     {
+        $cart_items = Cart::all();
+        return view('product_details',compact('cart_items'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CartController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,22 +38,32 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required',
-            'product_size' => 'required',
-            'product_color' => 'required',
-            'product_quantity' => 'required'
-        ]);
+        // dd($request->all());
+        // $request->validate([
+        //     'product_name' => 'required',
+        //     'product_size' => 'required',
+        //     'product_color' => 'required',
+        //     'product_quantity' => 'required'
+        // ]);
 
         $cart = new Cart();
+        // dd($request->all());
         $cart->product_name = $request->product_name;
-        $cart->product_size = $request->product_size;
-        $cart->product_color = $request->product_color;
+        echo "hr";
+        $cart->product_size = $request->size;
+        echo "after_size";
+        $cart->product_color = $request->color;
+        echo "after_color";
         $cart->product_quantity = $request->product_quantity;
+        echo "after_quantity";
+        $cart->product_id = $request->product_id;
+        // dd("after_id");
 
         $save = $cart->save();
         if ($save) {
-            Alert::success('Congrats', 'You\'ve Successfully Registered');
+            echo "after_save";
+            // Alert::success('Congrats', 'You\'ve Successfully added to cart');
+            return redirect()->back()->with('message', 'Added successfully');
         }
     }
 

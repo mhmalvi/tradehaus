@@ -150,9 +150,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        // dd($request->all());
+        dd($id);
         $product = Product::find($request->id);
         $product->product_name = $request->product_name;
         $product->product_price = $request->product_price;

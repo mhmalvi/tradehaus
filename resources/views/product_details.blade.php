@@ -12,16 +12,44 @@
             </div>
             <ul class="eccart-pro-items">
                 <li>
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/6_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title"></a>
+                    @php
+                    $cart_items = App\Models\Cart::all();
+                    @endphp
 
-                        <span class="cart-price"><span>$76.00</span> x 1</span>
+                    @if(isset($cart_items))
+                    @foreach($cart_items as $cart_item)
+
+                    {{-- {{ $cart_item->product_name }} --}}
+                    {{-- {{ env('APP_URL') }} --}}
+
+                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="{{ asset(env('APP_URL').'/'.$cart_item->product->product_image) }}" alt="{{ $cart_item->product_name }}"></a>
+
+
+                    <div class="ec-pro-content">
+                        <a href="product-left-sidebar.html" class="cart_pro_title">{{ $cart_item->product_name }}</a>
+
+
+                        <span class="cart-price"><span>${{ $cart_item->product->product_price}}</span> x {{ $cart_item->product_quantity }}</span>
+
+                        @php
+                        $price = $cart_item->product->product_price * $cart_item->product_quantity
+
+                        @endphp
                         <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                            <input class="qty-input" type="text" name="ec_qtybtn" value="{{ $cart_item->product_quantity }}" />
+
                         </div>
                         <a href="javascript:void(0)" class="remove">×</a>
                     </div>
+                    @php
+                    $sub_total=0;
+                    $sub_total = $sub_total+$price;
+
+
+                    @endphp
+                    @endforeach
+                    @endif
+                    {{-- {{ $sub_total }} --}}
                 </li>
                 {{-- <li>
                     <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/12_1.jpg" alt="product"></a>
@@ -53,7 +81,7 @@
                     <tbody>
                         <tr>
                             <td class="text-left">Sub-Total :</td>
-                            <td class="text-right">$300.00</td>
+                            <td class="text-right">${{ $sub_total }}</td>
                         </tr>
                         <tr>
                             <td class="text-left">VAT (20%) :</td>
@@ -61,7 +89,7 @@
                         </tr>
                         <tr>
                             <td class="text-left">Total :</td>
-                            <td class="text-right primary-color">$360.00</td>
+                            <td class="text-right primary-color">${{ $sub_total + 60 }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,6 +101,7 @@
         </div>
     </div>
 </div>
+
 <!-- ekka Cart End -->
 
 <!-- Ec breadcrumb start -->
@@ -106,17 +135,25 @@
             <div class="ec-pro-rightside ec-common-rightside col-lg-9 order-lg-last col-md-12 order-md-first">
 
                 <!-- Single product content Start -->
-                <div class="single-pro-block">
-                    <div class="single-pro-inner">
-                        <div class="row">
-                            <div class="single-pro-img">
-                                <div class="single-product-scroll">
-                                    <div class="single-product-cover">
-                                        <div class="single-slide zoom-image-hover">
-                                            <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
 
-                                        </div>
-                                        {{-- <div class="single-slide zoom-image-hover">
+                <form method="post" action="{{ route('store.cart') }}">
+                    @csrf
+                    <div class="single-pro-block">
+                        <div class="single-pro-inner">
+                            <div class="row">
+                                <div class="single-pro-img">
+                                    <div class="single-product-scroll">
+                                        <div class="single-product-cover">
+                                            <div class="single-slide zoom-image-hover">
+                                                <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
+
+                                            </div>
+                                            {{-- <div class="single-slide zoom-image-hover">
                                             <img class="img-responsive" src="assets/images/product-image/9_2.jpg" alt="">
                                         </div>
                                         <div class="single-slide zoom-image-hover">
@@ -128,218 +165,204 @@
                                         <div class="single-slide zoom-image-hover">
                                             <img class="img-responsive" src="assets/images/product-image/9_3.jpg" alt="">
                                         </div> --}}
-                                    </div>
-                                    {{-- <div class="single-nav-thumb">
+                                        </div>
+                                        {{-- <div class="single-nav-thumb">
                                         <div class="single-slide">
                                             <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
 
-                                </div>
-                                <div class="single-slide">
-                                    <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
+                                    </div>
+                                    <div class="single-slide">
+                                        <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
 
-                                </div>
-                                <div class="single-slide">
-                                    <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
+                                    </div>
+                                    <div class="single-slide">
+                                        <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
 
-                                </div>
-                                <div class="single-slide">
-                                    <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
+                                    </div>
+                                    <div class="single-slide">
+                                        <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
 
-                                </div>
-                                <div class="single-slide">
-                                    <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
+                                    </div>
+                                    <div class="single-slide">
+                                        <img class="img-responsive" src="{{ env('APP_URL') }}/{{ $products->product_image }}" alt="">
 
-                                </div>
-                            </div> --}}
+                                    </div>
+                                </div> --}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="single-pro-desc">
-                        <div class="single-pro-content">
-                            <h5 class="ec-single-title">{{ $products->product_name }}</h5>
-                            <div class="ec-single-rating-wrap">
-                                <div class="ec-single-rating">
-                                    <i class="ecicon eci-star fill"></i>
-                                    <i class="ecicon eci-star fill"></i>
-                                    <i class="ecicon eci-star fill"></i>
-                                    <i class="ecicon eci-star fill"></i>
-                                    <i class="ecicon eci-star-o"></i>
+                        <div class="single-pro-desc">
+                            <div class="single-pro-content">
+                                <h5 class="ec-single-title">{{ $products->product_name }}</h5>
+                                <div class="ec-single-rating-wrap">
+                                    <div class="ec-single-rating">
+                                        <i class="ecicon eci-star fill"></i>
+                                        <i class="ecicon eci-star fill"></i>
+                                        <i class="ecicon eci-star fill"></i>
+                                        <i class="ecicon eci-star fill"></i>
+                                        <i class="ecicon eci-star-o"></i>
+                                    </div>
+                                    <span class="ec-read-review"><a href="#ec-spt-nav-review">Be the first to
+                                            review this product</a></span>
                                 </div>
-                                <span class="ec-read-review"><a href="#ec-spt-nav-review">Be the first to
-                                        review this product</a></span>
-                            </div>
-                            <div class="ec-single-desc">{{ $products->product_short_description }}</div>
+                                <div class="ec-single-desc">{{ $products->product_short_description }}</div>
 
-                            <div class="ec-single-sales">
-                                <div class="ec-single-sales-inner">
-                                    <div class="ec-single-sales-title">sales accelerators</div>
-                                    <div class="ec-single-sales-visitor">real time <span>24</span> visitor
-                                        right now!</div>
-                                    <div class="ec-single-sales-progress">
-                                        <span class="ec-single-progress-desc">Hurry up!left 29 in
-                                            stock</span>
-                                        <span class="ec-single-progressbar"></span>
-                                    </div>
-                                    <div class="ec-single-sales-countdown">
-                                        <div class="ec-single-countdown"><span id="ec-single-countdown"></span></div>
-                                        <div class="ec-single-count-desc">Time is Running Out!</div>
+                                <div class="ec-single-sales">
+                                    <div class="ec-single-sales-inner">
+                                        <div class="ec-single-sales-title">sales accelerators</div>
+                                        <div class="ec-single-sales-visitor">real time <span>24</span> visitor
+                                            right now!</div>
+                                        <div class="ec-single-sales-progress">
+                                            <span class="ec-single-progress-desc">Hurry up!left {{ $products->product_quantity }} in
+
+                                                stock</span>
+                                            <span class="ec-single-progressbar"></span>
+                                        </div>
+                                        <div class="ec-single-sales-countdown">
+                                            <div class="ec-single-countdown"><span id="ec-single-countdown"></span></div>
+                                            <div class="ec-single-count-desc">Time is Running Out!</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="ec-single-price-stoke">
-                                <?php
+                                <div class="ec-single-price-stoke">
+                                    <?php
                                 //$price=array();
                                 
                             ?>
-                                <div class="ec-single-price">
-                                    <span class="ec-single-ps-title">As low as</span>
+                                    <div class="ec-single-price">
+                                        <span class="ec-single-ps-title">As low as</span>
+                                        @if(isset($products->product_discount))
 
-                                    <span class="new-price">${{ $products->product_price }}</span>
+                                        <span class="new-price">${{ $discount_price = $products->product_price*($products->product_discount/100) }}</span>
+                                        @else
+                                        <span class="new-price">${{ $products->product_price }}</span>
+                                        @endif
 
+                                    </div>
+                                    <div class="ec-single-stoke">
+                                        <span class="ec-single-ps-title">IN STOCK</span>
+                                        <span class="ec-single-sku">{{ $products->product_code_name }}</span>
+                                    </div>
+                                    {{-- @endforeach --}}
                                 </div>
-                                <div class="ec-single-stoke">
-                                    <span class="ec-single-ps-title">IN STOCK</span>
-                                    <span class="ec-single-sku">{{ $products->product_code_name }}</span>
-                                </div>
-                                {{-- @endforeach --}}
-                            </div>
 
 
-                            <div class="ec-pro-variation">
+                                <div class="ec-pro-variation">
 
 
-                                <div class="ec-pro-variation-inner ec-pro-variation-size">
+                                    <div class="ec-pro-variation-inner ec-pro-variation-size">
 
 
-                                    <span>SIZE</span>
+                                        <span>SIZE</span>
 
 
-                                    <div class="ec-pro-variation-content">
+                                        <div class="ec-pro-variation-content">
 
-                                        <ul id="myForm">
-                                            <input type="hidden" name="id" id="product_id" value="{{ $products->id }}" />
-                                            @if(isset($products->size1))
-                                            {{-- <li class="active"><span style="{{ $products->size1 }}" name="size1">{{ $products->size1 }}</span></li> --}}
-                                            {{-- <div class="form-check form-check-inline"> --}}
-                                            {{-- <div class="form-group" style="display:flex;"> --}}
-                                            <input type="radio"  class="form-control size-radio" name="size" value="{{ $products->size1 }}">
+                                            <ul id="myForm">
+                                                <input type="hidden" name="product_id" id="product_id" value="{{ $products->id }}" />
+                                                <input type="hidden" name="product_name" id="product_name" value="{{ $products->product_name }}" />
 
-                                            <label class=" mr-3">{{ $products->size1 }}</label>
+                                                @if(isset($products->size1))
+                                                {{-- <li class="active"><span style="{{ $products->size1 }}" name="size1">{{ $products->size1 }}</span></li> --}}
+                                                {{-- <div class="form-check form-check-inline"> --}}
+                                                {{-- <div class="form-group" style="display:flex;"> --}}
+                                                <input type="radio" class="size-radio" name="size" value="{{ $products->size1 }}">
 
-                                            {{-- </div> --}}
-                                            @endif
+                                                <label class=" mr-3">{{ $products->size1 }}</label>
+
+                                                {{-- </div> --}}
+                                                @endif
 
 
 
 
 
 
-                                            @if(isset($products->size2))
+                                                @if(isset($products->size2))
 
-                                            {{-- <li class="active"><span style="{{ $products->size2 }}" name="size2">{{ $products->size2 }}</span></li> --}}
-                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size2 }}">
+                                                {{-- <li class="active"><span style="{{ $products->size2 }}" name="size2">{{ $products->size2 }}</span></li> --}}
+                                                <input type="radio" class="size-radio" name="size" value="{{ $products->size2 }}">
 
-                                            <label class=" mr-3">{{ $products->size2 }}</label>
-
-
-
-                                            @endif
-                                            @if(isset($products->size3))
-
-                                            {{-- <li class="active"><span style="{{ $products->size3 }}" name="size3">{{ $products->size3 }}</span></li> --}}
-                                            <input type="radio" class="size-radio" name="size" value="">
-
-                                            <label class=" mr-3">{{ $products->size3 }}</label>
+                                                <label class=" mr-3">{{ $products->size2 }}</label>
 
 
 
-                                            @endif
-                                            @if(isset($products->size4))
+                                                @endif
+                                                @if(isset($products->size3))
 
-                                            {{-- <li class="active"><span style="{{ $products->size4 }}" name="size4">{{ $products->size4 }}</span></li> --}}
-                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size4 }}">
-
-
-                                            <label class=" mr-3">{{ $products->size4 }}</label>
+                                                {{-- <li class="active"><span style="{{ $products->size3 }}" name="size3">{{ $products->size3 }}</span></li> --}}
+                                                <input type="radio" class="size-radio" name="size" value="{{ $products->size3 }}">
 
 
-
-                                            @endif
-                                            @if(isset($products->size5))
-
-                                            {{-- <li class="active"><span name="size5" style="{{ $products->size5 }}">{{ $products->size5 }}</span></li> --}}
-                                            <input type="radio" class="size-radio mr-3" name="size" value="{{ $products->size5 }}">
-
-
-                                            <label class=" mr-3">{{ $products->size5 }}</label>
+                                                <label class=" mr-3">{{ $products->size3 }}</label>
 
 
 
-                                            @endif
+                                                @endif
+                                                @if(isset($products->size4))
 
-                                        </ul>
+                                                {{-- <li class="active"><span style="{{ $products->size4 }}" name="size4">{{ $products->size4 }}</span></li> --}}
+                                                <input type="radio" class="size-radio" name="size" value="{{ $products->size4 }}">
+
+
+                                                <label class=" mr-3">{{ $products->size4 }}</label>
+
+
+
+                                                @endif
+                                                @if(isset($products->size5))
+
+                                                {{-- <li class="active"><span name="size5" style="{{ $products->size5 }}">{{ $products->size5 }}</span></li> --}}
+                                                <input type="radio" class="size-radio mr-3" name="size" value="{{ $products->size5 }}">
+
+
+                                                <label class=" mr-3">{{ $products->size5 }}</label>
+
+
+
+                                                @endif
+
+                                            </ul>
+                                        </div>
+
                                     </div>
 
+
+
                                 </div>
+                                <div class="ec-pro-variation-inner ec-pro-variation-color">
+                                    <span>Color</span>
+                                    <div class="ec-pro-variation-content">
+                                        <div style="display:flex" class="mb-3 required checkbox-group" id="color-form">
+
+
+                                            <div class="form-group" id="" style="margin-left: 5%;">
+
+                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
 
 
 
-                            </div>
-                            <div class="ec-pro-variation-inner ec-pro-variation-color">
-                                <span>Color</span>
-                                <div class="ec-pro-variation-content">
-                                    <div style="display:flex" class="mb-3 required checkbox-group" id="color-form">
-
-
-                                        <div class="form-group" id="">
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
+                                                <span class="form-control form-control-color" id="color_1" style="width:212%;margin-left: 27%;min-height: 10px; background:{{ $products->color_1 }};" title="Choose your color"></span>
 
 
 
+                                            </div>
+                                            <div class="form-group" style="margin-left: 5%;">
 
 
-                                            <input class="form-control form-control-color" id="color_1" style="width:84%;min-height: 10px; background:{{ $products->color_1 }};" title="Choose your color" />
-
-
-                                        </div>
-                                        <div class="form-group">
-
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
+                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
 
 
 
+                                                <span class="form-control form-control-color" style="width:212%;min-height: 10px; margin-left: 27%;background:{{ $products->color_2 }};" id="color_2" title="Choose your color"></span>
 
 
 
-                                            <input class="form-control form-control-color" style="width:84%;min-height: 10px; background:{{ $products->color_2 }};" id="color_2" title="Choose your color" />
+                                            </div>
+
+                                            <div class="form-group" style="margin-left: 5%;">
 
 
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;margin-left: 28%;min-height: 10px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
-
-
-
-
-
-
-                                            <input style=" width:84%;background:{{ $products->color_3 }};min-height: 10px;" class="form-control form-control-color" id="color_3" title="Choose your color" />
-
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <input type="radio" name="color" style="width: 28%;height: 15px;    margin-left: 28%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
-
-
-
-
-
-                                            <input style=" background:{{ $products->color_4 }};width:84%;min-height: 10px;" class="form-control form-control-color" id="color_4" title="Choose your color" />
-
-                                        </div>
+                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
 
 
 
@@ -347,66 +370,98 @@
 
 
 
+                                                <span style=" width:212%;margin-left: 27%;background:{{ $products->color_3 }};min-height: 10px;" class="form-control form-control-color" id="color_3" title="Choose your color"></span>
 
 
-                                        {{-- <ul>
+
+                                            </div>
+
+                                            <div class="form-group" style="margin-left: 5%;">
+
+
+                                                <input type="radio" name="color" style=" height: 24px;margin-left: 70%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
+
+
+
+
+
+
+                                                <span style=" background:{{ $products->color_4 }};margin-left: 27%;width:212%;min-height: 10px;" class="form-control form-control-color" id="color_4" title="Choose your color"></span>
+
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            {{-- <ul>
 
 
                                             <li class="active form-control-color"><span value="{{ $products->color_1 }}" name="color_1" style="background-color:{{ $products->color_1 }}"></span></li>
 
 
 
-                                        <li class="active form-control-color"><span value="{{ $products->color_2 }}" name="color_2" style="background-color:{{ $products->color_2 }}"></span></li>
+                                            <li class="active form-control-color"><span value="{{ $products->color_2 }}" name="color_2" style="background-color:{{ $products->color_2 }}"></span></li>
 
 
 
 
-                                        <li class="active"><span value="{{ $products->color_3 }}" name="color_3" style="background-color:{{ $products->color_3 }}"></span></li>
+                                            <li class="active"><span value="{{ $products->color_3 }}" name="color_3" style="background-color:{{ $products->color_3 }}"></span></li>
 
 
 
-                                        <li class="active"><span name="color_4" value="{{ $products->color_4 }}" style="background-color:{{ $products->color_4 }}"></span></li>
+                                            <li class="active"><span name="color_4" value="{{ $products->color_4 }}" style="background-color:{{ $products->color_4 }}"></span></li>
 
-                                        </ul> --}}
-
-
+                                            </ul> --}}
 
 
+
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
 
 
 
-                            <div class="ec-single-qty">
-                                <div class="qty-plus-minus">
-                                    <input class="qty-input" type="text" name="product_quantity" value="1" />
+                                <div class="ec-single-qty">
+                                    <div class="qty-plus-minus">
+                                        <input class="qty-input" type="text" name="product_quantity" value="1" />
+                                    </div>
+                                    <div class="ec-single-cart ">
+                                        <button type="submit" class="btn btn-primary">Add To Cart</button>
+                                    </div>
+                                    <div class="ec-single-wishlist">
+                                        <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+                                    </div>
+                                    <div class="ec-single-quickview">
+                                        <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
+                                    </div>
                                 </div>
-                                <div class="ec-single-cart ">
-                                    <button class="btn btn-primary">Add To Cart</button>
+                                <div class="ec-single-social">
+                                    <ul class="mb-0">
+                                        <li class="list-inline-item facebook"><a href="#"><i class="ecicon eci-facebook"></i></a></li>
+                                        <li class="list-inline-item twitter"><a href="#"><i class="ecicon eci-twitter"></i></a></li>
+                                        <li class="list-inline-item instagram"><a href="#"><i class="ecicon eci-instagram"></i></a></li>
+                                        <li class="list-inline-item youtube-play"><a href="#"><i class="ecicon eci-youtube-play"></i></a></li>
+                                        <li class="list-inline-item behance"><a href="#"><i class="ecicon eci-behance"></i></a></li>
+                                        <li class="list-inline-item whatsapp"><a href="#"><i class="ecicon eci-whatsapp"></i></a></li>
+                                        <li class="list-inline-item plus"><a href="#"><i class="ecicon eci-plus"></i></a></li>
+                                    </ul>
                                 </div>
-                                <div class="ec-single-wishlist">
-                                    <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                </div>
-                                <div class="ec-single-quickview">
-                                    <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                </div>
-                            </div>
-                            <div class="ec-single-social">
-                                <ul class="mb-0">
-                                    <li class="list-inline-item facebook"><a href="#"><i class="ecicon eci-facebook"></i></a></li>
-                                    <li class="list-inline-item twitter"><a href="#"><i class="ecicon eci-twitter"></i></a></li>
-                                    <li class="list-inline-item instagram"><a href="#"><i class="ecicon eci-instagram"></i></a></li>
-                                    <li class="list-inline-item youtube-play"><a href="#"><i class="ecicon eci-youtube-play"></i></a></li>
-                                    <li class="list-inline-item behance"><a href="#"><i class="ecicon eci-behance"></i></a></li>
-                                    <li class="list-inline-item whatsapp"><a href="#"><i class="ecicon eci-whatsapp"></i></a></li>
-                                    <li class="list-inline-item plus"><a href="#"><i class="ecicon eci-plus"></i></a></li>
-                                </ul>
+
+
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
+
+
             </div>
         </div>
         <!--Single product content End -->
@@ -553,13 +608,30 @@
                 <div class="ec-sb-block-content">
                     <ul>
                         <li>
-                            <div class="ec-sidebar-block-item">clothes</div>
+                            @php
+                            $categories = App\Models\Category::all();
+                            @endphp
+                            @foreach($categories as $category)
+                            @if($category->parent_category==null)
+                            <div class="ec-sidebar-block-item">{{ $category->category_name }}</div>
+                            @endif
                             <ul style="display: block;">
                                 <li>
-                                    <div class="ec-sidebar-sub-item"><a href="#">Men <span>-25</span></a>
+                                    @php
+                                    $sub_category = App\Models\Category::where('parent_category',$category->id)->get();
+                                    @endphp
+                                    @foreach($sub_category as $data)
+                                    <div class="ec-sidebar-sub-item"><a href="#">{{ $data->category_name }} 
+                                    @php
+                                        $items = App\Models\Product::where('category_id',$data->id)->get();
+                                    @endphp
+                                    <span>-{{ $items->count() }}</span></a>
+
+                                        @endforeach
+
                                     </div>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <div class="ec-sidebar-sub-item"><a href="#">Women <span>-52</span></a>
                                     </div>
                                 </li>
@@ -570,12 +642,15 @@
                                 <li>
                                     <div class="ec-sidebar-sub-item"><a href="#">Girl <span>-35</span></a>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
+                            @endforeach
+
                         </li>
                     </ul>
                 </div>
-                <div class="ec-sb-block-content">
+
+                {{-- <div class="ec-sb-block-content">
                     <ul>
                         <li>
                             <div class="ec-sidebar-block-item">shoes</div>
@@ -724,7 +799,7 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
             <!-- Sidebar Category Block -->
         </div>
@@ -1471,15 +1546,15 @@
         alert($('input[name="color"]:checked', '#color-form').val());
 
     });
-    function save(){
+
+    function save() {
         $.ajax({
-            type:"post"
-            url:""
+            type: "post"
+            url: ""
         })
     }
 
     $('div.checkbox-group.required :checkbox:checked').length > 0
-
 
 </script>
 

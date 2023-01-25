@@ -4,7 +4,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\admin\AdminProductController;
 use App\Http\Controllers\admin\AdminCategoryController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
     Route::get('/edit-product', [AdminProductController::class, 'edit'])->name('edit.product');
+    Route::put('/update-product/{id}', [AdminProductController::class, 'update'])->name('update.product');
     Route::get('/get-productList', [AdminProductController::class, 'product_list'])->name('product.list');
     Route::get('/add-category', [AdminCategoryController::class, 'index'])->name('add.category');
     Route::get('/edit-category', [AdminCategoryController::class, 'edit'])->name('edit.category');
@@ -40,4 +43,15 @@ Route::prefix('admin')->group(function(){
     Route::get('/delete-category', [AdminCategoryController::class, 'destroy'])->name('delete.category');
     Route::post('/add-category', [AdminCategoryController::class, 'store'])->name('store.category');
     Route::get('/add-sub-category', [AdminCategoryController::class, 'view_subcategory'])->name('add.subCategory');
+
+    // Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 });
+
+Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
+Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
+ROute::get('/product-by-category',function(){
+    return view('productByCategory');
+});
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
