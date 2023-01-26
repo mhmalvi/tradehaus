@@ -19590,14 +19590,14 @@ li.ec-brand-item {
   overflow-y: hidden;
 }
 
-.slide-3 {
+/* .slide-3 {
   width: 100%;
   background-image: url(../images/main-slider-banner/7.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   overflow-y: hidden;
-}
+} */
 
 .ec-main-slider .container {
   position: absolute;

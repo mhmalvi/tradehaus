@@ -47,6 +47,7 @@ class AdminCategoryController extends Controller
         // dd($request->all());
         $request->validate([
             'name' => 'required',
+            'slug'=>'required|unique:categories',
             'short_description' => 'required',
             'full_description' => 'required',
         ]);
@@ -59,6 +60,13 @@ class AdminCategoryController extends Controller
         $category->status = 'A';
         $category->tags = $request->tags;
         $category->parent_category = $request->parent_category;
+        if($request->hasFile('category_image')){
+            // unlink($product->product_image);
+            $fileName = time() . '.' . $request->category_image->getClientOriginalExtension();
+            $request->category_image->move(public_path('assets/img/categories'), $fileName);
+            $file_path = "assets/img/categories/" . $fileName;
+            $category->category_image = $file_path;
+        }
         $save = $category->save();
         if ($save) {
             return redirect()->back()->with('message', 'Saved successfully');
@@ -116,6 +124,13 @@ class AdminCategoryController extends Controller
         $category->status = $request->status;
         $category->tags = $request->tags;
         $category->parent_category = $request->parent_category;
+        if ($request->hasFile('category_image')) {
+            // unlink($product->product_image);
+            $fileName = time() . '.' . $request->category_image->getClientOriginalExtension();
+            $request->category_image->move(public_path('assets/img/categories'), $fileName);
+            $file_path = "assets/img/categories/" . $fileName;
+            $category->category_image = $file_path;
+        }
         $update = $category->save();
         if ($update) {
             return redirect()->back()->with('message', 'Updated successfully');
@@ -132,6 +147,7 @@ class AdminCategoryController extends Controller
      */
     public function destroy(Request $request)
     {
+        // dd($request->id);
         $category = Category::findOrFail($request->id);
         $delete_data = $category->delete();
         if ($delete_data) {

@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->text('slug')->unique();
             $table->text('short_description')->nullable();
             $table->text('full_description')->nullable();
+            
             $table->string('tags')->nullable();
             $table->string('status')->nullable();
             $table->integer('parent_category')->nullable();

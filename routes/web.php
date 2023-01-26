@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Auth;
     
 // });
 Route::get('/',[CategoryController::class, 'show_all']);
-Route::get('/', [ProductController::class, 'show_all']);
+// Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
 Route::prefix('admin')->group(function(){

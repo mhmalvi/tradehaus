@@ -56,6 +56,14 @@
                                             <small>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                         </div>
                                     </div>
+                                    @if(isset($category->category_image))
+
+                                    <div class="form-group">
+                                        <label>Category Image</label>
+                                        <input type="file" class="form-control" name="category_image" value="{{ $category->category_image }}" />
+                                        <img style="width: 43%;" src="{{ asset(env('APP_URL')).'/'. $category->category_image}}" alt="">
+                                    </div>
+                                    @endif
                                     @if(isset($category->status))
 
                                     <div class="form-group row">
@@ -83,6 +91,11 @@
                                             <small>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Category Image</label>
+                                        <input type="file" class="form-control" name="category_image" />
+                                    </div>
+
                                     @endif
                                     @if(isset($category))
 
@@ -216,7 +229,7 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="{{ route('edit.category',['slug'=>$category->slug]) }}">Edit</a>
 
-                                                    <a onclick="return confirm('Are you sure?')" class="dropdown-item" href="{{ route('delete.category',['id'=>$category->slug]) }}">Delete</a>
+                                                    <a onclick="return confirm('Are you sure?')" class="dropdown-item" href="{{ route('delete.category',['id'=>$category->id]) }}">Delete</a>
 
                                                 </div>
                                             </div>

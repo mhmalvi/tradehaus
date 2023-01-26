@@ -33,6 +33,22 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label for="text" class="col-12 col-form-label">Status</label>
+                                    <div class="col-12">
+                                        <select name="status" class="form-control">
+                                            <option value="A" {{ $category->status=='A' ? 'selected' : '' }}</option>Active</option>
+
+                                            <option value="I" {{ $category->status=='I' ? 'selected' : '' }}>Inactive</option>
+
+
+
+                                        </select>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
                                     <label for="slug" class="col-12 col-form-label">Slug</label>
                                     <div class="col-12">
                                         <input id="slug" name="slug" value="{{ $category->slug }}" class="form-control here set-slug" type="text">
@@ -49,6 +65,22 @@
 
                                     </div>
                                 </div>
+                                @if(isset($category->category_image))
+
+                                <div class="form-group">
+                                    <label>Sub Category Image</label>
+                                    <input type="file" class="form-control" name="category_image" value="{{ $category->category_image }}" />
+
+                                    <img style="width: 43%;" src="{{ asset(env('APP_URL')).'/'. $category->category_image}}" alt="">
+
+                                </div>
+                                @endif
+
+                                {{-- <div class="form-group">
+                                    <label>Category Image</label>
+                                    <input type="file" class="form-control" name="category_image" />
+                                </div> --}}
+
 
                                 <div class="form-group row">
                                     <label for="parent-category" class="col-12 col-form-label">Parent Category</label>
@@ -131,6 +163,11 @@
                                         <textarea id="sortdescription" name="short_description" cols="40" rows="2" class="form-control"></textarea>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Category Image</label>
+                                    <input type="file" class="form-control" name="category_image" />
+                                </div>
+
 
                                 <div class="form-group row">
                                     <label for="parent-category" class="col-12 col-form-label">Parent Category</label>
@@ -262,7 +299,7 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="{{ route('edit.sub-category',['slug'=>$categories->slug]) }}">Edit</a>
 
-                                                    <a onclick="return confirm('Are you sure?')" class="dropdown-item" href="{{ route('delete.category',['id'=>$categories->slug]) }}">Delete</a>
+                                                    <a onclick="return confirm('Are you sure?')" class="dropdown-item" href="{{ route('delete.category',['id'=>$categories->id]) }}">Delete</a>
 
 
 
