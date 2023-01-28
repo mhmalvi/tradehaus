@@ -258,13 +258,13 @@
                         <div class="ec-main-menu">
                             <ul>
                                 <li class="dropdown"><a href="{{ url('/') }}">Home</a>
-                                    <ul class="sub-menu">
+                                    <!-- <ul class="sub-menu">
                                         <li><a href="index.html">Fashion 1</a></li>
                                         <li><a href="demo-2.html">Fashion 2</a></li>
                                         <li><a href="demo-3.html">Furniture</a></li>
                                         <li><a href="demo-4.html">Mix products</a></li>
                                         <li><a href="demo-5.html">Electronic</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
                                 <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu d-block">
@@ -294,7 +294,7 @@
                                                 <li><a href="shop-banner-full-width.html">Full width 4 column</a>
                                                 </li>
                                             </ul>
-                                            <ul class="d-block">
+                                            <!-- <ul class="d-block">
                                                 <li class="menu_title"><a href="javascript:void(0)">Columns</a></li>
                                                 <li><a href="shop-full-width-col-3.html">3 Columns full width</a></li>
                                                 <li><a href="shop-full-width-col-4.html">4 Columns full width</a></li>
@@ -313,7 +313,7 @@
                                                 <li><a href="shop-list-banner-right-sidebar.html">Banner right
                                                         sidebar</a></li>
                                                 <li><a href="shop-list-full-col-2.html">Full width 2 columns</a></li>
-                                            </ul>
+                                            </ul> -->
                                         </li>
                                         <li>
                                             <ul class="ec-main-banner w-100">
@@ -366,7 +366,7 @@
                                         <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="javascript:void(0)">Pages</a>
+                                <!-- <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
                                         <li><a href="about-us.html">About Us</a></li>
                                         <li><a href="contact-us.html">Contact Us</a></li>
@@ -487,7 +487,7 @@
                                         <li><a href="elemets-accordions.html">Accordions</a></li>
                                         <li><a href="elemets-blog.html">Blogs</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -2643,7 +2643,7 @@
         </div>
     </section> --}}
     <!--services Section End -->
-
+    <!-- <img class="dark-footer-logo" src="assets/images/logo/dark-logo-5.png" alt="Site Logo" style="display: none;" /> -->
     <!-- Footer Start -->
     <footer class="ec-footer">
         <div class="footer-container">
@@ -2652,7 +2652,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-lg-4 ec-footer-contact">
                             <div class="ec-footer-widget">
-                                <div class="ec-footer-logo"><a href="#"><img src="assets/images/logo/footer-logo-5.png" alt=""><img class="dark-footer-logo" src="assets/images/logo/dark-logo-5.png" alt="Site Logo" style="display: none;" /></a></div>
+                                <div class="ec-footer-logo"><a href="#">TradeUs</a></div>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                 <h4 class="ec-footer-heading">Ask Me questions</h4>
                                 <div class="ec-footer-links">
