@@ -273,7 +273,7 @@
                                         <li><a href="demo-5.html">Electronic</a></li>
                                     </ul> -->
                                 </li>
-                                <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
+                                {{-- <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu d-block">
                                         <li class="d-flex">
                                             <ul class="d-block">
@@ -331,8 +331,8 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="dropdown"><a href="javascript:void(0)">Products</a>
+                                </li> --}}
+                                {{-- <li class="dropdown"><a href="javascript:void(0)">Products</a>
                                     <ul class="sub-menu">
                                         <li class="dropdown position-static"><a href="javascript:void(0)">Product page
                                                 <i class="ecicon eci-angle-right"></i></a>
@@ -372,7 +372,7 @@
                                         <li><a href="product-video-full-width.html">Video full width</a></li>
                                         <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <!-- <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
                                         <li><a href="about-us.html">About Us</a></li>
@@ -527,7 +527,7 @@
                             </ul> --}}
                         </li>
 
-                        <li><a href="javascript:void(0)">Categories</a>
+                        {{-- <li><a href="javascript:void(0)">Categories</a>
                             <ul class="sub-menu">
                                 <li>
                                     <a href="javascript:void(0)">Classic Variation</a>
@@ -576,7 +576,7 @@
                                 <li><a class="p-0" href="shop-left-sidebar-col-3.html"><img class="img-responsive" src="assets/images/menu-banner/1.jpg" alt=""></a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li><a href="javascript:void(0)">Products</a>
                             <ul class="sub-menu">
                                 <li><a href="javascript:void(0)">Product page</a>

@@ -10,38 +10,67 @@
             </div>
             <ul class="eccart-pro-items">
                 <li>
-                    <a href="product-left-sidebar.html" class="sidecart_pro_img"><img src="assets/images/product-image/39_1.jpg" alt="product"></a>
+                    @php
+                    $cart_items = App\Models\Cart::all();
+                    @endphp
+
+                    @if(isset($cart_items))
+
+
+                    @foreach($cart_items as $cart_item)
+
+                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="{{ asset(env('APP_URL').'/'.$cart_item->product->product_image) }}" alt="{{ $cart_item->product_name }}"></a>
+
                     <div class="ec-pro-content">
-                        <a href="single-product-left-sidebar.html" class="cart_pro_title">Instant camera with two album</a>
-                        <span class="cart-price"><span>$450</span> x 1</span>
+                        <a href="product-left-sidebar.html" class="cart_pro_title">{{ $cart_item->product_name }}</a>
+
+                        <span class="cart-price"><span>${{ $cart_item->product->product_price}}</span> x 1</span>
+                        @php
+                        $price = $cart_item->product->product_price * $cart_item->product_quantity
+
+                        @endphp
+
+                        <div class="qty-plus-minus">
+                            <input class="qty-input" type="text" name="product_quantity" value="{{ $cart_item->product_quantity }}" />
+
+                        </div>
+                        <a href="javascript:void(0)" class="remove">×</a>
+                    </div>
+                    @if(isset($cart_items))
+                    @php
+
+                    $sub_total=0;
+                    $sub_total = $sub_total+$price;
+                    @endphp
+
+                    @endif
+
+                    @endforeach
+                    @endif
+
+                    {{-- </li>
+                <li>
+                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/12_1.jpg" alt="product"></a>
+                    <div class="ec-pro-content">
+                        <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
+                        <span class="cart-price"><span>$64.00</span> x 1</span>
                         <div class="qty-plus-minus">
                             <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
                         </div>
-                        <a href="#" class="remove">×</a>
+                        <a href="javascript:void(0)" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="product-left-sidebar.html" class="sidecart_pro_img"><img src="assets/images/product-image/40_1.jpg" alt="product"></a>
+                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/3_1.jpg" alt="product"></a>
                     <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Google nest wireless</a>
-                        <span class="cart-price"><span>$360</span> x 1</span>
+                        <a href="product-left-sidebar.html" class="cart_pro_title">Girls Nylon Purse</a>
+                        <span class="cart-price"><span>$59.00</span> x 1</span>
                         <div class="qty-plus-minus">
                             <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
                         </div>
-                        <a href="#" class="remove">×</a>
+                        <a href="javascript:void(0)" class="remove">×</a>
                     </div>
-                </li>
-                <li>
-                    <a href="product-left-sidebar.html" class="sidecart_pro_img"><img src="assets/images/product-image/41_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Earbuds 3nd generation wireless</a>
-                        <span class="cart-price"><span>$30</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <div class="ec-cart-bottom">
@@ -50,15 +79,22 @@
                     <tbody>
                         <tr>
                             <td class="text-left">Sub-Total :</td>
-                            <td class="text-right">$1350.00</td>
+                            @if(isset($sub_total))
+
+                            <td class="text-right">${{ $sub_total }}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td class="text-left">VAT (20%) :</td>
-                            <td class="text-right">$270.00</td>
+                            <td class="text-right">$60.00</td>
                         </tr>
                         <tr>
                             <td class="text-left">Total :</td>
-                            <td class="text-right primary-color">$1620.00</td>
+                            @if(isset($sub_total))
+
+                            <td class="text-right primary-color">${{ $sub_total + 60 }}</td>
+                            @endif
+
                         </tr>
                     </tbody>
                 </table>
@@ -70,6 +106,7 @@
         </div>
     </div>
 </div>
+
 <!-- Ekka Cart End -->
 
 <!-- Main Slider Start -->
@@ -268,11 +305,14 @@
                                         <div class="ec-pro-opt-inner">
                                             <div class="ec-pro-color">
                                                 <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/39_1.jpg" data-src-hover="assets/images/product-image/39_2.jpg" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
+                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
+
+
                                                 </ul>
                                             </div>
                                             <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
+                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="{{ env('APP_URL').'/'. $product->product_image }}" class="svg_img pro_svg" alt="" /></a>
+
                                             </div>
                                         </div>
                                     </div>
