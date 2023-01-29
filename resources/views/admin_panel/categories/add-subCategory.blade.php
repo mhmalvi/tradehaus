@@ -1,5 +1,6 @@
 @extends('admin_panel.layout.admin-master')
-@section('content')
+@section('admin')
+
 
 
 <!-- CONTENT WRAPPER -->

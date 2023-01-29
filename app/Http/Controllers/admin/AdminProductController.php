@@ -50,6 +50,14 @@ class AdminProductController extends Controller
         $product->product_discount = $request->product_discount;
         $product->slug = $request->slug;
         $product->product_quantity = $request->product_quantity;
+        $isSpecial = isset($request->isSpecial[0]) ? 'y' : 'n';
+        $isExclusive = isset($request->isExclusive[0]) ? 'y' : 'n';
+        $deals_of_the_days = isset($request->deals_of_the_days[0]) ? 'y' : 'n';
+        $isBlackFriday = isset($request->isBlackFriday[0]) ? 'y' : 'n';
+        $product->isSpecial = $isSpecial;
+        $product->isExclusive = $isExclusive;
+        $product->deals_of_the_days = $deals_of_the_days;
+        $product->isBlackFriday = $isBlackFriday;
         $product->tags = $request->tags;
         $product->size1 = $request->size1;
         $product->size2 = $request->size2;
@@ -167,13 +175,23 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
+        $isSpecial = isset($request->isSpecial[0]) ? 'y' : 'n';
+        $isBlackFriday = isset($request->isBlackFriday[0]) ? 'y' : 'n';
+        $isExclusive = isset($request->isExclusive[0]) ? 'y' : 'n';
+        $deals_of_the_days = isset($request->deals_of_the_days[0]) ? 'y' : 'n';
         $product = Product::find($request->id);
         $product->product_name = $request->product_name;
         $product->product_price = $request->product_price;
         $product->product_discount = $request->product_discount;
         $product->slug = $request->slug;
         $product->tags = $request->tags;
+        $product->isSpecial = $isSpecial;
+        $product->isExclusive = $isExclusive;
+        $product->deals_of_the_days = $deals_of_the_days;
+        $product->isBlackFriday = $isBlackFriday;
         $product->status = $request->status;
+        // $product->category_id = $request->category_id;
         $product->product_quantity = $request->product_quantity;
         $product->size1 = $request->size1;
         $product->size2 = $request->size2;
@@ -192,49 +210,49 @@ class AdminProductController extends Controller
         $product->product_details = $request->product_details;
         $product->category_id = $request->category_id;
         if ($request->product_image) {
-            unlink($product->product_image);
+            // unlink($product->product_image);
             $fileName = time() . '.' . $request->product_image->getClientOriginalExtension();
             $request->product_image->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image = $file_path;
         }
         if ($request->product_image_1) {
-            unlink($product->product_image_1);
+            // unlink($product->product_image_1);
             $fileName = time() . '.' . $request->product_image_1->getClientOriginalExtension();
             $request->product_image_1->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image_1 = $file_path;
         }
         if ($request->product_image_2) {
-            unlink($product->product_image_2);
+            // unlink($product->product_image_2);
             $fileName = time() . '.' . $request->product_image_2->getClientOriginalExtension();
             $request->product_image_2->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image_2 = $file_path;
         }
         if ($request->product_image_3) {
-            unlink($product->product_image_3);
+            // unlink($product->product_image_3);
             $fileName = time() . '.' . $request->product_image_3->getClientOriginalExtension();
             $request->product_image_3->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image = $file_path;
         }
         if ($request->product_image_4) {
-            unlink($product->product_image_4);
+            // unlink($product->product_image_4);
             $fileName = time() . '.' . $request->product_image_4->getClientOriginalExtension();
             $request->product_image_4->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image_4 = $file_path;
         }
         if ($request->product_image_5) {
-            unlink($product->product_image_5);
+            // unlink($product->product_image_5);
             $fileName = time() . '.' . $request->product_image_5->getClientOriginalExtension();
             $request->product_image_5->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
             $product->product_image_5 = $file_path;
         }
         if ($request->product_image_6) {
-            unlink($product->product_image_6);
+            // unlink($product->product_image_6);
             $fileName = time() . '.' . $request->product_image_6->getClientOriginalExtension();
             $request->product_image_6->move(public_path('assets/img/products'), $fileName);
             $file_path = "assets/img/products/" . $fileName;
@@ -242,7 +260,7 @@ class AdminProductController extends Controller
         }
         $update = $product->save();
         if ($update) {
-            return redirect()->back()->with('message', 'Product created successfully');
+            return redirect()->back()->with('message', 'Product updated successfully');
         } else {
             return redirect()->back()->with('message', 'Failed');
         }
@@ -263,8 +281,10 @@ class AdminProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        dd($request->all());
+        $product = Product::find($request->id);
+        $product->delete();
     }
 }

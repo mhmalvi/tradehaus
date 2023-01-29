@@ -1,6 +1,7 @@
 @extends('admin_panel.layout.admin-master')
 
-@section('content')
+@section('admin')
+
 
 <!-- CONTENT WRAPPER -->
 <div class="ec-content-wrapper">
@@ -166,6 +167,45 @@
                                                         </optgroup> --}}
                                                     </select>
                                                 </div>
+                                                <div class="col-md-8 mb-25 mt-4">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is special</label>
+
+                                                        <input type="checkbox" name="isSpecial" value="" class="">
+
+
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-8 mb-25">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is exclusive</label>
+
+                                                        <input type="checkbox" name="isSpecial" value="">
+
+
+
+
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-8 mb-25">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is deals of the days</label>
+
+                                                        <input type="checkbox" name="isSpecial" value="">
+
+
+
+
+                                                    </div>
+
+                                                </div>
+
                                                 <div class="col-md-12">
                                                     <label for="" class="form-label">Product Code Name</label>
                                                     <input type="text" name="product_code_name" class="form-control" id="" required>

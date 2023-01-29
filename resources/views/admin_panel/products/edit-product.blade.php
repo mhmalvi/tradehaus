@@ -1,13 +1,14 @@
 @extends('admin_panel.layout.admin-master')
 
-@section('content')
+@section('admin')
+
 
 <!-- CONTENT WRAPPER -->
 <div class="ec-content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
             <div>
-                <h1>Add Product</h1>
+                <h1>Edit Product</h1>
                 <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
                     <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
             </div>
@@ -20,7 +21,7 @@
             <div class="col-12">
                 <div class="card card-default">
                     <div class="card-header card-header-border-bottom">
-                        <h2>Add Product</h2>
+                        <h2>Edit Product</h2>
                     </div>
                     @if(session()->has('message'))
                     <div class="alert alert-success">
@@ -202,7 +203,7 @@
                                                     <label for="inputEmail4" class="form-label">Product name</label>
                                                     <input type="text" name="product_name" value="{{ $product->product_name }}" class="form-control slug-title" id="inputEmail4" required>
                                                 </div>
-                                                <div class="col-md-6">
+                                                {{-- <div class="col-md-6">
                                                     <label class="form-label">Select Categories</label>
                                                     <select name="category_id" id="Categories" class="form-select">
                                                         @php
@@ -221,6 +222,41 @@
                                                             @foreach($child_categories as $child)
 
                                                             <option value="{{ $child->id }}">{{ $child->category_name }}</option>
+
+
+                                                            @endforeach
+                                                        </optgroup>
+                                                        @endforeach
+                                                        {{-- <optgroup label="Furniture">
+                                                            <option value="table">Table</option>
+                                                            <option value="sofa">Sofa</option>
+                                                        </optgroup>
+                                                        <optgroup label="Electronic">
+                                                            <option value="phone">I Phone</option>
+                                                            <option value="laptop">Laptop</option>
+                                                        </optgroup> --}}
+                                                    {{-- </select>
+                                                </div> --}}
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Select Categories</label>
+                                                    <select name="category_id" id="Categories" class="form-select">
+                                                        @php
+                                                        $parent_categories = App\Models\Category::where(function($query){
+                                                        $query->whereNull('parent_category');
+                                                        })->get();
+
+                                                        @endphp
+                                                        @foreach($parent_categories as $categories)
+
+                                                        <optgroup label="{{ $categories->category_name }}">
+                                                            @php
+                                                            $child_categories = App\Models\Category::where('parent_category',$categories->id)->get();
+                                                            
+                                                            @endphp
+                                                            @foreach($child_categories as $child)
+
+                                                            <option value="{{ $child->id }}" {{ $child->id===$product->category->id ? 'selected' : '' }}>{{ $child->category_name }}</option>
 
 
                                                             @endforeach
@@ -288,30 +324,97 @@
                                                     <input type="color" name="color_3" class="form-control form-control-color" id="exampleColorInput3" value="{{ $product->color_3 }}" title="Choose your color">
                                                     <input type="color" name="color_4" class="form-control form-control-color" id="exampleColorInput4" value="{{ $product->color_4 }}" title="Choose your color">
                                                 </div>
+                                                <div class="col-md-8 mb-25 mt-4">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is special</label>
+
+                                                        <input type="checkbox" name="isSpecial" value="{{ $product->isSpecial }}" {{ $product->isSpecial=='y' ? 'checked' : '' }}>
+
+
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-8 mb-25">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is exclusive</label>
+
+                                                        <input type="checkbox" name="isExclusive" value="{{ $product->isExclusive }}" {{ $product->isExclusive=='y' ? 'checked' : '' }}>
+
+
+
+
+
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-8 mb-25">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is deals of the days</label>
+
+                                                        <input type="checkbox" name="deals_of_the_days" value="{{ $product->deals_of_the_days }}" {{ $product->deals_of_the_days=='y' ? 'checked' : '' }}>
+
+
+
+
+
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-8 mb-25">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is black Friday</label>
+
+                                                        <input type="checkbox" name="isBlackFriday" value="{{ $product->isBlackFriday }}" {{ $product->isBlackFriday=='y' ? 'checked' : '' }}>
+
+
+
+
+
+
+
+
+
+                                                    </div>
+
+                                                </div>
+
+
+
+
                                                 <div class="col-md-8 mb-25">
                                                     <label class="form-label">Size</label>
                                                     <div class="form-checkbox-box">
                                                         <div class="form-check form-check-inline">
-                                                            <input type="checkbox" name="size1" value="{{ $product->size1 }}">
+                                                            <input type="checkbox" name="size1" value="{{ $product->size1 }}" {{ $product->size1 ? 'checked' : '' }}>
                                                             <label>S</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input type="checkbox" name="size2" value="{{ $product->size2 }}">
+                                                            <input type="checkbox" name="size2" value="{{ $product->size2 }}" {{ $product->size2 ? 'checked' : '' }}>
+
 
                                                             <label>M</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input type="checkbox" name="size3" value="{{ $product->size3 }}">
+                                                            <input type="checkbox" name="size3" value="{{ $product->size3 }}" {{ $product->size3 ? 'checked' : '' }}>
+
 
                                                             <label>L</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input type="checkbox" name="size4" value="{{ $product->size4 }}">
+                                                            <input type="checkbox" name="size4" value="{{ $product->size4 }}" {{ $product->size4 ? 'checked' : '' }}>
+
 
                                                             <label>XL</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input type="checkbox" name="size5" value="{{ $product->size5 }}">
+                                                            <input type="checkbox" name="size5" value="{{ $product->size5 }}" {{ $product->size5 ? 'checked' : '' }}>
+
 
                                                             <label>XXL</label>
                                                         </div>

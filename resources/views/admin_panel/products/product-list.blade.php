@@ -1,6 +1,7 @@
 @extends('admin_panel.layout.admin-master')
 
-@section('content')
+@section('admin')
+
 <div class="ec-content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
@@ -10,7 +11,7 @@
                     <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
             </div>
             <div>
-                <a href="product-list.html" class="btn btn-primary"> Add Porduct</a>
+                <a href="{{ route('add.product') }}" class="btn btn-primary"> Add Porduct</a>
             </div>
         </div>
         <div class="row">
@@ -65,7 +66,8 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="{{ route('edit.product',['id'=>$products->id]) }}">Edit</a>
 
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item" href="{{ route('delete.product',['id'=>$products->id]) }}">Delete</a>
+
                                                 </div>
                                             </div>
                                         </td>

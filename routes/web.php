@@ -25,8 +25,8 @@ use Illuminate\Support\Facades\Auth;
 // Route::prefix('/',function(){
     
 // });
-Route::get('/',[CategoryController::class, 'show_all']);
-// Route::get('/', [ProductController::class, 'show_all']);
+// Route::get('/',[CategoryController::class, 'show_all']);
+Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
 Route::prefix('admin')->group(function(){
@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/delete-category', [AdminCategoryController::class, 'destroy'])->name('delete.category');
     Route::post('/add-category', [AdminCategoryController::class, 'store'])->name('store.category');
     Route::get('/add-sub-category', [AdminCategoryController::class, 'view_subcategory'])->name('add.subCategory');
+    Route::get('/delete-product', [AdminProductController::class, 'destroy'])->name('delete.product');
 
     // Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 });

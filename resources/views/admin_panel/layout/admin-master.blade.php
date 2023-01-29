@@ -3,6 +3,6 @@
 @include('admin_panel.layout.header')
 
 
-@yield('content')
+@yield('admin')
 
 @include('admin_panel.layout.footer')
