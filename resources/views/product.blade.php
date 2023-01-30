@@ -80,7 +80,6 @@
                     </div>
                 </li> --}}
             </ul>
-
         </div>
         <div class="ec-cart-bottom">
             <div class="cart-sub-total">
@@ -89,6 +88,7 @@
                         <tr>
                             <td class="text-left">Sub-Total :</td>
                             @if(isset($total))
+
 
                             <td class="text-right">${{ $total }}</td>
 
@@ -118,6 +118,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Ekka Cart End -->
 
@@ -186,23 +187,22 @@
                 @foreach($categories as $category)
 
                 <div class="ec_cat_content">
+                    {{-- {{ $category->id }} --}}
 
                     <div class="ec_cat_inner">
-                        <a href="#">
-                            <h2 class="d-none">Category</h2>
-                            <a href="{{ route('product.category',[$category->id]) }}">
+                        <a href="{{ route('product.category',[$category->id]) }}">
 
+
+                            <h2 class="d-none">Category</h2>
                             <div class="ec-cat-image">
-                                <img src="{{ $category->category_image }}" class="svg_img cat_svg" alt="" />
+                                <img src="{{ env('APP_URL').'/'.$category->category_image }}" class="svg_img cat_svg" alt="" />
                             </div>
                             <div class="ec-cat-desc">
-                               <span class="ec-section-title">{{ $category->category_name }}</span>
-
+                                <a href=""><span class="ec-section-title">{{ $category->category_name }}</span></a>
 
                             </div>
-                            </a>
-
                         </a>
+
                     </div>
 
                 </div>
@@ -292,7 +292,7 @@
         <div class="row">
             <div class="col-md-12 section-title-block">
                 <div class="section-title">
-                    <h2 class="ec-title">Featured Products</h2>
+                    <h2 class="ec-title"> Products</h2>
                     <h6 class="ec-sub-title">Lorem Ipsum is simply dummy text of the printing</h6>
 
                 </div>
@@ -321,13 +321,13 @@
                                 <div class="ec-pro-content">
                                     <div class="ec-pro-option">
                                         <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
+                                            {{-- <div class="ec-pro-color">
                                                 <ul class="ec-opt-swatch ec-change-img">
                                                     <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
 
 
                                                 </ul>
-                                            </div>
+                                            </div> --}}
                                             {{-- <div class="ec-pro-compare">
                                                 <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="{{ env('APP_URL').'/'. $product->product_image }}" class="svg_img pro_svg" alt="" /></a>
 
@@ -336,32 +336,23 @@
                                     </div>
                                     <h5 class="ec-pro-title"><a href="{{ route('product.details',[$product->id]) }}">{{ $product->product_name }}</a></h5>
 
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Camera</a></h6>
+                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">{{ $product->category->category_name }}</a></h6>
                                     <div class="ec-pro-rat-price">
                                         <div class="ec-pro-rat-pri-inner">
                                             <span class="ec-price">
                                                 @php
                                                 $discount = $product->product_price*($product->product_discount/100)
-
-
-
-
                                                 @endphp
                                                 @if(isset($product->product_discount))
-
-
                                                 <span class="new-price">${{ $discount }}</span>
                                                 <span class="old-price">${{ $product->product_price }}</span>
 
 
-
-
                                                 @else
                                                 <span class="new-price">${{ $product->product_price }}</span>
-
-
                                                 @endif
 
+                                                
                                             </span>
                                             <span class="ec-pro-rating">
                                                 <i class="ecicon eci-star fill"></i>
@@ -379,7 +370,7 @@
                                             <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
                                             <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
                                                 Cart</button>
-                                            {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
+                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -846,23 +837,9 @@
 
                                 <div class="ec-pro-rat-price">
                                     <span class="ec-price">
-                                        @php
-                                        $discount = $deal->product_price*($deal->product_discount/100)
-
-
-                                        @endphp
-                                        @if(isset($deal->product_discount))
-
-                                        <span class="new-price">${{ $discount }}</span>
-                                        <span class="old-price">${{ $deal->product_price }}</span>
-
-
-
-                                        @else
                                         <span class="new-price">${{ $deal->product_price }}</span>
 
-                                        @endif
-
+                                        <span class="old-price">$200.00</span>
                                     </span>
                                 </div>
                                 <div class="ec-fs-pro-progress">
@@ -949,7 +926,7 @@
                             <div class="ec-pro-content">
                                 <div class="ec-pro-option">
                                     <div class="ec-pro-opt-inner">
-                                        <div class="ec-pro-color">
+                                        {{-- <div class="ec-pro-color">
                                             <ul class="ec-opt-swatch ec-change-img">
                                                 <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'.$data->product_image }}" data-src-hover="{{ env('APP_URL').'/'.$data->product_image }}" data-tooltip="Gray"><span style="background-color:#dbdbdb;"></span></a></li>
 
@@ -958,7 +935,7 @@
 
 
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                         {{-- <div class="ec-pro-compare">
                                             <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
                                         </div> --}}
@@ -971,28 +948,9 @@
                                 <div class="ec-pro-rat-price">
                                     <div class="ec-pro-rat-pri-inner">
                                         <span class="ec-price">
-                                            @php
-                                            $discount = $data->product_price*($data->product_discount/100)
+                                            <span class="new-price">{{ $data->product_price }}</span>
 
-
-
-
-                                            @endphp
-                                            @if(isset($data->product_discount))
-
-
-                                            <span class="new-price">${{ $discount }}</span>
-                                            <span class="old-price">${{ $data->product_price }}</span>
-
-
-
-
-                                            @else
-                                            <span class="new-price">${{ $data->product_price }}</span>
-
-
-                                            @endif
-
+                                            <span class="old-price">$360.00</span>
                                         </span>
                                         <span class="ec-pro-rating">
                                             <i class="ecicon eci-star fill"></i>
@@ -1010,7 +968,7 @@
                                         <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
                                         <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
                                             Cart</button>
-                                        {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
+                                        <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
                                     </div>
                                 </div>
                             </div>

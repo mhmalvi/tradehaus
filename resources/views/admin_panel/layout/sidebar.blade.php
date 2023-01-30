@@ -56,7 +56,7 @@
                 <ul class="nav sidebar-inner" id="sidebar-menu">
                     <!-- Dashboard -->
                     <li>
-                        <a class="sidenav-item-link" href="index.html">
+                        <a class="sidenav-item-link" href="{{ route('admin.dashboard') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
@@ -64,7 +64,7 @@
                     </li>
 
                     <!-- Vendors -->
-                    <li class="has-sub">
+                    {{-- <li class="has-sub">
                         <a class="sidenav-item-link" href="javascript:void(0)">
                             <i class="mdi mdi-account-group-outline"></i>
                             <span class="nav-text">Vendors</span> <b class="caret"></b>
@@ -118,7 +118,7 @@
                             </ul>
                         </div>
                         <hr>
-                    </li>
+                    </li> --}}
 
                     <!-- Category -->
                     <li class="has-sub">
@@ -180,7 +180,7 @@
                     </li>
 
                     <!-- Orders -->
-                    <li class="has-sub">
+                    {{-- <li class="has-sub">
                         <a class="sidenav-item-link" href="javascript:void(0)">
                             <i class="mdi mdi-cart"></i>
                             <span class="nav-text">Orders</span> <b class="caret"></b>
@@ -290,7 +290,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

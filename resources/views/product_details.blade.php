@@ -40,47 +40,55 @@
                 <button class="ec-close">×</button>
             </div>
             <ul class="eccart-pro-items">
+                @php
+                $total=0;
+                $cart_items = App\Models\Cart::all();
+                @endphp
+
+                @if(isset($cart_items))
+
+
+                @foreach($cart_items as $cart_item)
+
                 <li>
-                    @php
-                    $cart_items = App\Models\Cart::all();
-                    @endphp
 
-                    @if(isset($cart_items))
-
-
-                    @foreach($cart_items as $cart_item)
 
                     <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="{{ asset(env('APP_URL').'/'.$cart_item->product->product_image) }}" alt="{{ $cart_item->product_name }}"></a>
 
                     <div class="ec-pro-content">
                         <a href="product-left-sidebar.html" class="cart_pro_title">{{ $cart_item->product_name }}</a>
 
-                        <span class="cart-price"><span>${{ $cart_item->product->product_price}}</span> x 1</span>
+                        <span class="cart-price"><span>${{ $cart_item->product->product_price}}</span> x {{ $cart_item->product_quantity }}</span>
+
                         @php
-                        $price = $cart_item->product->product_price * $cart_item->product_quantity
+                        $price = $cart_item->product->product_price * $cart_item->product_quantity;
 
+                        $total=$price+$total
                         @endphp
-
+                        {{-- {{ $total }} --}}
                         <div class="qty-plus-minus">
                             <input class="qty-input" type="text" name="product_quantity" value="{{ $cart_item->product_quantity }}" />
 
                         </div>
                         <a href="javascript:void(0)" class="remove">×</a>
                     </div>
-                    @if(isset($cart_items))
-                    @php
 
-                    $sub_total=0;
-                    $sub_total = $sub_total+$price;
-                    @endphp
 
-                    @endif
+                </li>
 
-                    @endforeach
-                    @endif
 
-                    {{-- </li>
-                <li>
+                @endforeach
+                @php
+
+
+
+                @endphp
+
+                @endif
+
+
+                {{-- <li>
+
                     <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/12_1.jpg" alt="product"></a>
                     <div class="ec-pro-content">
                         <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
@@ -110,9 +118,11 @@
                     <tbody>
                         <tr>
                             <td class="text-left">Sub-Total :</td>
-                            @if(isset($sub_total))
+                            @if(isset($total))
 
-                            <td class="text-right">${{ $sub_total }}</td>
+
+                            <td class="text-right">${{ $total }}</td>
+
                             @endif
                         </tr>
                         <tr>
@@ -121,9 +131,11 @@
                         </tr>
                         <tr>
                             <td class="text-left">Total :</td>
-                            @if(isset($sub_total))
+                            @if(isset($total))
 
-                            <td class="text-right primary-color">${{ $sub_total + 60 }}</td>
+
+                            <td class="text-right primary-color">${{ $total + 60 }}</td>
+
                             @endif
 
                         </tr>
@@ -268,6 +280,8 @@
                                         </div>
 
                                         <div class="ec-pro-variation">
+                                            <input type="hidden" name="product_id" value="{{ $products->id }}" <input type="hidden" name="product_price" value="{{ $products->product_price }}" <input type="hidden" name="product_id" id="product_id" value="{{ $products->id }}" />
+                                            <input type="hidden" name="product_name" id="product_name" value="{{ $products->product_name }}" />
 
                                             @if($products->category->category_name=='Shirts')
 
@@ -275,9 +289,7 @@
                                                 <span>SIZE</span>
                                                 <div class="ec-pro-variation-content">
                                                     <ul id="myForm">
-                                                    <input type="hidden" name="product_id" value="{{ $products->id }}"
-                                                        <input type="hidden" name="product_price" value="{{ $products->product_price }}" <input type="hidden" name="product_id" id="product_id" value="{{ $products->id }}" />
-                                                        <input type="hidden" name="product_name" id="product_name" value="{{ $products->product_name }}" />
+
 
                                                         @if(isset($products->size1))
                                                         {{-- <li class="active"><span style="{{ $products->size1 }}" name="size1">{{ $products->size1 }}</span></li> --}}
@@ -639,7 +651,9 @@
                                         @endphp
                                         @if($child->status=='A')
                                         <li>
-                                            <div class="ec-sidebar-sub-item"><a href="#">{{ $child->category_name }} <span>-{{ $count }}</span></a>
+                                            <div class="ec-sidebar-sub-item"><a href="{{ route('product.category',[$child->id]) }}">{{ $child->category_name }} <span>-{{ $count }}</span></a>
+
+
 
 
                                             </div>

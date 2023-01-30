@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\admin\AdminProductController;
 use App\Http\Controllers\admin\AdminCategoryController;
+use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
 Route::prefix('admin')->group(function(){
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
     Route::get('/edit-product', [AdminProductController::class, 'edit'])->name('edit.product');
@@ -50,9 +52,13 @@ Route::prefix('admin')->group(function(){
 
 Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
-ROute::get('/product-by-category',function(){
-    return view('productByCategory');
-});
+Route::get('/product_by_category/{id}',[ProductController::class, 'product_category'])->name('product.category');
+Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+// Route::get('/product_change', [ProductController::class, 'product_change'])->name('product.change');
+// ROute::get('/product-by-category',function(){
+//     return view('productByCategory');
+// });
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

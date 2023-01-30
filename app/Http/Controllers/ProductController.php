@@ -17,9 +17,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
     }
 
+    public function product_category(Request $request,$id)
+    {
+        // dd($id);
+        $products = Product::where('category_id', $id)->get();
+        return view('product', compact('products'));
+    }
+
+    // public function product_change(Request $request){
+    //     dd($request->id);
+    //     $products = Product::where('category_id', $request->id)->get();
+    //     return view('product', compact('products'));
+    // }
     public function show_all()
     {
         $products = Product::orderBy('id', 'DESC')->get();
@@ -153,7 +164,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         dd($request->all());
         $product = Product::find($request->id);
@@ -163,7 +174,7 @@ class ProductController extends Controller
         $product->product_discount = $request->product_discount;
         $product->slug = $request->slug;
         $product->tags = $request->tags;
-        
+
         $product->product_quantity = $request->product_quantity;
         $product->product_color = $request->product_color;
         $product->product_short_description = $request->product_short_description;

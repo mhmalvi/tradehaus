@@ -98,9 +98,9 @@
                             <div class="ec-header-user dropdown">
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">Login</span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                     <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                                 </ul>
                             </div>
                             <!-- Header User End -->
@@ -192,7 +192,14 @@
                                 <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                     <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" /></div>
 
-                                    <span class="ec-btn-title"><span class="ec-cart-count">3</span> item(s) - $350.00</span>
+                                    <span class="ec-btn-title"><span class="ec-cart-count">{{ $count = App\Models\Cart::all()->count() }}
+                                            @if($count=1)
+                                        </span> item</span>
+                                    @else
+                                    </span> item(s)</span>
+
+                                    @endif
+
 
                                 </a>
                                 <!-- Header Cart End -->
@@ -250,12 +257,21 @@
                             <div class="ec-category-content">
                                 <div id="ec-category-menu" class="ec-category-menu">
                                     <ul class="ec-category-wrapper">
-                                        <li><a title="" class="ec-cat-menu-link" href="#">Home & Kitchen</a></li>
-                                        <li><a title="" class="ec-cat-menu-link" href="#">Electronics & Digital</a></li>
+                                        @php
+                                        $categories=App\Models\Category::where(function($query){
+                                        $query->whereNotNull('parent_category');
+                                        })->get();
+                                        @endphp
+                                        @foreach($categories as $category)
+
+                                        <li><a title="" class="ec-cat-menu-link" href="{{ route('product.category',[$category->id]) }}">{{ $category->category_name }}</a></li>
+
+                                        {{-- <li><a title="" class="ec-cat-menu-link" href="#">Electronics & Digital</a></li>
                                         <li><a title="" class="ec-cat-menu-link" href="#">Home Accessories</a></li>
                                         <li><a title="" class="ec-cat-menu-link" href="#">Electronics</a></li>
                                         <li><a title="" class="ec-cat-menu-link" href="#">Office Furniture</a></li>
-                                        <li><a title="" class="ec-cat-menu-link" href="#">Hotel Furniture</a></li>
+                                        <li><a title="" class="ec-cat-menu-link" href="#">Hotel Furniture</a></li> --}}
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -515,7 +531,7 @@
             </div>
             <div class="ec-menu-inner">
                 <div class="ec-menu-content">
-                    <ul >
+                    <ul>
                         <li><a style="color:white !important;" href="{{ url('/') }}">Home</a>
 
                             {{-- <ul class="sub-menu">
