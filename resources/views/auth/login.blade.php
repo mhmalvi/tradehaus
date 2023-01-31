@@ -620,13 +620,22 @@
                         <p class="sub-title mb-3">Best place to buy and sell digital products</p>
                     </div>
                 </div>
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
+
                 <div class="ec-login-wrapper">
                     <div class="ec-login-container">
                         <div class="ec-login-form">
-                            <form action="#" method="post">
+                        
+
+                            <form action="{{ route('login.access') }}" method="post">
+                                @csrf
                                 <span class="ec-login-wrap">
                                     <label>Email Address*</label>
-                                    <input type="text" name="name" placeholder="Enter your email add..." required />
+                                    <input type="text" name="email" placeholder="Enter your email add..." required />
                                 </span>
                                 <span class="ec-login-wrap">
                                     <label>Password*</label>

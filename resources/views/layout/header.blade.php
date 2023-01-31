@@ -159,24 +159,29 @@
                         <!-- Ec Header Logo Start -->
                         <div class="align-self-center ec-header-logo ">
                             <div class="header-logo">
-                                <a href="index.html"><img src="assets/images/logo/logo-5.png" alt="Site Logo" /><img class="dark-logo" src="assets/images/logo/dark-logo-5.png" alt="Site Logo" style="display: none;" /></a>
+                                <a href="{{ url('/') }}">
+                                    <h2>Trade TradeUS</h2>
+                                </a>
+
                             </div>
+
                         </div>
                         <!-- Ec Header Logo End -->
 
                         <!-- Ec Header Search Start -->
                         <div class="align-self-center ec-header-search">
                             <div class="header-search">
-                                <form class="ec-search-group-form" action="#">
-                                    <div class="ec-search-select-inner">
-                                        <div class="ec-search-cat-title">All</div>
+                                <form class="ec-search-group-form" action="{{ route('product.search') }}" method="GET">
+                                @csrf
+                                    {{-- <div class="ec-search-select-inner"> --}}
+                                        {{-- <div class="ec-search-cat-title">All</div>
                                         <ul class="ec-search-cat-block">
                                             <li><a href="#">Cloths</a></li>
                                             <li><a href="#">Bag</a></li>
                                             <li><a href="#">Shoes</a></li>
-                                        </ul>
-                                    </div>
-                                    <input class="form-control" placeholder="Search Here..." type="text">
+                                        </ul> --}}
+                                    {{-- </div> --}}
+                                    <input class="form-control" name="search" placeholder="Search Here..." type="text">
                                     <button class="search_submit" type="submit"><i class="ecicon eci-search"></i></button>
                                 </form>
                             </div>
@@ -218,7 +223,7 @@
                     <!-- Ec Header Logo Start -->
                     <div class="col">
                         <div class="header-logo">
-                            <a href="index.html"><img src="assets/images/logo/logo-5.png" alt="Site Logo" /><img class="dark-logo" src="assets/images/logo/dark-logo-5.png" alt="Site Logo" style="display: none;" /></a>
+                            <a href="index.html">Trade TradeUS</a>
                         </div>
                     </div>
                     <!-- Ec Header Logo End -->
@@ -514,11 +519,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col ec-spe-offer-block">
+                    {{-- <div class="col ec-spe-offer-block">
                         <div class="ec-spe-offer-link">
                             <a href="offer.html" class="ec-spe-offer-title">Special offer</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -19,6 +19,12 @@ class ProductController extends Controller
     {
     }
 
+    public function search(Request $request){
+        // dd($request->all());
+        $products = Product::where('product_name', 'like','%'.$request->search.'%')->get();
+        return view('product_search',compact('products'));
+    }
+
     public function product_category(Request $request,$id)
     {
         // dd($id);

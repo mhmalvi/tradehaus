@@ -283,8 +283,11 @@ class AdminProductController extends Controller
      */
     public function destroy(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $product = Product::find($request->id);
-        $product->delete();
+        $delete = $product->delete();
+        if($delete){
+            return redirect()->back()->with('message','Deleted');
+        }
     }
 }

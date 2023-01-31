@@ -14,6 +14,12 @@
         <div class="row">
             <div class="col-xl-4 col-lg-12">
                 <div class="ec-cat-list card card-default mb-24px">
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
+
                     <div class="card-body">
                         @if(isset($category))
 

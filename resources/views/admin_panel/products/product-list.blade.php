@@ -14,6 +14,12 @@
                 <a href="{{ route('add.product') }}" class="btn btn-primary"> Add Porduct</a>
             </div>
         </div>
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+        @endif
+
         <div class="row">
             <div class="col-12">
                 <div class="card card-default">

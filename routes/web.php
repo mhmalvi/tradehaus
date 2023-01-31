@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\AdminProductController;
 use App\Http\Controllers\admin\AdminCategoryController;
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\UserMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +26,13 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 // Route::prefix('/',function(){
-    
+
 // });
 // Route::get('/',[CategoryController::class, 'show_all']);
 Route::get('/', [ProductController::class, 'show_all']);
-Route::get('/product-details/{id}',[ProductController::class,'show'])->name('product.details');
+Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
@@ -46,15 +48,19 @@ Route::prefix('admin')->group(function(){
     Route::post('/add-category', [AdminCategoryController::class, 'store'])->name('store.category');
     Route::get('/add-sub-category', [AdminCategoryController::class, 'view_subcategory'])->name('add.subCategory');
     Route::get('/delete-product', [AdminProductController::class, 'destroy'])->name('delete.product');
-
+    Route::get('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');
     // Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 });
-
+Route::get('/search-item',[ProductController::class,'search'])->name('product.search');
 Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
-Route::get('/product_by_category/{id}',[ProductController::class, 'product_category'])->name('product.category');
-Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::get('/product_by_category/{id}', [ProductController::class, 'product_category'])->name('product.category');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post(
+    '/login-access',
+    [AuthController::class, 'login_access']
+)->name('login.access');
 // Route::get('/product_change', [ProductController::class, 'product_change'])->name('product.change');
 // ROute::get('/product-by-category',function(){
 //     return view('productByCategory');
