@@ -13,6 +13,8 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    
+
     public function login_access(Request $request)
     {
         // dd('hello');

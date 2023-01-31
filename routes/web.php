@@ -7,6 +7,13 @@ use App\Http\Controllers\admin\AdminProductController;
 use App\Http\Controllers\admin\AdminCategoryController;
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\TrackOrderController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\TermsController;
+use App\Http\Controllers\ContactUsController;
+
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\UserMiddleware;
@@ -57,6 +64,11 @@ Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
 Route::get('/product_by_category/{id}', [ProductController::class, 'product_category'])->name('product.category');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
+Route::get('/track-us', [TrackOrderController::class, 'index'])->name('track.us');
+Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('privacy.policy');
+Route::get('/terms-condition', [TermsController::class, 'index'])->name('terms.condition');
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.us');
 Route::post(
     '/login-access',
     [AuthController::class, 'login_access']

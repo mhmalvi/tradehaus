@@ -40,11 +40,15 @@
                             <h4 class="ec-footer-heading">Information</h4>
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">
-                                    <li class="ec-footer-link"><a href="about-us.html">About us</a></li>
-                                    <li class="ec-footer-link"><a href="track-order.html">Delivery Information</a></li>
-                                    <li class="ec-footer-link"><a href="privacy-policy.html">Policy & policy </a></li>
-                                    <li class="ec-footer-link"><a href="terms-condition.html">Terms & conditions</a></li>
-                                    <li class="ec-footer-link"><a href="contact-us.html">Contact us</a></li>
+                                    <li class="ec-footer-link"><a href="{{ route('about.us') }}">About us</a></li>
+                                    <li class="ec-footer-link"><a href="{{ route('track.us') }}">Delivery Information</a></li>
+                                    <li class="ec-footer-link"><a href="{{ route('privacy.policy') }}">Policy & policy </a></li>
+
+
+                                    <li class="ec-footer-link"><a href="{{ route('terms.condition') }}">Terms & conditions</a></li>
+
+                                    <li class="ec-footer-link"><a href="{{ route('contact.us') }}">Contact us</a></li>
+
                                     <li class="ec-footer-link"><a href="#">Returns</a></li>
                                 </ul>
                             </div>
@@ -56,7 +60,7 @@
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">
                                     <li class="ec-footer-link"><a href="#">Site Map</a></li>
-                                    <li class="ec-footer-link"><a href="wishlist.html">Wish List</a></li>
+                                    <li class="ec-footer-link"><a href="{{ route('wishlist') }}">Wish List</a></li>
                                     <li class="ec-footer-link"><a href="#">Brands</a></li>
                                     <li class="ec-footer-link"><a href="offer.html">Gift Certificates</a></li>
                                     <li class="ec-footer-link"><a href="#">Affiliate</a></li>
