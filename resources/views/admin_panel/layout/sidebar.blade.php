@@ -175,6 +175,12 @@
                                         <span class="nav-text">Product Detail</span>
                                     </a>
                                 </li>
+                                <li class="">
+                                    <a class="sidenav-item-link" href="{{ route('new.arrival') }}">
+                                        <span class="nav-text">New Arrival</span>
+                                    </a>
+                                </li>
+
                             </ul>
                         </div>
                     </li>

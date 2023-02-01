@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\NewArrival;
 use Illuminate\Http\Request;
 
 class NewArrivalController extends Controller
@@ -13,7 +15,7 @@ class NewArrivalController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin_panel.home_slider.newArrival');
     }
 
     /**
@@ -34,8 +36,33 @@ class NewArrivalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+
+        ]);
+        $arrival = new NewArrival();
+        $arrival->title = $request->title;
+        $arrival->short_description = $request->short_description;
+        $arrival->full_details = $request->full_details;
+        $arrival->price = $request->price;
+        $arrival->slug = $request->slug;
+        $arrival->quantity = $request->quantity;
+        $arrival->color = $request->color;
+        $arrival->size = $request->size;
+        if ($request->file('image')) {
+            $fileName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('assets/img/newArrival'), $fileName);
+            $file_path = "assets/img/newArrival/" . $fileName;
+            $arrival->image = $file_path;
+        }
+        $arrival->save();
+        return redirect()->back()->with('message', 'Product inserted');
     }
+
+    // public function showAll(){
+    //     $product = NewArrival::all();
+    //     return view()
+    // }
 
     /**
      * Display the specified resource.

@@ -12,6 +12,8 @@ use App\Http\Controllers\TrackOrderController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\Wishlist;
+use App\Http\Controllers\admin\NewArrivalController;
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,8 @@ Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('p
 // Route::get('admin',[AdminCategoryController::class,'index']);
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
+    Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
     Route::get('/edit-product', [AdminProductController::class, 'edit'])->name('edit.product');
@@ -69,6 +73,7 @@ Route::get('/track-us', [TrackOrderController::class, 'index'])->name('track.us'
 Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('privacy.policy');
 Route::get('/terms-condition', [TermsController::class, 'index'])->name('terms.condition');
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.us');
+Route::get('/wishlist', [Wishlist::class, 'index'])->name('wish.list');
 Route::post(
     '/login-access',
     [AuthController::class, 'login_access']

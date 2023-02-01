@@ -1,8 +1,6 @@
-@extends('layout.master')
-@section('content')
+@extends('about-us')
+@section('about_us')
 @include('css.css')
-
-<div>
 <div class="ec-side-cart-overlay"></div>
 <div id="ec-side-cart" class="ec-side-cart">
     <div class="ec-cart-inner">
@@ -137,8 +135,6 @@
         </div>
     </div>
 </section>
-</div>
-
 <!-- Ec testmonial Start -->
 {{-- <section class="section ec-test-section section-space-ptb-100 section-space-m">
     <div class="container">
@@ -350,6 +346,5 @@
         </div>
     </div>
 </section> --}}
-
 @include('js.script')
 @endsection

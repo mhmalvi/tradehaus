@@ -42,7 +42,7 @@
                                 <ul class="align-items-center">
                                     <li class="ec-footer-link"><a href="{{ route('about.us') }}">About us</a></li>
                                     <li class="ec-footer-link"><a href="{{ route('track.us') }}">Delivery Information</a></li>
-                                    <li class="ec-footer-link"><a href="{{ route('privacy.policy') }}">Policy & policy </a></li>
+                                    <li class="ec-footer-link"><a href="{{ route('privacy.policy') }}">Privacy & policy </a></li>
 
 
                                     <li class="ec-footer-link"><a href="{{ route('terms.condition') }}">Terms & conditions</a></li>
@@ -60,7 +60,7 @@
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">
                                     <li class="ec-footer-link"><a href="#">Site Map</a></li>
-                                    <li class="ec-footer-link"><a href="{{ route('wishlist') }}">Wish List</a></li>
+                                    <li class="ec-footer-link"><a href="{{ route('wish.list') }}">Wish List</a></li>
                                     <li class="ec-footer-link"><a href="#">Brands</a></li>
                                     <li class="ec-footer-link"><a href="offer.html">Gift Certificates</a></li>
                                     <li class="ec-footer-link"><a href="#">Affiliate</a></li>
@@ -102,7 +102,7 @@
                     <!-- Footer Copyright Start -->
                     <div class="col footer-copy">
                         <div class="footer-bottom-copy ">
-                            <div class="ec-copy">© 2023 <a class="site-name" href="#">TradeUs</a>. All Rights Reserved
+                            <div class="ec-copy">© 2023 <a class="site-name" href="{{ url('/') }}">TradeUs</a>. All Rights Reserved
                             </div>
                         </div>
                     </div>

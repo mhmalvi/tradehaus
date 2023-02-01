@@ -172,9 +172,9 @@
                         <div class="align-self-center ec-header-search">
                             <div class="header-search">
                                 <form class="ec-search-group-form" action="{{ route('product.search') }}" method="GET">
-                                @csrf
+                                    @csrf
                                     {{-- <div class="ec-search-select-inner"> --}}
-                                        {{-- <div class="ec-search-cat-title">All</div>
+                                    {{-- <div class="ec-search-cat-title">All</div>
                                         <ul class="ec-search-cat-block">
                                             <li><a href="#">Cloths</a></li>
                                             <li><a href="#">Bag</a></li>
@@ -294,7 +294,7 @@
                                         <li><a href="demo-5.html">Electronic</a></li>
                                     </ul> -->
                                 </li>
-                                {{-- <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
+                                <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu d-block">
                                         <li class="d-flex">
                                             <ul class="d-block">
@@ -352,8 +352,8 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li> --}}
-                                {{-- <li class="dropdown"><a href="javascript:void(0)">Products</a>
+                                </li>
+                                <li class="dropdown"><a href="javascript:void(0)">Products</a>
                                     <ul class="sub-menu">
                                         <li class="dropdown position-static"><a href="javascript:void(0)">Product page
                                                 <i class="ecicon eci-angle-right"></i></a>
@@ -393,8 +393,8 @@
                                         <li><a href="product-video-full-width.html">Video full width</a></li>
                                         <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
                                     </ul>
-                                </li> --}}
-                                <!-- <li class="dropdown"><a href="javascript:void(0)">Pages</a>
+                                </li>
+                                <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
                                         <li><a href="about-us.html">About Us</a></li>
                                         <li><a href="contact-us.html">Contact Us</a></li>
@@ -515,7 +515,7 @@
                                         <li><a href="elemets-accordions.html">Accordions</a></li>
                                         <li><a href="elemets-blog.html">Blogs</a></li>
                                     </ul>
-                                </li> -->
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -537,7 +537,8 @@
             <div class="ec-menu-inner">
                 <div class="ec-menu-content">
                     <ul>
-                        <li><a style="color:white !important;" href="{{ url('/') }}">Home</a>
+                        <li><a style="color: aliceblue !important;" href="{{ url('/') }}">Home</a>
+
 
                             {{-- <ul class="sub-menu">
                                 <li><a href="index.html">Fashion 1</a></li>
