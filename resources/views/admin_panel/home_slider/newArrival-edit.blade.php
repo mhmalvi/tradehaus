@@ -38,7 +38,7 @@
 
                 <div class="card-body">
                     <div class="row ec-vendor-uploads">
-                        <form action="{{ route('store.arrival') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('edit.arrival') }}" method="post" enctype="multipart/form-data">
 
                             @csrf
                             <div class="row">
