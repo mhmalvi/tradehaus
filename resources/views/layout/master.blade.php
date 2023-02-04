@@ -103,7 +103,7 @@
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                     <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('login.page') }}">Login</a></li>
                                 </ul>
                             </div>
                             <!-- Header User End -->
