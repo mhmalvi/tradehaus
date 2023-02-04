@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use App\Models\Product;
+use App\Models\Cart;
+
+class ProductDetailsComponent extends Component
+{
+    public $products;
+    public $product_id;
+    public $product_name;
+    public $product_quantity;
+    public $color;
+    public $size;
+    public $product_price;
+    public function render()
+    {
+        // $products = Product::find($id);
+        return view('livewire.product-details-component', ['products' => $this->products]);
+    }
+    public function mount()
+    {
+        // $product_quantity = 1;
+        if ($this->products->product_discount) {
+            $price = $this->products->product_price * ($this->products->product_discount / 100);
+        } else {
+            $price = $this->products->product_price;
+        }
+        // $this->product_quantity = $product_quantity;
+        $this->product_id = $this->products->id;
+        $this->product_name = $this->products->product_name;
+        $this->product_price = $price;
+    }
+    public function add_to_cart()
+    {
+        dd($this->product_quantity);
+        $cart_item = Cart::where('product_id', $this->product_id)->exists();
+        if ($cart_item) {
+            $this->dispatchBrowserEvent('item_exists');
+        } else {
+            $cart = new Cart();
+            $cart->product_id = $this->product_id;
+            $cart->product_name = $this->product_name;
+            $cart->product_quantity = $this->product_quantity;
+            $cart->product_color = $this->color;
+            $cart->product_size = $this->size;
+            $cart->product_price = $this->product_price;
+            $save = $cart->save();
+            if ($save) {
+                $this->dispatchBrowserEvent('add_to_cart');
+                $this->emit('cart_items');
+                $this->emit('count');
+            }
+        }
+    }
+}
