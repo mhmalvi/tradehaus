@@ -290,7 +290,7 @@
                                         <li><a href="demo-5.html">Electronic</a></li>
                                     </ul> -->
                                 </li>
-                                <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
+                                <!-- <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu d-block">
                                         <li class="d-flex">
                                             <ul class="d-block">
@@ -317,8 +317,8 @@
                                                         4 column</a></li>
                                                 <li><a href="shop-banner-full-width.html">Full width 4 column</a>
                                                 </li>
-                                            </ul>
-                                            <!-- <ul class="d-block">
+                                            </ul> -->
+                                <!-- <ul class="d-block">
                                                 <li class="menu_title"><a href="javascript:void(0)">Columns</a></li>
                                                 <li><a href="shop-full-width-col-3.html">3 Columns full width</a></li>
                                                 <li><a href="shop-full-width-col-4.html">4 Columns full width</a></li>
@@ -338,7 +338,7 @@
                                                         sidebar</a></li>
                                                 <li><a href="shop-list-full-col-2.html">Full width 2 columns</a></li>
                                             </ul> -->
-                                        </li>
+                                <!-- </li>
                                         <li>
                                             <ul class="ec-main-banner w-100">
                                                 <li><a class="p-0" href="shop-left-sidebar-col-3.html"><img class="img-responsive" src="assets/images/menu-banner/1.jpg" alt=""></a></li>
@@ -348,9 +348,9 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="dropdown"><a href="javascript:void(0)">Products</a>
-                                    <ul class="sub-menu">
+                                </li> -->
+                                <li><a href="{{route('show.all')}}">Products</a>
+                                    <!-- <ul class="sub-menu">
                                         <li class="dropdown position-static"><a href="javascript:void(0)">Product page
                                                 <i class="ecicon eci-angle-right"></i></a>
                                             <ul class="sub-menu sub-menu-child">
@@ -388,7 +388,7 @@
                                         <li><a href="product-360-full-width.html">360 full width</a></li>
                                         <li><a href="product-video-full-width.html">Video full width</a></li>
                                         <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
                                 <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
@@ -404,13 +404,13 @@
                                         @else
                                         <li><a href="{{route('logout')}}">Logout</a></li>
                                         @endif
-                                        
+
                                         <li><a href="track-order.html">Track Order</a></li>
                                         <li><a href="{{route('terms.condition')}}">Terms Condition</a></li>
                                         <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"><span class="main-label-note-new" data-toggle="tooltip" title="NEW"></span><a href="javascript:void(0)">Others</a>
+                                <!-- <li class="dropdown"><span class="main-label-note-new" data-toggle="tooltip" title="NEW"></span><a href="javascript:void(0)">Others</a>
                                     <ul class="sub-menu">
                                         <li class="dropdown position-static"><a href="javascript:void(0)">Mail
                                                 Confirmation
@@ -494,16 +494,16 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="dropdown"><a href="javascript:void(0)">Blog</a>
-                                    <ul class="sub-menu">
+                                </li> -->
+                                <li><a href="{{route('blog.view')}}">Blog</a>
+                                    <!-- <ul class="sub-menu">
                                         <li><a href="blog-left-sidebar.html">left sidebar</a></li>
                                         <li><a href="blog-right-sidebar.html">right sidebar</a></li>
                                         <li><a href="blog-detail-left-sidebar.html">detail left sidebar</a></li>
                                         <li><a href="blog-detail-right-sidebar.html">detail right sidebar</a></li>
                                         <li><a href="blog-full-width.html">full width</a></li>
                                         <li><a href="blog-detail-full-width.html">detail full width</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
                                 <!-- <li class="dropdown"><a href="javascript:void(0)">Elements</a>
                                     <ul class="sub-menu">
@@ -600,8 +600,8 @@
                                 </li>
                             </ul>
                         </li> --}}
-                        <li><a href="javascript:void(0)">Products</a>
-                            <ul class="sub-menu">
+                        <li><a href="{{route('show.all')}}">Products</a>
+                            <!-- <ul class="sub-menu">
                                 <li><a href="javascript:void(0)">Product page</a>
                                     <ul class="sub-menu">
                                         <li><a href="product-left-sidebar.html">Product left sidebar</a></li>
@@ -630,9 +630,9 @@
                                 <li><a href="product-360-full-width.html">360 full width</a></li>
                                 <li><a href="product-video-full-width.html">Video full width</a></li>
                                 <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
-                            </ul>
+                            </ul> -->
                         </li>
-                        <li><a href="javascript:void(0)">Others</a>
+                        <!-- <li><a href="javascript:void(0)">Others</a>
                             <ul class="sub-menu">
                                 <li><a href="javascript:void(0)">Mail Confirmation</a>
                                     <ul class="sub-menu">
@@ -695,7 +695,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li><a href="javascript:void(0)">Pages</a>
                             <ul class="sub-menu">
                                 <li><a href="about.us">About Us</a></li>

@@ -43,6 +43,12 @@ class ProductController extends Controller
         return view('home', compact('products'));
     }
 
+    public function show_all_products()
+    {
+        $products = Product::orderBy('id', 'DESC')->get();
+        return view('show-all-products', compact('products'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

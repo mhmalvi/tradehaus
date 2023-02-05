@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
@@ -79,6 +80,9 @@ Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.
 Route::get('/wishlist', [Wishlist::class, 'index'])->name('wish.list');
 Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout.view');
 Route::post('place-order', [OrderController::class, 'store'])->name('place.order');
+Route::get('show-all', [ProductController::class, 'show_all_products'])->name('show.all');
+Route::get('blog-all', [BlogController::class, 'index'])->name('blog.view');
+Route::get('blog-details',[BlogController::class,'details'])->name('blog.details');
 Route::group(['middleware' => ['auth']], function () {
     /**
      * Logout Route
