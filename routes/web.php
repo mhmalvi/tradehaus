@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
@@ -14,11 +13,10 @@ use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Wishlist;
 use App\Http\Controllers\admin\NewArrivalController;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Middleware\UserMiddleware;
+use App\Http\Middleware\AdminMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,17 +29,17 @@ use App\Http\Middleware\UserMiddleware;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::prefix('/',function(){
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// });
-// Route::get('/',[CategoryController::class, 'show_all']);
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
-Route::prefix('admin')->group(function () {
+Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
     Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
@@ -66,7 +64,7 @@ Route::get('/search-item',[ProductController::class,'search'])->name('product.se
 Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
 Route::get('/product_by_category/{id}', [ProductController::class, 'product_category'])->name('product.category');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login-page', [AuthController::class, 'login'])->name('login.page');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 Route::get('/track-us', [TrackOrderController::class, 'index'])->name('track.us');
@@ -84,4 +82,5 @@ Route::post(
 // });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+require __DIR__.'/auth.php';
