@@ -99,17 +99,25 @@
 
                             <!-- Header User Start -->
                             <div class="ec-header-user dropdown">
+                            {{-- @if(auth()->check()) --}}
+                            
+
+                            {{-- @endif --}}
+
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">Login</span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                     <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
                                     <li><a class="dropdown-item" href="{{ route('login.page') }}">Login</a></li>
+                                    
                                 </ul>
                             </div>
                             <!-- Header User End -->
                             <!-- Header wishlist Start -->
-                            <div class="ec-header-wishlist">
-                                <a href="#">
+                            <div class="ec-header-wishlist" style="margin-top: 5px;">
+
+                                <a href="{{ route('wish.list') }}">
+
                                     <div class="top-icon"><img src="{{ asset('assets/images/icons/pro_wishlist.svg')}}" class="svg_img top_svg" alt="" /></div>
                                     <span class="ec-btn-title">wishlist</span>
                                 </a>

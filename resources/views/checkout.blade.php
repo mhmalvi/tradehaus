@@ -56,6 +56,15 @@
 
     }
 
+    .ec-product-inner {
+        border: none;
+    }
+
+    .ec-pro-rating {
+        margin-left: -61%;
+
+    }
+
 </style>
 <section class="ec-page-content section-space-p">
     <div class="container">
@@ -117,33 +126,35 @@
                             </div>
 
                         </div>
-                        <div style="border: 1px solid #ededed;padding: 30px;" class="ec-checkout-wrap margin-bottom-30 padding-bottom-3">
+                        <form action="{{ route('place.order') }}" method="post">
 
-                            {{-- {{ $sub_total }} --}}
-                            <div class="ec-checkout-block ec-check-bill">
-                                <h3 style="margin-bottom: 21px;" class="ec-checkout-title">Billing Details</h3>
+                            <div style="border: 1px solid #ededed;padding: 30px;" class="ec-checkout-wrap margin-bottom-30 padding-bottom-3">
 
-                                <div class="ec-bl-block-content">
-                                    <div class="ec-check-subtitle">Checkout Options</div>
-                                    <span class="ec-bill-option">
-                                        <span>
-                                            <input type="radio" id="bill1" name="radio-group">
-                                            <label for="bill1">I want to use an existing address</label>
+                                {{-- {{ $sub_total }} --}}
+                                <div class="ec-checkout-block ec-check-bill">
+                                    <h3 style="margin-bottom: 21px;" class="ec-checkout-title">Billing Details</h3>
+
+                                    <div class="ec-bl-block-content">
+                                        <div class="ec-check-subtitle">Checkout Options</div>
+                                        <span class="ec-bill-option">
+                                            <span>
+                                                <input type="radio" id="bill1" name="radio-group">
+                                                <label for="bill1">I want to use an existing address</label>
+                                            </span>
+                                            <span>
+                                                <input type="radio" id="bill2" name="radio-group" checked>
+                                                <label for="bill2">I want to use new address</label>
+                                            </span>
                                         </span>
-                                        <span>
-                                            <input type="radio" id="bill2" name="radio-group" checked>
-                                            <label for="bill2">I want to use new address</label>
-                                        </span>
-                                    </span>
-                                    <div class="ec-check-bill-form">
-                                        <form action="#" method="post">
+                                        <div class="ec-check-bill-form">
+
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>First Name*</label>
-                                                <input type="text" name="firstname" placeholder="Enter your first name" required />
+                                                <input type="text" name="first_name" placeholder="Enter your first name" required />
                                             </span>
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Last Name*</label>
-                                                <input type="text" name="lastname" placeholder="Enter your last name" required />
+                                                <input type="text" name="last_name" placeholder="Enter your last name" required />
                                             </span>
                                             <span class="ec-bill-wrap">
                                                 <label>Address</label>
@@ -164,12 +175,12 @@
                                             </span>
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Post Code</label>
-                                                <input type="text" name="postalcode" placeholder="Post Code" />
+                                                <input type="text" name="post_code" placeholder="Post Code" />
                                             </span>
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Country *</label>
                                                 <span class="ec-bl-select-inner">
-                                                    <select name="ec_select_country" id="ec-select-country" class="ec-bill-select">
+                                                    <select name="country" id="ec-select-country" class="ec-bill-select">
                                                         <option selected disabled>Country</option>
                                                         <option value="1">Country 1</option>
                                                         <option value="2">Country 2</option>
@@ -182,7 +193,7 @@
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Region State</label>
                                                 <span class="ec-bl-select-inner">
-                                                    <select name="ec_select_state" id="ec-select-state" class="ec-bill-select">
+                                                    <select name="region" id="ec-select-state" class="ec-bill-select">
                                                         <option selected disabled>Region/State</option>
                                                         <option value="1">Region/State 1</option>
                                                         <option value="2">Region/State 2</option>
@@ -190,18 +201,26 @@
                                                         <option value="4">Region/State 4</option>
                                                         <option value="5">Region/State 5</option>
                                                     </select>
+                                                    @php
+                                                    $delivery_charge = 80.00;
+
+                                                    @endphp
+                                                    <input type="hidden" name="sub_total" value="{{ $sub_total }}" />
+                                                    <input type="hidden" name="delivery_charge" value="{{ $delivery_charge }}" />
+                                                    <input type="hidden" name="total_amount" value="{{ $sub_total+$delivery_charge }}" />
                                                 </span>
                                             </span>
-                                        </form>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
 
-                        </div>
-                        <span class="ec-check-order-btn">
-                            <a class="btn btn-primary" href="#">Place Order</a>
-                        </span>
+                            </div>
+                            <span class="ec-check-order-btn">
+                                <a class="btn btn-primary" type="submit" href="#">Place Order</a>
+                            </span>
+                        </form>
+
                     </div>
                 </div>
                 <!--cart content End -->
@@ -223,10 +242,11 @@
                                 </div>
                                 <div>
                                     <span class="text-left">Delivery Charges</span>
-                                    <span class="text-right">$80.00</span>
+                                    <span class="text-right">${{ $delivery_charge }}.00</span>
                                 </div>
                                 @php
-                                $total = $sub_total+80;
+                                $total = $sub_total+$delivery_charge;
+
                                 @endphp
                                 <div>
                                     <span class="text-left">Coupan Discount</span>

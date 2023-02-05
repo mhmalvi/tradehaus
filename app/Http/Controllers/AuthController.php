@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Admin;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -13,8 +14,8 @@ class AuthController extends Controller
         return view('login');
     }
 
-    function construct(){
-        
+    function construct()
+    {
     }
 
 
@@ -28,31 +29,61 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         // dd('hello');
-        if (Auth::guard('admin')) {
-            $user = Admin::where('email', $request->email)->first();
-            if (!$user || $request->password !== $user->password) {
-dd('hello');
-                return redirect()->back()->with('message', 'Email or password not valid');
-            } else {
-                // dd(Auth::user());
-                // if ($user->roles == 1) {
-// dd("hello");
-                return redirect('admin/dashboard');
-                // }
-            }
-        }else{
-            dd('fail');
+        // if (Auth::guard('admin')) {
+        $user = User::where('email', $request->email)->first();
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            // dd('hello');
+            return redirect()->back()->with('message', 'Email or password not valid');
+        } else {
+            // dd(Auth::user());
+            // if ($user->roles == 1) {
+            // dd("hello");
+            dd(Auth::id());
+            return redirect('/');
+            // }
         }
+        // }else{
+        //     dd('fail');
+        // }
     }
 
     public function register()
     {
-        return view('auth.register');
+        return view('register');
+    }
+
+    public function register_user(Request $request)
+    {
+        $user = new User();
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+
+        $user->name = $request->first_name . ' ' . $request->last_name;
+        if ($request->password == $request->confirm_password) {
+            $user->password = Hash::make($request->password);
+        } else {
+            return response()->back()->with('message', 'password do not match');
+        }
+        // dd("hello");
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->city = $request->city;
+        $user->country = $request->country;
+        $user->post_code = $request->post_code;
+        $user->region = $request->region;
+        $user->roles = 0;
+
+        $save = $user->save();
+        if ($save) {
+            return redirect()->back()->with('message', 'Registered successfully');
+        }
     }
 
     public function logout_admin(Request $request)
     {
-       Auth::guard('admin')->logout();
-       return redirect()->route('login.page');
+        Auth::guard('admin')->logout();
+        return redirect()->route('login.page');
     }
 }
