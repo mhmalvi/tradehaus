@@ -1,8 +1,8 @@
 @extends('layout.master')
 @section('content')
 @include('css.css')
-<div class="ec-side-cart-overlay"></div>
-<div id="ec-side-cart" class="ec-side-cart">
+{{-- <div class="ec-side-cart-overlay"></div> --}}
+{{-- <div id="ec-side-cart" class="ec-side-cart">
     <div class="ec-cart-inner">
         <div class="ec-cart-top">
             <div class="ec-cart-title">
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- ekka Cart End -->
 
 <!-- Ec breadcrumb start -->
@@ -132,5 +132,4 @@
     </div>
 </section>
 @include('js.script')
-
 @endsection
