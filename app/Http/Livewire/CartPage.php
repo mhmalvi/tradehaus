@@ -14,6 +14,11 @@ class CartPage extends Component
         return view('livewire.cart-page',['cart_items'=>$items]);
     }
 
+    public function checkout($sub_total,$cart_items){
+        dd($sub_total);
+        return view('checkout',compact('sub_total','cart_items'));
+    }
+
     public function get_cart_items(){
         $items = Cart::all();
         return view('livewire.cart-page',['cart_items'=>$items]);

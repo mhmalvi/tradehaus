@@ -12,6 +12,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Wishlist;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\admin\NewArrivalController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -72,6 +73,7 @@ Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('privacy
 Route::get('/terms-condition', [TermsController::class, 'index'])->name('terms.condition');
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.us');
 Route::get('/wishlist', [Wishlist::class, 'index'])->name('wish.list');
+Route::get('/checkout/{total}',[CheckoutController::class,'index'])->name('checkout.view');
 Route::post(
     '/login-access',
     [AuthController::class, 'login_access']
