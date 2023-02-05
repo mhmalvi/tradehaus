@@ -6,7 +6,6 @@
                     .slide-1 {
                         background-image: url('../../public/assets/img/sliders/headset_adobe.jpg')
                     }
-
                 </style>
 
                 <div class="container align-self-center">
@@ -72,105 +71,31 @@
                     <div class="ec_cat_content">
 
                         <div class="ec_cat_inner">
-                            <a href="#">
-                                <h2 class="d-none">Category</h2>
-                                <a href="{{ route('product.category',[$category->id]) }}">
+                            <h2 class="d-none">Category</h2>
+                            <a href="{{ route('product.category',[$category->id]) }}">
 
-                                    <div class="ec-cat-image">
-                                        <img src="{{ $category->category_image }}" class="svg_img cat_svg" alt="" />
-                                    </div>
-                                    <div class="ec-cat-desc">
-                                        <span class="ec-section-title">{{ $category->category_name }}</span>
+                                <div class="ec-cat-image">
+                                    <img src="{{ $category->category_image }}" class="svg_img cat_svg" alt="" />
+                                </div>
+                                <div class="ec-cat-desc">
+                                    <span class="ec-section-title">{{ $category->category_name }}</span>
 
 
-                                    </div>
-                                </a>
-
+                                </div>
                             </a>
                         </div>
 
                     </div>
                     @endforeach
 
-                    {{-- <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/9.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Smartwatches</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/10.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/11.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Console Games</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/12.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Headphones</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/13.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Virtual Reality</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/14.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div> --}}
+
                 </div>
             </div>
         </div>
     </section>
-    @if(auth()->check())
+    <!-- @if(auth()->check())
     <h1>{{ auth()->user()->name }}</h1>
-    @endif
+    @endif -->
     <!--category Section End -->
     <!-- @if(session()->has('message')) -->
     <!-- @endif -->
