@@ -168,8 +168,9 @@
             </div>
         </div>
     </section>
+    @if(auth()->check())
     <h1>{{ auth()->user()->name }}</h1>
-
+    @endif
     <!--category Section End -->
     <!-- @if(session()->has('message')) -->
     <!-- @endif -->

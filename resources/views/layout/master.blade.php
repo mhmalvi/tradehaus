@@ -99,17 +99,21 @@
 
                             <!-- Header User Start -->
                             <div class="ec-header-user dropdown">
-                            {{-- @if(auth()->check()) --}}
-                            
+                                {{-- @if(auth()->check()) --}}
 
-                            {{-- @endif --}}
+{{-- {{ auth()->user()->name }} --}}
+                                {{-- @endif --}}
 
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">Login</span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                     <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('login.page') }}">Login</a></li>
-                                    
+                                    @if(auth()->check())
+                                    <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
+
+                                    @else
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    @endif
                                 </ul>
                             </div>
                             <!-- Header User End -->
@@ -276,7 +280,8 @@
                     <div class="col ec-main-menu-block align-self-center d-none d-lg-block p-0">
                         <div class="ec-main-menu">
                             <ul>
-                                <li class="dropdown"><a href="{{ url('/') }}">Home</a>
+                                <li style="color: white;" class="dropdown"><a href="{{ url('/') }}">Home</a>
+
                                     <!-- <ul class="sub-menu">
                                         <li><a href="index.html">Fashion 1</a></li>
                                         <li><a href="demo-2.html">Fashion 2</a></li>
@@ -795,24 +800,24 @@
     <script>
         window.addEventListener('item_exists', event => {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Item already exists.',
-            })
+                icon: 'error'
+                , title: 'Oops...'
+                , text: 'Item already exists.'
+            , })
         });
 
-        
     </script>
     <script>
         window.addEventListener('add_to_cart', event => {
             Swal.fire({
                 // position: 'top-end',
-                icon: 'success',
-                title: 'Added to cart',
-                showConfirmButton: true,
+                icon: 'success'
+                , title: 'Added to cart'
+                , showConfirmButton: true,
                 // timer: 1500
             })
         });
+
     </script>
 
     @include('layout.footer')

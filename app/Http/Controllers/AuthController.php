@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -38,7 +39,7 @@ class AuthController extends Controller
             // dd(Auth::user());
             // if ($user->roles == 1) {
             // dd("hello");
-            dd(Auth::id());
+            // dd(Auth::id());
             return redirect('/');
             // }
         }
@@ -81,9 +82,10 @@ class AuthController extends Controller
         }
     }
 
-    public function logout_admin(Request $request)
+    public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
-        return redirect()->route('login.page');
+        Session::flush();
+        Auth::logout();
+        return redirect('/');
     }
 }

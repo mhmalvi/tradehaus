@@ -125,7 +125,10 @@
                 <div class="col-12">
                     <div class="row ec_breadcrumb_inner">
                         <div class="col-md-6 col-sm-12">
-                            <h2 class="ec-breadcrumb-title">Login</h2>
+                            <a href="{{ url('/') }}">
+                                <h2 class="ec-breadcrumb-title">Trade Tradeus</h2>
+                            </a>
+
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <!-- ec-breadcrumb-list start -->
@@ -156,7 +159,7 @@
                 <div class="ec-login-wrapper">
                     @if(Session::has('message'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>{{Session::get('message')}}</strong> 
+                        <strong>{{Session::get('message')}}</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -215,6 +218,7 @@
                 pageLanguage: 'en'
             }, 'google_translate_element');
         }
+
     </script>
     <!-- Main Js -->
     <script src="{{asset('assets/js/vendor/index.js')}}"></script>

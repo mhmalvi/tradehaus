@@ -68,6 +68,7 @@ Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('sto
 Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
 Route::get('/product_by_category/{id}', [ProductController::class, 'product_category'])->name('product.category');
 Route::get('/login-page', [AuthController::class, 'login'])->name('login.page');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register-page', [AuthController::class, 'register'])->name('register.page');
 Route::post('/register-user', [AuthController::class, 'register_user'])->name('register.user');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
@@ -78,6 +79,12 @@ Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.
 Route::get('/wishlist', [Wishlist::class, 'index'])->name('wish.list');
 Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout.view');
 Route::post('place-order', [OrderController::class, 'store'])->name('place.order');
+Route::group(['middleware' => ['auth']], function () {
+    /**
+     * Logout Route
+     */
+    Route::get('/logout', [AuthController::class,'logout'])->name('logout.perform');
+});
 Route::post(
     '/login-access',
     [AuthController::class, 'login_access']

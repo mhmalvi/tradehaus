@@ -127,7 +127,7 @@
 
                         </div>
                         <form action="{{ route('place.order') }}" method="post">
-
+                            @csrf
                             <div style="border: 1px solid #ededed;padding: 30px;" class="ec-checkout-wrap margin-bottom-30 padding-bottom-3">
 
                                 {{-- {{ $sub_total }} --}}
@@ -163,13 +163,13 @@
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>City *</label>
                                                 <span class="ec-bl-select-inner">
-                                                    <select name="ec_select_city" id="ec-select-city" class="ec-bill-select">
+                                                    <select name="city" id="ec-select-city" class="ec-bill-select">
                                                         <option selected disabled>City</option>
-                                                        <option value="1">City 1</option>
-                                                        <option value="2">City 2</option>
-                                                        <option value="3">City 3</option>
-                                                        <option value="4">City 4</option>
-                                                        <option value="5">City 5</option>
+                                                        <option value="city one">City 1</option>
+                                                        <option value="city one">City 2</option>
+                                                        <option value="city one">City 3</option>
+                                                        <option value="city one">City 4</option>
+                                                        <option value="city one">City 5</option>
                                                     </select>
                                                 </span>
                                             </span>
@@ -182,11 +182,11 @@
                                                 <span class="ec-bl-select-inner">
                                                     <select name="country" id="ec-select-country" class="ec-bill-select">
                                                         <option selected disabled>Country</option>
-                                                        <option value="1">Country 1</option>
-                                                        <option value="2">Country 2</option>
-                                                        <option value="3">Country 3</option>
-                                                        <option value="4">Country 4</option>
-                                                        <option value="5">Country 5</option>
+                                                        <option value="country one">Country 1</option>
+                                                        <option value="country one">Country 2</option>
+                                                        <option value="country one">Country 3</option>
+                                                        <option value="country one">Country 4</option>
+                                                        <option value="country one">Country 5</option>
                                                     </select>
                                                 </span>
                                             </span>
@@ -195,11 +195,11 @@
                                                 <span class="ec-bl-select-inner">
                                                     <select name="region" id="ec-select-state" class="ec-bill-select">
                                                         <option selected disabled>Region/State</option>
-                                                        <option value="1">Region/State 1</option>
-                                                        <option value="2">Region/State 2</option>
-                                                        <option value="3">Region/State 3</option>
-                                                        <option value="4">Region/State 4</option>
-                                                        <option value="5">Region/State 5</option>
+                                                        <option value="state">Region/State 1</option>
+                                                        <option value="state">Region/State 2</option>
+                                                        <option value="state">Region/State 3</option>
+                                                        <option value="state">Region/State 4</option>
+                                                        <option value="state">Region/State 5</option>
                                                     </select>
                                                     @php
                                                     $delivery_charge = 80.00;
@@ -209,6 +209,38 @@
                                                     <input type="hidden" name="delivery_charge" value="{{ $delivery_charge }}" />
                                                     <input type="hidden" name="total_amount" value="{{ $sub_total+$delivery_charge }}" />
                                                 </span>
+                                                @php
+                                                $cart_items = App\Models\Cart::all();
+                                                @endphp
+                                                @foreach($cart_items as $cart_item)
+                                                @php
+                                                $product_item = App\Models\Product::find($cart_item->product_id);
+                                                @endphp
+                                                <input type="hidden" name="product_name[]" value="{{ $product_item->product_name }}" />
+                                                @php
+
+
+
+                                                @endphp
+                                                @if(isset($product_item->product_discount))
+
+                                                @php
+                                                $price = $product_item->product_price*($product_item->product_discount/100)
+
+                                                @endphp
+
+                                                @else
+                                                @php
+                                                $price = $item->product_price
+
+                                                @endphp
+                                                @endif
+
+                                                <input type="hidden" name="product_price[]" value="{{ $price }}" />
+
+                                                <input type="hidden" name="images[]" value="{{ $product_item->product_image }}" />
+
+                                                @endforeach
                                             </span>
                                         </div>
 
@@ -217,7 +249,7 @@
 
                             </div>
                             <span class="ec-check-order-btn">
-                                <a class="btn btn-primary" type="submit" href="#">Place Order</a>
+                                <button class="btn btn-primary" type="submit" href="#">Place Order</button>
                             </span>
                         </form>
 
@@ -278,6 +310,8 @@
                                         <div class="ec-pro-image-outer">
                                             <div class="ec-pro-image">
                                                 <a href="product-left-sidebar.html" class="image">
+                                                    <input type="hidden" name="product_image[]" value="{{ $image->product_image }}" />
+
                                                     <img class="main-image" src="{{ env('APP_URL').'/'.$image->product_image }}" alt="Product" />
 
                                                     <img class="hover-image" src="{{ env('APP_URL').'/'.$image->product_image }}" alt="Product" />
