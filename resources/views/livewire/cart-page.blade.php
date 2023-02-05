@@ -13,7 +13,7 @@
                 $cart_items = App\Models\Cart::all();
                 @endphp -->
 
-                    @if(isset($cart_items))
+                    @if(isset($cart_items) && auth()->check())
 
 
                     @foreach($cart_items as $cart_item)
@@ -56,30 +56,7 @@
                     @endif
 
 
-                    {{-- <li>
-
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/12_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
-                        <span class="cart-price"><span>$64.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/3_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Girls Nylon Purse</a>
-                        <span class="cart-price"><span>$59.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li> --}}
-                </ul>
+                    
 
             </div>
             <div class="ec-cart-bottom">
@@ -111,6 +88,7 @@
                         </tbody>
                     </table>
                 </div>
+                @if(auth()->check())
                 <div class="cart_btn">
                     <a href="cart.html" class="btn btn-primary">View Cart</a>
                     {{-- @php
@@ -120,6 +98,7 @@
 
                     {{-- wire:click="checkout({{ $total }},{{ $total +60 }},{{ $cart_items }})" --}}
                 </div>
+                @endif
             </div>
         </div>
     </div>

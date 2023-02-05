@@ -83,7 +83,10 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * Logout Route
      */
-    Route::get('/logout', [AuthController::class,'logout'])->name('logout.perform');
+    Route::get('/wishlist', [Wishlist::class, 'index'])->name('wish.list');
+    Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout.view');
+    Route::post('place-order', [OrderController::class, 'store'])->name('place.order');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout.perform');
 });
 Route::post(
     '/login-access',

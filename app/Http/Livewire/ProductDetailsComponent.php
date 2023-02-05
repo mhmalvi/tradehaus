@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class ProductDetailsComponent extends Component
 {
@@ -35,7 +36,8 @@ class ProductDetailsComponent extends Component
     }
     public function add_to_cart()
     {
-        dd($this->product_quantity);
+        // dd($this->product_quantity);
+        if(Auth::check()){
         $cart_item = Cart::where('product_id', $this->product_id)->exists();
         if ($cart_item) {
             $this->dispatchBrowserEvent('item_exists');
@@ -54,5 +56,8 @@ class ProductDetailsComponent extends Component
                 $this->emit('count');
             }
         }
+    }else{
+        $this->dispatchBrowserEvent('login');
+    }
     }
 }
