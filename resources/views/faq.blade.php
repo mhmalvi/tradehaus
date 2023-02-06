@@ -1,5 +1,5 @@
-@extends('layout.master')
-@section('content')
+@extends('layout.inner-master')
+@section('inner-content')
 <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
         <div class="container">
             <div class="row">

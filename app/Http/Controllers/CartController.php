@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 // use RealRashid\SweetAlert\Facades\Alert;
 use Alert;
 
@@ -17,7 +19,7 @@ class CartController extends Controller
     public function index()
     {
         $cart_items = Cart::all();
-        return view('product_details',compact('cart_items'));
+        return view('product_details', compact('cart_items'));
     }
 
     /**
@@ -27,7 +29,6 @@ class CartController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -45,25 +46,33 @@ class CartController extends Controller
         //     'product_color' => 'required',
         //     'product_quantity' => 'required'
         // ]);
+        if (Auth::check()) {
+            // $product = Product::find($request->id);
+            $cart_item = Cart::where('product_id', $request->product_id)->exists();
+            if ($cart_item) {
+                return redirect()->back()->with('error', 'Item already exist');
+            } else {
+                $cart = new Cart();
+                // dd($request->all());
+                $cart->product_name = $request->product_name;
+                echo "hr";
+                $cart->product_price = $request->product_price;
+                $cart->product_size = $request->size;
+                $cart->product_color = $request->color;
+                $cart->product_quantity = $request->product_quantity;
+                $cart->product_id = $request->product_id;
+                $cart->user_id = Auth::user()->id;
+                // dd("after_id");
 
-        $cart = new Cart();
-        // dd($request->all());
-        $cart->product_name = $request->product_name;
-        echo "hr";
-        $cart->product_size = $request->size;
-        echo "after_size";
-        $cart->product_color = $request->color;
-        echo "after_color";
-        $cart->product_quantity = $request->product_quantity;
-        echo "after_quantity";
-        $cart->product_id = $request->product_id;
-        // dd("after_id");
-
-        $save = $cart->save();
-        if ($save) {
-            echo "after_save";
-            // Alert::success('Congrats', 'You\'ve Successfully added to cart');
-            return redirect()->back()->with('message', 'Added successfully');
+                $save = $cart->save();
+                if ($save) {
+                    echo "after_save";
+                    // Alert::success('Congrats', 'You\'ve Successfully added to cart');
+                    return redirect()->back()->with('message', 'Added successfully');
+                }
+            }
+        } else {
+            return redirect()->back()->with('error', 'Please login first');
         }
     }
 

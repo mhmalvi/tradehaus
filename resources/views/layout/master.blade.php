@@ -45,7 +45,15 @@
 
 </head>
 
+<style>
+    .ec-main-menu ul li a {
+        color: white !important;
+    }
+    .ec-main-menu ul li.dropdown ul li a {
+        color:black !important;
+    }
 
+</style>
 
 <body>
     <div id="ec-overlay"><span class="loader_img"></span></div>
@@ -107,7 +115,7 @@
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">Login</span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
-                                    <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
+                                    {{-- <li><a class="dropdown-item" href="checkout.html">Checkout</a></li> --}}
                                     @if(auth()->check())
                                     <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
 
@@ -392,12 +400,14 @@
                                 </li>
                                 <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
-                                        <li><a href="{{ route('about.us') }}">About Us</a></li>
-                                        <li><a href="{{route('contact.us')}}">Contact Us</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="compare.html">Compare</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
+
+                                        <li><a  style="color:black; !important;" href="{{ route('about.us') }}">About Us</a></li>
+                                        <li><a  style="color:black; !important;" href="{{route('contact.us')}}">Contact Us</a></li>
+                                        {{-- <li><a href="cart.html">Cart</a></li> --}}
+                                        {{-- <li><a href="checkout.html">Checkout</a></li> --}}
+                                        {{-- <li><a href="compare.html">Compare</a></li> --}}
+                                        <li><a href="{{ route('faq') }}">FAQ</a></li>
+
                                         @if(!auth()->check())
                                         <li><a href="{{route('login')}}">Login</a></li>
                                         <li><a href="{{route('register')}}">Register</a></li>
@@ -405,7 +415,7 @@
                                         <li><a href="{{route('logout')}}">Logout</a></li>
                                         @endif
 
-                                        <li><a href="track-order.html">Track Order</a></li>
+                                        {{-- <li><a href="track-order.html">Track Order</a></li> --}}
                                         <li><a href="{{route('terms.condition')}}">Terms Condition</a></li>
                                         <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
                                     </ul>
@@ -697,18 +707,25 @@
                             </ul>
                         </li> -->
                         <li><a href="javascript:void(0)">Pages</a>
-                            <ul class="sub-menu">
-                                <li><a href="about.us">About Us</a></li>
-                                <li><a href="contact.us">Contact Us</a></li>
-                                <li><a href="cart.html">Cart</a></li>
-                                <!-- <li><a href="checkout.html">Checkout</a></li> -->
-                                <!-- <li><a href="compare.html">Compare</a></li> -->
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="register.html">Register</a></li>
-                                <li><a href="track-order.html">Track Order</a></li>
-                                <li><a href="terms-condition.html">Terms Condition</a></li>
-                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <ul class="sub-menu" style="color:black;">
+                                 <li><a href="{{ route('about.us') }}">About Us</a></li>
+                                 <li><a href="{{route('contact.us')}}">Contact Us</a></li>
+                                 {{-- <li><a href="cart.html">Cart</a></li> --}}
+                                 {{-- <li><a href="checkout.html">Checkout</a></li> --}}
+                                 {{-- <li><a href="compare.html">Compare</a></li> --}}
+                                 <li><a href="{{ route('faq') }}">FAQ</a></li>
+
+                                 @if(!auth()->check())
+                                 <li><a href="{{route('login')}}">Login</a></li>
+                                 <li><a href="{{route('register')}}">Register</a></li>
+                                 @else
+                                 <li><a href="{{route('logout')}}">Logout</a></li>
+                                 @endif
+
+                                 {{-- <li><a href="track-order.html">Track Order</a></li> --}}
+                                 <li><a href="{{route('terms.condition')}}">Terms Condition</a></li>
+                                 <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown"><a href="javascript:void(0)">Blog</a>
@@ -792,10 +809,31 @@
     <script src="{{ asset('assets/js/plugins/swiper-bundle.min.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/countdownTimer.min.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/scrollup.js')}}"></script>
-    <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script> --}}
     <script src="{{ asset('assets/js/plugins/slick.min.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/infiniteslidev2.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/chat-pro.js')}}"></script>
+    <script src="{{ asset('assets/js/plugins/nouislider.js')}}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/countdownTimer.min.js')}}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/plugins/scrollup.js')}}"></script> --}}
+    <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script>
+
+    {{-- <script src="{{ asset('assets/js/plugins/slick.min.js')}}"></script> --}}
+
+    {{-- <script src="{{ asset('assets/js/plugins/infiniteslidev2.js')}}"></script> --}}
+    <script src="{{ asset('assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{ asset('assets/js/plugins/jquery.sticky-sidebar.js')}}"></script>
+    <script src="{{ asset('assets/js/vendor/google-translate.js')}}"></script>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+
+    </script>
+    <!-- Main Js -->
+    <script src="{{ asset('assets/js/main.js')}}"></script>
 
     <!-- Main Js -->
     <script src="{{ asset('assets/js/vendor/index.js')}}"></script>
@@ -805,35 +843,38 @@
     <script>
         window.addEventListener('item_exists', event => {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Item already exists.',
-            })
+                icon: 'error'
+                , title: 'Oops...'
+                , text: 'Item already exists.'
+            , })
         });
+
     </script>
     <script>
         window.addEventListener('add_to_cart', event => {
             Swal.fire({
                 // position: 'top-end',
-                icon: 'success',
-                title: 'Added to cart',
-                showConfirmButton: true,
+                icon: 'success'
+                , title: 'Added to cart'
+                , showConfirmButton: true,
                 // timer: 1500
             })
         });
+
     </script>
     <script>
         window.addEventListener('login', event => {
             Swal.fire({
-                title: 'Please login first',
-                showClass: {
+                title: 'Please login first'
+                , showClass: {
                     popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
+                }
+                , hideClass: {
                     popup: 'animate__animated animate__fadeOutUp'
                 }
             })
         });
+
     </script>
 
     @include('layout.footer')

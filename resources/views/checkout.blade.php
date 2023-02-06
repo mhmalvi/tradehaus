@@ -753,7 +753,7 @@
         </div>
     </div>
 </section>
-<script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
+{{-- <script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
 <script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
 <script src="{{ asset('assets/js/vendor/bootstrap.min.js')}}"></script>
 <script src="{{ asset('assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
@@ -777,7 +777,7 @@
 </script>
 <!-- Main Js -->
 <script src="{{ asset('assets/js/vendor/index.js')}}"></script>
-<script src="{{ asset('assets/js/main.js')}}"></script>
+<script src="{{ asset('assets/js/main.js')}}"></script> --}}
 
 
 @endsection

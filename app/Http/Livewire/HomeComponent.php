@@ -28,8 +28,11 @@ class HomeComponent extends Component
                 $cart = new Cart();
                 $cart->product_name = $product->product_name;
                 $cart->product_price = $price;
+                // $cart->product_size = $request->size;
+                // $cart->product_color = $request->color;
                 $cart->product_quantity = $quantity;
                 $cart->product_id = $id;
+                $cart->user_id = Auth::user()->id;
                 $cart->save();
                 // Alert::success('Congrats', 'Added to cart');
                 $this->dispatchBrowserEvent('add_to_cart');

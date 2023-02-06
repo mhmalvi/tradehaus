@@ -1,6 +1,7 @@
-@extends('layout.master')
-@section('content')
-@include('css.css')
+@extends('layout.inner-master')
+@section('inner-content')
+
+{{-- @include('css.css') --}}
 
 <div>
 <div class="ec-side-cart-overlay"></div>
@@ -351,5 +352,5 @@
     </div>
 </section> --}}
 
-@include('js.script')
+{{-- @include('js.script') --}}
 @endsection

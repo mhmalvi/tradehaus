@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\NewArrivalController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
 
@@ -83,6 +84,7 @@ Route::post('place-order', [OrderController::class, 'store'])->name('place.order
 Route::get('show-all', [ProductController::class, 'show_all_products'])->name('show.all');
 Route::get('blog-all', [BlogController::class, 'index'])->name('blog.view');
 Route::get('blog-details',[BlogController::class,'details'])->name('blog.details');
+Route::get('/faq',[FaqController::class,'index'])->name('faq');
 Route::group(['middleware' => ['auth']], function () {
     /**
      * Logout Route

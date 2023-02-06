@@ -1,144 +1,27 @@
 <div>
-    <link rel="icon" href="assets/images/favicon/favicon.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="assets/images/favicon/favicon.png" />
-    <meta name="msapplication-TileImage" content="assets/images/favicon/favicon.png" />
+<link rel="icon" href="assets/images/favicon/favicon.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="assets/images/favicon/favicon.png" />
+<meta name="msapplication-TileImage" content="assets/images/favicon/favicon.png" />
 
-    <link rel="stylesheet" href="assets/css/vendor/ecicons.min.css" />
+<link rel="stylesheet" href="assets/css/vendor/ecicons.min.css" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper-bundle.min.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper-bundle.min.css')}}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery-ui.min.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery-ui.min.css')}}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/countdownTimer.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/countdownTimer.css')}}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/slick.min.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/slick.min.css')}}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/nouislider.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/nouislider.css')}}" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}" />
-    <link rel="stylesheet" id="bg-switcher-css" href="assets/css/backgrounds/bg-4.css">
+<link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}" />
+<link rel="stylesheet" id="bg-switcher-css" href="{{ asset('assets/css/backgrounds/bg-4.css')}}">
 
-    <!-- <div class="ec-side-cart-overlay"></div>
-<div id="ec-side-cart" class="ec-side-cart">
-    <div class="ec-cart-inner">
-        <div class="ec-cart-top">
-            <div class="ec-cart-title">
-                <span class="cart_title">My Cart</span>
-                <button class="ec-close">×</button>
-            </div>
-            <ul class="eccart-pro-items">
-                @php
-                $total=0;
-                $cart_items = App\Models\Cart::all();
-                @endphp
-
-                @if(isset($cart_items))
-
-
-                @foreach($cart_items as $cart_item)
-
-                <li>
-
-
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="{{ asset(env('APP_URL').'/'.$cart_item->product->product_image) }}" alt="{{ $cart_item->product_name }}"></a>
-
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">{{ $cart_item->product_name }}</a>
-
-                        <span class="cart-price"><span>${{ $cart_item->product->product_price}}</span> x {{ $cart_item->product_quantity }}</span>
-
-                        @php
-                        $price = $cart_item->product->product_price * $cart_item->product_quantity;
-
-                        $total=$price+$total
-                        @endphp
-                        {{-- {{ $total }} --}}
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="product_quantity" value="{{ $cart_item->product_quantity }}" />
-
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-
-
-                </li>
-
-
-                @endforeach
-                @php
-
-
-
-                @endphp
-
-                @endif
-
-
-                {{-- <li>
-
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/12_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
-                        <span class="cart-price"><span>$64.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/3_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Girls Nylon Purse</a>
-                        <span class="cart-price"><span>$59.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li> --}}
-            </ul>
-        </div>
-        <div class="ec-cart-bottom">
-            <div class="cart-sub-total">
-                <table class="table cart-table">
-                    <tbody>
-                        <tr>
-                            <td class="text-left">Sub-Total :</td>
-                            @if(isset($total))
-
-
-                            <td class="text-right">${{ $total }}</td>
-
-                            @endif
-                        </tr>
-                        <tr>
-                            <td class="text-left">VAT (20%) :</td>
-                            <td class="text-right">$60.00</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">Total :</td>
-                            @if(isset($total))
-
-
-                            <td class="text-right primary-color">${{ $total + 60 }}</td>
-
-                            @endif
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="cart_btn">
-                <a href="cart.html" class="btn btn-primary">View Cart</a>
-                <a href="checkout.html" class="btn btn-secondary">Checkout</a>
-            </div>
-        </div>
-    </div>
-</div> -->
+    {{--  --}}
     <!-- ekka Cart End -->
 
     <!-- Ec breadcrumb start -->
@@ -245,29 +128,34 @@
                                             <div class="ec-single-sales">
                                                 <div class="ec-single-sales-inner">
                                                     <div class="ec-single-sales-title">sales accelerators</div>
-                                                    <div class="ec-single-sales-visitor">real time <span>24</span> visitor
-                                                        right now!</div>
+                                                    {{-- <div class="ec-single-sales-visitor">real time <span>24</span> visitor right now!</div> --}}
                                                     <div class="ec-single-sales-progress">
                                                         <span class="ec-single-progress-desc">Hurry up!left {{ $products->product_quantity }} in
                                                             stock</span>
-                                                        <span class="ec-single-progressbar"></span>
+                                                        {{-- <span class="ec-single-progressbar"></span> --}}
                                                     </div>
-                                                    <div class="ec-single-sales-countdown">
+                                                    {{-- <div class="ec-single-sales-countdown">
                                                         <div class="ec-single-countdown"><span id="ec-single-countdown"></span></div>
                                                         <div class="ec-single-count-desc">Time is Running Out!</div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                             @php
-                                            $price = $products->product_price*($products->product_discount/100)
+
                                             @endphp
                                             @if(isset($products->product_discount))
+                                            @php
+                                            $price = $products->product_price*($products->product_discount/100)
 
-                                            <span class="new-price">${{ $price }}</span>
-                                            <span class="old-price">${{ $products->product_price }}</span>
+                                            @endphp
+                                            {{-- <span class="new-price">${{ $price }}</span>
+                                            <span class="old-price">${{ $products->product_price }}</span> --}}
 
                                             @else
-                                            <span class="new-price">${{ $price = $products->product_price }}</span>
+                                            @php
+                                            $price = $products->product_price
+                                            @endphp
+
                                             @endif
                                             <div class="ec-single-price-stoke">
                                                 <div class="ec-single-price">
@@ -461,6 +349,7 @@
                                             <div class="ec-single-qty">
                                                 <div class="qty-plus-minus">
                                                     <input class="qty-input" type="text" wire:model="product_quantity" name="product_quantity" value="1" />
+
                                                 </div>
                                                 <div class="ec-single-cart ">
                                                     <button type="submit" class="btn btn-primary">Add To Cart</button>
@@ -1701,28 +1590,8 @@
         width: 4%;
 
     }
+
 </style>
-<script>
-    color - form
-
-    $('#myForm input').on('change', function() {
-        alert($('input[name="size"]:checked', '#myForm').val());
-    });
-    $('#color-form input').on('change', function() {
-
-        alert($('input[name="color"]:checked', '#color-form').val());
-
-    });
-
-    // function save() {
-    //     $.ajax({
-    //         type: "post"
-    //         url: ""
-    //     })
-    // }
-
-    $('div.checkbox-group.required :checkbox:checked').length > 0
-</script>
 <script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
 <script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
 <script src="{{ asset('assets/js/vendor/bootstrap.min.js')}}"></script>
@@ -1744,7 +1613,9 @@
             pageLanguage: 'en'
         }, 'google_translate_element');
     }
+
 </script>
 <!-- Main Js -->
 <script src="{{ asset('assets/js/main.js')}}"></script>
+
 </div>
