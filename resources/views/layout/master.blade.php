@@ -116,7 +116,13 @@
                                 {{-- {{ auth()->user()->name }} --}}
                                 {{-- @endif --}}
 
-                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">{{ auth()->user()->first_name }}</span></button>
+                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" />
+                                @if(auth()->check())
+                                <span class="ec-btn-title">{{ auth()->user()->first_name }}</span>
+                                @endif
+
+                                </button>
+                                
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     
                                     {{-- <li><a class="dropdown-item" href="checkout.html">Checkout</a></li> --}}

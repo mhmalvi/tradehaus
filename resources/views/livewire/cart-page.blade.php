@@ -36,7 +36,8 @@
                             <!-- {{$price}}
                         {{ $total }} -->
                             <div class="qty-plus-minus">
-                                <input class="qty-input" type="text" name="product_quantity" value="{{ $cart_item->product_quantity }}" />
+                                <input class="qty-input" type="text"  name="product_quantity" value="{{ $cart_item->product_quantity }}" />
+
 
                             </div>
                             <button href="javascript:void(0)" wire:click="delete_cart_item({{$cart_item->id}})" class="remove">×</button>
