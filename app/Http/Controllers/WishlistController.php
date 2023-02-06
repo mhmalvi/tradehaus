@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 
-class Wishlist extends Controller
+class WishlistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +36,12 @@ class Wishlist extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $wishlist = new Wishlist();
+        $wishlist->product_name = $request->product_name;
+        $wishlist->product_price = $request->product_price;
+        $wishlist->product_id = $request->product_id;
+        $wishlist->user_id = Auth::user()->id;
     }
 
     /**

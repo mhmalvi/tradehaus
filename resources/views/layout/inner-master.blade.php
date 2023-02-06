@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
 
     <title>Ekka - Ecommerce HTML Template.</title>
     <meta name="keywords" content="apparel, catalog, clean, ecommerce, ecommerce HTML, electronics, fashion, html eCommerce, html store, minimal, multipurpose, multipurpose ecommerce, online store, responsive ecommerce template, shops" />
@@ -32,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}" />
     <link rel="stylesheet" id="bg-switcher-css" href="{{ asset('assets/css/backgrounds/bg-4.css')}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     @livewireStyles
@@ -92,40 +94,55 @@
                         <div class="ec-header-bottons">
                             <!-- Header User Start -->
                             <div class="ec-header-user dropdown">
-                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ env('APP_URL').'/'.('assets/images/icons/user.svg') }}" class="svg_img header_svg" alt="" /></button>
+                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user.svg') }}" class="svg_img header_svg" alt="" /></button>
 
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
-                                    <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
+
+                                    {{-- <li><a class="dropdown-item" href="checkout.html">Checkout</a></li> --}}
+                                    @if(auth()->check())
+                                    <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
+
+                                    @else
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                             <!-- Header User End -->
                             <!-- Header Cart Start -->
-                            <a href="wishlist.html" class="ec-header-btn ec-header-wishlist">
-                                <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" /></div>
-
-                                <span class="ec-header-count">4</span>
-                            </a>
-                            <!-- Header Cart End -->
-                            <!-- Header Cart Start -->
-                            <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
-                                <div class="header-icon"><img src="{{ asset('assets/images/icons/cart.svg')}}" class="svg_img header_svg" alt="" /></div>
-
-                                <span class="ec-header-count cart-count-lable">3</span>
-                            </a>
-                            <!-- Header Cart End -->
-                            <!-- Header menu Start -->
-                            <a href="#ec-mobile-menu" class="ec-header-btn ec-side-toggle d-lg-none">
-                                <img src="{{ asset('assets/images/icons/menu.svg')}}" class="svg_img header_svg" alt="icon" />
-
-                            </a>
-                            <!-- Header menu End -->
+                            {{-- <a href="wishlist.html" class="ec-header-btn ec-header-wishlist">
+                                <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" />
                         </div>
+
+                        <span class="ec-header-count">4</span>
+                        </a> --}}
+                        <!-- Header Cart End -->
+                        <!-- Header Cart Start -->
+                        {{-- <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+                                <div class="header-icon"><img src="{{ asset('assets/images/icons/cart.svg')}}" class="svg_img header_svg" alt="" />
                     </div>
-                    <!-- Header Top responsive Action -->
+
+                    <span class="ec-header-count cart-count-lable">3</span>
+                    </a> --}}
+                    <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+                        <div class="header-icon"><img src="assets/images/icons/cart_5.svg" class="svg_img header_svg" alt="" /></div>
+                        <span class="ec-header-count ec-cart-count">3</span>
+                    </a>
+
+                    <!-- Header Cart End -->
+                    <!-- Header menu Start -->
+                    <a href="#ec-mobile-menu" class="ec-header-btn ec-side-toggle d-lg-none">
+                        <img src="{{ asset('assets/images/icons/menu.svg')}}" class="svg_img header_svg" alt="icon" />
+
+                    </a>
+                    <!-- Header menu End -->
                 </div>
             </div>
+            <!-- Header Top responsive Action -->
+        </div>
+        </div>
         </div>
         <!-- Ec Header Top  End -->
 
@@ -146,9 +163,11 @@
                         <!-- Ec Header Search Start -->
                         <div class="align-self-center">
                             <div class="header-search">
-                                <form class="ec-btn-group-form" action="#">
+                                <form class="ec-btn-group-form" action="{{ route('product.search') }}">
+                                    @csrf
                                     <input class="form-control" placeholder="Enter Your Product Name..." type="text">
-                                    <button class="submit" type="submit"><img src="assets/images/icons/search.svg" class="svg_img header_svg" alt="" /></button>
+                                    <button class="submit" type="submit"><img src="{{ asset('assets/images/icons/search.svg') }}" class="svg_img header_svg" alt="" /></button>
+
                                 </form>
                             </div>
                         </div>
@@ -163,9 +182,19 @@
                                     <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user.svg') }}" class="svg_img header_svg" alt="" /></button>
 
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a class="dropdown-item" href="register.html">Register</a></li>
-                                        <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                        <li><a class="dropdown-item" href="login.html">Login</a></li>
+
+                                        {{-- <li><a class="dropdown-item" href="checkout.html">Checkout</a></li> --}}
+                                        @if(auth()->check())
+                                        <li><a class="dropdown-item" href="">{{ auth()->user()->name }}</a></li>
+
+                                        <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
+
+                                        @else
+                                        <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+
+                                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                        @endif
+
                                     </ul>
                                 </div>
                                 <!-- Header User End -->
@@ -178,10 +207,17 @@
                                 <!-- Header wishlist End -->
                                 <!-- Header Cart Start -->
                                 <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
-                                    <div class="header-icon"><img src="{{ asset('assets/images/icons/cart.svg') }}" class="svg_img header_svg" alt="" /></div>
+                                    <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" /></div>
 
-                                    <span class="ec-header-count cart-count-lable">3</span>
+                                    @php
+                                    $count = App\Models\Cart::where('user_id',Auth::user()->id)->count();
+                                    @endphp
+                                    <span class="ec-header-count ec-cart-count">{{ $count }}</span>
+
                                 </a>
+
+                                {{-- @include('layout.cart') --}}
+
                                 <!-- Header Cart End -->
                             </div>
                         </div>
@@ -207,13 +243,17 @@
                     <!-- Ec Header Search Start -->
                     <div class="col">
                         <div class="header-search">
-                            <form class="ec-btn-group-form" action="#">
+                            <form class="ec-btn-group-form" action="{{ route('product.search') }}">
+                                @csrf
                                 <input class="form-control" placeholder="Enter Your Product Name..." type="text">
-                                <button class="submit" type="submit"><img src="assets/images/icons/search.svg" class="svg_img header_svg" alt="icon" /></button>
+                                <button class="submit" type="submit"><img src="{{ asset('assets/images/icons/search.svg') }}g" class="svg_img header_svg" alt="icon" /></button>
+
                             </form>
                         </div>
                     </div>
                     <!-- Ec Header Search End -->
+                    {{-- @include('layout.cart') --}}
+
                 </div>
             </div>
         </div>
@@ -288,7 +328,7 @@
                                         </li>
                                     </ul>
                                 </li> --}}
-                                <li class="dropdown"><a href="javascript:void(0)">Products</a>
+                                <li class="dropdown"><a href="{{ route('show.all') }}">Products</a>
                                     {{-- <ul class="sub-menu">
                                         <li class="dropdown position-static"><a href="javascript:void(0)">Product page
                                                 <i class="ecicon eci-angle-right"></i></a>
@@ -437,15 +477,15 @@
                                         </li>
                                     </ul>
                                 </li> --}}
-                                <li class="dropdown"><a href="javascript:void(0)">Blog</a>
-                                    <ul class="sub-menu">
+                                <li class="dropdown"><a href="{{ route('blog.view') }}">Blog</a>
+                                    {{-- <ul class="sub-menu">
                                         <li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
                                         <li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
                                         <li><a href="blog-detail-left-sidebar.html">Blog detail left sidebar</a></li>
                                         <li><a href="blog-detail-right-sidebar.html">Blog detail right sidebar</a></li>
                                         <li><a href="blog-full-width.html">Blog full width</a></li>
                                         <li><a href="blog-detail-full-width.html">Blog detail full width</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 {{-- <li class="dropdown"><a href="javascript:void(0)">Elements</a>
                                     <ul class="sub-menu">
@@ -476,8 +516,8 @@
             <div class="ec-menu-inner">
                 <div class="ec-menu-content">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="javascript:void(0)">Products</a>
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        <li><a href="{{ route('show.all') }}">Products</a>
                         </li>
                         <li><a href="javascript:void(0)">Pages</a>
                             <ul class="sub-menu">
@@ -643,7 +683,7 @@
     @include('layout.cart-view')
 
     @yield('inner-content')
-@include('layout.inner-footer')
+    @include('layout.inner-footer')
 
     <script>
         $('#myForm input').on('change', function() {
@@ -691,7 +731,7 @@
     <!-- Main Js -->
     <script src="{{ asset('assets/js/main.js')}}"></script>
 
-    
+
 
     @livewireScripts
     @include('sweetalert::alert')

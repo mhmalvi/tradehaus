@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+{{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
 
     <title>TradeUs</title>
     <meta name="keywords" content="apparel, catalog, clean, ecommerce, ecommerce HTML, electronics, fashion, html eCommerce, html store, minimal, multipurpose, multipurpose ecommerce, online store, responsive ecommerce template, shops" />
@@ -40,6 +41,8 @@
 
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo5.css')}}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     @livewireStyles
 
 
@@ -49,8 +52,9 @@
     .ec-main-menu ul li a {
         color: white !important;
     }
+
     .ec-main-menu ul li.dropdown ul li a {
-        color:black !important;
+        color: black !important;
     }
 
 </style>
@@ -112,21 +116,23 @@
                                 {{-- {{ auth()->user()->name }} --}}
                                 {{-- @endif --}}
 
-                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">Login</span></button>
+                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">{{ auth()->user()->first_name }}</span></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                    
                                     {{-- <li><a class="dropdown-item" href="checkout.html">Checkout</a></li> --}}
                                     @if(auth()->check())
                                     <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
 
                                     @else
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+
                                     <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                                     @endif
                                 </ul>
                             </div>
                             <!-- Header User End -->
                             <!-- Header wishlist Start -->
-                            <div class="ec-header-wishlist" style="margin-top: 5px;">
+                            <div class="ec-header-wishlist" style="">
 
                                 <a href="{{ route('wish.list') }}">
 
@@ -144,9 +150,15 @@
                             <div class="ec-header-user dropdown">
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="assets/images/icons/user_5.svg" class="svg_img header_svg" alt="" /></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
-                                    <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
+                                    @if(auth()->check())
+                                    <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
+
+                                    @else
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                             <!-- Header User End -->
@@ -401,8 +413,8 @@
                                 <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
 
-                                        <li><a  style="color:black; !important;" href="{{ route('about.us') }}">About Us</a></li>
-                                        <li><a  style="color:black; !important;" href="{{route('contact.us')}}">Contact Us</a></li>
+                                        <li><a style="color:black; !important;" href="{{ route('about.us') }}">About Us</a></li>
+                                        <li><a style="color:black; !important;" href="{{route('contact.us')}}">Contact Us</a></li>
                                         {{-- <li><a href="cart.html">Cart</a></li> --}}
                                         {{-- <li><a href="checkout.html">Checkout</a></li> --}}
                                         {{-- <li><a href="compare.html">Compare</a></li> --}}
@@ -708,23 +720,23 @@
                         </li> -->
                         <li><a href="javascript:void(0)">Pages</a>
                             <ul class="sub-menu" style="color:black;">
-                                 <li><a href="{{ route('about.us') }}">About Us</a></li>
-                                 <li><a href="{{route('contact.us')}}">Contact Us</a></li>
-                                 {{-- <li><a href="cart.html">Cart</a></li> --}}
-                                 {{-- <li><a href="checkout.html">Checkout</a></li> --}}
-                                 {{-- <li><a href="compare.html">Compare</a></li> --}}
-                                 <li><a href="{{ route('faq') }}">FAQ</a></li>
+                                <li><a href="{{ route('about.us') }}">About Us</a></li>
+                                <li><a href="{{route('contact.us')}}">Contact Us</a></li>
+                                {{-- <li><a href="cart.html">Cart</a></li> --}}
+                                {{-- <li><a href="checkout.html">Checkout</a></li> --}}
+                                {{-- <li><a href="compare.html">Compare</a></li> --}}
+                                <li><a href="{{ route('faq') }}">FAQ</a></li>
 
-                                 @if(!auth()->check())
-                                 <li><a href="{{route('login')}}">Login</a></li>
-                                 <li><a href="{{route('register')}}">Register</a></li>
-                                 @else
-                                 <li><a href="{{route('logout')}}">Logout</a></li>
-                                 @endif
+                                @if(!auth()->check())
+                                <li><a href="{{route('login')}}">Login</a></li>
+                                <li><a href="{{route('register')}}">Register</a></li>
+                                @else
+                                <li><a href="{{route('logout')}}">Logout</a></li>
+                                @endif
 
-                                 {{-- <li><a href="track-order.html">Track Order</a></li> --}}
-                                 <li><a href="{{route('terms.condition')}}">Terms Condition</a></li>
-                                 <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
+                                {{-- <li><a href="track-order.html">Track Order</a></li> --}}
+                                <li><a href="{{route('terms.condition')}}">Terms Condition</a></li>
+                                <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
 
                             </ul>
                         </li>
@@ -816,7 +828,7 @@
     <script src="{{ asset('assets/js/plugins/nouislider.js')}}"></script>
     {{-- <script src="{{ asset('assets/js/plugins/countdownTimer.min.js')}}"></script> --}}
     {{-- <script src="{{ asset('assets/js/plugins/scrollup.js')}}"></script> --}}
-    <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script> --}}
 
     {{-- <script src="{{ asset('assets/js/plugins/slick.min.js')}}"></script> --}}
 

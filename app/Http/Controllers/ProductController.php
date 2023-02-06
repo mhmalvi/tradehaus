@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Type;
+use App\Models\NewArrival;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -24,6 +25,11 @@ class ProductController extends Controller
         $products = Product::where('product_name', 'like','%'.$request->search.'%')->get();
         return view('product_search',compact('products'));
     }
+
+    // public function new_arrival(){
+    //     $new = NewArrival::all();
+    //     return view('')
+    // }
 
     public function product_category(Request $request,$id)
     {

@@ -1,6 +1,8 @@
-@extends('layout.master')
-@section('content')
-@include('css.css')
+@extends('layout.inner-master')
+
+@section('inner-content')
+
+{{-- @include('css.css') --}}
 
 <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
         <div class="container">
@@ -157,5 +159,5 @@
             </div>
         </div>
     </section>
-@include('js.script')
+{{-- @include('js.script') --}}
     @endsection

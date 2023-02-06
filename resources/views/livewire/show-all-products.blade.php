@@ -41,7 +41,9 @@
                                                 <div class="ec-pro-opt-inner">
                                                     <div class="ec-pro-color">
                                                         <ul class="ec-opt-swatch ec-change-img">
-                                                            <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
+                                                            <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
+                                                            {{-- <span style="background-color:#ef7ca3;"></span>php rtisan --}}
+                                                            </a></li>
 
 
                                                         </ul>

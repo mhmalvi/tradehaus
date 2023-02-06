@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-3 ec-footer-contact">
                         <div class="ec-footer-widget">
-                            <div class="ec-footer-logo"><a href="#"><img src="assets/images/logo/footer-logo.png" alt=""><img class="dark-footer-logo" src="assets/images/logo/dark-logo.png" alt="Site Logo" style="display: none;" /></a></div>
+                            <div class="ec-footer-logo"><a href="{{ url('/') }}"><h4>Trade TradeUs</h4></a></div>
                             <h4 class="ec-footer-heading">Contact us</h4>
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">

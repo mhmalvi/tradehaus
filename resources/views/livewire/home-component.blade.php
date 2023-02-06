@@ -1,11 +1,16 @@
 <div>
     <div class="ec-main-slider section ">
         <div class="ec-slider">
+            @php
+            $new = App\Models\NewArrival::all();
+            @endphp
+            @foreach($new as $product)
             <div class="ec-slide-item d-flex slide-1">
                 <style>
                     .slide-1 {
                         background-image: url('../../public/assets/img/sliders/headset_adobe.jpg')
                     }
+
                 </style>
 
                 <div class="container align-self-center">
@@ -22,6 +27,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
             <div class="ec-slide-item d-flex slide-2">
                 <div class="container align-self-center">
                     <div class="row">
@@ -142,7 +148,11 @@
                                                 <div class="ec-pro-opt-inner">
                                                     <div class="ec-pro-color">
                                                         <ul class="ec-opt-swatch ec-change-img">
-                                                            <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
+                                                            <li class="active">
+                                                            <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
+                                                            {{-- <span style="background-color:#ef7ca3;"></span> --}}
+                                                            </a>
+                                                            </li>
 
 
                                                         </ul>
@@ -199,14 +209,12 @@
                                             <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
                                             <div class="ec-pro-actions">
                                                 <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                                <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To
-                                                    Cart</button>
+                                                <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To Cart</button>
                                                 {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </a>
-
                             </div>
                             </a>
                         </div>

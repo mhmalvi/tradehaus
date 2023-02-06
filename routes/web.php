@@ -13,7 +13,7 @@ use App\Http\Controllers\TrackOrderController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\Wishlist;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\admin\NewArrivalController;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +44,7 @@ Route::get('/', function () {
 Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
-Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
     Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
@@ -83,13 +83,14 @@ Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('che
 Route::post('place-order', [OrderController::class, 'store'])->name('place.order');
 Route::get('show-all', [ProductController::class, 'show_all_products'])->name('show.all');
 Route::get('blog-all', [BlogController::class, 'index'])->name('blog.view');
-Route::get('blog-details',[BlogController::class,'details'])->name('blog.details');
-Route::get('/faq',[FaqController::class,'index'])->name('faq');
+Route::get('blog-details', [BlogController::class, 'details'])->name('blog.details');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+Route::post('/wishlist-store', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::group(['middleware' => ['auth']], function () {
     /**
      * Logout Route
      */
-    Route::get('/wishlist', [Wishlist::class, 'index'])->name('wish.list');
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wish.list');
     Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout.view');
     Route::post('place-order', [OrderController::class, 'store'])->name('place.order');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout.perform');

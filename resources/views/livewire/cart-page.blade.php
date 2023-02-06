@@ -90,7 +90,7 @@
                 </div>
                 @if(auth()->check())
                 <div class="cart_btn">
-                    <a href="cart.html" class="btn btn-primary">View Cart</a>
+                    {{-- <a href="cart.html" class="btn btn-primary">View Cart</a> --}}
                     {{-- @php
                     $items = serialize($cart_items)
                     @endphp --}}
