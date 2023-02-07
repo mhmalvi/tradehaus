@@ -28,12 +28,12 @@ class ProductByCategory extends Component
             $this->dispatchBrowserEvent('item_exists');
         } else {
             $cart = new Cart();
-            $cart->product_id = $this->product_id;
-            $cart->product_name = $this->product_name;
-            $cart->product_quantity = $this->product_quantity;
-            $cart->product_color = $this->color;
-            $cart->product_size = $this->size;
-            $cart->product_price = $this->product_price;
+            $cart->product_id = $id;
+            $cart->product_name = $name;
+            // $cart->product_quantity = $this->product_quantity;
+            // $cart->product_color = $color;
+            // $cart->product_size = $size;
+            $cart->product_price = $price;
             $save = $cart->save();
             if ($save) {
                 $this->dispatchBrowserEvent('add_to_cart');

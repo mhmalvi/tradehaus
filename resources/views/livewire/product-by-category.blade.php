@@ -239,7 +239,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                {{$product->id}}
+                                {{-- {{$product->id}} --}}
                                 <!-- <form wire:submit.prevent="add_to_cart"> -->
                                     <!-- <input type="text" wire:model="product_id" name="product_id" value="{{$product->id}}" /> -->
                                     <div class="pro-hidden-block">

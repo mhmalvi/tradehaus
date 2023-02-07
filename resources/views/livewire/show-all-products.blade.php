@@ -1,5 +1,5 @@
 <div>
-<section class="section ec-product-tab section-space-p">
+    <section class="section ec-product-tab section-space-p">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 section-title-block">
