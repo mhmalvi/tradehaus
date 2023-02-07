@@ -16,6 +16,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\admin\NewArrivalController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -70,7 +71,7 @@ Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('sto
 Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
 Route::get('/product_by_category/{id}', [ProductController::class, 'product_category'])->name('product.category');
 Route::get('/login-page', [AuthController::class, 'login'])->name('login.page');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+// Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register-page', [AuthController::class, 'register'])->name('register.page');
 Route::post('/register-user', [AuthController::class, 'register_user'])->name('register.user');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');

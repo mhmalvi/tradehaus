@@ -11,24 +11,25 @@ class CartPage extends Component
     protected $listeners = ['cart_items' => 'get_cart_items'];
     public function render()
     {
-        if (Auth::check()) {
-            $items = Cart::all();
-            return view('livewire.cart-page', ['cart_items' => $items]);
-        } else {
+        // dd(Auth::id());
+        // if (Auth::check()) {
+            // $items = Cart::where('user_id', Auth::user()->id)->get();
+        //     return view('livewire.cart-page', ['cart_items' => $items]);
+        // } else {
             return view('livewire.cart-page');
-        }
+        // }
     }
 
     public function checkout($sub_total, $cart_items)
     {
-        dd($sub_total);
+        // dd($sub_total);
         return view('checkout', compact('sub_total', 'cart_items'));
     }
 
     public function get_cart_items()
     {
-        if (Auth::check()) {
-            $items = Cart::all();
+        if (auth()->check()) {
+            $items = Cart::where('user_id', Auth::user()->id)->get();
             return view('livewire.cart-page', ['cart_items' => $items]);
         } else {
             return view('livewire.cart-page');

@@ -21,7 +21,7 @@ class HomeComponent extends Component
         // dd($price);
         if (Auth::check()) {
             $product = Product::find($id);
-            $cart_item = Cart::where('product_id', $id)->exists();
+            $cart_item = Cart::where('product_id', $id)->where('user_id', Auth::user()->id)->exists();
             if ($cart_item) {
                 $this->dispatchBrowserEvent('item_exists');
             } else {
@@ -30,6 +30,7 @@ class HomeComponent extends Component
                 $cart->product_price = $price;
                 // $cart->product_size = $request->size;
                 // $cart->product_color = $request->color;
+                $cart->product_image = $product->product_image;
                 $cart->product_quantity = $quantity;
                 $cart->product_id = $id;
                 $cart->user_id = Auth::user()->id;

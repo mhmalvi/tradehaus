@@ -12,14 +12,15 @@ class ShowAllProducts extends Component
     public $products;
     public function render()
     {
-        return view('livewire.show-all-products',['products'=>$this->products]);
+        return view('livewire.show-all-products', ['products' => $this->products]);
     }
 
     public function add_to_cart($id, $price, $quantity)
     {
-        // dd($price);
+        // dd("hello");
         if (Auth::check()) {
             $product = Product::find($id);
+            $image = $product->product_image;
             $cart_item = Cart::where('product_id', $id)->exists();
             if ($cart_item) {
                 $this->dispatchBrowserEvent('item_exists');
@@ -28,7 +29,9 @@ class ShowAllProducts extends Component
                 $cart->product_name = $product->product_name;
                 $cart->product_price = $price;
                 $cart->product_quantity = $quantity;
+                $cart->product_image = $image;
                 $cart->product_id = $id;
+                $cart->user_id = Auth::user()->id;
                 $cart->save();
                 // Alert::success('Congrats', 'Added to cart');
                 $this->dispatchBrowserEvent('add_to_cart');

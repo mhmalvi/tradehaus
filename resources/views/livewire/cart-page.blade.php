@@ -2,31 +2,36 @@
     <div class="ec-side-cart-overlay"></div>
     <div id="ec-side-cart" class="ec-side-cart">
         <div class="ec-cart-inner">
+
+            @if( auth()->check())
+            @php
+
+
+            $total=0;
+            $cart_items=App\Models\Cart::where('user_id',auth()->user()->id)->get();
+            @endphp
+
+            @endif
+
             <div class="ec-cart-top">
                 <div class="ec-cart-title">
                     <span class="cart_title">My Cart</span>
                     <button class="ec-close">×</button>
                 </div>
                 <ul class="eccart-pro-items">
-                    <!-- @php
-                $total=0;
-                $cart_items = App\Models\Cart::all();
-                @endphp -->
-
-                    @if(isset($cart_items) && auth()->check())
-
-
+                    @if(isset($cart_items))
                     @foreach($cart_items as $cart_item)
 
                     <li>
 
 
                         <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="{{ asset(env('APP_URL').'/'.$cart_item->product->product_image) }}" alt="{{ $cart_item->product_name }}"></a>
-
+                        {{-- {{ $cart_item->user_id }} --}}
                         <div class="ec-pro-content">
                             <a href="product-left-sidebar.html" class="cart_pro_title">{{ $cart_item->product_name }}</a>
 
                             <span class="cart-price"><span>${{ $cart_item->product_price}}</span> x {{ $cart_item->product_quantity }}</span>
+                           
 
                             @php
                             $price = $cart_item->product_price * $cart_item->product_quantity;
@@ -36,7 +41,7 @@
                             <!-- {{$price}}
                         {{ $total }} -->
                             <div class="qty-plus-minus">
-                                <input class="qty-input" type="text"  name="product_quantity" value="{{ $cart_item->product_quantity }}" />
+                                <input class="qty-input" type="text" name="product_quantity" value="{{ $cart_item->product_quantity }}" />
 
 
                             </div>
@@ -57,7 +62,7 @@
                     @endif
 
 
-                    
+
 
             </div>
             <div class="ec-cart-bottom">
@@ -101,6 +106,8 @@
                 </div>
                 @endif
             </div>
+            {{-- @endif --}}
+
         </div>
     </div>
 </div>

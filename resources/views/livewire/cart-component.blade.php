@@ -7,7 +7,7 @@
             <!-- Header Cart Start -->
             <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                 <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" /></div>
-                @if(isset($count))
+                @if(isset($count) && auth()->user()->id)
                 <span class="ec-btn-title">
                     <span class="ec-cart-count">{{ $count }}
                         @if($count=1)

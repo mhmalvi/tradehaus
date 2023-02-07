@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Providers\RouteServiceProvider;
 
 class AuthController extends Controller
 {
@@ -25,27 +26,33 @@ class AuthController extends Controller
     {
         // dd($request->all());
         // dd('hello');
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-        // dd('hello');
-        // if (Auth::guard('admin')) {
-        $user = User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            // dd('hello');
-            return redirect()->back()->with('message', 'Email or password not valid');
-        } else {
-            // dd(Auth::user());
-            // if ($user->roles == 1) {
-            // dd("hello");
-            // dd(Auth::id());
-            return redirect('/');
-            // }
-        }
+        // $request->validate([
+        //     'email' => 'required',
+        //     'password' => 'required'
+        // ]);
+        // // dd('hello');
+        // // if (Auth::guard('admin')) {
+        // $user = User::where('email', $request->email)->first();
+        // if (!$user || !Hash::check($request->password, $user->password)) {
+        //     // dd('hello');
+        //     return redirect()->back()->with('message', 'Email or password not valid');
+        // } else {
+        //     // dd(Auth::user());
+        //     // if ($user->roles == 1) {
+        //     // dd("hello");
+        //     // dd(Auth::id());
+        //     return redirect('/');
+        //     // }
+        // }
         // }else{
         //     dd('fail');
         // }
+// dd("fgvgfdg");
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     public function register()

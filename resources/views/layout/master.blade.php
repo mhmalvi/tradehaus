@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-{{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>TradeUs</title>
     <meta name="keywords" content="apparel, catalog, clean, ecommerce, ecommerce HTML, electronics, fashion, html eCommerce, html store, minimal, multipurpose, multipurpose ecommerce, online store, responsive ecommerce template, shops" />
@@ -117,14 +118,14 @@
                                 {{-- @endif --}}
 
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" />
-                                @if(auth()->check())
-                                <span class="ec-btn-title">{{ auth()->user()->first_name }}</span>
-                                @endif
+                                    @if(auth()->check())
+                                    <span class="ec-btn-title">{{ auth()->user()->first_name }}</span>
+                                    @endif
 
                                 </button>
-                                
+
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    
+
                                     {{-- <li><a class="dropdown-item" href="checkout.html">Checkout</a></li> --}}
                                     @if(auth()->check())
                                     <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
@@ -813,6 +814,7 @@
 
 
     @yield('content')
+    <script src="{{ asset('js/ajax.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
 

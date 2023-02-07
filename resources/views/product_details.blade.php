@@ -528,10 +528,6 @@
                                         @if($child->status=='A')
                                         <li>
                                             <div class="ec-sidebar-sub-item"><a href="{{ route('product.category',[$child->id]) }}">{{ $child->category_name }} <span>-{{ $count }}</span></a>
-
-
-
-
                                             </div>
                                         </li>
                                         @endif

@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Ekka - Ecommerce HTML Template.</title>
     <meta name="keywords" content="apparel, catalog, clean, ecommerce, ecommerce HTML, electronics, fashion, html eCommerce, html store, minimal, multipurpose, multipurpose ecommerce, online store, responsive ecommerce template, shops" />
@@ -705,6 +706,7 @@
         $('div.checkbox-group.required :checkbox:checked').length > 0
 
     </script>
+    <script src="{{ asset('js/ajax.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/bootstrap.min.js')}}"></script>

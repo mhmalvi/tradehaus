@@ -13,7 +13,7 @@ class CartComponent extends Component
     public function render()
     {
         if (Auth::check()) {
-            $count = Cart::all()->count();
+            $count = Cart::where('user_id',Auth::user()->id)->count();
             return view('livewire.cart-component', ['count' => $count]);
         }else{
             return view('livewire.cart-component');
@@ -22,13 +22,17 @@ class CartComponent extends Component
 
     function mount()
     {
-        $count = Cart::all()->count();
+        if(Auth::check()){
+        $count = Cart::where('user_id', Auth::user()->id)->count();
         return view('livewire.cart-component', ['count' => $count]);
+        }else{
+            return view('livewire.cart-component');
+        }
     }
 
     public function cart_count()
     {
-        $count = Cart::all()->count();
+        $count = Cart::where('user_id', Auth::user()->id)->count();
         return view('livewire.cart-component', ['count' => $count]);
     }
 }

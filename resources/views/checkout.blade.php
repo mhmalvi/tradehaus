@@ -66,6 +66,8 @@
     }
 
 </style>
+
+
 <section class="ec-page-content section-space-p">
     <div class="container">
         <div class="row">
@@ -126,8 +128,15 @@
                             </div>
 
                         </div>
-                        <form action="{{ route('place.order') }}" method="post">
-                            @csrf
+                        @if(auth()->check())
+
+                        @php
+                        $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
+                       
+                        @endphp
+                        @endif
+                        <form>
+                            {{-- @csrf --}}
                             <div style="border: 1px solid #ededed;padding: 30px;" class="ec-checkout-wrap margin-bottom-30 padding-bottom-3">
 
                                 {{-- {{ $sub_total }} --}}
@@ -150,20 +159,26 @@
 
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>First Name*</label>
-                                                <input type="text" name="first_name" placeholder="Enter your first name" required />
+                                                <input type="text" name="first_name" id="first_name" placeholder="Enter your first name" required />
+
                                             </span>
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Last Name*</label>
-                                                <input type="text" name="last_name" placeholder="Enter your last name" required />
+                                                <input type="text" name="last_name" id="last_name" placeholder="Enter your last name" required />
+
+
                                             </span>
                                             <span class="ec-bill-wrap">
                                                 <label>Address</label>
-                                                <input type="text" name="address" placeholder="Address Line 1" />
+                                                <input type="string" id="address" name="address" placeholder="Address Line 1" />
+
+
+
                                             </span>
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>City *</label>
                                                 <span class="ec-bl-select-inner">
-                                                    <select name="city" id="ec-select-city" class="ec-bill-select">
+                                                    <select name="city" id="city" class="ec-bill-select">
                                                         <option selected disabled>City</option>
                                                         <option value="city one">City 1</option>
                                                         <option value="city one">City 2</option>
@@ -175,12 +190,15 @@
                                             </span>
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Post Code</label>
-                                                <input type="text" name="post_code" placeholder="Post Code" />
+                                                <input type="text" name="post_code" id="post_code" placeholder="Post Code" />
+
                                             </span>
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Country *</label>
                                                 <span class="ec-bl-select-inner">
-                                                    <select name="country" id="ec-select-country" class="ec-bill-select">
+                                                    <select name="country" id="country" class="ec-bill-select">
+
+
                                                         <option selected disabled>Country</option>
                                                         <option value="country one">Country 1</option>
                                                         <option value="country one">Country 2</option>
@@ -193,7 +211,9 @@
                                             <span class="ec-bill-wrap ec-bill-half">
                                                 <label>Region State</label>
                                                 <span class="ec-bl-select-inner">
-                                                    <select name="region" id="ec-select-state" class="ec-bill-select">
+                                                    <select name="region" id="region" class="ec-bill-select">
+
+
                                                         <option selected disabled>Region/State</option>
                                                         <option value="state">Region/State 1</option>
                                                         <option value="state">Region/State 2</option>
@@ -203,20 +223,40 @@
                                                     </select>
                                                     @php
                                                     $delivery_charge = 80.00;
+                                                    $product_items = json_encode($items);
+
 
                                                     @endphp
-                                                    <input type="hidden" name="sub_total" value="{{ $sub_total }}" />
-                                                    <input type="hidden" name="delivery_charge" value="{{ $delivery_charge }}" />
-                                                    <input type="hidden" name="total_amount" value="{{ $sub_total+$delivery_charge }}" />
+
+                                                    <input type="hidden" name="items" id="items" value="{{ $product_items }}" />
+
+
+
+
+
+                                                    <input type="hidden" name="sub_total" id="sub_total" value="{{ $sub_total }}" />
+
+                                                    {{-- <input type="hidden" name="sub_total" id="sub_total" value="{{ $sub_total }}" /> --}}
+
+
+
+                                                    <input type="hidden" name="delivery_charge" id="delivery_charge" value="{{ $delivery_charge }}" />
+
+
+                                                    <input type="hidden" name="total_amount" id="total_amount" value="{{ $sub_total+$delivery_charge }}" />
+
+
                                                 </span>
+
+                                                @if($items)
+
+                                                @foreach($items as $cart_item)
                                                 @php
-                                                $cart_items = App\Models\Cart::all();
+                                                $product_item = App\Models\Product::find($cart_item->product_id)->first();
                                                 @endphp
-                                                @foreach($cart_items as $cart_item)
-                                                @php
-                                                $product_item = App\Models\Product::find($cart_item->product_id);
-                                                @endphp
-                                                <input type="hidden" name="product_name[]" value="{{ $product_item->product_name }}" />
+                                                {{-- <input type="hidden" name="product_price[]" id="product_price" value="{{ $product_item->product_name }}" /> --}}
+
+
                                                 @php
 
 
@@ -236,11 +276,14 @@
                                                 @endphp
                                                 @endif
 
-                                                <input type="hidden" name="product_price[]" value="{{ $price }}" />
+                                                {{-- <input type="hidden" name="product_price[]" id="region" value="{{ $price }}" /> --}}
 
-                                                <input type="hidden" name="images[]" value="{{ $product_item->product_image }}" />
+
+                                                {{-- <input type="hidden" name="images[]" value="{{ $product_item->product_image }}" /> --}}
 
                                                 @endforeach
+                                                @endif
+
                                             </span>
                                         </div>
 
@@ -249,7 +292,7 @@
 
                             </div>
                             <span class="ec-check-order-btn">
-                                <button class="btn btn-primary" type="submit" href="#">Place Order</button>
+                                <button class="btn btn-primary place_order" type="button" href="#">Place Order</button>
                             </span>
                         </form>
 
@@ -273,11 +316,16 @@
 
                                 </div>
                                 <div>
+                                    <span class="text-left">VAT(20%)</span>
+                                    <span class="text-right">$60.00</span>
+
+                                </div>
+                                <div>
                                     <span class="text-left">Delivery Charges</span>
                                     <span class="text-right">${{ $delivery_charge }}.00</span>
                                 </div>
                                 @php
-                                $total = $sub_total+$delivery_charge;
+                                $total = $sub_total+$delivery_charge+60;
 
                                 @endphp
                                 <div>
@@ -297,7 +345,7 @@
                                 </div>
                             </div>
                             @php
-                            $items = App\Models\Cart::all();
+                            $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
                             @endphp
                             <div class="ec-checkout-pro">
                                 @foreach($items as $item)
@@ -328,7 +376,7 @@
                                                 <i class="ecicon eci-star fill"></i>
                                                 <i class="ecicon eci-star"></i>
                                             </div>
-                                            <span class="ec-price">
+                                            <span class="ec-price" style="width:115%;">
                                                 @php
                                                 $price = $item->product_price*($item->product_discount/100)
                                                 @endphp
@@ -753,6 +801,8 @@
         </div>
     </div>
 </section>
+{{-- <script src="{{ asset('js/ajax.js')}}"></script> --}}
+
 {{-- <script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
 <script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
 <script src="{{ asset('assets/js/vendor/bootstrap.min.js')}}"></script>
