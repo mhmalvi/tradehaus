@@ -23,9 +23,9 @@ class ShowAllProducts extends Component
     //     // $this->product_name = $this->products->product_name;
     // }
 
-    public function add_to_cart($product_id,$product_name,$product_price,$quantity)
+    public function add_to_cart($product_id, $product_name, $product_price, $quantity)
     {
-        dd($quantity);
+        dd($product_name);
         if (Auth::check()) {
             $product = Product::find($product_id);
             $image = $product->product_image;

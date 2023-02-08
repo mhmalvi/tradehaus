@@ -19,7 +19,7 @@
                             @foreach($products as $product)
                             @if($product->status=='A')
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                                <form >
+                                {{-- <form > --}}
 
                                     <a href="{{ route('product.details',[$product->id]) }}" class="image">
 
@@ -105,7 +105,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                </form>
+                                {{-- </form> --}}
 
                             </div>
 
