@@ -77,7 +77,7 @@
                     <div class="ec_cat_content">
 
                         <div class="ec_cat_inner">
-                            <h2 class="d-none">Category</h2>
+                            {{-- <h2 class="d-none">Category</h2> --}}
                             <a href="{{ route('product.category',[$category->id]) }}">
 
                                 <div class="ec-cat-image">
@@ -85,12 +85,9 @@
                                 </div>
                                 <div class="ec-cat-desc">
                                     <span class="ec-section-title">{{ $category->category_name }}</span>
-
-
                                 </div>
                             </a>
                         </div>
-
                     </div>
                     @endforeach
 

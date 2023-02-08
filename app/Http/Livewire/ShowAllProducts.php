@@ -25,7 +25,7 @@ class ShowAllProducts extends Component
 
     public function add_to_cart($product_id, $product_name, $product_price, $quantity)
     {
-        dd($product_name);
+        dd($product_price);
         if (Auth::check()) {
             $product = Product::find($product_id);
             $image = $product->product_image;
