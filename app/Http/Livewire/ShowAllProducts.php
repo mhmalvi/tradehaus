@@ -10,27 +10,35 @@ use App\Models\Product;
 class ShowAllProducts extends Component
 {
     public $products;
+    // public $product_id;
+    // public $product_name;
     public function render()
     {
         return view('livewire.show-all-products', ['products' => $this->products]);
     }
 
-    public function add_to_cart($id, $price, $quantity)
+    // public function mount()
+    // {
+    //     // $this->product_id = $this->products->id;
+    //     // $this->product_name = $this->products->product_name;
+    // }
+
+    public function add_to_cart($product_id,$product_name,$product_price,$quantity)
     {
-        // dd("hello");
+        dd($quantity);
         if (Auth::check()) {
-            $product = Product::find($id);
+            $product = Product::find($product_id);
             $image = $product->product_image;
-            $cart_item = Cart::where('product_id', $id)->exists();
+            $cart_item = Cart::where('product_id', $product_id)->exists();
             if ($cart_item) {
                 $this->dispatchBrowserEvent('item_exists');
             } else {
                 $cart = new Cart();
-                $cart->product_name = $product->product_name;
-                $cart->product_price = $price;
+                $cart->product_name = $product_name;
+                $cart->product_price = $product_price;
                 $cart->product_quantity = $quantity;
                 $cart->product_image = $image;
-                $cart->product_id = $id;
+                $cart->product_id = $product_id;
                 $cart->user_id = Auth::user()->id;
                 $cart->save();
                 // Alert::success('Congrats', 'Added to cart');

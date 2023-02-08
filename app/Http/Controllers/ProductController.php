@@ -151,6 +151,13 @@ class ProductController extends Controller
         }
     }
 
+    public function new_arrival_details($slug){
+        // dd($slug);
+        $new = NewArrival::where('slug',$slug)->first();
+        // dd($new);
+        return view('new_products',compact('new'));
+    }
+
     /**
      * Display the specified resource.
      *

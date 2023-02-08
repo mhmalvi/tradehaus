@@ -32,6 +32,7 @@ class CartComponent extends Component
 
     public function cart_count()
     {
+        // dd("hello");
         $count = Cart::where('user_id', Auth::user()->id)->count();
         return view('livewire.cart-component', ['count' => $count]);
     }

@@ -1,26 +1,22 @@
 <div>
 
-    <div class="align-self-center ec-header-bottons">
-        <div class="ec-header-bottons">
-
-            <!-- Header wishlist End -->
-            <!-- Header Cart Start -->
-            <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
-                <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" /></div>
-                @if(isset($count) && auth()->user()->id)
-                <span class="ec-btn-title">
-                    <span class="ec-cart-count">{{ $count }}
-                        @if($count=1)
-                    </span> item</span>
-                @else
-                </span> item(s)</span>
-
-                @endif
-                @endif
+    <?php
+                                    if(auth()->check()){
+                                    $count = App\Models\Cart::where('user_id',Auth::user()->id)->count();
+                                    ?>
+    <span style="margin-left: 57%;
+    margin-top: -12px;
+    background: #6e6e6e;
+    color: white;
+    border-radius: 43%;
+    font-weight: 800;
+    width: 78%;
+    display: block;
+    text-align: center;" class="ec-header-count ec-cart-count">{{ $count }}</span>
 
 
-            </a>
-            <!-- Header Cart End -->
-        </div>
-    </div>
+    <?php
+                                    }
+                                    ?>
+
 </div>

@@ -8,6 +8,7 @@ $(document).ready(function () {
     });
 });
 
+
 $(".place_order").click(function () {
     console.log("here");
     var first_name = $("#first_name").val();

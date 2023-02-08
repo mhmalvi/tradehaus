@@ -127,10 +127,12 @@
 
                     <span class="ec-header-count cart-count-lable">3</span>
                     </a> --}}
-                    <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+                    {{-- <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                         <div class="header-icon"><img src="assets/images/icons/cart_5.svg" class="svg_img header_svg" alt="" /></div>
                         <span class="ec-header-count ec-cart-count">3</span>
-                    </a>
+                    </a> --}}
+                    {{-- @include('layout.cart') --}}
+
 
                     <!-- Header Cart End -->
                     <!-- Header menu Start -->
@@ -210,11 +212,7 @@
                                 <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                     <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" /></div>
 
-                                    @php
-                                    $count = App\Models\Cart::where('user_id',Auth::user()->id)->count();
-                                    @endphp
-                                    <span class="ec-header-count ec-cart-count">{{ $count }}</span>
-
+                                    @include('layout.cart')
                                 </a>
 
                                 {{-- @include('layout.cart') --}}
@@ -684,6 +682,44 @@
     @include('layout.cart-view')
 
     @yield('inner-content')
+
+    <script>
+        window.addEventListener('item_exists', event => {
+            Swal.fire({
+                icon: 'error'
+                , title: 'Oops...'
+                , text: 'Item already exists.'
+            , })
+        });
+
+    </script>
+    <script>
+        window.addEventListener('add_to_cart', event => {
+            Swal.fire({
+                // position: 'top-end',
+                icon: 'success'
+                , title: 'Added to cart'
+                , showConfirmButton: true,
+                // timer: 1500
+            })
+        });
+
+    </script>
+    <script>
+        window.addEventListener('login', event => {
+            Swal.fire({
+                title: 'Please login first'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
     @include('layout.inner-footer')
 
     <script>
@@ -722,6 +758,8 @@
     <script src="{{ asset('assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/jquery.sticky-sidebar.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/google-translate.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({

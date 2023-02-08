@@ -6,9 +6,10 @@
             @endphp
             @foreach($new as $product)
             <div class="ec-slide-item d-flex slide-1">
+
                 <style>
                     .slide-1 {
-                        background-image: url('../../public/assets/img/sliders/headset_adobe.jpg')
+                        background-image: url('{{ asset($product->image)}}')
                     }
 
                 </style>
@@ -18,10 +19,9 @@
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 align-self-center">
                             <div class="ec-slide-content slider-animation">
                                 <h2 class="ec-slide-stitle">new arrival</h2>
-                                <h1 class="ec-slide-title">stylish headphone</h1>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                <a href="#" class="btn btn-lg btn-secondary">Shop Now</a>
+                                <h1 class="ec-slide-title">{{ $product->title }}</h1>
+                                <p>{{$product->short_description}}</p>
+                                <a href="{{ route('new.arrival',['slug'=>$product->slug]) }}" class="btn btn-lg btn-secondary">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -149,9 +149,9 @@
                                                     <div class="ec-pro-color">
                                                         <ul class="ec-opt-swatch ec-change-img">
                                                             <li class="active">
-                                                            <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
-                                                            {{-- <span style="background-color:#ef7ca3;"></span> --}}
-                                                            </a>
+                                                                <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
+                                                                    {{-- <span style="background-color:#ef7ca3;"></span> --}}
+                                                                </a>
                                                             </li>
 
 

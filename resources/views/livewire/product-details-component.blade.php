@@ -1,27 +1,7 @@
 <div>
-<link rel="icon" href="assets/images/favicon/favicon.png" sizes="32x32" />
-<link rel="apple-touch-icon" href="assets/images/favicon/favicon.png" />
-<meta name="msapplication-TileImage" content="assets/images/favicon/favicon.png" />
 
-<link rel="stylesheet" href="assets/css/vendor/ecicons.min.css" />
 
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.css')}}" />
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper-bundle.min.css')}}" />
-
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery-ui.min.css')}}" />
-
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/countdownTimer.css')}}" />
-
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/slick.min.css')}}" />
-
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/nouislider.css')}}" />
-
-<link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap.css')}}" />
-<link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
-<link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}" />
-<link rel="stylesheet" id="bg-switcher-css" href="{{ asset('assets/css/backgrounds/bg-4.css')}}">
-
-    {{--  --}}
+    {{-- --}}
     <!-- ekka Cart End -->
 
     <!-- Ec breadcrumb start -->
@@ -62,8 +42,6 @@
                     @endif
 
                     <form wire:submit.prevent="add_to_cart">
-
-
                         <div class="single-pro-block">
                             <div class="single-pro-inner">
                                 <div class="row">
@@ -346,9 +324,21 @@
                                                 </div>
                                                 @endif
                                             </div>
+                                            {{-- <div id="field1">
+                                                <button type="button" id="sub" class="minus">-</button>
+                                                <input type="number" wire:model="quantity" value="1" min="1" class='quantity' max="10" />
+                                                <button type="button" id="add" class="plus">+</button>
+                                            </div> --}}
+
                                             <div class="ec-single-qty">
+                                                
+
+
+
+
                                                 <div class="qty-plus-minus">
-                                                    <input class="qty-input" type="text" wire:model="product_quantity" name="product_quantity" value="1" />
+                                                    <input class="qty-input" type="number" wire:model="product_quantity" value="product_quantity"/>
+                                                    <input type="hidden" wire:model="product_image" value="product_image"/>
 
                                                 </div>
                                                 <div class="ec-single-cart ">
@@ -1592,30 +1582,26 @@
     }
 
 </style>
-<script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/bootstrap.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/modernizr-3.11.2.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/swiper-bundle.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/nouislider.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/countdownTimer.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/scrollup.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/slick.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/infiniteslidev2.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.sticky-sidebar.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/google-translate.js')}}"></script>
-<script>
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'en'
-        }, 'google_translate_element');
-    }
-
-</script>
 <!-- Main Js -->
 <script src="{{ asset('assets/js/main.js')}}"></script>
 
-</div>
+<script>
+    var input = $('.quantity')
+        , minValue = parseInt(input.attr('min'))
+        , maxValue = parseInt(input.attr('max'));
+
+
+    $('.plus').on('click', function() {
+        var inputValue = input.val();
+        if (inputValue < maxValue) {
+            input.val(parseInt(inputValue) + 1);
+        }
+    });
+    $('.minus').on('click', function() {
+        var inputValue = input.val();
+        if (inputValue < script maxValue) {
+            input.val(parseInt(inputValue) - 1);
+        }
+    });
+
+</script>

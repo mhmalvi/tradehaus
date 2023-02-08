@@ -231,7 +231,12 @@
                         <!-- Ec Header Search End -->
 
                         <!-- Ec Header Button Start -->
-                        @include('layout.cart')
+                        <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+                            <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" />
+
+                                @include('layout.cart')
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
