@@ -141,11 +141,11 @@
                             <!-- Header wishlist Start -->
                             <div class="ec-header-wishlist" style="">
 
-                                <a href="{{ route('wish.list') }}">
+                                {{-- <a href="{{ route('wish.list') }}">
 
-                                    <div class="top-icon"><img src="{{ asset('assets/images/icons/pro_wishlist.svg')}}" class="svg_img top_svg" alt="" /></div>
-                                    <span class="ec-btn-title">wishlist</span>
-                                </a>
+                                <div class="top-icon"><img src="{{ asset('assets/images/icons/pro_wishlist.svg')}}" class="svg_img top_svg" alt="" /></div>
+                                <span class="ec-btn-title">wishlist</span>
+                                </a> --}}
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,8 @@
                             <!-- Header Cart Start -->
                             <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                 <div class="header-icon"><img src="assets/images/icons/cart_5.svg" class="svg_img header_svg" alt="" /></div>
-                                <span class="ec-header-count ec-cart-count">3</span>
+                                @include('layout.cart')
+
                             </a>
                             <!-- Header Cart End -->
                             <!-- Header menu Start -->
@@ -230,8 +231,13 @@
                         </div>
                         <!-- Ec Header Search End -->
 
+                        <a href="{{ route('wish.list') }}" style="    margin-right: -17%;" class="ec-header-btn ec-header-wishlist">
+
+                            <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" /></div>
+                            @include('wishlist-count')
+                        </a>
                         <!-- Ec Header Button Start -->
-                        <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+                        <a href="{{ route('wish.list') }}" class="ec-header-btn ec-side-toggle">
                             <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" />
 
                                 @include('layout.cart')
@@ -752,17 +758,18 @@
 
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)">Blog</a>
-                            <ul class="sub-menu">
+                        <li class="dropdown"><a href="{{route('blog.view')}}">Blog</a>
+
+                            {{-- <ul class="sub-menu">
                                 <li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
                                 <li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
                                 <li><a href="blog-detail-left-sidebar.html">Blog detail left sidebar</a></li>
                                 <li><a href="blog-detail-right-sidebar.html">Blog detail right sidebar</a></li>
                                 <li><a href="blog-full-width.html">Blog full width</a></li>
                                 <li><a href="blog-detail-full-width.html">Blog detail full width</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)">Elements</a>
+                        {{-- <li class="dropdown"><a href="javascript:void(0)">Elements</a>
                             <ul class="sub-menu">
                                 <li><a href="elemets-products.html">Products</a></li>
                                 <li><a href="elemets-typography.html">Typography</a></li>
@@ -774,7 +781,7 @@
                                 <li><a href="elemets-blog.html">Blogs</a></li>
                             </ul>
                         </li>
-                        <li><a href="offer.html">Hot Offers</a></li>
+                        <li><a href="offer.html">Hot Offers</a></li> --}}
                     </ul>
                 </div>
                 <div class="header-res-lan-curr">
@@ -887,6 +894,19 @@
         });
 
     </script>
+    <script>
+        window.addEventListener('add_to_wishlist', event => {
+            Swal.fire({
+                // position: 'top-end',
+                icon: 'success'
+                , title: 'Added to wishlist'
+                , showConfirmButton: true,
+                // timer: 1500
+            })
+        });
+
+    </script>
+
     <script>
         window.addEventListener('login', event => {
             Swal.fire({

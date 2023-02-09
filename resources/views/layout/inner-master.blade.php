@@ -706,6 +706,19 @@
 
     </script>
     <script>
+        window.addEventListener('add_to_wishlist', event => {
+            Swal.fire({
+                // position: 'top-end',
+                icon: 'success'
+                , title: 'Added to wishlist'
+                , showConfirmButton: true,
+                // timer: 1500
+            })
+        });
+
+    </script>
+
+    <script>
         window.addEventListener('login', event => {
             Swal.fire({
                 title: 'Please login first'

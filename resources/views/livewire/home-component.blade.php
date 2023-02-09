@@ -78,10 +78,11 @@
 
                         <div class="ec_cat_inner">
                             {{-- <h2 class="d-none">Category</h2> --}}
+                            {{-- svg_img cat_svg --}}
                             <a href="{{ route('product.category',[$category->id]) }}">
 
                                 <div class="ec-cat-image">
-                                    <img src="{{ $category->category_image }}" class="svg_img cat_svg" alt="" />
+                                    <img src="{{ $category->category_image }}" class="" alt="" />
                                 </div>
                                 <div class="ec-cat-desc">
                                     <span class="ec-section-title">{{ $category->category_name }}</span>
@@ -205,7 +206,8 @@
 
                                             <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
                                             <div class="ec-pro-actions">
-                                                <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+                                                <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$product->id}},{{$price}})" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+
                                                 <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To Cart</button>
                                                 {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
                                             </div>

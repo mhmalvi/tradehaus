@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-md-12 section-title-block">
                     <div class="section-title">
-                        <h2 class="ec-title">Products</h2>
-                        <!-- <h6 class="ec-sub-title">Lorem Ipsum is simply dummy text of the printing</h6> -->
+                        <h2 class="ec-title">All Products</h2>
+                        <h6 class="ec-sub-title">Lorem Ipsum is simply dummy text of the printing</h6>
 
                     </div>
                 </div>
@@ -18,8 +18,10 @@
                         <div class="row">
                             @foreach($products as $product)
                             @if($product->status=='A')
+
+
+
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                                {{-- <form > --}}
 
                                 <a href="{{ route('product.details',[$product->id]) }}" class="image">
 
@@ -39,7 +41,11 @@
                                                 <div class="ec-pro-opt-inner">
                                                     <div class="ec-pro-color">
                                                         <ul class="ec-opt-swatch ec-change-img">
-                                                            <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
+                                                            <li class="active">
+                                                                <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
+                                                                    {{-- <span style="background-color:#ef7ca3;"></span> --}}
+                                                                </a>
+                                                            </li>
 
 
                                                         </ul>
@@ -91,25 +97,18 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        {{-- <input type="text" wire:model="product_id" value="{{ $product->id }}" /> --}}
-
                                         <div class="pro-hidden-block">
-                                            {{ $product->product_name }}
 
                                             <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
                                             <div class="ec-pro-actions">
                                                 <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                                <button title="Add To Cart" wire:click="add_to_cart({{ $product->id }},{{ $product->product_name }},{{ $price }},1)" class=" btn btn-primary">Add To Cart</button>
-
+                                                <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To Cart</button>
                                                 {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </a>
-                                {{-- </form> --}}
-
                             </div>
-
                             </a>
                         </div>
                         @endif
@@ -121,4 +120,5 @@
         </div>
 </div>
 </section>
+
 </div>

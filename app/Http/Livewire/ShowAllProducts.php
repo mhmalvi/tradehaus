@@ -23,9 +23,9 @@ class ShowAllProducts extends Component
     //     // $this->product_name = $this->products->product_name;
     // }
 
-    public function add_to_cart($product_id, $product_name, $product_price, $quantity)
+    public function add_to_cart($product_id, $product_price, $quantity)
     {
-        dd($product_price);
+        // dd($quantity);
         if (Auth::check()) {
             $product = Product::find($product_id);
             $image = $product->product_image;
@@ -34,7 +34,7 @@ class ShowAllProducts extends Component
                 $this->dispatchBrowserEvent('item_exists');
             } else {
                 $cart = new Cart();
-                $cart->product_name = $product_name;
+                $cart->product_name = $product->product_name;
                 $cart->product_price = $product_price;
                 $cart->product_quantity = $quantity;
                 $cart->product_image = $image;
