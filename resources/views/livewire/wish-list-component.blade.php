@@ -35,9 +35,10 @@
                                 {{-- @php
                                 $products = App\Models\Wishlist::where('user_id',auth()->user()->id)->get();
                                 @endphp --}}
+                                @if(!$products->isEmpty())
                                 @foreach($products as $product)
                                 @php
-                                $product_item = App\Models\Product::find($product->product_id)->first();
+                                $product_item = App\Models\Product::find($product->product_id);
                                 @endphp
                                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-6 pro-gl-content">
                                     <div class="ec-product-inner">
@@ -52,17 +53,21 @@
                                                 <span class="ec-com-remove ec-remove-wish"><a wire:click="remove({{ $product->id }})">×</a></span>
                                                 <span class="percentage">{{ $product_item->product_discount }}%</span>
 
-                                                <a href="#" class="quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="{{ asset($product_item->product_image) }}" class="svg_img pro_svg" alt="" /></a>
+                                                {{-- <a href="#" class="quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="{{ asset($product_item->product_image) }}" class="svg_img pro_svg" alt="" /></a> --}}
 
-                                                {{-- <div class="ec-pro-actions">
-                                                    <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare.svg" class="svg_img pro_svg" alt="" /></a>
-                                                    <button title="Add To Cart" class=" add-to-cart"><img src="assets/images/icons/cart.svg" class="svg_img pro_svg" alt="" /> Add To Cart</button>
-                                                    <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                                </div> --}}
+                                                <div class="ec-pro-actions">
+                                                    {{-- <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare.svg" class="svg_img pro_svg" alt="" />
+                                                    </a> --}}
+                                                    <button title="Add To Cart" wire:click="add_to_cart({{$product_item->id}},{{$product_item->product_price}},1)" class=" add-to-cart"><img src="assets/images/icons/cart.svg" class="svg_img pro_svg" alt="" /> Add To Cart</button>
+
+
+                                                    {{-- <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/wishlist.svg" class="svg_img pro_svg" alt="" /></a> --}}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="ec-pro-content">
-                                            <h5 class="ec-pro-title"><a href="product-left-sidebar.html">{{ $product->product_name }}</a></h5>
+                                            <h5 class="ec-pro-title"><a href="product-left-sidebar.html">{{ $product_item->product_name }}</a></h5>
+
                                             <div class="ec-pro-rating">
                                                 <i class="ecicon eci-star fill"></i>
                                                 <i class="ecicon eci-star fill"></i>
@@ -77,7 +82,7 @@
                                                 <span class="new-price">${{ $product->product_price }}.00</span>
                                             </span>
                                             <div class="ec-pro-option">
-                                                <div class="ec-pro-color">
+                                                {{-- <div class="ec-pro-color">
                                                     <span class="ec-pro-opt-label">Color</span>
                                                     <ul class="ec-opt-swatch ec-change-img">
                                                         <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/7_1.jpg" data-src-hover="assets/images/product-image/7_1.jpg" data-tooltip="Gray"><span style="background-color:#01f1f1;"></span></a></li>
@@ -91,13 +96,17 @@
                                                         <li><a href="#" class="ec-opt-sz" data-old="$15.00" data-new="$12.00" data-tooltip="Medium">M</a></li>
                                                         <li><a href="#" class="ec-opt-sz" data-old="$20.00" data-new="$17.00" data-tooltip="Extra Large">XL</a></li>
                                                     </ul>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 @endforeach
-
+                                @else
+                                <div style="text-align:center;">
+                                    <h3>Your wishlist is empty.</h3>
+                                </div>                                
+                                @endif
                                 {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-6 pro-gl-content">
                                     <div class="ec-product-inner">
                                         <div class="ec-pro-image-outer">

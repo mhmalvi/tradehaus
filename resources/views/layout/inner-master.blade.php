@@ -104,7 +104,7 @@
                                     <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
 
                                     @else
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register.page') }}">Register</a></li>
 
                                     <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                                     @endif
@@ -193,7 +193,7 @@
                                         <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
 
                                         @else
-                                        <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('register.page') }}">Register</a></li>
 
                                         <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                                         @endif
@@ -202,10 +202,11 @@
                                 </div>
                                 <!-- Header User End -->
                                 <!-- Header wishlist Start -->
-                                <a href="wishlist.html" class="ec-header-btn ec-header-wishlist">
+                                <a href="{{ route('wish.list') }}" class="ec-header-btn ec-header-wishlist">
                                     <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" /></div>
 
-                                    <span class="ec-header-count">4</span>
+                                    @include('wishlist-count')
+
                                 </a>
                                 <!-- Header wishlist End -->
                                 <!-- Header Cart Start -->
@@ -378,7 +379,7 @@
                                         <li><a href="{{ route('faq') }}">FAQ</a></li>
                                         @if(!auth()->check())
                                         <li><a href="{{route('login')}}">Login</a></li>
-                                        <li><a href="{{route('register')}}">Register</a></li>
+                                        <li><a href="{{route('register.page')}}">Register</a></li>
                                         @else
                                         <li><a href="{{route('logout')}}">Logout</a></li>
                                         @endif
@@ -529,7 +530,7 @@
 
                                 @if(!auth()->check())
                                 <li><a href="{{route('login')}}">Login</a></li>
-                                <li><a href="{{route('register')}}">Register</a></li>
+                                <li><a href="{{route('register.page')}}">Register</a></li>
                                 @else
                                 <li><a href="{{route('logout')}}">Logout</a></li>
                                 @endif
@@ -732,6 +733,21 @@
         });
 
     </script>
+    <script>
+        window.addEventListener('fields', event => {
+            Swal.fire({
+                title: 'Please select all required fields.'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
 
     @include('layout.inner-footer')
 

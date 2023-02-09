@@ -158,7 +158,7 @@
                                                 <div class="ec-pro-variation-inner ec-pro-variation-size">
                                                     <span>SIZE</span>
                                                     <div class="ec-pro-variation-content">
-                                                        <ul id="myForm">
+                                                        <ul id="">
 
 
                                                             @if(isset($products->size1))
@@ -171,12 +171,6 @@
 
                                                             {{-- </div> --}}
                                                             @endif
-
-
-
-
-
-
                                                             @if(isset($products->size2))
 
                                                             {{-- <li class="active"><span style="{{ $products->size2 }}" name="size2">{{ $products->size2 }}</span></li> --}}
@@ -228,12 +222,13 @@
                                                 <div class="ec-pro-variation-inner ec-pro-variation-color">
                                                     <span>Color</span>
                                                     <div class="ec-pro-variation-content">
-                                                        <div style="display:flex" class="mb-3 required checkbox-group" id="color-form">
+                                                        <div style="display:flex" class="mb-3 required checkbox-group" id="">
 
 
                                                             <div class="form-group" id="" style="margin-left: 5%;">
 
-                                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_1 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
+
 
 
 
@@ -245,7 +240,8 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_2 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
+
 
 
 
@@ -258,7 +254,8 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_3 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
+
 
 
 
@@ -275,7 +272,8 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color" style=" height: 24px;margin-left: 70%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_4 }}" style=" height: 24px;margin-left: 70%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
+
 
 
 
@@ -330,14 +328,12 @@
                                                 <button type="button" id="add" class="plus">+</button>
                                             </div> --}}
 
-                                            <div class="ec-single-qty">
-                                                
+                                            <div class="ec-single-qty">                                          
+                                                <div class="" style="width:20%;">
+                                                    <input class="qty-input" style="border: 1px solid #d3d3d3;height: 40px;" type="number" wire:model="product_quantity" />
 
 
 
-
-                                                <div class="qty-plus-minus">
-                                                    <input class="qty-input" type="number" wire:model="product_quantity" value="product_quantity"/>
                                                     <input type="hidden" wire:model="product_image" value="product_image"/>
 
                                                 </div>
@@ -345,11 +341,14 @@
                                                     <button type="submit" class="btn btn-primary">Add To Cart</button>
                                                 </div>
                                                 <div class="ec-single-wishlist">
-                                                    <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+                                                    <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$products->id}},{{$price}})" title="Wishlist"><img src="{{ asset('assets/images/icons/wishlist.svg')}}" class="svg_img pro_svg " alt="" /></a>
+
+
+
                                                 </div>
-                                                <div class="ec-single-quickview">
+                                                {{-- <div class="ec-single-quickview">
                                                     <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="ec-single-social">
                                                 <ul class="mb-0">
@@ -535,10 +534,6 @@
                                             @if($child->status=='A')
                                             <li>
                                                 <div class="ec-sidebar-sub-item"><a href="{{ route('product.category',[$child->id]) }}">{{ $child->category_name }} <span>-{{ $count }}</span></a>
-
-
-
-
                                                 </div>
                                             </li>
                                             @endif
@@ -1365,7 +1360,7 @@
 <!-- Footer navigation panel for responsive display end -->
 
 <!-- Recent Purchase Popup  -->
-<div class="recent-purchase">
+{{-- <div class="recent-purchase">
     <img src="assets/images/product-image/1.jpg" alt="payment image">
     <div class="detail">
         <p>Someone in new just bought</p>
@@ -1373,7 +1368,7 @@
         <p>10 Minutes ago</p>
     </div>
     <a href="javascript:void(0)" class="icon-btn recent-close">×</a>
-</div>
+</div> --}}
 <!-- Recent Purchase Popup end -->
 
 <!-- Cart Floating Button -->
@@ -1493,7 +1488,8 @@
     <div class="ec-right-bottom">
         <div class="ec-box">
             <div class="ec-button rotateBackward">
-                <img class="whatsapp" src="assets/images/common/whatsapp.png" alt="whatsapp icon" />
+                <img class="whatsapp" src="{{ asset('assets/images/common/whatsapp.png') }}" alt="whatsapp icon" />
+
             </div>
         </div>
     </div>

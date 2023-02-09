@@ -1,9 +1,8 @@
-@extends('layout.master')
-@section('content')
+@extends('layout.inner-master')
+@section('inner-content')
+
 <!-- ekka Cart End -->
-@include('css.css')
 <!-- Ec breadcrumb start -->
 <livewire:wish-list-component />
-@include('js.script')
 
 @endsection

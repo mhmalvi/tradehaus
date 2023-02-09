@@ -19,7 +19,7 @@ class HomeComponent extends Component
 
     public function add_to_cart($id, $price, $quantity)
     {
-        // dd($price);
+        // dd($id);
         if (Auth::check()) {
             $product = Product::find($id);
             $cart_item = Cart::where('product_id', $id)->where('user_id', Auth::user()->id)->exists();
@@ -40,7 +40,7 @@ class HomeComponent extends Component
                 $this->dispatchBrowserEvent('add_to_cart');
                 $this->emit('cart_items');
                 $this->emit('count');
-                $cart_item = "";
+                // $cart_item = "";
             }
         } else {
             $this->dispatchBrowserEvent('login');
@@ -66,7 +66,7 @@ class HomeComponent extends Component
                 $wishlist->save();
                 $this->dispatchBrowserEvent('add_to_wishlist');
                 // $this->emit('wishlist_item');
-                $this->emit('wishlist_count');
+                $this->emit('count');
             }
         } else {
             $this->dispatchBrowserEvent('login');

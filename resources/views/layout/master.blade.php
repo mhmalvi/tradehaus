@@ -131,7 +131,7 @@
                                     <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
 
                                     @else
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register.page') }}">Register</a></li>
 
                                     <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                                     @endif
@@ -161,7 +161,7 @@
                                     <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
 
                                     @else
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register.page') }}">Register</a></li>
 
                                     <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                                     @endif
@@ -172,7 +172,8 @@
                             <!-- Header Cart Start -->
                             <a href="#" class="ec-header-btn ec-header-wishlist">
                                 <div class="header-icon"><img src="assets/images/icons/wishlist.svg" class="svg_img header_svg" alt="" /></div>
-                                <span class="ec-header-count ec-wishlist-count">0</span>
+                                @include('wishlist-count')
+
                             </a>
                             <!-- Header Cart End -->
                             <!-- Header Cart Start -->
@@ -234,10 +235,13 @@
                         <a href="{{ route('wish.list') }}" style="    margin-right: -17%;" class="ec-header-btn ec-header-wishlist">
 
                             <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" /></div>
+                            @if(auth()->check())
                             @include('wishlist-count')
+                            @endif
                         </a>
                         <!-- Ec Header Button Start -->
-                        <a href="{{ route('wish.list') }}" class="ec-header-btn ec-side-toggle">
+                        <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+
                             <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" />
 
                                 @include('layout.cart')
@@ -440,7 +444,7 @@
 
                                         @if(!auth()->check())
                                         <li><a href="{{route('login')}}">Login</a></li>
-                                        <li><a href="{{route('register')}}">Register</a></li>
+                                        <li><a href="{{route('register.page')}}">Register</a></li>
                                         @else
                                         <li><a href="{{route('logout')}}">Logout</a></li>
                                         @endif
@@ -747,7 +751,7 @@
 
                                 @if(!auth()->check())
                                 <li><a href="{{route('login')}}">Login</a></li>
-                                <li><a href="{{route('register')}}">Register</a></li>
+                                <li><a href="{{route('register.page')}}">Register</a></li>
                                 @else
                                 <li><a href="{{route('logout')}}">Logout</a></li>
                                 @endif
@@ -921,6 +925,21 @@
         });
 
     </script>
+    <script>
+        window.addEventListener('fields', event => {
+            Swal.fire({
+                title: 'Please select all required fields.'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
 
     @include('layout.footer')
 

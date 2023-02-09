@@ -5,6 +5,7 @@
     }
     @endphp
 
+@if(auth()->check())
 
     <span style="position: absolute;
     margin-top: -12px;
@@ -16,6 +17,12 @@
     height: 23px;
     text-align: center;
     color: white;
-    font-weight: 800;" class="ec-header-count">{{ $count }}</span>
+    font-weight: 800;" class="ec-header-count">
+        
+
+        {{ $count }}
+       
+    </span>
+ @endif
 
 </div>
