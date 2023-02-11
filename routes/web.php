@@ -48,8 +48,8 @@ Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('p
 // Route::get('admin',[AdminCategoryController::class,'index']);
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
-    Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
+    // Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
+    // Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
     Route::get('/edit-product', [AdminProductController::class, 'edit'])->name('edit.product');
@@ -88,7 +88,7 @@ Route::get('blog-all', [BlogController::class, 'index'])->name('blog.view');
 Route::get('blog-details', [BlogController::class, 'details'])->name('blog.details');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/wishlist-store', [WishlistController::class, 'store'])->name('wishlist.store');
-Route::get('/new-arrival/{slug}',[ProductController::class,'new_arrival_details'])->name('new.arrival');
+Route::get('/new-arrival',[ProductController::class,'new_arrival_details'])->name('new.arrival');
 
 Route::group(['middleware' => ['auth']], function () {
     /**

@@ -11,7 +11,6 @@
                     .slide-1 {
                         background-image: url('{{ asset($product->image)}}')
                     }
-
                 </style>
 
                 <div class="container align-self-center">
@@ -122,7 +121,7 @@
                     <div class="tab-content">
                         <div class="row">
                             @foreach($products as $product)
-                            @if($product->status=='A')
+                            @if($product->status=='A' && $product->isBlackFriday=='n')
 
 
 
@@ -580,7 +579,7 @@
 
                 <div class="ec-offer-content-inner">
                     <h2 class="ec-offer-stitle">black friday</h2>
-                    <h2 class="ec-offer-title">up to 60 % off</h2>
+                    <h2 class="ec-offer-title">up to {{$data->product_discount}} % off</h2>
                     <span class="ec-offer-desc">Select accessories for your favourites gadgets</span>
                     <span class="ec-offer-btn"><a href="{{ route('product.details',[$data->id]) }}" class="btn btn-primary">Shop Now</a></span>
                 </div>
