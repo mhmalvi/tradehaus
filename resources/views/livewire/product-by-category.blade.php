@@ -70,8 +70,8 @@
 
 
                                 <h2 class="d-none">Category</h2>
-                                <div class="ec-cat-image">
-                                    <img src="{{ env('APP_URL').'/'.$category->category_image }}" class="svg_img cat_svg" alt="" />
+                                <div class="ec-cat-image" style="width: 64%;">
+                                    <img src="{{ env('APP_URL').'/'.$category->category_image }}" class="cat_svg" alt="" />
                                 </div>
                                 <div class="ec-cat-desc">
                                     <a href=""><span class="ec-section-title">{{ $category->category_name }}</span></a>
@@ -84,78 +84,6 @@
                     </div>
                     @endforeach
 
-                    {{-- <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/9.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Smartwatches</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/10.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/11.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Console Games</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/12.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Headphones</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/13.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Virtual Reality</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/14.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div> --}}
                 </div>
             </div>
         </div>
@@ -239,18 +167,19 @@
                                         </span>
                                     </div>
                                 </div>
-                                {{-- {{$product->id}} --}}
                                 <!-- <form wire:submit.prevent="add_to_cart"> -->
-                                    <!-- <input type="text" wire:model="product_id" name="product_id" value="{{$product->id}}" /> -->
-                                    <div class="pro-hidden-block">
-
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button wire:click="add_to_cart({{$product->id}},{{$product->product_name}},{{$price}})" class=" btn btn-primary">Add To Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
+                                <!-- <input type="text" wire:model="product_id" name="product_id" value="{{$product->id}}" /> -->
+                                <div class="pro-hidden-block">
+                                    <!-- {{$product->id}}
+{{$product->product_name}}
+{{$price}} -->
+                                    <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
+                                    <div class="ec-pro-actions">
+                                        <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$product->id}},{{$price}})" title="Wishlist"><img src="{{asset('assets/images/icons/pro_wishlist.svg')}}" class="svg_img pro_svg" alt="" /></a>
+                                        <button wire:click="add_to_cart({{$product->id}},{{$price}})" class=" btn btn-primary">Add To Cart</button>
+                                        <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
                                     </div>
+                                </div>
                                 <!-- </form> -->
                             </div>
 

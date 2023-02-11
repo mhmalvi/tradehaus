@@ -435,8 +435,8 @@
                                 <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
 
-                                        <li><a style="color:black; !important;" href="{{ route('about.us') }}">About Us</a></li>
-                                        <li><a style="color:black; !important;" href="{{route('contact.us')}}">Contact Us</a></li>
+                                        <li><a style="color:black !important;" href="{{ route('about.us') }}">About Us</a></li>
+                                        <li><a style="color:black !important;" href="{{route('contact.us')}}">Contact Us</a></li>
                                         {{-- <li><a href="cart.html">Cart</a></li> --}}
                                         {{-- <li><a href="checkout.html">Checkout</a></li> --}}
                                         {{-- <li><a href="compare.html">Compare</a></li> --}}
