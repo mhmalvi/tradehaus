@@ -70,8 +70,9 @@
 
 
                                 <h2 class="d-none">Category</h2>
-                                <div class="ec-cat-image" style="width: 64%;">
-                                    <img src="{{ env('APP_URL').'/'.$category->category_image }}" class="cat_svg" alt="" />
+                                <div class="ec-cat-image" style="">
+                                    <img style="width: 40%; margin-left: 29%;" src="{{ env('APP_URL').'/'.$category->category_image }}" class="" alt="" />
+
                                 </div>
                                 <div class="ec-cat-desc">
                                     <a href=""><span class="ec-section-title">{{ $category->category_name }}</span></a>
