@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>TradeUs</title>
     <meta name="keywords" content="apparel, catalog, clean, ecommerce, ecommerce HTML, electronics, fashion, html eCommerce, html store, minimal, multipurpose, multipurpose ecommerce, online store, responsive ecommerce template, shops" />
@@ -40,12 +42,23 @@
 
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo5.css')}}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     @livewireStyles
 
 
 </head>
 
+<style>
+    .ec-main-menu ul li a {
+        color: white !important;
+    }
 
+    .ec-main-menu ul li.dropdown ul li a {
+        color: black !important;
+    }
+
+</style>
 
 <body>
     <div id="ec-overlay"><span class="loader_img"></span></div>
@@ -99,20 +112,40 @@
 
                             <!-- Header User Start -->
                             <div class="ec-header-user dropdown">
-                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" /><span class="ec-btn-title">Login</span></button>
+                                {{-- @if(auth()->check()) --}}
+
+                                {{-- {{ auth()->user()->name }} --}}
+                                {{-- @endif --}}
+
+                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg')}}" class="svg_img top_svg" alt="" />
+                                    @if(auth()->check())
+                                    <span class="ec-btn-title">{{ auth()->user()->first_name }}</span>
+                                    @endif
+
+                                </button>
+
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
-                                    <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('login.page') }}">Login</a></li>
+
+                                    {{-- <li><a class="dropdown-item" href="checkout.html">Checkout</a></li> --}}
+                                    @if(auth()->check())
+                                    <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
+
+                                    @else
+                                    <li><a class="dropdown-item" href="{{ route('register.page') }}">Register</a></li>
+
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    @endif
                                 </ul>
                             </div>
                             <!-- Header User End -->
                             <!-- Header wishlist Start -->
-                            <div class="ec-header-wishlist">
-                                <a href="#">
-                                    <div class="top-icon"><img src="{{ asset('assets/images/icons/pro_wishlist.svg')}}" class="svg_img top_svg" alt="" /></div>
-                                    <span class="ec-btn-title">wishlist</span>
-                                </a>
+                            <div class="ec-header-wishlist" style="">
+
+                                {{-- <a href="{{ route('wish.list') }}">
+
+                                <div class="top-icon"><img src="{{ asset('assets/images/icons/pro_wishlist.svg')}}" class="svg_img top_svg" alt="" /></div>
+                                <span class="ec-btn-title">wishlist</span>
+                                </a> --}}
                             </div>
                         </div>
                     </div>
@@ -124,22 +157,30 @@
                             <div class="ec-header-user dropdown">
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="assets/images/icons/user_5.svg" class="svg_img header_svg" alt="" /></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
-                                    <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
-                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
+                                    @if(auth()->check())
+                                    <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
+
+                                    @else
+                                    <li><a class="dropdown-item" href="{{ route('register.page') }}">Register</a></li>
+
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                             <!-- Header User End -->
                             <!-- Header Cart Start -->
                             <a href="#" class="ec-header-btn ec-header-wishlist">
                                 <div class="header-icon"><img src="assets/images/icons/wishlist.svg" class="svg_img header_svg" alt="" /></div>
-                                <span class="ec-header-count ec-wishlist-count">0</span>
+                                @include('wishlist-count')
+
                             </a>
                             <!-- Header Cart End -->
                             <!-- Header Cart Start -->
                             <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                 <div class="header-icon"><img src="assets/images/icons/cart_5.svg" class="svg_img header_svg" alt="" /></div>
-                                <span class="ec-header-count ec-cart-count">3</span>
+                                @include('layout.cart')
+
                             </a>
                             <!-- Header Cart End -->
                             <!-- Header menu Start -->
@@ -191,8 +232,21 @@
                         </div>
                         <!-- Ec Header Search End -->
 
+                        <a href="{{ route('wish.list') }}" style="    margin-right: -17%;" class="ec-header-btn ec-header-wishlist">
+
+                            <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" /></div>
+                            @if(auth()->check())
+                            @include('wishlist-count')
+                            @endif
+                        </a>
                         <!-- Ec Header Button Start -->
-                        @include('layout.cart')
+                        <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+
+                            <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" />
+
+                                @include('layout.cart')
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -268,7 +322,8 @@
                     <div class="col ec-main-menu-block align-self-center d-none d-lg-block p-0">
                         <div class="ec-main-menu">
                             <ul>
-                                <li class="dropdown"><a href="{{ url('/') }}">Home</a>
+                                <li style="color: white;" class="dropdown"><a href="{{ url('/') }}">Home</a>
+
                                     <!-- <ul class="sub-menu">
                                         <li><a href="index.html">Fashion 1</a></li>
                                         <li><a href="demo-2.html">Fashion 2</a></li>
@@ -277,7 +332,7 @@
                                         <li><a href="demo-5.html">Electronic</a></li>
                                     </ul> -->
                                 </li>
-                                <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
+                                <!-- <li class="dropdown position-static"><a href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu d-block">
                                         <li class="d-flex">
                                             <ul class="d-block">
@@ -304,8 +359,8 @@
                                                         4 column</a></li>
                                                 <li><a href="shop-banner-full-width.html">Full width 4 column</a>
                                                 </li>
-                                            </ul>
-                                            <!-- <ul class="d-block">
+                                            </ul> -->
+                                <!-- <ul class="d-block">
                                                 <li class="menu_title"><a href="javascript:void(0)">Columns</a></li>
                                                 <li><a href="shop-full-width-col-3.html">3 Columns full width</a></li>
                                                 <li><a href="shop-full-width-col-4.html">4 Columns full width</a></li>
@@ -325,7 +380,7 @@
                                                         sidebar</a></li>
                                                 <li><a href="shop-list-full-col-2.html">Full width 2 columns</a></li>
                                             </ul> -->
-                                        </li>
+                                <!-- </li>
                                         <li>
                                             <ul class="ec-main-banner w-100">
                                                 <li><a class="p-0" href="shop-left-sidebar-col-3.html"><img class="img-responsive" src="assets/images/menu-banner/1.jpg" alt=""></a></li>
@@ -335,9 +390,9 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="dropdown"><a href="javascript:void(0)">Products</a>
-                                    <ul class="sub-menu">
+                                </li> -->
+                                <li><a href="{{route('show.all')}}">Products</a>
+                                    <!-- <ul class="sub-menu">
                                         <li class="dropdown position-static"><a href="javascript:void(0)">Product page
                                                 <i class="ecicon eci-angle-right"></i></a>
                                             <ul class="sub-menu sub-menu-child">
@@ -375,24 +430,31 @@
                                         <li><a href="product-360-full-width.html">360 full width</a></li>
                                         <li><a href="product-video-full-width.html">Video full width</a></li>
                                         <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
                                 <li class="dropdown"><a href="javascript:void(0)">Pages</a>
                                     <ul class="sub-menu">
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="contact-us.html">Contact Us</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="compare.html">Compare</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="track-order.html">Track Order</a></li>
-                                        <li><a href="terms-condition.html">Terms Condition</a></li>
-                                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+
+                                        <li><a style="color:black !important;" href="{{ route('about.us') }}">About Us</a></li>
+                                        <li><a style="color:black !important;" href="{{route('contact.us')}}">Contact Us</a></li>
+                                        {{-- <li><a href="cart.html">Cart</a></li> --}}
+                                        {{-- <li><a href="checkout.html">Checkout</a></li> --}}
+                                        {{-- <li><a href="compare.html">Compare</a></li> --}}
+                                        <li><a href="{{ route('faq') }}">FAQ</a></li>
+
+                                        @if(!auth()->check())
+                                        <li><a href="{{route('login')}}">Login</a></li>
+                                        <li><a href="{{route('register.page')}}">Register</a></li>
+                                        @else
+                                        <li><a href="{{route('logout')}}">Logout</a></li>
+                                        @endif
+
+                                        {{-- <li><a href="track-order.html">Track Order</a></li> --}}
+                                        <li><a href="{{route('terms.condition')}}">Terms Condition</a></li>
+                                        <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"><span class="main-label-note-new" data-toggle="tooltip" title="NEW"></span><a href="javascript:void(0)">Others</a>
+                                <!-- <li class="dropdown"><span class="main-label-note-new" data-toggle="tooltip" title="NEW"></span><a href="javascript:void(0)">Others</a>
                                     <ul class="sub-menu">
                                         <li class="dropdown position-static"><a href="javascript:void(0)">Mail
                                                 Confirmation
@@ -476,18 +538,18 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="dropdown"><a href="javascript:void(0)">Blog</a>
-                                    <ul class="sub-menu">
+                                </li> -->
+                                <li><a href="{{route('blog.view')}}">Blog</a>
+                                    <!-- <ul class="sub-menu">
                                         <li><a href="blog-left-sidebar.html">left sidebar</a></li>
                                         <li><a href="blog-right-sidebar.html">right sidebar</a></li>
                                         <li><a href="blog-detail-left-sidebar.html">detail left sidebar</a></li>
                                         <li><a href="blog-detail-right-sidebar.html">detail right sidebar</a></li>
                                         <li><a href="blog-full-width.html">full width</a></li>
                                         <li><a href="blog-detail-full-width.html">detail full width</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li class="dropdown"><a href="javascript:void(0)">Elements</a>
+                                <!-- <li class="dropdown"><a href="javascript:void(0)">Elements</a>
                                     <ul class="sub-menu">
                                         <li><a href="elemets-products.html">Products</a></li>
                                         <li><a href="elemets-typography.html">Typography</a></li>
@@ -498,7 +560,7 @@
                                         <li><a href="elemets-accordions.html">Accordions</a></li>
                                         <li><a href="elemets-blog.html">Blogs</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -582,8 +644,8 @@
                                 </li>
                             </ul>
                         </li> --}}
-                        <li><a href="javascript:void(0)">Products</a>
-                            <ul class="sub-menu">
+                        <li><a href="{{route('show.all')}}">Products</a>
+                            <!-- <ul class="sub-menu">
                                 <li><a href="javascript:void(0)">Product page</a>
                                     <ul class="sub-menu">
                                         <li><a href="product-left-sidebar.html">Product left sidebar</a></li>
@@ -612,9 +674,9 @@
                                 <li><a href="product-360-full-width.html">360 full width</a></li>
                                 <li><a href="product-video-full-width.html">Video full width</a></li>
                                 <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
-                            </ul>
+                            </ul> -->
                         </li>
-                        <li><a href="javascript:void(0)">Others</a>
+                        <!-- <li><a href="javascript:void(0)">Others</a>
                             <ul class="sub-menu">
                                 <li><a href="javascript:void(0)">Mail Confirmation</a>
                                     <ul class="sub-menu">
@@ -677,33 +739,41 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li><a href="javascript:void(0)">Pages</a>
-                            <ul class="sub-menu">
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="contact-us.html">Contact Us</a></li>
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="compare.html">Compare</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="register.html">Register</a></li>
-                                <li><a href="track-order.html">Track Order</a></li>
-                                <li><a href="terms-condition.html">Terms Condition</a></li>
-                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <ul class="sub-menu" style="color:black;">
+                                <li><a href="{{ route('about.us') }}">About Us</a></li>
+                                <li><a href="{{route('contact.us')}}">Contact Us</a></li>
+                                {{-- <li><a href="cart.html">Cart</a></li> --}}
+                                {{-- <li><a href="checkout.html">Checkout</a></li> --}}
+                                {{-- <li><a href="compare.html">Compare</a></li> --}}
+                                <li><a href="{{ route('faq') }}">FAQ</a></li>
+
+                                @if(!auth()->check())
+                                <li><a href="{{route('login')}}">Login</a></li>
+                                <li><a href="{{route('register.page')}}">Register</a></li>
+                                @else
+                                <li><a href="{{route('logout')}}">Logout</a></li>
+                                @endif
+
+                                {{-- <li><a href="track-order.html">Track Order</a></li> --}}
+                                <li><a href="{{route('terms.condition')}}">Terms Condition</a></li>
+                                <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
+
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)">Blog</a>
-                            <ul class="sub-menu">
+                        <li class="dropdown"><a href="{{route('blog.view')}}">Blog</a>
+
+                            {{-- <ul class="sub-menu">
                                 <li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
                                 <li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
                                 <li><a href="blog-detail-left-sidebar.html">Blog detail left sidebar</a></li>
                                 <li><a href="blog-detail-right-sidebar.html">Blog detail right sidebar</a></li>
                                 <li><a href="blog-full-width.html">Blog full width</a></li>
                                 <li><a href="blog-detail-full-width.html">Blog detail full width</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)">Elements</a>
+                        {{-- <li class="dropdown"><a href="javascript:void(0)">Elements</a>
                             <ul class="sub-menu">
                                 <li><a href="elemets-products.html">Products</a></li>
                                 <li><a href="elemets-typography.html">Typography</a></li>
@@ -715,7 +785,7 @@
                                 <li><a href="elemets-blog.html">Blogs</a></li>
                             </ul>
                         </li>
-                        <li><a href="offer.html">Hot Offers</a></li>
+                        <li><a href="offer.html">Hot Offers</a></li> --}}
                     </ul>
                 </div>
                 <div class="header-res-lan-curr">
@@ -760,6 +830,7 @@
 
 
     @yield('content')
+    <script src="{{ asset('js/ajax.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
 
@@ -774,10 +845,31 @@
     <script src="{{ asset('assets/js/plugins/swiper-bundle.min.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/countdownTimer.min.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/scrollup.js')}}"></script>
-    <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script> --}}
     <script src="{{ asset('assets/js/plugins/slick.min.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/infiniteslidev2.js')}}"></script>
     <script src="{{ asset('assets/js/plugins/chat-pro.js')}}"></script>
+    <script src="{{ asset('assets/js/plugins/nouislider.js')}}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/countdownTimer.min.js')}}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/plugins/scrollup.js')}}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script> --}}
+
+    {{-- <script src="{{ asset('assets/js/plugins/slick.min.js')}}"></script> --}}
+
+    {{-- <script src="{{ asset('assets/js/plugins/infiniteslidev2.js')}}"></script> --}}
+    <script src="{{ asset('assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{ asset('assets/js/plugins/jquery.sticky-sidebar.js')}}"></script>
+    <script src="{{ asset('assets/js/vendor/google-translate.js')}}"></script>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+
+    </script>
+    <!-- Main Js -->
+    <script src="{{ asset('assets/js/main.js')}}"></script>
 
     <!-- Main Js -->
     <script src="{{ asset('assets/js/vendor/index.js')}}"></script>
@@ -787,25 +879,67 @@
     <script>
         window.addEventListener('item_exists', event => {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Item already exists.',
-            })
+                icon: 'error'
+                , title: 'Oops...'
+                , text: 'Item already exists.'
+            , })
         });
 
-        
     </script>
     <script>
         window.addEventListener('add_to_cart', event => {
             Swal.fire({
                 // position: 'top-end',
-                icon: 'success',
-                title: 'Added to cart',
-                showConfirmButton: true,
+                icon: 'success'
+                , title: 'Added to cart'
+                , showConfirmButton: true,
                 // timer: 1500
             })
         });
+
     </script>
+    <script>
+        window.addEventListener('add_to_wishlist', event => {
+            Swal.fire({
+                // position: 'top-end',
+                icon: 'success'
+                , title: 'Added to wishlist'
+                , showConfirmButton: true,
+                // timer: 1500
+            })
+        });
+
+    </script>
+
+    <script>
+        window.addEventListener('login', event => {
+            Swal.fire({
+                title: 'Please login first'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+    <script>
+        window.addEventListener('fields', event => {
+            Swal.fire({
+                title: 'Please select all required fields.'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
 
     @include('layout.footer')
 

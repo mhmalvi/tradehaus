@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
@@ -11,10 +13,15 @@ use App\Http\Controllers\TrackOrderController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\Wishlist;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\admin\NewArrivalController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
 
@@ -39,10 +46,10 @@ Route::get('/', function () {
 Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
-Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
-    Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
+    // Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
+    // Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
     Route::get('/edit-product', [AdminProductController::class, 'edit'])->name('edit.product');
@@ -60,18 +67,39 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');
     // Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 });
-Route::get('/search-item',[ProductController::class,'search'])->name('product.search');
+Route::get('/search-item', [ProductController::class, 'search'])->name('product.search');
 Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
 Route::get('/product_by_category/{id}', [ProductController::class, 'product_category'])->name('product.category');
 Route::get('/login-page', [AuthController::class, 'login'])->name('login.page');
-Route::get('/register', [AuthController::class, 'register'])->name('register');
+// Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/register-page', [AuthController::class, 'register'])->name('register.page');
+Route::post('/register-user', [AuthController::class, 'register_user'])->name('register.user');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');
 Route::get('/track-us', [TrackOrderController::class, 'index'])->name('track.us');
 Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('privacy.policy');
 Route::get('/terms-condition', [TermsController::class, 'index'])->name('terms.condition');
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.us');
 Route::get('/wishlist', [Wishlist::class, 'index'])->name('wish.list');
+Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout.view');
+Route::post('place-order', [OrderController::class, 'store'])->name('place.order');
+Route::get('show-all', [ProductController::class, 'show_all_products'])->name('show.all');
+Route::get('blog-all', [BlogController::class, 'index'])->name('blog.view');
+Route::get('blog-details', [BlogController::class, 'details'])->name('blog.details');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+Route::post('/wishlist-store', [WishlistController::class, 'store'])->name('wishlist.store');
+Route::get('/new-arrival',[ProductController::class,'new_arrival_details'])->name('new.arrival');
+
+Route::group(['middleware' => ['auth']], function () {
+    /**
+     * Logout Route
+     */
+    Route::post('/add-comment', [CommentController::class, 'store'])->name('add.comment');
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wish.list');
+    Route::get('/checkout/{total}', [CheckoutController::class, 'index'])->name('checkout.view');
+    Route::post('place-order', [OrderController::class, 'store'])->name('place.order');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout.perform');
+});
 Route::post(
     '/login-access',
     [AuthController::class, 'login_access']
@@ -83,4 +111,16 @@ Route::post(
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,10 +1,15 @@
 <div>
     <div class="ec-main-slider section ">
         <div class="ec-slider">
+            @php
+            $new = App\Models\NewArrival::all();
+            @endphp
+            @foreach($new as $product)
             <div class="ec-slide-item d-flex slide-1">
+
                 <style>
                     .slide-1 {
-                        background-image: url('../../public/assets/img/sliders/headset_adobe.jpg')
+                        background-image: url('{{ asset($product->image)}}')
                     }
                 </style>
 
@@ -13,15 +18,15 @@
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 align-self-center">
                             <div class="ec-slide-content slider-animation">
                                 <h2 class="ec-slide-stitle">new arrival</h2>
-                                <h1 class="ec-slide-title">stylish headphone</h1>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                <a href="#" class="btn btn-lg btn-secondary">Shop Now</a>
+                                <h1 class="ec-slide-title">{{ $product->title }}</h1>
+                                <p>{{$product->short_description}}</p>
+                                <a href="{{ route('new.arrival',['slug'=>$product->slug]) }}" class="btn btn-lg btn-secondary">Shop Now</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
             <div class="ec-slide-item d-flex slide-2">
                 <div class="container align-self-center">
                     <div class="row">
@@ -71,102 +76,29 @@
                     <div class="ec_cat_content">
 
                         <div class="ec_cat_inner">
-                            <a href="#">
-                                <h2 class="d-none">Category</h2>
-                                <a href="{{ route('product.category',[$category->id]) }}">
+                            {{-- <h2 class="d-none">Category</h2> --}}
+                            {{-- svg_img cat_svg --}}
+                            <a href="{{ route('product.category',[$category->id]) }}">
 
-                                    <div class="ec-cat-image">
-                                        <img src="{{ $category->category_image }}" class="svg_img cat_svg" alt="" />
-                                    </div>
-                                    <div class="ec-cat-desc">
-                                        <span class="ec-section-title">{{ $category->category_name }}</span>
-
-
-                                    </div>
-                                </a>
-
+                                <div class="ec-cat-image">
+                                    <img src="{{ $category->category_image }}" class="" alt="" />
+                                </div>
+                                <div class="ec-cat-desc">
+                                    <span class="ec-section-title">{{ $category->category_name }}</span>
+                                </div>
                             </a>
                         </div>
-
                     </div>
                     @endforeach
 
-                    {{-- <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/9.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Smartwatches</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/10.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/11.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Console Games</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/12.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Headphones</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/13.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Virtual Reality</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/14.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div> --}}
+
                 </div>
             </div>
         </div>
     </section>
+    <!-- @if(auth()->check())
+    <h1>{{ auth()->user()->name }}</h1>
+    @endif -->
     <!--category Section End -->
     <!-- @if(session()->has('message')) -->
     <!-- @endif -->
@@ -189,7 +121,7 @@
                     <div class="tab-content">
                         <div class="row">
                             @foreach($products as $product)
-                            @if($product->status=='A')
+                            @if($product->status=='A' && $product->isBlackFriday=='n')
 
 
 
@@ -213,7 +145,11 @@
                                                 <div class="ec-pro-opt-inner">
                                                     <div class="ec-pro-color">
                                                         <ul class="ec-opt-swatch ec-change-img">
-                                                            <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
+                                                            <li class="active">
+                                                                <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
+                                                                    {{-- <span style="background-color:#ef7ca3;"></span> --}}
+                                                                </a>
+                                                            </li>
 
 
                                                         </ul>
@@ -269,402 +205,20 @@
 
                                             <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
                                             <div class="ec-pro-actions">
-                                                <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                                <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To
-                                                    Cart</button>
+                                                <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$product->id}},{{$price}})" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+
+                                                <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To Cart</button>
                                                 {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </a>
-
                             </div>
                             </a>
                         </div>
                         @endif
                         @endforeach
-                        {{-- <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="assets/images/product-image/40_1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/40_2.jpg" alt="Product" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/40_1.jpg" data-src-hover="assets/images/product-image/40_1.jpg" data-tooltip="Gray"><span style="background-color:#dddddd;"></span></a></li>
-                                                    <li><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/40_2.jpg" data-src-hover="assets/images/product-image/40_2.jpg" data-tooltip="Orange"><span style="background-color:#818181;"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Google nest wireless</a></h5>
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Multimedia Speakers</a></h6>
-                                    <div class="ec-pro-rat-price">
-                                        <div class="ec-pro-rat-pri-inner">
-                                            <span class="ec-price">
-                                                <span class="new-price">$180.00</span>
-                                                <span class="old-price">$199.00</span>
-                                            </span>
-                                            <span class="ec-pro-rating">
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-hidden-block">
 
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                                Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="assets/images/product-image/41_1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/41_2.jpg" alt="Product" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/41_1.jpg" data-src-hover="assets/images/product-image/41_1.jpg" data-tooltip="Gray"><span style="background-color:#dfdfdf;"></span></a></li>
-                                                    <li><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/41_2.jpg" data-src-hover="assets/images/product-image/41_2.jpg" data-tooltip="Orange"><span style="background-color:#5a6777;"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Earbuds 3nd generation wireless</a></h5>
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Accessories</a></h6>
-                                    <div class="ec-pro-rat-price">
-                                        <div class="ec-pro-rat-pri-inner">
-                                            <span class="ec-price">
-                                                <span class="new-price">$159.00</span>
-                                                <span class="old-price">$200.00</span>
-                                            </span>
-                                            <span class="ec-pro-rating">
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-hidden-block">
-
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                                Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="assets/images/product-image/42_1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/42_2.jpg" alt="Product" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/42_1.jpg" data-src-hover="assets/images/product-image/42_2.jpg" data-tooltip="Gray"><span style="background-color:#eeeeee;"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Apple iPhone 13 128 GB, Starlight</a></h5>
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Phone</a></h6>
-                                    <div class="ec-pro-rat-price">
-                                        <div class="ec-pro-rat-pri-inner">
-                                            <span class="ec-price">
-                                                <span class="new-price">$1590.00</span>
-                                                <span class="old-price">$2000.00</span>
-                                            </span>
-                                            <span class="ec-pro-rating">
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-hidden-block">
-
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                                Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="assets/images/product-image/43_1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/43_2.jpg" alt="Product" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/43_1.jpg" data-src-hover="assets/images/product-image/43_1.jpg" data-tooltip="Gray"><span style="background-color:#cccccc;"></span></a></li>
-                                                    <li><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/43_2.jpg" data-src-hover="assets/images/product-image/43_2.jpg" data-tooltip="Orange"><span style="background-color:#9fbfff;"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Sharp Air Purifier for Homes</a></h5>
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Accessories</a></h6>
-                                    <div class="ec-pro-rat-price">
-                                        <div class="ec-pro-rat-pri-inner">
-                                            <span class="ec-price">
-                                                <span class="new-price">$599.00</span>
-                                                <span class="old-price">$650.00</span>
-                                            </span>
-                                            <span class="ec-pro-rating">
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-hidden-block">
-
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                                Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="assets/images/product-image/44_1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/44_2.jpg" alt="Product" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/44_1.jpg" data-src-hover="assets/images/product-image/44_1.jpg" data-tooltip="Gray"><span style="background-color:#ffdf76;"></span></a></li>
-                                                    <li><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/44_2.jpg" data-src-hover="assets/images/product-image/44_2.jpg" data-tooltip="Orange"><span style="background-color:#568eff;"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Wireless blutooth headphone</a></h5>
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Headphone</a></h6>
-                                    <div class="ec-pro-rat-price">
-                                        <div class="ec-pro-rat-pri-inner">
-                                            <span class="ec-price">
-                                                <span class="new-price">$65.00</span>
-                                            </span>
-                                            <span class="ec-pro-rating">
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-hidden-block">
-
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                                Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="assets/images/product-image/45_1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/45_2.jpg" alt="Product" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/45_1.jpg" data-src-hover="assets/images/product-image/45_2.jpg" data-tooltip="Gray"><span style="background-color:#202020;"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Laptop i7 processor 1TB, 6GB</a></h5>
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Laptop</a></h6>
-                                    <div class="ec-pro-rat-price">
-                                        <div class="ec-pro-rat-pri-inner">
-                                            <span class="ec-price">
-                                                <span class="new-price">$1900.00</span>
-                                                <span class="old-price">$2100.00</span>
-                                            </span>
-                                            <span class="ec-pro-rating">
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-hidden-block">
-
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                                Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="assets/images/product-image/46_1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/46_2.jpg" alt="Product" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/46_1.jpg" data-src-hover="assets/images/product-image/46_1.jpg" data-tooltip="Gray"><span style="background-color:#202020;"></span></a></li>
-                                                    <li><a href="#" class="ec-opt-clr-img" data-src="assets/images/product-image/46_2.jpg" data-src-hover="assets/images/product-image/46_2.jpg" data-tooltip="Orange"><span style="background-color:#033eb4;"></span></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="assets/images/icons/compare_5.svg" class="svg_img pro_svg" alt="" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html">LED torch light</a></h5>
-                                    <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">Lighting</a></h6>
-                                    <div class="ec-pro-rat-price">
-                                        <div class="ec-pro-rat-pri-inner">
-                                            <span class="ec-price">
-                                                <span class="new-price">$45.00</span>
-                                                <span class="old-price">$60.00</span>
-                                            </span>
-                                            <span class="ec-pro-rating">
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star fill"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                                <i class="ecicon eci-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-hidden-block">
-
-                                        <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                        <div class="ec-pro-actions">
-                                            <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                            <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                                Cart</button>
-                                            <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -674,39 +228,7 @@
 <!-- ec Product tab Area End -->
 
 <!-- ec Banner Section Start -->
-{{-- <section class="ec-banner section section-space-p">
-    <h2 class="d-none">Banner</h2>
-    <div class="container">
-        <div class="row m-tb-minus-15">
-            <div class="ec-banners">
-                <div class="ec-banner-left col-sm-6">
-                    <div class="ec-banner-block ec-banner-block-1 col-sm-12">
-                        <div class="banner-block">
-                            <img src="assets/images/banner/23.png" alt="" />
-                            <div class="banner-content">
-                                <span class="ec-banner-stitle">lenovo tablets</span>
-                                <span class="ec-banner-title">UP to 70% OFF</span>
-                                <span class="ec-banner-btn"><a href="#" class="btn-primary">Shop Now</a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ec-banner-right col-sm-6">
-                    <div class="ec-banner-block ec-banner-block-2 col-sm-12">
-                        <div class="banner-block">
-                            <img src="assets/images/banner/24.png" alt="" />
-                            <div class="banner-content">
-                                <span class="ec-banner-stitle">Xiaoyi YI 1080p</span>
-                                <span class="ec-banner-title">WiFi IP Camera 36</span>
-                                <span class="ec-banner-btn"><a href="#" class="btn-primary">Shop Now</a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
+
 <!-- ec Banner Section End -->
 
 <!--  Feature & Special Section Start -->
@@ -743,19 +265,20 @@
                                 <div class="ec-pro-rat-price">
                                     <span class="ec-price">
                                         @php
-                                        $discount = $deal->product_price*($deal->product_discount/100)
+                                        $price = $deal->product_price*($deal->product_discount/100)
 
 
                                         @endphp
                                         @if(isset($deal->product_discount))
 
-                                        <span class="new-price">${{ $discount }}</span>
+                                        <span class="new-price">${{ $price }}</span>
+
                                         <span class="old-price">${{ $deal->product_price }}</span>
 
 
 
                                         @else
-                                        <span class="new-price">${{ $deal->product_price }}</span>
+                                        <span class="new-price">${{ $price=$deal->product_price }}</span>
 
                                         @endif
 
@@ -772,9 +295,10 @@
                                     <span id="ec-fs-count-1"></span>
                                 </div>
                                 <div class="ec-pro-actions">
-                                    <a title="Add To Cart" style="width: 105%; color: white;" href="{{ route('product.details',[$deal->id]) }}" class="add-to-cart btn btn-primary">Add To
+                                    <button title="Add To Cart" style="width: 105%; color: white;" wire:click="add_to_cart({{$deal->id}},{{$price}},1)" class="add-to-cart btn btn-primary">Add To
 
-                                        Cart</a>
+
+                                        Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -868,7 +392,7 @@
                                     <div class="ec-pro-rat-pri-inner">
                                         <span class="ec-price">
                                             @php
-                                            $discount = $data->product_price*($data->product_discount/100)
+                                            $price = $data->product_price*($data->product_discount/100)
 
 
 
@@ -877,14 +401,15 @@
                                             @if(isset($data->product_discount))
 
 
-                                            <span class="new-price">${{ $discount }}</span>
+                                            <span class="new-price">${{ $price }}</span>
+
                                             <span class="old-price">${{ $data->product_price }}</span>
 
 
 
 
                                             @else
-                                            <span class="new-price">${{ $data->product_price }}</span>
+                                            <span class="new-price">${{ $price=$data->product_price }}</span>
 
 
                                             @endif
@@ -904,7 +429,8 @@
                                     <div class="ec-pro-desc">{{ $data->product_short_description }} </div>
                                     <div class="ec-pro-actions">
                                         <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                        <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
+                                        <button title="Add To Cart" wire:click="add_to_cart({{$data->id}},{{$price}},1)" class="add-to-cart btn btn-primary">Add To
+
                                             Cart</button>
                                         {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
                                     </div>
@@ -1053,7 +579,7 @@
 
                 <div class="ec-offer-content-inner">
                     <h2 class="ec-offer-stitle">black friday</h2>
-                    <h2 class="ec-offer-title">up to 60 % off</h2>
+                    <h2 class="ec-offer-title">up to {{$data->product_discount}} % off</h2>
                     <span class="ec-offer-desc">Select accessories for your favourites gadgets</span>
                     <span class="ec-offer-btn"><a href="{{ route('product.details',[$data->id]) }}" class="btn btn-primary">Shop Now</a></span>
                 </div>

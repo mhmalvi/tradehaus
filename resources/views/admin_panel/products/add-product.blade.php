@@ -196,12 +196,15 @@
                                                 <div class="col-md-8 mb-25">
                                                     <div class="form-check form-check-inline">
                                                         <label>Is deals of the days</label>
-
                                                         <input type="checkbox" name="isSpecial" value="">
+                                                    </div>
 
+                                                </div>
 
-
-
+                                                <div class="col-md-8 mb-25">
+                                                    <div class="form-check form-check-inline">
+                                                        <label>Is black Friday</label>
+                                                        <input type="checkbox" name="isBlackFriday">
                                                     </div>
 
                                                 </div>

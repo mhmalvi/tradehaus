@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CartComponent extends Component
 {
@@ -11,18 +12,28 @@ class CartComponent extends Component
     protected $listeners = ['count' => 'cart_count'];
     public function render()
     {
-        $count = Cart::all()->count();
-        return view('livewire.cart-component',['count'=>$count]);
+        if (Auth::check()) {
+            $count = Cart::where('user_id',Auth::user()->id)->count();
+            return view('livewire.cart-component', ['count' => $count]);
+        }else{
+            return view('livewire.cart-component');
+        }
     }
 
-    function mount(){
-        $count = Cart::all()->count();
-        return view('livewire.cart-component',['count'=>$count]);
+    function mount()
+    {
+        if(Auth::check()){
+        $count = Cart::where('user_id', Auth::user()->id)->count();
+        return view('livewire.cart-component', ['count' => $count]);
+        }else{
+            return view('livewire.cart-component');
+        }
     }
 
     public function cart_count()
     {
-        $count = Cart::all()->count();
-        return view('livewire.cart-component',['count'=>$count]);
+        // dd("hello");
+        $count = Cart::where('user_id', Auth::user()->id)->count();
+        return view('livewire.cart-component', ['count' => $count]);
     }
 }

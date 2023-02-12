@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Type;
+use App\Models\NewArrival;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -25,6 +26,11 @@ class ProductController extends Controller
         return view('product_search',compact('products'));
     }
 
+    // public function new_arrival(){
+    //     $new = NewArrival::all();
+    //     return view('')
+    // }
+
     public function product_category(Request $request,$id)
     {
         // dd($id);
@@ -41,6 +47,12 @@ class ProductController extends Controller
     {
         $products = Product::orderBy('id', 'DESC')->get();
         return view('home', compact('products'));
+    }
+
+    public function show_all_products()
+    {
+        $products = Product::orderBy('id', 'DESC')->get();
+        return view('show-all-products', compact('products'));
     }
 
     /**
@@ -137,6 +149,13 @@ class ProductController extends Controller
                 'message' => 'failed'
             ], 424);
         }
+    }
+
+    public function new_arrival_details($slug){
+        // dd($slug);
+        $new = NewArrival::where('slug',$slug)->first();
+        // dd($new);
+        return view('new_products',compact('new'));
     }
 
     /**

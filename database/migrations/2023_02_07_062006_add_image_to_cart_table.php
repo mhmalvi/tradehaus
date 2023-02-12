@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropSizeAndColorFromProductsTable extends Migration
+class AddImageToCartTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class DropSizeAndColorFromProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            // $table->dropColumn('size');
-            $table->dropColumn('product_color');
+        Schema::table('carts', function (Blueprint $table) {
+            $table->string('product_image');
         });
     }
 
@@ -26,9 +25,8 @@ class DropSizeAndColorFromProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            // $table->dropColumn('size');
-            $table->dropColumn('product_color');
+        Schema::table('carts', function (Blueprint $table) {
+            //
         });
     }
 }

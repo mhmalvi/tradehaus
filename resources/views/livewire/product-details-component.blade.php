@@ -1,144 +1,7 @@
 <div>
-    <link rel="icon" href="assets/images/favicon/favicon.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="assets/images/favicon/favicon.png" />
-    <meta name="msapplication-TileImage" content="assets/images/favicon/favicon.png" />
-
-    <link rel="stylesheet" href="assets/css/vendor/ecicons.min.css" />
-
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper-bundle.min.css')}}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery-ui.min.css')}}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/countdownTimer.css')}}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/slick.min.css')}}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/nouislider.css')}}" />
-
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}" />
-    <link rel="stylesheet" id="bg-switcher-css" href="assets/css/backgrounds/bg-4.css">
-
-    <!-- <div class="ec-side-cart-overlay"></div>
-<div id="ec-side-cart" class="ec-side-cart">
-    <div class="ec-cart-inner">
-        <div class="ec-cart-top">
-            <div class="ec-cart-title">
-                <span class="cart_title">My Cart</span>
-                <button class="ec-close">×</button>
-            </div>
-            <ul class="eccart-pro-items">
-                @php
-                $total=0;
-                $cart_items = App\Models\Cart::all();
-                @endphp
-
-                @if(isset($cart_items))
 
 
-                @foreach($cart_items as $cart_item)
-
-                <li>
-
-
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="{{ asset(env('APP_URL').'/'.$cart_item->product->product_image) }}" alt="{{ $cart_item->product_name }}"></a>
-
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">{{ $cart_item->product_name }}</a>
-
-                        <span class="cart-price"><span>${{ $cart_item->product->product_price}}</span> x {{ $cart_item->product_quantity }}</span>
-
-                        @php
-                        $price = $cart_item->product->product_price * $cart_item->product_quantity;
-
-                        $total=$price+$total
-                        @endphp
-                        {{-- {{ $total }} --}}
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="product_quantity" value="{{ $cart_item->product_quantity }}" />
-
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-
-
-                </li>
-
-
-                @endforeach
-                @php
-
-
-
-                @endphp
-
-                @endif
-
-
-                {{-- <li>
-
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/12_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
-                        <span class="cart-price"><span>$64.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/3_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Girls Nylon Purse</a>
-                        <span class="cart-price"><span>$59.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li> --}}
-            </ul>
-        </div>
-        <div class="ec-cart-bottom">
-            <div class="cart-sub-total">
-                <table class="table cart-table">
-                    <tbody>
-                        <tr>
-                            <td class="text-left">Sub-Total :</td>
-                            @if(isset($total))
-
-
-                            <td class="text-right">${{ $total }}</td>
-
-                            @endif
-                        </tr>
-                        <tr>
-                            <td class="text-left">VAT (20%) :</td>
-                            <td class="text-right">$60.00</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">Total :</td>
-                            @if(isset($total))
-
-
-                            <td class="text-right primary-color">${{ $total + 60 }}</td>
-
-                            @endif
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="cart_btn">
-                <a href="cart.html" class="btn btn-primary">View Cart</a>
-                <a href="checkout.html" class="btn btn-secondary">Checkout</a>
-            </div>
-        </div>
-    </div>
-</div> -->
+    {{-- --}}
     <!-- ekka Cart End -->
 
     <!-- Ec breadcrumb start -->
@@ -179,8 +42,6 @@
                     @endif
 
                     <form wire:submit.prevent="add_to_cart">
-
-
                         <div class="single-pro-block">
                             <div class="single-pro-inner">
                                 <div class="row">
@@ -245,29 +106,34 @@
                                             <div class="ec-single-sales">
                                                 <div class="ec-single-sales-inner">
                                                     <div class="ec-single-sales-title">sales accelerators</div>
-                                                    <div class="ec-single-sales-visitor">real time <span>24</span> visitor
-                                                        right now!</div>
+                                                    {{-- <div class="ec-single-sales-visitor">real time <span>24</span> visitor right now!</div> --}}
                                                     <div class="ec-single-sales-progress">
                                                         <span class="ec-single-progress-desc">Hurry up!left {{ $products->product_quantity }} in
                                                             stock</span>
-                                                        <span class="ec-single-progressbar"></span>
+                                                        {{-- <span class="ec-single-progressbar"></span> --}}
                                                     </div>
-                                                    <div class="ec-single-sales-countdown">
+                                                    {{-- <div class="ec-single-sales-countdown">
                                                         <div class="ec-single-countdown"><span id="ec-single-countdown"></span></div>
                                                         <div class="ec-single-count-desc">Time is Running Out!</div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                             @php
-                                            $price = $products->product_price*($products->product_discount/100)
+
                                             @endphp
                                             @if(isset($products->product_discount))
+                                            @php
+                                            $price = $products->product_price*($products->product_discount/100)
 
-                                            <span class="new-price">${{ $price }}</span>
-                                            <span class="old-price">${{ $products->product_price }}</span>
+                                            @endphp
+                                            {{-- <span class="new-price">${{ $price }}</span>
+                                            <span class="old-price">${{ $products->product_price }}</span> --}}
 
                                             @else
-                                            <span class="new-price">${{ $price = $products->product_price }}</span>
+                                            @php
+                                            $price = $products->product_price
+                                            @endphp
+
                                             @endif
                                             <div class="ec-single-price-stoke">
                                                 <div class="ec-single-price">
@@ -292,7 +158,7 @@
                                                 <div class="ec-pro-variation-inner ec-pro-variation-size">
                                                     <span>SIZE</span>
                                                     <div class="ec-pro-variation-content">
-                                                        <ul id="myForm">
+                                                        <ul id="">
 
 
                                                             @if(isset($products->size1))
@@ -305,12 +171,6 @@
 
                                                             {{-- </div> --}}
                                                             @endif
-
-
-
-
-
-
                                                             @if(isset($products->size2))
 
                                                             {{-- <li class="active"><span style="{{ $products->size2 }}" name="size2">{{ $products->size2 }}</span></li> --}}
@@ -362,12 +222,13 @@
                                                 <div class="ec-pro-variation-inner ec-pro-variation-color">
                                                     <span>Color</span>
                                                     <div class="ec-pro-variation-content">
-                                                        <div style="display:flex" class="mb-3 required checkbox-group" id="color-form">
+                                                        <div style="display:flex" class="mb-3 required checkbox-group" id="">
 
 
                                                             <div class="form-group" id="" style="margin-left: 5%;">
 
-                                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_1 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
+
 
 
 
@@ -379,7 +240,8 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_2 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
+
 
 
 
@@ -392,7 +254,8 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_3 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
+
 
 
 
@@ -409,7 +272,8 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color" style=" height: 24px;margin-left: 70%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
+                                                                <input type="radio" name="color_{{ $products->color_4 }}" style=" height: 24px;margin-left: 70%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
+
 
 
 
@@ -458,19 +322,33 @@
                                                 </div>
                                                 @endif
                                             </div>
-                                            <div class="ec-single-qty">
-                                                <div class="qty-plus-minus">
-                                                    <input class="qty-input" type="text" wire:model="product_quantity" name="product_quantity" value="1" />
+                                            {{-- <div id="field1">
+                                                <button type="button" id="sub" class="minus">-</button>
+                                                <input type="number" wire:model="quantity" value="1" min="1" class='quantity' max="10" />
+                                                <button type="button" id="add" class="plus">+</button>
+                                            </div> --}}
+
+                                            <div class="ec-single-qty">                                          
+                                                <div class="" style="width:20%;">
+                                                    <input class="qty-input" style="border: 1px solid #d3d3d3;height: 40px;" type="number" wire:model="product_quantity" />
+
+
+
+                                                    <input type="hidden" wire:model="product_image" value="product_image"/>
+
                                                 </div>
                                                 <div class="ec-single-cart ">
                                                     <button type="submit" class="btn btn-primary">Add To Cart</button>
                                                 </div>
                                                 <div class="ec-single-wishlist">
-                                                    <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+                                                    <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$products->id}},{{$price}})" title="Wishlist"><img src="{{ asset('assets/images/icons/wishlist.svg')}}" class="svg_img pro_svg " alt="" /></a>
+
+
+
                                                 </div>
-                                                <div class="ec-single-quickview">
+                                                {{-- <div class="ec-single-quickview">
                                                     <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="ec-single-social">
                                                 <ul class="mb-0">
@@ -656,10 +534,6 @@
                                             @if($child->status=='A')
                                             <li>
                                                 <div class="ec-sidebar-sub-item"><a href="{{ route('product.category',[$child->id]) }}">{{ $child->category_name }} <span>-{{ $count }}</span></a>
-
-
-
-
                                                 </div>
                                             </li>
                                             @endif
@@ -1486,7 +1360,7 @@
 <!-- Footer navigation panel for responsive display end -->
 
 <!-- Recent Purchase Popup  -->
-<div class="recent-purchase">
+{{-- <div class="recent-purchase">
     <img src="assets/images/product-image/1.jpg" alt="payment image">
     <div class="detail">
         <p>Someone in new just bought</p>
@@ -1494,7 +1368,7 @@
         <p>10 Minutes ago</p>
     </div>
     <a href="javascript:void(0)" class="icon-btn recent-close">×</a>
-</div>
+</div> --}}
 <!-- Recent Purchase Popup end -->
 
 <!-- Cart Floating Button -->
@@ -1614,7 +1488,8 @@
     <div class="ec-right-bottom">
         <div class="ec-box">
             <div class="ec-button rotateBackward">
-                <img class="whatsapp" src="assets/images/common/whatsapp.png" alt="whatsapp icon" />
+                <img class="whatsapp" src="{{ asset('assets/images/common/whatsapp.png') }}" alt="whatsapp icon" />
+
             </div>
         </div>
     </div>
@@ -1701,50 +1576,28 @@
         width: 4%;
 
     }
+
 </style>
-<script>
-    color - form
-
-    $('#myForm input').on('change', function() {
-        alert($('input[name="size"]:checked', '#myForm').val());
-    });
-    $('#color-form input').on('change', function() {
-
-        alert($('input[name="color"]:checked', '#color-form').val());
-
-    });
-
-    // function save() {
-    //     $.ajax({
-    //         type: "post"
-    //         url: ""
-    //     })
-    // }
-
-    $('div.checkbox-group.required :checkbox:checked').length > 0
-</script>
-<script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/popper.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/bootstrap.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/modernizr-3.11.2.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/swiper-bundle.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/nouislider.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/countdownTimer.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/scrollup.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.zoom.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/slick.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/infiniteslidev2.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.sticky-sidebar.js')}}"></script>
-<script src="{{ asset('assets/js/vendor/google-translate.js')}}"></script>
-<script>
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'en'
-        }, 'google_translate_element');
-    }
-</script>
 <!-- Main Js -->
 <script src="{{ asset('assets/js/main.js')}}"></script>
-</div>
+
+<script>
+    var input = $('.quantity')
+        , minValue = parseInt(input.attr('min'))
+        , maxValue = parseInt(input.attr('max'));
+
+
+    $('.plus').on('click', function() {
+        var inputValue = input.val();
+        if (inputValue < maxValue) {
+            input.val(parseInt(inputValue) + 1);
+        }
+    });
+    $('.minus').on('click', function() {
+        var inputValue = input.val();
+        if (inputValue < script maxValue) {
+            input.val(parseInt(inputValue) - 1);
+        }
+    });
+
+</script>

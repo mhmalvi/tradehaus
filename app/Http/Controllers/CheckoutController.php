@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Wishlist extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($total)
     {
-        return view('wishlist');
+        $sub_total = $total;
+        return view('checkout',compact('sub_total'));
     }
 
     /**

@@ -1,7 +1,9 @@
-@extends('layout.master')
+@extends('layout.inner-master')
 
-@section('content')
+@section('inner-content')
 
-<livewire:product-details-component :products='$products'>
+<livewire:product-details-component :products="$products" />
+
+
 
 @endsection
