@@ -39,7 +39,7 @@ class ProductDetailsComponent extends Component
     }
     public function add_to_cart()
     {
-        dd($this->color !== " ");
+        // dd($this->color !== " ");
         // dd($this->product_quantity);
         if ($this->color !== " " || $this->size !== "") {
             if (Auth::check()) {

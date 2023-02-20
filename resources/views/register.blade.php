@@ -175,7 +175,7 @@
                                 </span> --}}
                                 <span class="ec-register-wrap ec-register-btn">
                                     <button class="btn btn-primary" type="submit">Register</button>
-                                    <a style="font-size:1vw;" href="{{ route('login.page') }}" class="btn btn-secondary">Login</a>
+                                    <a style="font-size:1vw;" href="{{ route('login') }}" class="btn btn-secondary">Login</a>
 
                                 </span>
 

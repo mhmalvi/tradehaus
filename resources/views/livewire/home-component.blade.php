@@ -428,7 +428,9 @@
 
                                     <div class="ec-pro-desc">{{ $data->product_short_description }} </div>
                                     <div class="ec-pro-actions">
-                                        <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+                                        <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$data->id}},{{$data->product_price}})" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+
+
                                         <button title="Add To Cart" wire:click="add_to_cart({{$data->id}},{{$price}},1)" class="add-to-cart btn btn-primary">Add To
 
                                             Cart</button>
@@ -1380,7 +1382,7 @@
 <!-- Ec Instagram End -->
 
 <!--  services Section Start -->
-<section class="section ec-services-section">
+{{-- <section class="section ec-services-section">
     <h2 class="d-none">Services</h2>
     <div class="container">
         <div class="row">
@@ -1430,5 +1432,5 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 </div>

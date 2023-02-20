@@ -8,7 +8,8 @@
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Ekka - Ecommerce HTML Template.</title>
+    <title>Trade TradeUs</title>
+
     <meta name="keywords" content="apparel, catalog, clean, ecommerce, ecommerce HTML, electronics, fashion, html eCommerce, html store, minimal, multipurpose, multipurpose ecommerce, online store, responsive ecommerce template, shops" />
     <meta name="description" content="Best ecommerce html template for single and multi vendor store.">
     <meta name="author" content="ashishmaraviya">
@@ -158,7 +159,10 @@
                         <!-- Ec Header Logo Start -->
                         <div class="align-self-center">
                             <div class="header-logo">
-                                <a href="{{ url('/') }}">Trade TradeUs</a>
+                                <a href="{{ url('/') }}">
+                                    <h2>Trade TradeUs</h2>
+                                </a>
+
                             </div>
                         </div>
                         <!-- Ec Header Logo End -->

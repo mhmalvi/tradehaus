@@ -123,7 +123,8 @@
                                             @endphp
                                             @if(isset($products->product_discount))
                                             @php
-                                            $price = $products->product_price*($products->product_discount/100)
+                                            $price = ($products->product_price*$products->product_discount)/100;
+
 
                                             @endphp
                                             {{-- <span class="new-price">${{ $price }}</span>
