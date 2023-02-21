@@ -8,19 +8,32 @@ use Illuminate\Support\Facades\Auth;
 
 class CartPage extends Component
 {
-    public $quantity;
+    public $items;
+    public $product_quantity;
     protected $listeners = ['cart_items' => 'get_cart_items'];
+    protected $rules = [
+        'items.*.product_quantity' => 'required',
+        // 'items.*.content' => 'required',
+    ];
     public function render()
     {
         // $cart_items = Cart::where('user_id', auth()->user()->id)->get();
         // dd(Auth::id());
         if (Auth::check()) {
-            $items = Cart::where('user_id', Auth::user()->id)->get();
-            return view('livewire.cart-page', ['cart_items' => $items]);
-
+            $this->items = Cart::where('user_id', Auth::user()->id)->get();
+            return view('livewire.cart-page', ['cart_items' => $this->items]);
+        } else {
+            return view('livewire.cart-page');
         }
         // return view('livewire.cart-page', ['cart_items' => $cart_items]);
         // }
+    }
+
+    function mount()
+    {
+        if (Auth::check()) {
+            $this->items = Cart::where('user_id', Auth::user()->id)->get();
+        }
     }
 
     public function checkout($sub_total, $cart_items)
@@ -29,7 +42,8 @@ class CartPage extends Component
         return view('checkout', compact('sub_total', 'cart_items'));
     }
 
-    public function changePrice(){
+    public function changePrice()
+    {
         dd("hello");
     }
 
@@ -49,9 +63,5 @@ class CartPage extends Component
         $cart->delete();
         // $this->emit('cart_items');
         $this->emit('count');
-    }
-
-    function mount()
-    {
     }
 }

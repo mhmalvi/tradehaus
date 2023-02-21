@@ -45,14 +45,12 @@
                             @endphp
                             <!-- {{$price}}
                         {{ $total }} -->
-                            <div class="qty-plus-minus" style="width:36%;">
+                            <div class="" style="width:36%;">
 
 
-                                <input class="qty-input" wire:change="updateCart" type="number" wire:model="product_quantity" value="{{ $cart_item->product_quantity }}" />
+                                <!-- <input class="qty-input" wire:change="updateCart" type="number" wire:model="product_quantity" value="{{ $cart_item->product_quantity }}" /> -->
 
-                                {{-- {{ $cart_item->product_quantity }} --}}
-
-                                {{-- <input class="qty-input" style="border: 1px solid #d3d3d3;height: 40px;" type="text" wire:change="updateCart" value="{{ $cart_item->product_quantity }}" /> --}}
+                                <input class="qty-input" wire:model="product_quantity" style="border: 1px solid #d3d3d3;height: 40px;" type="number" wire:change="updateCart" value="{{ $cart_item->product_quantity }}" /> 
 
 
                             </div>
