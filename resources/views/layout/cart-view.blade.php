@@ -1,6 +1,6 @@
-{{-- <livewire:cart-page/> --}}
+<livewire:cart-page/>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
 
         $.ajax({
@@ -188,7 +188,7 @@ echo $data;
         </div>
     </div>
 
-</div>
+</div> -->
 
 
 

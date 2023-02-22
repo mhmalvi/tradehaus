@@ -10,23 +10,42 @@ class CartPage extends Component
 {
     public $items;
     public $product_quantity;
-    protected $listeners = ['cart_items' => 'get_cart_items'];
+    protected $listeners = ['cart_items' => 'mount'];
     protected $rules = [
         'items.*.product_quantity' => 'required',
         // 'items.*.content' => 'required',
     ];
+
+    
     public function render()
     {
         // $cart_items = Cart::where('user_id', auth()->user()->id)->get();
         // dd(Auth::id());
         if (Auth::check()) {
             $this->items = Cart::where('user_id', Auth::user()->id)->get();
+            // dd($this->items);
             return view('livewire.cart-page', ['cart_items' => $this->items]);
         } else {
             return view('livewire.cart-page');
         }
         // return view('livewire.cart-page', ['cart_items' => $cart_items]);
         // }
+    }
+
+    public function increment($id){
+        $quantity = Cart::where('id',$id)->where('user_id',Auth::user()->id)->first();
+        if($quantity){
+            $quantity->increment('product_quantity');
+            // $this->dispatchBrowserEvent('quantity_updated');
+        }
+    }
+
+    public function decrement($id){
+        $quantity = Cart::where('id',$id)->where('user_id',Auth::user()->id)->first();
+        if($quantity){
+            $quantity->decrement('product_quantity');
+            // $this->dispatchBrowserEvent('quantity_updated');
+        }
     }
 
     function mount()

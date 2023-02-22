@@ -899,6 +899,18 @@
 
     </script>
     <script>
+        window.addEventListener('quantity_updated', event => {
+            Swal.fire({
+                // position: 'top-end',
+                icon: 'success'
+                , title: 'Quantity Updated'
+                , showConfirmButton: true,
+                // timer: 1500
+            })
+        });
+
+    </script>
+    <script>
         window.addEventListener('add_to_wishlist', event => {
             Swal.fire({
                 // position: 'top-end',

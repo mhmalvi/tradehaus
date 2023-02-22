@@ -24,7 +24,7 @@
 
                     @endphp
                     @if(isset($cart_items))
-
+<!-- @dump($cart_items) -->
                     @foreach($cart_items as $cart_item)
 
                     <li>
@@ -45,14 +45,13 @@
                             @endphp
                             <!-- {{$price}}
                         {{ $total }} -->
-                            <div class="" style="width:36%;">
+                            <div class="form-group d-flex" style="width:36%;">
 
 
                                 <!-- <input class="qty-input" wire:change="updateCart" type="number" wire:model="product_quantity" value="{{ $cart_item->product_quantity }}" /> -->
-
-                                <input class="qty-input" wire:model="product_quantity" style="border: 1px solid #d3d3d3;height: 40px;" type="number" wire:change="updateCart" value="{{ $cart_item->product_quantity }}" /> 
-
-
+                                <button type="button" wire:click="decrement({{$cart_item->id}})" class="btn">-</button>
+                                <input class="qty-input" style="border: 1px solid #d3d3d3;height: 22px;    margin-top: 12px;width:3rem;" type="text" value="{{$cart_item->product_quantity}}"  /> 
+                                <button type="button" wire:click="increment({{$cart_item->id}})" class="btn">+</button>
                             </div>
                             <button href="javascript:void(0)" wire:click="delete_cart_item({{$cart_item->id}})" class="remove">×</button>
                         </div>
