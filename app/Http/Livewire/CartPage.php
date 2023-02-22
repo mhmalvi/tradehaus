@@ -36,6 +36,7 @@ class CartPage extends Component
         $quantity = Cart::where('id',$id)->where('user_id',Auth::user()->id)->first();
         if($quantity){
             $quantity->increment('product_quantity');
+            $this->emit('cart_items');
             // $this->dispatchBrowserEvent('quantity_updated');
         }
     }
@@ -44,6 +45,7 @@ class CartPage extends Component
         $quantity = Cart::where('id',$id)->where('user_id',Auth::user()->id)->first();
         if($quantity){
             $quantity->decrement('product_quantity');
+            $this->emit('cart_items');
             // $this->dispatchBrowserEvent('quantity_updated');
         }
     }
