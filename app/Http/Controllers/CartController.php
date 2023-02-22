@@ -82,6 +82,19 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function update_quantity(Request $request)
+    {
+        // dd($request->id);
+        $quantity = Cart::find($request->id);
+        $quantity->product_quantity = $request->quantity;
+        $quantity->save();
+    }
+
+    public function get_cart()
+    {
+        $items = Cart::where('user_id', auth()->user()->id)->get();
+        return response()->json($items);
+    }
     public function show($id)
     {
         //
