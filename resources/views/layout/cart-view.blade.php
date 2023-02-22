@@ -1,11 +1,71 @@
 {{-- <livewire:cart-page/> --}}
 
+<script>
+    $(document).ready(function() {
+
+        $.ajax({
+            method: 'GET'
+            , url: "/get-cart"
+            , dataType: "json"
+            , success: function(data) {}
+        }).then((res) => {
+
+            console.log(res)
+            var data = res
+        })
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            , }
+        , });
+
+        <?php
+        for ($index = 1; $index < 20; $index++) {
+            ?>
+            $('#quantity_<?=$index;?>').change(function() {
+                var id = $('#pro_id_<?=$index;?>').val()
+                var quantity = $('#quantity_<?=$index;?>').val();
+                var datastr = 'id=' + id + '&quantity=' + quantity
+
+                $.ajax({
+                    method: "POST"
+                    , url: "/cart-quantity"
+                    , data: datastr
+                    , success: function(data) {
+                        $('#inner_cart').load("#inner_cart")
+
+                    }
+                })
+            }); 
+            <?php
+        } ?>
+
+
+
+    })
+
+</script>
+
 <div>
     <div class="ec-side-cart-overlay"></div>
     <div id="ec-side-cart" class="ec-side-cart">
         <div class="ec-cart-inner">
             <div id="cart">
-<div id="hello"></div>
+{{-- <div id="hello">
+    <?php
+    
+if(isset($_GET['data'])){
+
+$data = $_GET['data'];
+
+echo $data;
+
+}
+
+    ?>
+
+</div> --}}
                 @if( auth()->check())
                 @php
                 $total=0;
@@ -131,48 +191,4 @@
 </div>
 
 
-<script>
-    $(document).ready(function() {
 
-        $.ajax({
-            method: 'GET'
-            , url: "/get-cart",
-            dataType:"json"
-            , success:function(data){
-            }
-        }).then((res)=>{
-            
-            console.log(res)
-        })
-
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-            , }
-        , });
-
-        <?php
-        for ($index = 1; $index < 20; $index++) {
-            ?>
-            $('#quantity_<?=$index;?>').change(function() {
-                var id = $('#pro_id_<?=$index;?>').val()
-                var quantity = $('#quantity_<?=$index;?>').val();
-                var datastr = 'id=' + id + '&quantity=' + quantity
-
-                $.ajax({
-                    method: "POST"
-                    , url: "/cart-quantity"
-                    , data: datastr
-                    , success: function(data) {
-                        $('#inner_cart').load("#inner_cart")
-
-                    }
-                })
-            }); <?php
-        } ?>
-
-        
-
-    })
-
-</script>
