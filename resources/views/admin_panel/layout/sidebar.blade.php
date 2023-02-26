@@ -5,9 +5,10 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Ekka - Admin Dashboard HTML Template.">
+    <meta name="description" content="Trade TradeUs - Admin Dashboard">
 
-    <title>Ekka - Admin Dashboard HTML Template.</title>
+
+    <title>Trade TradeUs - Admin Dashboard</title>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +46,7 @@
 
             <div class="ec-brand">
                 <a href="index.html" title="Ekka">
-                    <img class="ec-brand-icon" src="assets/img/logo/ec-site-logo.png" alt="" />
+                    {{-- <img class="ec-brand-icon" src="assets/img/logo/ec-site-logo.png" alt="" /> --}}
                     <span class="ec-brand-name text-truncate">TradeUs</span>
                 </a>
             </div>
@@ -176,7 +177,8 @@
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('new.arrival') }}">
+                                    <a class="sidenav-item-link" href="{{ route('admin.new_arrival') }}">
+
                                         <span class="nav-text">New Arrival</span>
                                     </a>
                                 </li>

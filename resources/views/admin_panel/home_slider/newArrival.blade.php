@@ -18,10 +18,10 @@
             <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
                 <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
         </div>
-        <div>
+        {{-- <div>
             <a href="product-list.html" class="btn btn-primary"> View All
             </a>
-        </div>
+        </div> --}}
     </div>
     <div class="row">
         <div class="col-12">
@@ -38,27 +38,38 @@
 
                 <div class="card-body">
                     <div class="row ec-vendor-uploads">
-                        <form action="{{ route('store.arrival') }}" method="post" enctype="multipart/form-data">
+                        @if(isset($product))
 
-                            @csrf
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="ec-vendor-img-upload">
-                                        <div class="ec-vendor-main-img">
-                                            <div class="avatar-upload">
-                                                <div class="avatar-edit">
-                                                    <input type='file' name="image" id="imageUpload" class="ec-image-upload" accept=".png, .jpg, .jpeg" />
+                        <form action="{{ route('admin.update_arrival') }}" method="post" enctype="multipart/form-data">
+                            @method('PUT')
 
-                                                    <label for="imageUpload"><img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" /></label>
-                                                </div>
-                                                <div class="avatar-preview ec-preview">
-                                                    <div class="imagePreview ec-div-preview">
-                                                        <img class="ec-image-preview" name="product_image_1" src="assets/img/products/vender-upload-preview.jpg" alt="edit" />
+                            @else
+                            <form action="{{ route('store.arrival') }}" method="post" enctype="multipart/form-data">
+                                @endif
+                                @csrf
+                                @if(isset($product))
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                @endif
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="ec-vendor-img-upload">
+                                            <div class="ec-vendor-main-img">
+                                                <div class="form-group">
+                                                    @if(isset($product))
+                                                    <div class="avatar-edit">
+                                                        <input type="file" class="form-control" name="image" value="{{ $product->image }}" />
 
+                                                        <img style=" width: 43%;margin-top:5px;" src="{{ asset(env('APP_URL').'/'. $product->image)}}" alt="">
                                                     </div>
+                                                    @else
+                                                    <div class="avatar-edit">
+                                                        <input type="file" class="form-control" name="image" />
+                                                        <img style="width: 43%;" src="" alt="">
+                                                    </div>
+
+                                                    @endif
                                                 </div>
-                                            </div>
-                                            {{-- <div class="thumb-upload-set colo-md-12">
+                                                {{-- <div class="thumb-upload-set colo-md-12">
                                                     <div class="thumb-upload">
                                                         <div class="thumb-edit">
                                                             <input type='file' name="product_image_2" id="thumbUpload01" class="ec-image-upload" accept=".png, .jpg, .jpeg" />
@@ -130,17 +141,26 @@
                                                         </div>
                                                     </div>
                                                 </div> --}}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="ec-vendor-upload-detail">
-                                        <div class="row g-3">
-                                            <div class="col-md-6">
-                                                <label for="inputEmail4" class="form-label">Product name</label>
-                                                <input type="text" name="title" class="form-control slug-title" id="inputEmail4" required>
-                                            </div>
-                                            {{-- <div class="col-md-6">
+                                    <div class="col-lg-8">
+                                        <div class="ec-vendor-upload-detail">
+                                            <div class="row g-3">
+
+                                                @if(isset($product))
+                                                <div class="col-md-6">
+                                                    <label for="inputEmail4" class="form-label">Product name</label>
+                                                    <input type="text" name="title" class="form-control slug-title" id="inputEmail4" value="{{ $product->title }}">
+                                                </div>
+                                                @else
+                                                <div class="col-md-6">
+                                                    <label for="inputEmail4" class="form-label">Product name</label>
+                                                    <input type="text" name="title" class="form-control slug-title" id="inputEmail4" required>
+                                                </div>
+
+                                                @endif
+                                                {{-- <div class="col-md-6">
                                                     <label class="form-label">Select Categories</label>
                                                     <select name="category_id" id="Categories" class="form-select">
                                                         @php
@@ -152,21 +172,21 @@
                                                         @foreach($parent_categories as $categories)
 
                                                         <optgroup label="{{ $categories->category_name }}">
-                                            @php
-                                            $child_categories = App\Models\Category::where('parent_category',$categories->id)->get();
+                                                @php
+                                                $child_categories = App\Models\Category::where('parent_category',$categories->id)->get();
 
-                                            @endphp
-                                            @foreach($child_categories as $child)
+                                                @endphp
+                                                @foreach($child_categories as $child)
 
-                                            <option value="{{ $child->id }}">{{ $child->category_name }}</option>
+                                                <option value="{{ $child->id }}">{{ $child->category_name }}</option>
 
 
-                                            @endforeach
-                                            </optgroup>
-                                            @endforeach
-                                            </select>
-                                        </div> --}}
-                                        {{-- <div class="col-md-8 mb-25 mt-4">
+                                                @endforeach
+                                                </optgroup>
+                                                @endforeach
+                                                </select>
+                                            </div> --}}
+                                            {{-- <div class="col-md-8 mb-25 mt-4">
                                                     <div class="form-check form-check-inline">
                                                         <label>Is special</label>
 
@@ -205,171 +225,235 @@
 
                                                 </div> --}}
 
-                                        <div class="col-md-12">
-                                            <label for="" class="form-label">Product Code Name</label>
-                                            <input type="text" name="code_name" class="form-control" id="" required>
-                                        </div>
+                                            @if(isset($product))
 
-                                        <div class="col-md-12">
-                                            <label for="" class="col-12 col-form-label">Slug</label>
-                                            <div class="col-12">
-                                                <input id="" name="slug" class="form-control here set-slug" type="string" required>
-
+                                            <div class="col-md-12">
+                                                <label for="" class="form-label">Product Code Name</label>
+                                                <input type="text" name="code_name" class="form-control" id="" value="{{ $product->code_name }}">
                                             </div>
-                                        </div>
-                                        {{-- <div class="col-md-12">
+                                            @else
+                                            <div class="col-md-12">
+                                                <label for="" class="form-label">Product Code Name</label>
+                                                <input type="text" name="code_name" class="form-control" id="" required>
+                                            </div>
+                                            @endif
+                                            @if(isset($product))
+
+                                            <div class="col-md-12">
+                                                <label for="" class="col-12 col-form-label">Slug</label>
+                                                <div class="col-12">
+                                                    <input id="" name="slug" class="form-control here set-slug" value="{{ $product->slug }}" type="string">
+
+                                                </div>
+                                            </div>
+                                            @else
+                                            <div class="col-md-12">
+                                                <label for="" class="col-12 col-form-label">Slug</label>
+                                                <div class="col-12">
+                                                    <input id="" name="slug" class="form-control here set-slug" type="string" required>
+
+                                                </div>
+                                            </div>
+                                            @endif
+                                            {{-- <div class="col-md-12">
                                                     <label for="" class="col-12 col-form-label">Discount</label>
                                                     <div class="col-12">
                                                         <input id="product_discount" name="product_discount" class="form-control here " type="text">
 
                                                     </div>
                                                 </div> --}}
+                                            @if(isset($product))
+                                            <div class="col-md-12">
+                                                <label class="form-label">Short Description</label>
+                                                <textarea class="form-control" name="short_description" rows="2" value="{{ $product->short_description }}"></textarea>
 
-                                        <div class="col-md-12">
-                                            <label class="form-label">Short Description</label>
-                                            <textarea class="form-control" name="short_description" rows="2" required></textarea>
+
+                                            </div>
+                                            @else
+                                            <div class="col-md-12">
+                                                <label class="form-label">Short Description</label>
+                                                <textarea class="form-control" name="short_description" rows="2" required></textarea>
 
 
-                                        </div>
-                                        {{-- <div class="col-md-4 mb-25">
+                                            </div>
+                                            @endif
+                                            {{-- <div class="col-md-4 mb-25">
                                                     <label class="form-label">Colors</label>
                                                     <input type="color" name="color_1" class="form-control form-control-color" id="exampleColorInput1" value="#ff6191" title="Choose your color">
                                                     <input type="color" name="color_2" class="form-control form-control-color" id="exampleColorInput2" value="#33317d" title="Choose your color">
                                                     <input type="color" name="color_3" class="form-control form-control-color" id="exampleColorInput3" value="#56d4b7" title="Choose your color">
                                                     <input type="color" name="color_4" class="form-control form-control-color" id="exampleColorInput4" value="#009688" title="Choose your color">
                                                 </div> --}}
-                                        <div class="col-md-8 mb-25">
-                                            <label class="form-label">Size</label>
-                                            <div class="form-checkbox-box">
-                                                <div class="form-check form-check-inline">
-                                                    <input type="checkbox" name="size1" value="S">
-                                                    <label>S</label>
+                                            {{-- <div class="col-md-8 mb-25">
+                                                <label class="form-label">Size</label>
+                                                <div class="form-checkbox-box">
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" name="size1" value="S">
+                                                        <label>S</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" name="size2" value="M">
+                                                        <label>M</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" name="size3" value="L">
+                                                        <label>L</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" name="size4" value="XL">
+                                                        <label>XL</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" name="size5" value="XXL">
+                                                        <label>XXL</label>
+                                                    </div>
                                                 </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input type="checkbox" name="size2" value="M">
-                                                    <label>M</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input type="checkbox" name="size3" value="L">
-                                                    <label>L</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input type="checkbox" name="size4" value="XL">
-                                                    <label>XL</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input type="checkbox" name="size5" value="XXL">
-                                                    <label>XXL</label>
-                                                </div>
+                                            </div> --}}
+                                            @if(isset($product))
+                                            <div class="col-md-6">
+                                                <label class="form-label">Price <span>( In USD
+                                                        )</span></label>
+                                                <input type="number" name="price" class="form-control" id="price1" value="{{ $product->price }}" required>
+
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Price <span>( In USD
-                                                    )</span></label>
-                                            <input type="number" name="price" class="form-control" id="price1" required>
+                                            @else
+                                            <div class="col-md-6">
+                                                <label class="form-label">Price <span>( In USD
+                                                        )</span></label>
+                                                <input type="number" name="price" class="form-control" id="price1" required>
 
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Quantity</label>
-                                            <input type="number" name="quantity" class="form-control" id="quantity1">
+                                            </div>
+                                            @endif
+                                            @if(isset($product))
+                                            <div class="col-md-6">
+                                                <label class="form-label">Quantity</label>
+                                                <input type="number" name="quantity" class="form-control" value="{{ $product->quantity }}" id="quantity1">
 
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="form-label">Full Details</label>
-                                            {{-- <textarea class="form-control" name="product_details" rows="4"></textarea> --}}
-                                            <textarea class="ckeditor form-control" name="full_details"></textarea>
+                                            </div>
+                                            @else
+                                            <div class="col-md-6">
+                                                <label class="form-label">Quantity</label>
+                                                <input type="number" name="quantity" class="form-control" id="quantity1">
+
+                                            </div>
+                                            @endif
+                                            @if(isset($product))
+
+                                            <div class="col-md-12">
+                                                <label class="form-label">Full Details</label>
+                                                {{-- <textarea class="form-control" name="product_details" rows="4"></textarea> --}}
+                                                <textarea class="ckeditor form-control" name="full_details">{{ $product->full_details }}</textarea>
 
 
 
 
-                                        </div>
-                                        {{-- <div class="col-md-12">
+
+                                            </div>
+                                            @else
+                                            <div class="col-md-12">
+                                                <label class="form-label">Full Details</label>
+                                                {{-- <textarea class="form-control" name="product_details" rows="4"></textarea> --}}
+                                                <textarea class="ckeditor form-control" name="full_details"></textarea>
+
+
+
+
+                                            </div>
+                                            @endif
+                                            {{-- <div class="col-md-12">
                                                     <label class="form-label">Product Tags <span>( Type and
                                                             make comma to separate tags )</span></label>
                                                     <input type="text" class="form-control" id="group_tag" name="tags" value="" placeholder="" data-role="tagsinput" />
                                                 </div> --}}
-                                        <div class="col-md-12">
-                                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                            @if(isset($product))
+
+                                            <div class="col-md-12 mt-3">
+                                                <button type="submit" name="submit" class="btn btn-primary">Update</button>
+
+                                            </div>
+                                            @else
+                                            <div class="col-md-12 mt-3">
+
+                                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-12">
-                                        <div class="card card-default">
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table id="responsive-data-table" class="table" style="width:100%">
-                                                        <thead>
-                                                            <tr>
-                                                                {{-- <th>Product</th> --}}
-                                                                <th>Title</th>
-                                                                <th>Price</th>
-                                                                {{-- @if(isset($products->product_discount)) --}}
-                                                                <th>Offer</th>
-                                                                {{-- @endif --}}
-                                                                <th>Purchased</th>
-                                                                <th>Stock</th>
-                                                                <th>Status</th>
-                                                                {{-- <th>Date</th> --}}
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
+                                    <div class="row mt-4">
+                                        <div class="col-12">
+                                            <div class="card card-default">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table id="responsive-data-table" class="table" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    {{-- <th>Product</th> --}}
+                                                                    <th>Title</th>
+                                                                    <th>Price</th>
+                                                                    {{-- @if(isset($products->product_discount)) --}}
+                                                                    <th>Offer</th>
+                                                                    {{-- @endif --}}
+                                                                    <th>Purchased</th>
+                                                                    <th>Stock</th>
+                                                                    <th>Status</th>
+                                                                    {{-- <th>Date</th> --}}
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
 
-                                                        <tbody>
-                                                            @php
-                                                            $products = App\Models\NewArrival::all();
-
-                                                            @endphp
-                                                            @foreach($products as $product)
-                                                            <tr>
+                                                            <tbody>
                                                                 @php
-                                                                $base = env('APP_URL');
+                                                                $products = App\Models\NewArrival::all();
+
                                                                 @endphp
-                                                                <td>{{ $product->title }}</td>
-                                                                <td>{{ $product->price }}</td>
+                                                                @foreach($products as $product)
+                                                                <tr>
+                                                                    @php
+                                                                    $base = env('APP_URL');
+                                                                    @endphp
+                                                                    <td>{{ $product->title }}</td>
+                                                                    <td>{{ $product->price }}</td>
 
-                                                                <td></td>
-                                                                {{-- @if(isset($products->product_discount)) --}}
+                                                                    <td></td>
+                                                                    {{-- @if(isset($products->product_discount)) --}}
 
-                                                                <td></td>
+                                                                    <td></td>
 
-                                                                {{-- @endif --}}
-                                                                <td>{{ $product->quantity }}</td>
+                                                                    {{-- @endif --}}
+                                                                    <td>{{ $product->quantity }}</td>
 
-                                                                <td></td>
-                                                                <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
 
-                                                                {{-- <td>2021-10-30</td> --}}
-                                                                <td>
-                                                                    <div class="btn-group mb-1">
-                                                                        <button type="button" class="btn btn-outline-success">Info</button>
-                                                                        <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                                                            <span class="sr-only">Info</span>
-                                                                        </button>
+                                                                    {{-- <td>2021-10-30</td> --}}
+                                                                    <td>
+                                                                        <div class="btn-group mb-1">
+                                                                            <button type="button" class="btn btn-outline-success">Info</button>
+                                                                            <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                                                                <span class="sr-only">Info</span>
+                                                                            </button>
 
-                                                                        <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="{{ route('edit.product',['id'=>$product->id]) }}">Edit</a>
+                                                                            <div class="dropdown-menu">
+                                                                                <a class="dropdown-item" href="{{ route('admin.edit_arrival',['slug'=>$product->slug]) }}">Edit</a>
+                                                                                <a class="dropdown-item" href="{{ route('admin.delete_arrival',['id'=>$product->id]) }}">Delete</a>
 
-
-                                                                            <a class="dropdown-item" href="{{ route('edit.product',['id'=>$product->id]) }}">Delete</a>
-
-
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            @endforeach
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
 
-                                                        </tbody>
-                                                    </table>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </div>
-                        </form>
+                                </div>
+                            </form>
                     </div>
 
                 </div>

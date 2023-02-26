@@ -48,8 +48,12 @@ Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('p
 // Route::get('admin',[AdminCategoryController::class,'index']);
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    // Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('new.arrival');
-    // Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
+    Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('admin.new_arrival');
+    Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
+    Route::put('/new-arrival', [NewArrivalController::class, 'update'])->name('admin.update_arrival');
+    Route::get('/new-arrival/{slug}', [NewArrivalController::class, 'edit'])->name('admin.edit_arrival');
+    Route::get('/new-arrival/{id}', [NewArrivalController::class, 'destroy'])->name('admin.delete_arrival');
+
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');
     Route::get('/edit-product', [AdminProductController::class, 'edit'])->name('edit.product');

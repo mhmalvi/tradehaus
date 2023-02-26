@@ -36,8 +36,9 @@ class NewArrivalController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
 
         ]);
         $arrival = new NewArrival();
@@ -81,9 +82,11 @@ class NewArrivalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $product = NewArrival::where('slug', $slug)->first();
+        // dd($product);
+        return view('admin_panel.home_slider.newArrival', compact('product'));
     }
 
     /**
@@ -93,9 +96,29 @@ class NewArrivalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // dd($request->all());
+        $arrival = NewArrival::find($request->id);
+        $arrival->title = $request->title;
+        $arrival->short_description = $request->short_description;
+        $arrival->price = $request->price;
+        $arrival->quantity = $request->quantity;
+        $arrival->color = $request->color;
+        $arrival->size = $request->size;
+        $arrival->slug = $request->slug;
+        $arrival->full_details = $request->full_details;
+        $arrival->code_name = $request->code_name;
+        if ($request->file('image')) {
+            $fileName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('assets/img/newArrival'), $fileName);
+            $file_path = "assets/img/newArrival/" . $fileName;
+            $arrival->image = $file_path;
+        }
+        $update = $arrival->save();
+        if ($update) {
+            return redirect()->back()->with('message', 'updated successfully');
+        }
     }
 
     /**
@@ -104,8 +127,13 @@ class NewArrivalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        dd($request->id);
+        $arrival = NewArrival::find($request->id);
+        $delete = $arrival->delete();
+        if($delete){
+            return redirect()->back()->with('message','Deleted successfully');
+        }
     }
 }
