@@ -88,7 +88,7 @@ Route::get('blog-all', [BlogController::class, 'index'])->name('blog.view');
 Route::get('blog-details', [BlogController::class, 'details'])->name('blog.details');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/wishlist-store', [WishlistController::class, 'store'])->name('wishlist.store');
-Route::get('/new-arrival',[ProductController::class,'new_arrival_details'])->name('new.arrival');
+Route::get('/new-arrival/{slug}',[ProductController::class,'new_arrival_details'])->name('new.arrival');
 
 Route::post('/cart-quantity',[CartController::class, 'update_quantity']);
 

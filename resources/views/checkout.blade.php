@@ -75,7 +75,7 @@
                 <!-- checkout content Start -->
                 <div class="ec-checkout-content">
                     <div class="ec-checkout-inner">
-                        <div style="padding: 30px;border: 1px solid #ededed;" class="ec-checkout-wrap margin-bottom-30">
+                        {{-- <div style="padding: 30px;border: 1px solid #ededed;" class="ec-checkout-wrap margin-bottom-30">
 
 
                             <div class="ec-checkout-block ec-check-new">
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> --}}
                         @if(auth()->check())
 
                         @php
@@ -144,7 +144,7 @@
                                     <h3 style="margin-bottom: 21px;" class="ec-checkout-title">Billing Details</h3>
 
                                     <div class="ec-bl-block-content">
-                                        <div class="ec-check-subtitle">Checkout Options</div>
+                                        {{-- <div class="ec-check-subtitle">Checkout Options</div>
                                         <span class="ec-bill-option">
                                             <span>
                                                 <input type="radio" id="bill1" name="radio-group">
@@ -154,7 +154,7 @@
                                                 <input type="radio" id="bill2" name="radio-group" checked>
                                                 <label for="bill2">I want to use new address</label>
                                             </span>
-                                        </span>
+                                        </span> --}}
                                         <div class="ec-check-bill-form">
 
                                             <span class="ec-bill-wrap ec-bill-half">
@@ -292,7 +292,7 @@
 
                             </div>
                             <span class="ec-check-order-btn">
-                                <button class="btn btn-primary place_order" type="button" href="#">Place Order</button>
+                                <button class="btn btn-primary place_order m-auto" type="button" href="#">Place Order</button>
                             </span>
                         </form>
 
@@ -369,7 +369,8 @@
                                         </div>
                                         <div class="ec-pro-content">
                                             <h5 class="ec-pro-title"><a href="product-left-sidebar.html">{{ $item->product_name }}</a></h5>
-                                            <div class="ec-pro-rating">
+                                            <div class="ec-pro-rating" style="margin-left: -42%;">
+
                                                 <i class="ecicon eci-star fill"></i>
                                                 <i class="ecicon eci-star fill"></i>
                                                 <i class="ecicon eci-star fill"></i>
@@ -407,7 +408,7 @@
                 </div>
                 <div class="ec-sidebar-wrap ec-checkout-del-wrap">
                     <!-- Sidebar Summary Block -->
-                    <div class="ec-sidebar-block">
+                    {{-- <div class="ec-sidebar-block">
                         <div class="ec-sb-title">
                             <h3 class="ec-sidebar-title">Delivery Method</h3>
                         </div>
@@ -435,10 +436,10 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Sidebar Summary Block -->
                 </div>
-                <div class="ec-sidebar-wrap ec-checkout-pay-wrap">
+                {{-- <div class="ec-sidebar-wrap ec-checkout-pay-wrap">
                     <!-- Sidebar Payment Block -->
                     <div class="ec-sidebar-block">
                         <div class="ec-sb-title">
@@ -466,7 +467,7 @@
                         </div>
                     </div>
                     <!-- Sidebar Payment Block -->
-                </div>
+                </div> --}}
                 <div class="ec-sidebar-wrap ec-check-pay-img-wrap">
                     <!-- Sidebar Payment Block -->
                     <div class="ec-sidebar-block">

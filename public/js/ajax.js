@@ -8,7 +8,6 @@ $(document).ready(function () {
     });
 });
 
-
 $(".place_order").click(function () {
     console.log("here");
     var first_name = $("#first_name").val();
@@ -22,35 +21,77 @@ $(".place_order").click(function () {
     var sub_total = $("#sub_total").val();
     var delivery_charge = $("#delivery_charge").val();
     var total_amount = $("#total_amount").val();
-    var credential = {
-        first_name: first_name,
-        last_name: last_name,
-        city: city,
-        address: address,
-        post_code: post_code,
-        country: country,
-        region: region,
-        items: items,
-        sub_total: sub_total,
-        delivery_charge: delivery_charge,
-        total_amount: total_amount,
-    };
-    $.ajax({
-        method: "POST",
-        url: "/place-order",
-        data: credential,
-        success: function (data) {
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Ordered",
-                showConfirmButton: false,
-                // timer: 1500,
-            });
-        },
-    }).then((res) => {
-        console.log(res);
-        window.location.href = "/";
-        
-    });
+    console.log(city)
+    if (first_name == "") {
+        Swal.fire({
+            title: "First name field required",
+            showClass: {
+                popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+            },
+        });
+    } else if (last_name == "") {
+        Swal.fire({
+            title: "Last name field required",
+            showClass: {
+                popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+            },
+        });
+    } else if (city == null) {
+        Swal.fire({
+            title: "City field required",
+            showClass: {
+                popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+            },
+        });
+    } else if (country == null) {
+        Swal.fire({
+            title: "Country field required",
+            showClass: {
+                popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+            },
+        });
+    } else {
+        var credential = {
+            first_name: first_name,
+            last_name: last_name,
+            city: city,
+            address: address,
+            post_code: post_code,
+            country: country,
+            region: region,
+            items: items,
+            sub_total: sub_total,
+            delivery_charge: delivery_charge,
+            total_amount: total_amount,
+        };
+        $.ajax({
+            method: "POST",
+            url: "/place-order",
+            data: credential,
+            success: function (data) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Ordered",
+                    showConfirmButton: false,
+                    // timer: 1500,
+                });
+            },
+        }).then((res) => {
+            console.log(res);
+            window.location.href = "/";
+        });
+    }
 });

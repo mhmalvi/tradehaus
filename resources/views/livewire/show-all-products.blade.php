@@ -40,15 +40,15 @@
                                             <div class="ec-pro-option">
                                                 <div class="ec-pro-opt-inner">
                                                     <div class="ec-pro-color">
-                                                        <ul class="ec-opt-swatch ec-change-img">
+                                                        {{-- <ul class="ec-opt-swatch ec-change-img">
                                                             <li class="active">
                                                                 <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
-                                                                    {{-- <span style="background-color:#ef7ca3;"></span> --}}
+                                                                    <span style="background-color:#ef7ca3;"></span>
                                                                 </a>
                                                             </li>
 
 
-                                                        </ul>
+                                                        </ul> --}}
                                                     </div>
                                                     {{-- <div class="ec-pro-compare">
                                                 <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="{{ env('APP_URL').'/'. $product->product_image }}" class="svg_img pro_svg" alt="" />

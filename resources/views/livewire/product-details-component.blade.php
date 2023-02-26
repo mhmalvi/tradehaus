@@ -68,7 +68,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="single-nav-thumb">
+                                            {{-- <div class="single-nav-thumb">
                                                 <div class="single-slide">
                                                     <img class="img-responsive" src="assets/images/product-image/9_1.jpg" alt="">
                                                 </div>
@@ -84,7 +84,7 @@
                                                 <div class="single-slide">
                                                     <img class="img-responsive" src="assets/images/product-image/9_3.jpg" alt="">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="single-pro-desc">
@@ -166,7 +166,8 @@
                                                             {{-- <li class="active"><span style="{{ $products->size1 }}" name="size1">{{ $products->size1 }}</span></li> --}}
                                                             {{-- <div class="form-check form-check-inline"> --}}
                                                             {{-- <div class="form-group" style="display:flex;"> --}}
-                                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size1 }}">
+                                                            <input type="radio" class="size-radio" wire:model="size" value="{{ $products->size1 }}">
+
 
                                                             <label class=" mr-3">{{ $products->size1 }}</label>
 
@@ -175,7 +176,8 @@
                                                             @if(isset($products->size2))
 
                                                             {{-- <li class="active"><span style="{{ $products->size2 }}" name="size2">{{ $products->size2 }}</span></li> --}}
-                                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size2 }}">
+                                                            <input type="radio" class="size-radio" wire:model="size" value="{{ $products->size2 }}">
+
 
                                                             <label class=" mr-3">{{ $products->size2 }}</label>
 
@@ -185,7 +187,8 @@
                                                             @if(isset($products->size3))
 
                                                             {{-- <li class="active"><span style="{{ $products->size3 }}" name="size3">{{ $products->size3 }}</span></li> --}}
-                                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size3 }}">
+                                                            <input type="radio" class="size-radio" wire:model="size" value="{{ $products->size3 }}">
+
 
 
                                                             <label class=" mr-3">{{ $products->size3 }}</label>
@@ -196,7 +199,8 @@
                                                             @if(isset($products->size4))
 
                                                             {{-- <li class="active"><span style="{{ $products->size4 }}" name="size4">{{ $products->size4 }}</span></li> --}}
-                                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size4 }}">
+                                                            <input type="radio" class="size-radio" wire:model="size" value="{{ $products->size4 }}">
+
 
 
                                                             <label class=" mr-3">{{ $products->size4 }}</label>
@@ -207,7 +211,7 @@
                                                             @if(isset($products->size5))
 
                                                             {{-- <li class="active"><span name="size5" style="{{ $products->size5 }}">{{ $products->size5 }}</span></li> --}}
-                                                            <input type="radio" class="size-radio" name="size" value="{{ $products->size5 }}">
+                                                            <input type="radio" class="size-radio" wire:model="size" value="{{ $products->size5 }}">
 
 
                                                             <label class=" mr-3">{{ $products->size5 }}</label>
@@ -228,7 +232,7 @@
 
                                                             <div class="form-group" id="" style="margin-left: 5%;">
 
-                                                                <input type="radio" name="color_{{ $products->color_1 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
+                                                                <input type="radio" wire:model="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_1 }}" title="Choose your color" />
 
 
 
@@ -241,7 +245,8 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color_{{ $products->color_2 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
+                                                                <input type="radio" wire:model="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_2 }}" title="Choose your color" />
+
 
 
 
@@ -255,7 +260,9 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color_{{ $products->color_3 }}" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
+                                                                <input type="radio" wire:model="color" style="margin-left: 70%;height: 24px;" id="color" value="{{ $products->color_3 }}" title="Choose your color" />
+
+
 
 
 
@@ -273,7 +280,9 @@
                                                             <div class="form-group" style="margin-left: 5%;">
 
 
-                                                                <input type="radio" name="color_{{ $products->color_4 }}" style=" height: 24px;margin-left: 70%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
+                                                                <input type="radio" wire:model="color" style=" height: 24px;margin-left: 70%;" id="color" value="{{ $products->color_4 }}" title="Choose your color" />
+
+
 
 
 

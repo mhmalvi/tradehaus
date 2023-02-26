@@ -924,6 +924,71 @@
     </script>
 
     <script>
+        window.addEventListener('not_available', event => {
+
+            Swal.fire({
+                title: 'Product not available in stock'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+    <script>
+        window.addEventListener('color', event => {
+
+
+            Swal.fire({
+                title: 'Please select color'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+    <script>
+        window.addEventListener('size', event => {
+
+
+            Swal.fire({
+                title: 'Please select size'
+
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+    <script>
+        window.addEventListener('over_quantity', event => {
+
+            Swal.fire({
+                title: 'The number of products is not available'
+
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
+    <script>
         window.addEventListener('login', event => {
             Swal.fire({
                 title: 'Please login first'

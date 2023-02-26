@@ -29,23 +29,27 @@ class ShowAllProducts extends Component
         // dd($quantity);
         if (Auth::check()) {
             $product = Product::find($product_id);
-            $image = $product->product_image;
-            $cart_item = Cart::where('product_id', $product_id)->exists();
-            if ($cart_item) {
-                $this->dispatchBrowserEvent('item_exists');
+            if ($product->product_quantity > 0) {
+                $image = $product->product_image;
+                $cart_item = Cart::where('product_id', $product_id)->exists();
+                if ($cart_item) {
+                    $this->dispatchBrowserEvent('item_exists');
+                } else {
+                    $cart = new Cart();
+                    $cart->product_name = $product->product_name;
+                    $cart->product_price = $product_price;
+                    $cart->product_quantity = $quantity;
+                    $cart->product_image = $image;
+                    $cart->product_id = $product_id;
+                    $cart->user_id = Auth::user()->id;
+                    $cart->save();
+                    // Alert::success('Congrats', 'Added to cart');
+                    $this->dispatchBrowserEvent('add_to_cart');
+                    $this->emit('cart_items');
+                    $this->emit('count');
+                }
             } else {
-                $cart = new Cart();
-                $cart->product_name = $product->product_name;
-                $cart->product_price = $product_price;
-                $cart->product_quantity = $quantity;
-                $cart->product_image = $image;
-                $cart->product_id = $product_id;
-                $cart->user_id = Auth::user()->id;
-                $cart->save();
-                // Alert::success('Congrats', 'Added to cart');
-                $this->dispatchBrowserEvent('add_to_cart');
-                $this->emit('cart_items');
-                $this->emit('count');
+                $this->dispatchBrowserEvent('not_available');
             }
         } else {
             $this->dispatchBrowserEvent('login');

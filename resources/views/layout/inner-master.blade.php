@@ -711,6 +711,57 @@
 
     </script>
     <script>
+        window.addEventListener('color', event => {
+
+
+            Swal.fire({
+                title: 'Please select color'
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+    <script>
+        window.addEventListener('over_quantity', event => {
+            Swal.fire({
+                title: 'The number of products is not available'
+
+
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
+    <script>
+        window.addEventListener('size', event => {
+
+
+            Swal.fire({
+                title: 'Please select size'
+
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
+    <script>
         window.addEventListener('add_to_wishlist', event => {
             Swal.fire({
                 // position: 'top-end',
@@ -737,6 +788,23 @@
         });
 
     </script>
+    <script>
+        window.addEventListener('not_available', event => {
+
+            Swal.fire({
+                title: 'Product not available in stock'
+
+                , showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                }
+                , hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+
+    </script>
+
     <script>
         window.addEventListener('fields', event => {
             Swal.fire({
