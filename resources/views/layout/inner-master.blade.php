@@ -14,11 +14,17 @@
     <meta name="description" content="Best ecommerce html template for single and multi vendor store.">
     <meta name="author" content="ashishmaraviya">
 
-    <link rel="icon" href="assets/images/favicon/favicon.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="assets/images/favicon/favicon.png" />
-    <meta name="msapplication-TileImage" content="assets/images/favicon/favicon.png" />
+    <link rel="icon" href="{{ asset('assets/images/favicon/favicon.png') }}" sizes="32x32" />
 
-    <link rel="stylesheet" href="assets/css/vendor/ecicons.min.css" />
+
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/favicon/favicon.png') }}" />
+
+    <meta name="msapplication-TileImage" content="{{ asset('assets/images/favicon/favicon.png') }}" />
+
+
+
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/ecicons.min.css') }}" />
+
 
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper-bundle.min.css')}}" />
@@ -38,7 +44,7 @@
 
 
     <link rel="stylesheet" id="bg-switcher-css" href="{{ asset('assets/css/backgrounds/bg-4.css')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
 
     @livewireStyles

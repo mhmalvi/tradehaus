@@ -22,6 +22,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\OfferController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
 
@@ -93,6 +95,7 @@ Route::get('blog-details', [BlogController::class, 'details'])->name('blog.detai
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/wishlist-store', [WishlistController::class, 'store'])->name('wishlist.store');
 Route::get('/new-arrival/{slug}',[ProductController::class,'new_arrival_details'])->name('new.arrival');
+Route::get('/offer',[OfferController::class,'index'])->name('offer.index');
 
 Route::post('/cart-quantity',[CartController::class, 'update_quantity']);
 
@@ -121,14 +124,14 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 require __DIR__ . '/auth.php';
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

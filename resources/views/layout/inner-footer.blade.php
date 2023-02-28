@@ -75,7 +75,8 @@
                                     <li class="ec-footer-link"><a href="#">Brands</a></li>
                                     <li class="ec-footer-link"><a href="offer.html">Gift Certificates</a></li>
                                     <li class="ec-footer-link"><a href="#">Affiliate</a></li>
-                                    <li class="ec-footer-link"><a href="offer.html">Specials</a></li>
+                                    <li class="ec-footer-link"><a href="{{ route('offer.index') }}">Specials</a></li>
+
 
                                 </ul>
                             </div>

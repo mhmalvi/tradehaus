@@ -49,7 +49,10 @@
 
 
                                 <!-- <input class="qty-input" wire:change="updateCart" type="number" wire:model="product_quantity" value="{{ $cart_item->product_quantity }}" /> -->
-                                <button type="button" wire:click="decrement({{$cart_item->id}})" class="btn">-</button>
+                                <button type="button" wire:click="decrement({{$cart_item->id}})" class="btn"><span >-</span></button>
+
+
+
                                 <input class="qty-input" style="border: 1px solid #d3d3d3;height: 22px;    margin-top: 12px;width:3rem;" type="text" value="{{$cart_item->product_quantity}}"  /> 
                                 <button type="button" wire:click="increment({{$cart_item->id}})" class="btn">+</button>
                             </div>

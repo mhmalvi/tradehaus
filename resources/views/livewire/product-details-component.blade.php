@@ -339,8 +339,8 @@
                                             </div> --}}
 
                                             <div class="ec-single-qty">
-                                                <div class="qty-plus-minus" style="width:20%;">
-                                                    <input class="qty-input" style="border: 1px solid #d3d3d3;height: 40px;" type="number" wire:model="product_quantity" value="1" />
+                                                <div class="" style="width:15%;">
+                                                    {{-- <input class="" style="border: 1px solid #d3d3d3;height:40px;" type="number"  value="1" /> --}}
 
                                                     <input type="hidden" wire:model="product_image" value="product_image" />
 
@@ -1325,9 +1325,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ec-quickview-qty">
-                                <div class="qty-plus-minus">
-                                    <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                            <div class="">
+                                <div class="">
+                                    <input class="qty-input" type="number" wire:model="product_quantity" value="1" />
+
                                 </div>
                                 <div class="ec-quickview-cart ">
                                     <button class="btn btn-primary"><img src="assets/images/icons/cart.svg" class="svg_img pro_svg" alt="" /> Add To Cart</button>
