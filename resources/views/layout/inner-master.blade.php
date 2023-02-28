@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <link rel="stylesheet" id="bg-switcher-css" href="{{ asset('assets/css/backgrounds/bg-4.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -112,6 +115,20 @@
 
                                 </ul>
                             </div>
+                            <a href="{{ route('wish.list') }}" class="ec-header-btn ec-header-wishlist">
+                                <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" /></div>
+
+                                @include('wishlist-count')
+
+                            </a>
+                            <!-- Header wishlist End -->
+                            <!-- Header Cart Start -->
+                            <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+                                <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg') }}" class="svg_img header_svg" alt="" /></div>
+
+                                @include('layout.cart')
+                            </a>
+
                             <!-- Header User End -->
                             <!-- Header Cart Start -->
                             {{-- <a href="wishlist.html" class="ec-header-btn ec-header-wishlist">
@@ -170,7 +187,7 @@
                         <!-- Ec Header Search Start -->
                         <div class="align-self-center">
                             <div class="header-search">
-                                <form class="ec-btn-group-form" action="{{ route('product.search') }}">
+                                <form class="ec-btn-group-form d-flex" action="{{ route('product.search') }}">
                                     @csrf
                                     <input class="form-control" name="search" placeholder="Enter Your Product Name..." type="text">
 
@@ -248,12 +265,13 @@
                     <!-- Ec Header Search Start -->
                     <div class="col">
                         <div class="header-search">
-                            <form class="ec-btn-group-form" action="{{ route('product.search') }}" method="GET">
+                            <form class="ec-btn-group-form d-flex" action="{{ route('product.search') }}" method="GET">
 
                                 @csrf
                                 <input class="form-control" name="search" placeholder="Enter Your Product Name..." type="text">
 
-                                <button class="search_submit" type="submit"><i class="ecicon eci-search"></i></button>
+                                <button class="search_submit" type="submit"><img src="{{ asset('assets/images/icons/search.svg') }}" class="svg_img header_svg" alt="" /></button>
+
 
 
 
@@ -551,16 +569,17 @@
 
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)">Blog</a>
-                            <ul class="sub-menu">
-                                <li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
-                                <li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
-                                <li><a href="blog-detail-left-sidebar.html">Blog detail left sidebar</a></li>
-                                <li><a href="blog-detail-right-sidebar.html">Blog detail right sidebar</a></li>
-                                <li><a href="blog-full-width.html">Blog full width</a></li>
-                                <li><a href="blog-detail-full-width.html">Blog detail full width</a></li>
-                            </ul>
+                        <li class="dropdown"><a href="{{ route('blog.view') }}">Blog</a>
+                            {{-- <ul class="sub-menu">
+                                        <li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
+                                        <li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
+                                        <li><a href="blog-detail-left-sidebar.html">Blog detail left sidebar</a></li>
+                                        <li><a href="blog-detail-right-sidebar.html">Blog detail right sidebar</a></li>
+                                        <li><a href="blog-full-width.html">Blog full width</a></li>
+                                        <li><a href="blog-detail-full-width.html">Blog detail full width</a></li>
+                                    </ul> --}}
                         </li>
+
                         {{-- <li class="dropdown"><a href="javascript:void(0)">Elements</a>
                             <ul class="sub-menu">
                                 <li><a href="elemets-products.html">Products</a></li>

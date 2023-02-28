@@ -70,103 +70,29 @@
                 @foreach($categories as $category)
 
                 <div class="ec_cat_content">
-                    {{-- {{ $category->id }} --}}
 
                     <div class="ec_cat_inner">
+                        {{-- <h2 class="d-none">Category</h2> --}}
+                        {{-- svg_img cat_svg --}}
                         <a href="{{ route('product.category',[$category->id]) }}">
 
-
-                            <h2 class="d-none">Category</h2>
                             <div class="ec-cat-image">
-                                <img src="{{ env('APP_URL').'/'.$category->category_image }}" class="svg_img cat_svg" alt="" />
+                                <img src="{{ $category->category_image }}" class="" alt="" />
                             </div>
                             <div class="ec-cat-desc">
-                                <a href=""><span class="ec-section-title">{{ $category->category_name }}</span></a>
-
+                                <span class="ec-section-title">{{ $category->category_name }}</span>
                             </div>
                         </a>
-
                     </div>
-
                 </div>
                 @endforeach
 
-                {{-- <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/9.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Smartwatches</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/10.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/11.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Console Games</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/12.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Headphones</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/13.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Virtual Reality</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="ec_cat_content">
-                    <div class="ec_cat_inner">
-                        <a href="#">
-                            <div class="ec-cat-image">
-                                <img src="assets/images/category-image/14.svg" class="svg_img cat_svg" alt="" />
-                            </div>
-                            <div class="ec-cat-desc">
-                                <span class="ec-section-title">Cameras</span>
-                            </div>
-                        </a>
-                    </div>
-                </div> --}}
+
             </div>
         </div>
     </div>
 </section>
+
 <!--category Section End -->
 
 <!-- Product tab Area Start -->
@@ -1811,7 +1737,7 @@
 <!-- Ec Instagram End -->
 
 <!--  services Section Start -->
-<section class="section ec-services-section">
+{{-- <section class="section ec-services-section">
     <h2 class="d-none">Services</h2>
     <div class="container">
         <div class="row">
@@ -1861,7 +1787,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 
 

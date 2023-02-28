@@ -170,7 +170,8 @@
                         <div class="ec-header-bottons">
                             <!-- Header User Start -->
                             <div class="ec-header-user dropdown">
-                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="assets/images/icons/user_5.svg" class="svg_img header_svg" alt="" /></button>
+                                <button class="dropdown-toggle" data-bs-toggle="dropdown"><img src="{{ asset('assets/images/icons/user_5.svg') }}" class="svg_img header_svg" alt="" /></button>
+
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     @if(auth()->check())
                                     <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
@@ -186,14 +187,17 @@
                             <!-- Header User End -->
                             <!-- Header Cart Start -->
                             <a href="#" class="ec-header-btn ec-header-wishlist">
-                                <div class="header-icon"><img src="assets/images/icons/wishlist.svg" class="svg_img header_svg" alt="" /></div>
+                                <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg')}}" class="svg_img header_svg" alt="" /></div>
+
                                 @include('wishlist-count')
 
                             </a>
                             <!-- Header Cart End -->
                             <!-- Header Cart Start -->
                             <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
-                                <div class="header-icon"><img src="assets/images/icons/cart_5.svg" class="svg_img header_svg" alt="" /></div>
+                                <div class="header-icon"><img src="{{ asset('assets/images/icons/cart_5.svg')}}" class="svg_img header_svg" alt="" /></div>
+
+
                                 @include('layout.cart')
 
                             </a>

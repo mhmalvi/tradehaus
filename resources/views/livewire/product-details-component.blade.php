@@ -339,7 +339,8 @@
                                             </div> --}}
 
                                             <div class="ec-single-qty">                                          
-                                                <div class="" style="width:20%;">
+                                                <div class="qty-plus-minus" style="width:20%;">
+
                                                     <input class="qty-input" style="border: 1px solid #d3d3d3;height: 40px;" type="number" wire:model="product_quantity" />
 
 
