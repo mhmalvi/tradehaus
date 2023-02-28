@@ -5,24 +5,47 @@
     }
     @endphp
 
-@if(auth()->check())
+    @if(auth()->check())
 
-    <span style="position: absolute;
-    margin-top: -12px;
+    <span class="ec-header-count ec-wishlist-count">
 
-    margin-left: 1%;
-    background: #6e6e6e;
-    border-radius: 61%;
-    width: 2%;
-    height: 23px;
-    text-align: center;
-    color: white;
-    font-weight: 800;" class="ec-header-count">
-        
+
 
         {{ $count }}
-       
+
     </span>
- @endif
+    @endif
 
 </div>
+
+<style>
+    @media(min-width:992px) {
+        .ec-wishlist-count {
+            position: absolute;
+            margin-top: -12px;            
+            margin-left: 1%;
+            background: #6e6e6e;
+            border-radius: 61%;
+            width: 2%;
+            height: 23px;
+            text-align: center;
+            color: white;
+            font-weight: 800;
+
+        }
+    }
+
+</style>
+
+
+{{-- style="position: absolute;
+margin-top: -12px;
+
+margin-left: 1%;
+background: #6e6e6e;
+border-radius: 61%;
+width: 2%;
+height: 23px;
+text-align: center;
+color: white;
+font-weight: 800;" class="ec-header-count" --}}

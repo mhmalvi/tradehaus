@@ -15,6 +15,7 @@ class ProductDetailsComponent extends Component
     public $product_name;
     public $product_quantity;
     public $color;
+    public $value;
     public $size;
     public $product_price;
     public $product_image;
@@ -25,18 +26,22 @@ class ProductDetailsComponent extends Component
     }
     public function mount()
     {
-        // $product_quantity = 1;
+        $this->product_quantity = 1;
         if ($this->products->product_discount) {
             $price = $this->products->product_price * ($this->products->product_discount / 100);
         } else {
             $price = $this->products->product_price;
         }
-        $this->product_quantity = 1;
+        // $this->product_quantity = 1;
         $this->product_id = $this->products->id;
         $this->product_name = $this->products->product_name;
         $this->product_price = $price;
         $this->product_image = $this->products->product_image;
     }
+
+    // public function quantity($product_quantity){
+    //     dd($product_quantity);
+    // }
     public function add_to_cart()
     {
         // dd($this);

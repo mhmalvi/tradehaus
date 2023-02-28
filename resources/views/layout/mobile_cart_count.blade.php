@@ -1,0 +1,1 @@
+<livewire:mobile-cart-count/>

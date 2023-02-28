@@ -186,7 +186,7 @@
                             </div>
                             <!-- Header User End -->
                             <!-- Header Cart Start -->
-                            <a href="#" class="ec-header-btn ec-header-wishlist">
+                            <a href="{{ route('wish.list') }}" class="ec-header-btn ec-header-wishlist">
                                 <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg')}}" class="svg_img header_svg" alt="" /></div>
 
                                 @include('wishlist-count')
@@ -251,13 +251,14 @@
                         </div>
                         <!-- Ec Header Search End -->
 
-                        <a href="{{ route('wish.list') }}" style="    margin-right: -17%;" class="ec-header-btn ec-header-wishlist">
+                        <a href="{{ route('wish.list') }}" style="margin-right: -15%;" class="ec-header-btn ec-header-wishlist">
 
-                            <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="" /></div>
-                            @if(auth()->check())
+                            <div class="header-icon"><img src="{{ asset('assets/images/icons/wishlist.svg')}}" class="svg_img header_svg" alt="" /></div>
+
                             @include('wishlist-count')
-                            @endif
+
                         </a>
+
                         <!-- Ec Header Button Start -->
                         <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
 

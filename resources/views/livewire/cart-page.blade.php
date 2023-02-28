@@ -53,7 +53,7 @@
                                 <input class="qty-input" style="border: 1px solid #d3d3d3;height: 22px;    margin-top: 12px;width:3rem;" type="text" value="{{$cart_item->product_quantity}}"  /> 
                                 <button type="button" wire:click="increment({{$cart_item->id}})" class="btn">+</button>
                             </div>
-                            <button wire:click="delezte_cart_item({{$cart_item->id}})" class="remove">×</button>
+                            <button wire:click="delete_cart_item({{$cart_item->id}})" class="remove">×</button>
                         </div>
 
 
@@ -110,9 +110,11 @@
                     {{-- @php
                     $items = serialize($cart_items)
                     @endphp --}}
+                    @if(!$cart_items->isEmpty())
                     <a href="{{ route('checkout.view',$total) }}" class="btn btn-secondary">Checkout</a>
 
                     {{-- wire:click="checkout({{ $total }},{{ $total +60 }},{{ $cart_items }})" --}}
+                    @endif
                 </div>
                 @endif
             </div>

@@ -5,13 +5,19 @@
             $new = App\Models\NewArrival::all();
             @endphp
             @foreach($new as $product)
-            <div class="ec-slide-item d-flex slide-1">
+            {{-- <style>
+                .slide-10 {
+                    
 
-                <style>
-                    .slide-1 {
-                        background-image: url('{{ asset($product->image)}}')
-                    }
-                </style>
+                }
+
+            </style> --}}
+{{-- style="background-image: url({{ '<?=env('APP_URL');?>/<?=$product->image;?>'  }});
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;" --}}
+
+            <div class="ec-slide-item d-flex slide-1" >                
 
                 <div class="container align-self-center">
                     <div class="row">
@@ -147,81 +153,81 @@
                                                         {{-- <ul class="ec-opt-swatch ec-change-img">
                                                             <li class="active">
                                                                 <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray">
-                                                                </a>
-                                                            </li>
+                                </a>
+                                </li>
 
 
-                                                        </ul> --}}
-                                                    </div>
-                                                    {{-- <div class="ec-pro-compare">
+                                </ul> --}}
+                            </div>
+                            {{-- <div class="ec-pro-compare">
                                                 <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="{{ env('APP_URL').'/'. $product->product_image }}" class="svg_img pro_svg" alt="" />
 
 
-                                                </div> --}}
+                        </div> --}}
 
-
-                                            </div>
-                                        </div>
-                                        <h5 class="ec-pro-title"><a href="{{ route('product.details',[$product->id]) }}">{{ $product->product_name }}</a></h5>
-
-                                        <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">{{$product->category->category_name}}</a></h6>
-                                        <div class="ec-pro-rat-price">
-                                            <div class="ec-pro-rat-pri-inner">
-                                                <span class="ec-price">
-                                                    @php
-                                                    $price = $product->product_price*($product->product_discount/100)
-
-
-
-
-                                                    @endphp
-                                                    @if(isset($product->product_discount))
-
-
-                                                    <span class="new-price">${{ $price }}</span>
-                                                    <span class="old-price">${{ $product->product_price }}</span>
-
-
-
-
-                                                    @else
-                                                    <span class="new-price">${{ $price = $product->product_price }}</span>
-
-
-                                                    @endif
-
-                                                </span>
-                                                <span class="ec-pro-rating">
-                                                    <i class="ecicon eci-star fill"></i>
-                                                    <i class="ecicon eci-star fill"></i>
-                                                    <i class="ecicon eci-star fill"></i>
-                                                    <i class="ecicon eci-star-o"></i>
-                                                    <i class="ecicon eci-star-o"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="pro-hidden-block">
-
-                                            <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                            <div class="ec-pro-actions">
-                                                <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$product->id}},{{$price}})" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-
-                                                <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To Cart</button>
-                                                {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            </a>
-                        </div>
-                        @endif
-                        @endforeach
 
                     </div>
                 </div>
+                <h5 class="ec-pro-title"><a href="{{ route('product.details',[$product->id]) }}">{{ $product->product_name }}</a></h5>
+
+                <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">{{$product->category->category_name}}</a></h6>
+                <div class="ec-pro-rat-price">
+                    <div class="ec-pro-rat-pri-inner">
+                        <span class="ec-price">
+                            @php
+                            $price = $product->product_price*($product->product_discount/100)
+
+
+
+
+                            @endphp
+                            @if(isset($product->product_discount))
+
+
+                            <span class="new-price">${{ $price }}</span>
+                            <span class="old-price">${{ $product->product_price }}</span>
+
+
+
+
+                            @else
+                            <span class="new-price">${{ $price = $product->product_price }}</span>
+
+
+                            @endif
+
+                        </span>
+                        <span class="ec-pro-rating">
+                            <i class="ecicon eci-star fill"></i>
+                            <i class="ecicon eci-star fill"></i>
+                            <i class="ecicon eci-star fill"></i>
+                            <i class="ecicon eci-star-o"></i>
+                            <i class="ecicon eci-star-o"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="pro-hidden-block">
+
+                    <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
+                    <div class="ec-pro-actions">
+                        <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$product->id}},{{$price}})" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+
+                        <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To Cart</button>
+                        {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
+                    </div>
+                </div>
             </div>
+            </a>
         </div>
+        </a>
+</div>
+@endif
+@endforeach
+
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <!-- ec Product tab Area End -->
@@ -372,13 +378,13 @@
                                             {{-- <ul class="ec-opt-swatch ec-change-img">
                                                 <li class="active">
                                                 <a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'.$data->product_image }}" data-src-hover="{{ env('APP_URL').'/'.$data->product_image }}" data-tooltip="Gray">
-                                                <span style="background-color:#dbdbdb;"></span>
-                                                </a>
-                                                </li>
+                                            <span style="background-color:#dbdbdb;"></span>
+                                            </a>
+                                            </li>
 
 
-                                                <li><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'.$data->product_image }}" data-src-hover="{{ env('APP_URL').'/'.$data->product_image }}" data-tooltip="Orange">
-                                                <span style="background-color:#76e7e7;"></span>
+                                            <li><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'.$data->product_image }}" data-src-hover="{{ env('APP_URL').'/'.$data->product_image }}" data-tooltip="Orange">
+                                                    <span style="background-color:#76e7e7;"></span>
                                                 </a></li>
 
 
