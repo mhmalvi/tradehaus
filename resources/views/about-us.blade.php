@@ -229,7 +229,7 @@
 <!-- ec testmonial end -->
 
 <!-- Services Section Start -->
-<section class="section ec-services-section section-space-p">
+{{-- <section class="section ec-services-section section-space-p">
     <h2 class="d-none">Services</h2>
     <div class="container">
         <div class="row">
@@ -279,7 +279,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- Services Section End -->
 
 <!-- Ec Instagram Start -->

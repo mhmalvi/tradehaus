@@ -172,8 +172,9 @@
                             <div class="header-search">
                                 <form class="ec-btn-group-form" action="{{ route('product.search') }}">
                                     @csrf
-                                    <input class="form-control" placeholder="Enter Your Product Name..." type="text">
-                                    <button class="submit" type="submit"><img src="{{ asset('assets/images/icons/search.svg') }}" class="svg_img header_svg" alt="" /></button>
+                                    <input class="form-control" name="search" placeholder="Enter Your Product Name..." type="text">
+
+                                    <button class="search_submit" type="submit"><img src="{{ asset('assets/images/icons/search.svg') }}" class="svg_img header_svg" alt="" /></button>
 
                                 </form>
                             </div>
@@ -238,7 +239,7 @@
                     <!-- Ec Header Logo Start -->
                     <div class="col">
                         <div class="header-logo">
-                            <a href="index.html"><img src="{{ asset('assets/images/logo/logo.png') }}" alt="Site Logo" /><img class="dark-logo" src="{{ asset('assets/images/logo/logo.png') }}" alt="Site Logo" /></a>
+                            <a href="{{ url('/') }}">Trade TradeUs</a>
 
 
                         </div>
@@ -247,10 +248,14 @@
                     <!-- Ec Header Search Start -->
                     <div class="col">
                         <div class="header-search">
-                            <form class="ec-btn-group-form" action="{{ route('product.search') }}">
+                            <form class="ec-btn-group-form" action="{{ route('product.search') }}" method="GET">
+
                                 @csrf
-                                <input class="form-control" placeholder="Enter Your Product Name..." type="text">
-                                <button class="submit" type="submit"><img src="{{ asset('assets/images/icons/search.svg') }}g" class="svg_img header_svg" alt="icon" /></button>
+                                <input class="form-control" name="search" placeholder="Enter Your Product Name..." type="text">
+
+                                <button class="search_submit" type="submit"><i class="ecicon eci-search"></i></button>
+
+
 
                             </form>
                         </div>

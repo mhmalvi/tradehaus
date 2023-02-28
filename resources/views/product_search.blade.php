@@ -1,123 +1,6 @@
 @extends('layout.master')
 @section('content')
-<div class="ec-side-cart-overlay"></div>
-<div id="ec-side-cart" class="ec-side-cart">
-    <div class="ec-cart-inner">
-        <div class="ec-cart-top">
-            <div class="ec-cart-title">
-                <span class="cart_title">My Cart</span>
-                <button class="ec-close">×</button>
-            </div>
-            <ul class="eccart-pro-items">
-                @php
-                $total=0;
-                $cart_items = App\Models\Cart::all();
-                @endphp
 
-                @if(isset($cart_items))
-
-
-                @foreach($cart_items as $cart_item)
-
-                <li>
-
-
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="{{ asset(env('APP_URL').'/'.$cart_item->product->product_image) }}" alt="{{ $cart_item->product_name }}"></a>
-
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">{{ $cart_item->product_name }}</a>
-
-                        <span class="cart-price"><span>${{ $cart_item->product->product_price}}</span> x {{ $cart_item->product_quantity }}</span>
-
-                        @php
-                        $price = $cart_item->product->product_price * $cart_item->product_quantity;
-
-                        $total=$price+$total
-                        @endphp
-                        {{-- {{ $total }} --}}
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="product_quantity" value="{{ $cart_item->product_quantity }}" />
-
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-
-
-                </li>
-
-
-                @endforeach
-                @php
-
-
-
-                @endphp
-
-                @endif
-
-
-                {{-- <li>
-
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/12_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
-                        <span class="cart-price"><span>$64.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="product-left-sidebar.html" class="sidekka_pro_img"><img src="assets/images/product-image/3_1.jpg" alt="product"></a>
-                    <div class="ec-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title">Girls Nylon Purse</a>
-                        <span class="cart-price"><span>$59.00</span> x 1</span>
-                        <div class="qty-plus-minus">
-                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li> --}}
-            </ul>
-        </div>
-        <div class="ec-cart-bottom">
-            <div class="cart-sub-total">
-                <table class="table cart-table">
-                    <tbody>
-                        <tr>
-                            <td class="text-left">Sub-Total :</td>
-                            @if(isset($total))
-
-
-                            <td class="text-right">${{ $total }}</td>
-
-                            @endif
-                        </tr>
-                        <tr>
-                            <td class="text-left">VAT (20%) :</td>
-                            <td class="text-right">$60.00</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">Total :</td>
-                            @if(isset($total))
-
-
-                            <td class="text-right primary-color">${{ $total + 60 }}</td>
-
-                            @endif
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="cart_btn">
-                <a href="cart.html" class="btn btn-primary">View Cart</a>
-                <a href="checkout.html" class="btn btn-secondary">Checkout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!-- Ekka Cart End -->
@@ -303,88 +186,94 @@
             <div class="col">
                 <div class="tab-content">
                     <div class="row">
-                        @if(!$products->isEmpty())
                         @foreach($products as $product)
-                        @if($product->status=='A')
+                        @if($product->status=='A' && $product->isBlackFriday=='n')
+
+
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
-                            <div class="ec-product-inner">
-                                <div class="ec-product-hover"></div>
-                                <div class="ec-pro-image-outer">
-                                    <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
-                                            <img class="main-image" src="{{ env('APP_URL').'/'. $product->product_image }}" alt="Product" />
-                                            <img class="hover-image" src="{{ env('APP_URL').'/'. $product->product_image }}" alt="Product" />
 
-                                        </a>
+                            <a href="{{ route('product.details',[$product->id]) }}" class="image">
+
+                                <div class="ec-product-inner">
+                                    <div class="ec-product-hover"></div>
+                                    <div class="ec-pro-image-outer">
+                                        <div class="ec-pro-image">
+                                            <a href="product-left-sidebar.html" class="image">
+                                                <img class="main-image" src="{{ env('APP_URL').'/'. $product->product_image }}" alt="Product" />
+                                                <img class="hover-image" src="{{ env('APP_URL').'/'. $product->product_image }}" alt="Product" />
+
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ec-pro-content">
-                                    <div class="ec-pro-option">
-                                        <div class="ec-pro-opt-inner">
-                                            {{-- <div class="ec-pro-color">
-                                                <ul class="ec-opt-swatch ec-change-img">
-                                                    <li class="active"><a href="#" class="ec-opt-clr-img" data-src="{{ env('APP_URL').'/'. $product->product_image }}" data-src-hover="{{ env('APP_URL').'/'. $product->product_image }}" data-tooltip="Gray"><span style="background-color:#ef7ca3;"></span></a></li>
+                                    <div class="ec-pro-content">
+                                        <div class="ec-pro-option">
+                                            <div class="ec-pro-opt-inner">
+                                                <div class="ec-pro-color">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h5 class="ec-pro-title"><a href="{{ route('product.details',[$product->id]) }}">{{ $product->product_name }}</a></h5>
+
+                                        <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">{{$product->category->category_name}}</a></h6>
+                                        <div class="ec-pro-rat-price">
+                                            <div class="ec-pro-rat-pri-inner">
+                                                <span class="ec-price">
+                                                    @php
+                                                    $price = $product->product_price*($product->product_discount/100)
 
 
-                                            </ul>
-                                        </div> --}}
-                                        {{-- <div class="ec-pro-compare">
-                                                <a href="compare.html" class="ec-btn-group compare" title="Compare"><img src="{{ env('APP_URL').'/'. $product->product_image }}" class="svg_img pro_svg" alt="" /></a>
-
-                                    </div> --}}
-                                </div>
-                            </div>
-                            <h5 class="ec-pro-title"><a href="{{ route('product.details',[$product->id]) }}">{{ $product->product_name }}</a></h5>
-
-                            <h6 class="ec-pro-stitle"><a href="shop-left-sidebar-col-3.html">{{ $product->category->category_name }}</a></h6>
-                            <div class="ec-pro-rat-price">
-                                <div class="ec-pro-rat-pri-inner">
-                                    <span class="ec-price">
-                                        @php
-                                        $discount = $product->product_price*($product->product_discount/100)
-                                        @endphp
-                                        @if(isset($product->product_discount))
-                                        <span class="new-price">${{ $discount }}</span>
-                                        <span class="old-price">${{ $product->product_price }}</span>
 
 
-                                        @else
-                                        <span class="new-price">${{ $product->product_price }}</span>
-                                        @endif
+                                                    @endphp
+                                                    @if(isset($product->product_discount))
 
 
-                                    </span>
-                                    <span class="ec-pro-rating">
-                                        <i class="ecicon eci-star fill"></i>
-                                        <i class="ecicon eci-star fill"></i>
-                                        <i class="ecicon eci-star fill"></i>
-                                        <i class="ecicon eci-star-o"></i>
-                                        <i class="ecicon eci-star-o"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="pro-hidden-block">
+                                                    <span class="new-price">${{ $price }}</span>
+                                                    <span class="old-price">${{ $product->product_price }}</span>
 
-                                <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
-                                <div class="ec-pro-actions">
-                                    <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                    <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
-                                        Cart</button>
-                                    <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
-                                </div>
-                            </div>
+
+
+
+                                                    @else
+                                                    <span class="new-price">${{ $price = $product->product_price }}</span>
+
+
+                                                    @endif
+
+                                                </span>
+                                                <span class="ec-pro-rating">
+                                                    <i class="ecicon eci-star fill"></i>
+                                                    <i class="ecicon eci-star fill"></i>
+                                                    <i class="ecicon eci-star fill"></i>
+                                                    <i class="ecicon eci-star-o"></i>
+                                                    <i class="ecicon eci-star-o"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="pro-hidden-block">
+
+                                            <div class="ec-pro-desc">Lorem Ipsum is simply dummy text of the printing.</div>
+                                            <div class="ec-pro-actions">
+                                                <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$product->id}},{{$price}})" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+
+                                                <button wire:click="add_to_cart({{$product->id}},{{$price}},1)" title="Add To Cart" class=" btn btn-primary">Add To Cart</button>
+                                                {{-- <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </a>
                         </div>
-                        @endif
-                        @endforeach
-
-                        @else
-                        <h2>Product Not found</h2>
-                        @endif
+                        </a>
                     </div>
+                    @endif
+                    @endforeach
+
                 </div>
-                
-                {{-- <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
+            </div>
+        </div>
+
+    {{-- <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
                             <div class="ec-product-inner">
                                 <div class="ec-product-hover"></div>
                                 <div class="ec-pro-image-outer">
@@ -766,8 +655,8 @@
                                 </div>
                             </div>
                         </div> --}}
-            </div>
-        </div>
+    </div>
+    </div>
     </div>
     </div>
     </div>
