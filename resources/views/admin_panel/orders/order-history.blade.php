@@ -8,7 +8,7 @@
 <div class="ec-content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
-            <h1>New Orders</h1>
+            <h1>All Orders</h1>
             <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
                 <span><i class="mdi mdi-chevron-right"></i></span>Orders
             </p>
@@ -64,9 +64,12 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>
                                             <div class="btn-group mb-1">
-                                                <button type="button" class="btn btn-outline-success">Info</button>
+                                                <a href="{{ route('order.details',[$customers->id]) }}"><button type="button" class="btn btn-outline-success">Info</button></a>
+
+
                                                 <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                                     <span class="sr-only">Info</span>
+
                                                 </button>
 
                                                 <div class="dropdown-menu">

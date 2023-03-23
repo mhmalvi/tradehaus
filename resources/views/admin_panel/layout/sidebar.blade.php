@@ -204,11 +204,11 @@
                                         <span class="nav-text">Order History</span>
                                     </a>
                                 </li>
-                                <li class="">
+                                {{-- <li class="">
                                     <a class="sidenav-item-link" href="order-detail.html">
                                         <span class="nav-text">Order Detail</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="">
                                     <a class="sidenav-item-link" href="invoice.html">
                                         <span class="nav-text">Invoice</span>
