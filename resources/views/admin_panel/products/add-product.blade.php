@@ -235,6 +235,7 @@
 
 
                                                 </div>
+                                                @if()
                                                 <div class="col-md-4 mb-25">
                                                     <label class="form-label">Colors</label>
                                                     <input type="color" name="color_1" class="form-control form-control-color" id="exampleColorInput1" value="#ff6191" title="Choose your color">

@@ -166,7 +166,7 @@
                                         <span class="nav-text">List Product</span>
                                     </a>
                                 </li>
-                                <li class="">
+                                {{-- <li class="">
                                     <a class="sidenav-item-link" href="product-grid.html">
                                         <span class="nav-text">Grid Product</span>
                                     </a>
@@ -175,10 +175,9 @@
                                     <a class="sidenav-item-link" href="product-detail.html">
                                         <span class="nav-text">Product Detail</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="">
                                     <a class="sidenav-item-link" href="{{ route('admin.new_arrival') }}">
-
                                         <span class="nav-text">New Arrival</span>
                                     </a>
                                 </li>
@@ -188,7 +187,7 @@
                     </li>
 
                     <!-- Orders -->
-                    {{-- <li class="has-sub">
+                    <li class="has-sub">
                         <a class="sidenav-item-link" href="javascript:void(0)">
                             <i class="mdi mdi-cart"></i>
                             <span class="nav-text">Orders</span> <b class="caret"></b>
@@ -196,12 +195,12 @@
                         <div class="collapse">
                             <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
                                 <li class="">
-                                    <a class="sidenav-item-link" href="new-order.html">
+                                    <a class="sidenav-item-link" href="{{ route('new.order') }}">
                                         <span class="nav-text">New Order</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a class="sidenav-item-link" href="order-history.html">
+                                    <a class="sidenav-item-link" href="{{ route('order.history') }}">
                                         <span class="nav-text">Order History</span>
                                     </a>
                                 </li>
@@ -220,7 +219,8 @@
                     </li>
 
                     <!-- Reviews -->
-                    <li>
+                    {{-- <li>
+
                         <a class="sidenav-item-link" href="review-list.html">
                             <i class="mdi mdi-star-half"></i>
                             <span class="nav-text">Reviews</span>

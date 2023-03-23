@@ -23,7 +23,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\OfferController;
-
+use App\Http\Controllers\admin\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
 
@@ -72,6 +72,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/delete-product', [AdminProductController::class, 'destroy'])->name('delete.product');
     Route::get('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');
     // Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
+    Route::get('new-order', [AdminOrderController::class, 'index'])->name('new.order');
+    Route::get('order-history', [AdminOrderController::class, 'order_history'])->name('order.history');
+    Route::get('order-details/{id}', [AdminOrderController::class, 'show_order_details'])->name('order.details');
 });
 Route::get('/search-item', [ProductController::class, 'search'])->name('product.search');
 Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
@@ -94,10 +97,10 @@ Route::get('blog-all', [BlogController::class, 'index'])->name('blog.view');
 Route::get('blog-details', [BlogController::class, 'details'])->name('blog.details');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/wishlist-store', [WishlistController::class, 'store'])->name('wishlist.store');
-Route::get('/new-arrival/{slug}',[ProductController::class,'new_arrival_details'])->name('new.arrival');
-Route::get('/offer',[OfferController::class,'index'])->name('offer.index');
+Route::get('/new-arrival/{slug}', [ProductController::class, 'new_arrival_details'])->name('new.arrival');
+Route::get('/offer', [OfferController::class, 'index'])->name('offer.index');
 
-Route::post('/cart-quantity',[CartController::class, 'update_quantity']);
+Route::post('/cart-quantity', [CartController::class, 'update_quantity']);
 
 Route::get('/get-cart', [CartController::class, 'get_cart']);
 
