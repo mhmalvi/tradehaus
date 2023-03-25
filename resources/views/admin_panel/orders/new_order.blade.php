@@ -60,8 +60,13 @@
 
 
                                         <td>PAID</td>
-                                        <td><span class="mb-2 mr-2 badge badge-secondary">Pending</span>
+                                        @if($item->status=='cancelled')
+                                        <td><span style="background:#e852ff" class="mb-2 mr-2 badge badge-secondary">{{$item->status}}</span>
                                         </td>
+                                        @else
+                                        <td><span class="mb-2 mr-2 badge badge-secondary">{{$item->status}}</span>
+                                        </td>
+                                        @endif
                                         <td>{{ $item->created_at }}</td>
                                         <td>
                                             <div class="btn-group mb-1">
@@ -108,9 +113,12 @@
                                                 </button>
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Detail</a>
+                                                    <a class="dropdown-item" href="{{ route('order.details',[$customers->id]) }}">Detail</a>
+
                                                     <a class="dropdown-item" href="#">Track</a>
-                                                    <a class="dropdown-item" href="#">Cancel</a>
+                                                    @if($item->status!=='cancelled')
+                                                    <a class="dropdown-item" href="{{route('order.cancel',[$item->id])}}">Cancel</a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>

@@ -75,6 +75,7 @@ Route::prefix('admin')->group(function () {
     Route::get('new-order', [AdminOrderController::class, 'index'])->name('new.order');
     Route::get('order-history', [AdminOrderController::class, 'order_history'])->name('order.history');
     Route::get('order-details/{id}', [AdminOrderController::class, 'show_order_details'])->name('order.details');
+    Route::get('order-cancel/{id}', [AdminOrderController::class, 'order_cancel'])->name('order.cancel');
 });
 Route::get('/search-item', [ProductController::class, 'search'])->name('product.search');
 Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');

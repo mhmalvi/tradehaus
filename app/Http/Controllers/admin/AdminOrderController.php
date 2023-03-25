@@ -22,4 +22,11 @@ class AdminOrderController extends Controller
         $order = Order::find($id);
         return view('admin_panel.orders.order-details',compact('order'));
     }
+
+    public function order_cancel($id){
+        $order = OrderedProducts::find($id);
+        $order->status = 'cancelled';
+        $order->save();
+        return redirect()->back()->with('message','Cancelled');
+    }
 }
