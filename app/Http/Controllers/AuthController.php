@@ -2,57 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SignupCounter;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
-    public function login()
-    {
-        return view('login');
-    }
-
     function construct()
     {
     }
 
-
-
     public function login_access(Request $request)
     {
-        // dd($request->all());
-        // dd('hello');
-        // $request->validate([
-        //     'email' => 'required',
-        //     'password' => 'required'
-        // ]);
-        // // dd('hello');
-        // // if (Auth::guard('admin')) {
-        // $user = User::where('email', $request->email)->first();
-        // if (!$user || !Hash::check($request->password, $user->password)) {
-        //     // dd('hello');
-        //     return redirect()->back()->with('message', 'Email or password not valid');
-        // } else {
-        //     // dd(Auth::user());
-        //     // if ($user->roles == 1) {
-        //     // dd("hello");
-        //     // dd(Auth::id());
-        //     return redirect('/');
-        //     // }
-        // }
-        // }else{
-        //     dd('fail');
-        // }
-// dd("fgvgfdg");
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     public function register()
@@ -73,7 +42,6 @@ class AuthController extends Controller
         } else {
             return response()->back()->with('message', 'password do not match');
         }
-        // dd("hello");
         $user->email = $request->email;
         $user->address = $request->address;
         $user->phone = $request->phone;
@@ -82,9 +50,13 @@ class AuthController extends Controller
         $user->post_code = $request->post_code;
         $user->region = $request->region;
         $user->roles = 0;
-
         $save = $user->save();
         if ($save) {
+            $counter = SignupCounter::latest()->first();
+            $counter->counter = $counter->counter+1;
+            $counter->created_at = Carbon::now();
+            $counter->updated_at = Carbon::now();
+            $counter->save();
             return redirect()->back()->with('message', 'Registered successfully');
         }
     }

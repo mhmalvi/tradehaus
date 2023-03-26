@@ -20,10 +20,16 @@ class UserMiddleware
     {
         // $user = DB::table('users')->where('roles',1)->first();
         if (Auth::check()) {
-            if (Auth::user()->roles == 1) {
-                // return redirect("/");
-                return $next($request);
+            if (Auth::user()->roles === 1) {
+                // dd("hello");
+                return redirect("/admin/dashboard");
+            } else if (Auth::user()->roles !== 1) {
+                // dd("hello user");
+                return redirect("/");
+            } else if (!$request->expectsJson()) {
+                return route('login');
             }
         }
+        return $next($request);
     }
 }

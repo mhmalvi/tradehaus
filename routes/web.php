@@ -25,7 +25,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\admin\AdminOrderController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +38,9 @@ use App\Http\Middleware\AdminMiddleware;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -48,7 +48,8 @@ Route::get('/', function () {
 Route::get('/', [ProductController::class, 'show_all']);
 Route::get('/product-details/{id}', [ProductController::class, 'show'])->name('product.details');
 // Route::get('admin',[AdminCategoryController::class,'index']);
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+// Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/new-arrival', [NewArrivalController::class, 'index'])->name('admin.new_arrival');
     Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
@@ -77,12 +78,11 @@ Route::prefix('admin')->group(function () {
     Route::get('order-details/{id}', [AdminOrderController::class, 'show_order_details'])->name('order.details');
     Route::get('order-cancel/{id}', [AdminOrderController::class, 'order_cancel'])->name('order.cancel');
 });
+// });
 Route::get('/search-item', [ProductController::class, 'search'])->name('product.search');
 Route::post('/add-product-to-cart', [CartController::class, 'store'])->name('store.cart');
 Route::get('/cart-items', [CartController::class, 'index'])->name('items.cart');
 Route::get('/product_by_category/{id}', [ProductController::class, 'product_category'])->name('product.category');
-Route::get('/login-page', [AuthController::class, 'login'])->name('login.page');
-// Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register-page', [AuthController::class, 'register'])->name('register.page');
 Route::post('/register-user', [AuthController::class, 'register_user'])->name('register.user');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.us');

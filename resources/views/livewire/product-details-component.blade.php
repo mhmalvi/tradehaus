@@ -339,12 +339,12 @@
                                             </div> --}}
 
                                             <div class="ec-single-qty">
-                                                <div class="" style="width:15%;">
-                                                    {{-- <input class="" style="border: 1px solid #d3d3d3;height:40px;" type="number"  value="1" /> --}}
+                                                <!-- <div class="" style="width:15%;">
+                                                    <input class="" min="1" style="border: 1px solid #d3d3d3;height:40px;" type="number" />
 
                                                     <input type="hidden" wire:model="product_image" value="product_image" />
 
-                                                </div>
+                                                </div> -->
                                                 <div class="ec-single-cart ">
                                                     <button type="submit" class="btn btn-primary">Add To Cart</button>
                                                 </div>

@@ -17,7 +17,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        dd(auth()->guard('admin')->check());
+        // dd(auth()->guard('admin')->check());
         if(auth()->guard('admin')->check()){
             return redirect()->route('login.page')->with('message','Please login first to');
         }

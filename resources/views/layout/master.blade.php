@@ -27,7 +27,7 @@
     <!-- css Icon Font -->
     <link rel="icon" href="{{ asset('assets/images/favicon/favicon-5.png')}}" sizes="32x32" />
     <link rel="apple-touch-icon" href="{{ asset('assets/images/favicon/favicon-5.png')}}" />
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <meta name="msapplication-TileImage" content="{{ asset('assets/images/favicon/favicon-5.png')}}" />
 

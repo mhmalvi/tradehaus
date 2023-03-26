@@ -8,11 +8,18 @@ use App\Models\Cart;
 use App\Models\Wishlist;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use App\Models\VisitorCount;
+use Illuminate\Support\Carbon;
 
 class HomeComponent extends Component
 {
     public function render()
     {
+        $count = VisitorCount::latest()->first();
+        $count->counter = $count->counter + 1;
+        $count->created_at = Carbon::now();
+        $count->updated_at = Carbon::now();
+        $count->save();
         $products = Product::orderBy('id', 'DESC')->get();
         return view('livewire.home-component', ['products' => $products]);
     }

@@ -2,23 +2,21 @@
     <div class="ec-main-slider section ">
         <div class="ec-slider">
             @php
+            $url = env('APP_URL');
             $new = App\Models\NewArrival::all();
             @endphp
             @foreach($new as $product)
-            {{-- <style>
+            <!-- <style>
                 .slide-10 {
                     
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
 
                 }
+            </style> -->
 
-            </style> --}}
-{{-- style="background-image: url({{ '<?=env('APP_URL');?>/<?=$product->image;?>'  }});
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;" --}}
-
-            <div class="ec-slide-item d-flex slide-1" >                
-
+            <div class="ec-slide-item d-flex slide-10" style="background-image: url('{{ url($product->image) }}');">
                 <div class="container align-self-center">
                     <div class="row">
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 align-self-center">

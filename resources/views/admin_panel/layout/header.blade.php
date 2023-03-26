@@ -50,7 +50,7 @@
                                 <a href="javascript:0"> <i class="mdi mdi-settings-outline"></i> Setting </a>
                             </li>
                             <li class="dropdown-footer">
-                                <a href="{{ route('admin.logout') }}"> <i class="mdi mdi-logout"></i> Log Out </a>
+                                <a href="{{ route('logout.perform') }}"> <i class="mdi mdi-logout"></i> Log Out </a>
                             </li>
                         </ul>
                     </li>

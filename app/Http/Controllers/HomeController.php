@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VisitorCount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $count =  VisitorCount::latest()->first();
+        $count->count = $count->count + 1;
+        $count->created_at = Carbon::now();
+        $count->updated_at = Carbon::now();
+        $count->save();
+        // return view('home');
     }
 }

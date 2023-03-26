@@ -6,11 +6,22 @@
         <div class="row">
             <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
                 <div class="card card-mini dash-card card-1">
+                    @php
+                        $signup_count = App\Models\SignupCounter::latest()->first();
+                    @endphp
+                    @if($signup_count->counter=="")
                     <div class="card-body">
-                        <h2 class="mb-1">1,503</h2>
+                        <h2 class="mb-1">0</h2>
                         <p>Daily Signups</p>
                         <span class="mdi mdi-account-arrow-left"></span>
                     </div>
+                    @else
+                    <div class="card-body">
+                        <h2 class="mb-1">{{$signup_count->counter}}</h2>
+                        <p>Daily Signups</p>
+                        <span class="mdi mdi-account-arrow-left"></span>
+                    </div>
+                    @endif
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
