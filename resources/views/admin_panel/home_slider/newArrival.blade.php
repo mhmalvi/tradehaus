@@ -395,9 +395,9 @@
                                                                     <th>Title</th>
                                                                     <th>Price</th>
                                                                     {{-- @if(isset($products->product_discount)) --}}
-                                                                    <th>Offer</th>
+                                                                    {{-- <th>Offer</th> --}}
                                                                     {{-- @endif --}}
-                                                                    <th>Purchased</th>
+                                                                    {{-- <th>Purchased</th> --}}
                                                                     <th>Stock</th>
                                                                     <th>Status</th>
                                                                     {{-- <th>Date</th> --}}
@@ -418,16 +418,13 @@
                                                                     <td>{{ $product->title }}</td>
                                                                     <td>{{ $product->price }}</td>
 
-                                                                    <td></td>
-                                                                    {{-- @if(isset($products->product_discount)) --}}
-
-                                                                    <td></td>
-
                                                                     {{-- @endif --}}
                                                                     <td>{{ $product->quantity }}</td>
-
-                                                                    <td></td>
-                                                                    <td></td>
+                                                                @if($product->status==1)
+                                                                    <td>Active</td>
+                                                                @else
+                                                                    <td>Inactive</td>
+                                                                @endif
 
                                                                     {{-- <td>2021-10-30</td> --}}
                                                                     <td>

@@ -18,6 +18,8 @@ class AdminDashboardController extends Controller
         // dd(Auth::user());
         // if (Auth::user()->roles == 1) {
             return view('admin_panel.dashboard');
+        // }else{
+        //     return redirect()->back();
         // }
     }
 

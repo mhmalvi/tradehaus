@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class AdminProductController extends Controller
 {
@@ -16,10 +17,15 @@ class AdminProductController extends Controller
     public function index()
     {
         // dd('dfdsfdsf');
-        return view('admin_panel.products.add-product');
+        if (Auth::user()->roles == 1) {
+            return view('admin_panel.products.add-product');
+        } else {
+            return redirect()->back();
+        }
     }
 
-    public function product_list(){
+    public function product_list()
+    {
         $product = Product::orderBy('id', 'DESC')->get();
         return view('admin_panel.products.product-list', compact('product'));
     }
@@ -135,12 +141,11 @@ class AdminProductController extends Controller
         //         'message' => 'failed'
         //     ], 424);
         // }
-        if($save){
+        if ($save) {
             return redirect()->back()->with('message', 'Product created successfully');
-        }else{
+        } else {
             return redirect()->back()->with('message', 'Failed');
         }
-        
     }
 
     /**
@@ -163,7 +168,7 @@ class AdminProductController extends Controller
     public function edit(Request $request)
     {
         $product = Product::find($request->id);
-        return view('admin_panel.products.edit-product',compact('product'));
+        return view('admin_panel.products.edit-product', compact('product'));
     }
 
     /**
@@ -286,8 +291,8 @@ class AdminProductController extends Controller
         // dd($request->all());
         $product = Product::find($request->id);
         $delete = $product->delete();
-        if($delete){
-            return redirect()->back()->with('message','Deleted');
+        if ($delete) {
+            return redirect()->back()->with('message', 'Deleted');
         }
     }
 }
