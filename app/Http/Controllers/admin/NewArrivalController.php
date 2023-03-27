@@ -52,8 +52,8 @@ class NewArrivalController extends Controller
         $arrival->size = $request->size;
         if ($request->file('image')) {
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
-            $request->image->move(public_path('assets/img/newArrival'), $fileName);
-            $file_path = "assets/img/newArrival/" . $fileName;
+            $request->image->move(public_path('public/assets/img/newArrival'), $fileName);
+            $file_path = "public/assets/img/newArrival/" . $fileName;
             $arrival->image = $file_path;
         }
         $arrival->save();
@@ -111,8 +111,8 @@ class NewArrivalController extends Controller
         $arrival->code_name = $request->code_name;
         if ($request->file('image')) {
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
-            $request->image->move(public_path('assets/img/newArrival'), $fileName);
-            $file_path = "assets/img/newArrival/" . $fileName;
+            $request->image->move(public_path('public/assets/img/newArrival'), $fileName);
+            $file_path = "public/assets/img/newArrival/" . $fileName;
             $arrival->image = $file_path;
         }
         $update = $arrival->save();
