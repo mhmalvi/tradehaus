@@ -115,12 +115,12 @@
                 <div class="row">
                     <div class="col-md-6 ec-cms-block ec-abcms-block text-center">
                         <div class="ec-cms-block-inner">
-                            <img class="a-img" src="assets/images/offer-image/1.jpg" alt="about">
+                            <img class="a-img" src="assets/about_us/about_us.jpg" alt="about">
                         </div>
                     </div>
                     <div class="col-md-6 ec-cms-block ec-abcms-block text-center">
                         <div class="ec-cms-block-inner">
-                            <h3 class="ec-cms-block-title">What is the ekka?</h3>
+                            <h3 class="ec-cms-block-title">What is the trade tradeus?</h3>
                             <p>Electronic typesetting text of the printing and typesetting industry. when an unknown printer took a galley of type
                                 and scrambled it to make a type specimen book. Lorem Ipsum is
                                 simply dutmmy text ever since the 1500s, It has survived not only,

@@ -36,29 +36,33 @@
                     <div class="ec-blogs-content">
                         <div class="ec-blogs-inner">
                             <div class="row">
+                            @php
+                                                    $blog = App\Models\Blog::where('status',1)->get();
+
+                                                    @endphp
+                                                    @foreach($blog as $blogs)
                                 <div class="col-lg-4 col-md-6 col-sm-12 mb-6 ec-blog-block">
                                     <div class="ec-blog-inner">
                                         <div class="ec-blog-image">
                                             <a href="blog-detail-left-sidebar.html">
-                                                <img class="blog-image" src="assets/images/blog-image/1.jpg"
+                                                <img class="blog-image" src="{{env('APP_URL').'/'.$blogs->image}}"
                                                     alt="Blog" />
                                             </a>
                                         </div>
                                         <div class="ec-blog-content">
                                             <h5 class="ec-blog-title"><a
-                                                    href="blog-detail-left-sidebar.html">The best fashion influencers.</a></h5>
+                                                    href="blog-detail-left-sidebar.html">{{$blogs->title}}</a></h5>
 
-                                            <div class="ec-blog-date">By <span>Mr Admin</span> / February 10, 2021-2022</div>
-                                            <div class="ec-blog-desc">Lorem Ipsum is simply dummy text of the printing
-                                                and typesetting industry. Lorem Ipsum has been the industry's standard
-                                                dummy text ever since the 1500s,</div>
+                                            <!-- <div class="ec-blog-date"> / February 10, 2021-2022</div> -->
+                                            <div class="ec-blog-desc">{{$blogs->short_description}}</div>
 
                                             <div class="ec-blog-btn"><a href="{{route('blog.details')}}" class="btn btn-primary">Read More</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 mb-6 ec-blog-block">
+                                @endforeach
+                                <!-- <div class="col-lg-4 col-md-6 mb-6 ec-blog-block">
                                     <div class="ec-blog-inner">
                                         <div class="ec-blog-image">
                                             <a href="blog-detail-left-sidebar.html">
@@ -167,7 +171,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- Ec Pagination Start -->

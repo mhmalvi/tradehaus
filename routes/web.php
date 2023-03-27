@@ -24,6 +24,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\admin\AdminOrderController;
+use App\Http\Controllers\admin\AdminBlogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserMiddleware;
 
@@ -77,6 +78,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('order-history', [AdminOrderController::class, 'order_history'])->name('order.history');
     Route::get('order-details/{id}', [AdminOrderController::class, 'show_order_details'])->name('order.details');
     Route::get('order-cancel/{id}', [AdminOrderController::class, 'order_cancel'])->name('order.cancel');
+
+    Route::get('/add-blog',[AdminBlogController::class,'index'])->name('add.blog');
+    Route::post('/create-blog',[AdminBlogController::class,'store'])->name('create.blog');
 });
 // });
 Route::get('/search-item', [ProductController::class, 'search'])->name('product.search');

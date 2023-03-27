@@ -332,7 +332,7 @@
 <!-- Click To ChatPro end-->
 
 <!-- Newsletter Modal Start -->
-<div id="ec-popnews-bg"></div>
+<!-- <div id="ec-popnews-bg"></div>
 <div id="ec-popnews-box" class="animate__animated animate__slideInDown">
     <div id="ec-popnews-close"><i class="ecicon eci-close"></i></div>
     <div id="ec-popnews-box-content">
@@ -343,7 +343,7 @@
             <button type="button" class="btn btn-secondary" name="subscribe">Subscribe</button>
         </form>
     </div>
-</div>
+</div> -->
 <!-- Newsletter Modal end -->
 
 <!-- successfully toast Start -->

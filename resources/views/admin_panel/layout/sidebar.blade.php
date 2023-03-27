@@ -217,6 +217,36 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="has-sub">
+                        <a class="sidenav-item-link" href="javascript:void(0)">
+                            <i class="mdi mdi-blogger"></i>
+                            <span class="nav-text">Blog</span> <b class="caret"></b>
+                        </a>
+                        <div class="collapse">
+                            <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+                                <li class="">
+                                    <a class="sidenav-item-link" href="{{ route('add.blog') }}">
+                                        <span class="nav-text">Add Blog</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a class="sidenav-item-link" href="{{ route('order.history') }}">
+                                        <span class="nav-text">View Blogs</span>
+                                    </a>
+                                </li>
+                                {{-- <li class="">
+                                    <a class="sidenav-item-link" href="order-detail.html">
+                                        <span class="nav-text">Order Detail</span>
+                                    </a>
+                                </li> --}}
+                                <!-- <li class="">
+                                    <a class="sidenav-item-link" href="invoice.html">
+                                        <span class="nav-text">Invoice</span>
+                                    </a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </li>
 
                     <!-- Reviews -->
                     {{-- <li>
