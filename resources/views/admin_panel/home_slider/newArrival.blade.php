@@ -63,7 +63,8 @@
                                                     </div>
                                                     @else
                                                     <div class="avatar-edit">
-                                                        <input type="file" class="form-control" name="image" />
+                                                        <input type="file" class="form-control" name="image" required />
+
                                                         <img style="width: 43%;" src="" alt="">
                                                     </div>
 
@@ -244,6 +245,7 @@
                                                 <div class="col-12">
                                                     <input id="" name="slug" class="form-control here set-slug" value="{{ $product->slug }}" type="string">
 
+
                                                 </div>
                                             </div>
                                             @else
@@ -313,7 +315,7 @@
                                             <div class="col-md-6">
                                                 <label class="form-label">Price <span>( In USD
                                                         )</span></label>
-                                                <input type="number" name="price" class="form-control" id="price1" value="{{ $product->price }}" required>
+                                                <input type="number" name="price" class="form-control" id="price1" value="{{ $product->price }}">
 
                                             </div>
                                             @else
@@ -333,7 +335,8 @@
                                             @else
                                             <div class="col-md-6">
                                                 <label class="form-label">Quantity</label>
-                                                <input type="number" name="quantity" class="form-control" id="quantity1">
+                                                <input type="number" name="quantity" class="form-control" id="quantity1" required>
+
 
                                             </div>
                                             @endif
@@ -437,7 +440,6 @@
                                                                             <div class="dropdown-menu">
                                                                                 <a class="dropdown-item" href="{{ route('admin.edit_arrival',['slug'=>$product->slug]) }}">Edit</a>
                                                                                 <a class="dropdown-item" href="{{ route('admin.delete_arrival',['id'=>$product->id]) }}">Delete</a>
-
                                                                             </div>
                                                                         </div>
                                                                     </td>

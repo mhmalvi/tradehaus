@@ -15,8 +15,9 @@
 
                 }
             </style> -->
+            {{-- @dump({{ url($product->image) }}); --}}
 
-            <div class="ec-slide-item d-flex slide-10" style="background-image: url('{{ url($product->image) }}');">
+            <div class="ec-slide-item d-flex slide-1" style="background-image: url('{{ url($product->image) }}');">
                 <div class="container align-self-center">
                     <div class="row">
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 align-self-center">
@@ -31,7 +32,7 @@
                 </div>
             </div>
             @endforeach
-            <div class="ec-slide-item d-flex slide-2">
+            {{-- <div class="ec-slide-item d-flex slide-2">
                 <div class="container align-self-center">
                     <div class="row">
                         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 align-self-center">
@@ -60,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Main Slider End -->

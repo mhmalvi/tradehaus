@@ -55,7 +55,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/new-arrival', [NewArrivalController::class, 'store'])->name('store.arrival');
     Route::put('/new-arrival', [NewArrivalController::class, 'update'])->name('admin.update_arrival');
     Route::get('/new-arrival/{slug}', [NewArrivalController::class, 'edit'])->name('admin.edit_arrival');
-    Route::get('/new-arrival/{id}', [NewArrivalController::class, 'destroy'])->name('admin.delete_arrival');
+    Route::get('/delete-new-arrival/{id}', [NewArrivalController::class, 'destroy'])->name('admin.delete_arrival');
 
     Route::get('/add-product', [AdminProductController::class, 'index'])->name('add.product');
     Route::post('/add-product', [AdminProductController::class, 'store'])->name('store.product');

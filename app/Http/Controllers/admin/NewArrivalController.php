@@ -127,10 +127,11 @@ class NewArrivalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,$id)
     {
-        dd($request->id);
-        $arrival = NewArrival::find($request->id);
+        // dd("hello");
+        // dd($request->id);
+        $arrival = NewArrival::find($id);
         $delete = $arrival->delete();
         if($delete){
             return redirect()->back()->with('message','Deleted successfully');
