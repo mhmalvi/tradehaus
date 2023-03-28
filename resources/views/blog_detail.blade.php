@@ -37,7 +37,7 @@
                     <div class="ec-blogs-content">
                         <div class="ec-blogs-inner">
                             <div class="ec-blog-main-img">
-                                <img class="blog-image" src="assets/images/blog-image/7.jpg" alt="Blog" />
+                                <img class="blog-image" src="{{ asset('assets/img/blogs/software-cameras.jpg') }}" alt="Blog" />
                             </div>
                             <div class="ec-blog-date">
                                 <p class="date">28 JUNE, 2021-2022 - </p><a href="javascript:void(0)">5 Comments</a>
@@ -60,7 +60,7 @@
                                     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
                                     irure dolor in reprehendrit in voluptate velit esse cillum dolore eu fugiat nulla
                                     pariatur.</p>
-                                <div class="ec-blog-sub-imgs">
+                                {{-- <div class="ec-blog-sub-imgs">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <img class="blog-image" src="assets/images/blog-image/2.jpg" alt="Blog" />
@@ -69,21 +69,21 @@
                                             <img class="blog-image" src="assets/images/blog-image/3.jpg" alt="Blog" />
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                                     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
                                     irure dolor in reprehendrit in voluptate velit esse cillum dolore eu fugiat nulla
                                     pariatur.</p>
                             </div>
-                            <div class="ec-blog-tags">
+                            {{-- <div class="ec-blog-tags">
                                 <a href="blog-left-sidebar.html">lifestyle ,</a>
                                 <a href="blog-left-sidebar.html">Outdoor ,</a>
                                 <a href="blog-left-sidebar.html">interior ,</a>
                                 <a href="blog-left-sidebar.html">sports ,</a>
                                 <a href="blog-left-sidebar.html">bloging ,</a>
                                 <a href="blog-left-sidebar.html">inspiration</a>
-                            </div>
+                            </div> --}}
                             <div class="ec-blog-arrows">
                                 <a href="blog-detail-left-sidebar.html"><i class="ecicon eci-angle-left"></i> Prev
                                     Post</a>
@@ -93,10 +93,10 @@
                             <div class="ec-blog-comments">
                                 <div class="ec-blog-cmt-preview">
                                     <div class="ec-blog-comment-wrapper mt-55">
-                                        <h4 class="ec-blog-dec-title">Comments : 05</h4>
+                                        <h4 class="ec-blog-dec-title">Comments : 02</h4>
                                         <div class="ec-single-comment-wrapper mt-35">
                                             <div class="ec-blog-user-img">
-                                                <img src="assets/images/blog-image/9.jpg" alt="blog image">
+                                                <img src="{{ asset('assets/img/person_icon/user.png') }}" alt="blog image">
                                             </div>
                                             <div class="ec-blog-comment-content">
                                                 <h5>John Deo</h5>
@@ -111,7 +111,8 @@
                                         </div>
                                         <div class="ec-single-comment-wrapper mt-50 ml-150">
                                             <div class="ec-blog-user-img">
-                                                <img src="assets/images/blog-image/10.jpg" alt="blog image">
+                                                <img src="{{ asset('assets/img/person_icon/user.png') }}" alt="blog image">
+
                                             </div>
                                             <div class="ec-blog-comment-content">
                                                 <h5>Jenifer lowes</h5>
@@ -141,12 +142,12 @@
                                                         <input type="email" placeholder="Email Address ">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                {{-- <div class="col-md-12">
                                                     <div class="ec-text-leave">
                                                         <textarea placeholder="Message"></textarea>
                                                         <a href="#" class="btn btn-lg btn-secondary">Order Now</a>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </form>
                                     </div>

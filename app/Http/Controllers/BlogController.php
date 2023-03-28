@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Blog;
 
 class BlogController extends Controller
 {
@@ -16,7 +17,10 @@ class BlogController extends Controller
         return view('blog');
     }
 
-    public function details(){
+    public function details()
+    {
+        // dd($id);
+        // $blog = Blog::find($id);
         return view('blog_detail');
     }
 

@@ -257,7 +257,9 @@
                         <div class="ec-fs-pro-inner ec-product-inner">
                             <div class="ec-fs-pro-image-outer col-lg-6 col-md-6 col-sm-6">
                                 <div class="ec-fs-pro-image">
-                                    <a href="product-left-sidebar.html" class="image"><img class="main-image" src="{{ env("APP_URL").'/'.$deal->product_image }}" alt="Product" /></a>
+                                    <a href="product-left-sidebar.html" class="image"><img style="width: 65%;" class="main-image" src="{{ env("APP_URL").'/'.$deal->product_image }}" alt="Product" /></a>
+
+
 
                                 </div>
                             </div>
@@ -582,10 +584,11 @@
 
         <div class="ec-offer-inner ofr-img">
 
-            <img style="width: 26%;" src="{{ env('APP_URL').'/'.$data->product_image }}">
+            {{-- <img style="width: 26%;" src="{{ env('APP_URL').'/'.$data->product_image }}"> --}}
+            <img src="{{ asset('assets/black_friday/matebook.jpg') }}"/>
 
 
-            <!-- <img src="assets/images/offer-image/offer_bg.png" alt="" class="offer_bg" /> -->
+            {{-- <img src="assets/images/offer-image/offer_bg.png" alt="" class="offer_bg" />  --}}
 
             <div class="col-sm-6 ec-offer-content">
 

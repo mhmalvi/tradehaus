@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-4 ec-footer-news">
-                        <div class="ec-footer-widget">
+                        {{-- <div class="ec-footer-widget">
                             <h4 class="ec-footer-heading">Newsletter</h4>
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">
@@ -86,7 +86,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="ec-footer-widget ec-share">
                             <ul>
                                 <li class="ec-share-link"><a href="#"><img src="assets/images/icons/iphone.png" alt="" /></a></li>

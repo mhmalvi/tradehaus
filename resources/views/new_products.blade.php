@@ -78,13 +78,13 @@
                             <a href="{{ route('product.category',[$category->id]) }}">{{ $category->category_name }} ,</a>
                             @endforeach
                         </div>
-                        <div class="ec-blog-arrows">
+                        {{-- <div class="ec-blog-arrows">
                             <a href="blog-detail-left-sidebar.html"><i class="ecicon eci-angle-left"></i> Prev
                                 Post</a>
                             <a href="blog-detail-left-sidebar.html">Next Post <i class="ecicon eci-angle-right"></i></a>
-                        </div>
+                        </div> --}}
                         <div class="ec-blog-comments">
-                            <div class="ec-blog-cmt-preview">
+                            {{-- <div class="ec-blog-cmt-preview">
                                 <div class="ec-blog-comment-wrapper mt-55">
                                     <h4 class="ec-blog-dec-title">Comments : 05</h4>
                                     <div class="ec-single-comment-wrapper mt-35">
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="ec-blog-cmt-form">
                                 <div class="ec-blog-reply-wrapper mt-50">
                                     <h4 class="ec-blog-dec-title">Leave A Reply</h4>
