@@ -39,7 +39,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->items);
+        // dd($request->all());
         // $item = array();
 
         // dd($request->items);

@@ -134,34 +134,22 @@
                         $ipAddr=\Request::ip();
                         $extra_items = App\Models\Cart::where('ip',$ipAddr)->get();
                         $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
-                        
-                        
-                        foreach($extra_items as $ex){
-                            
-                        }
-                        for($i=0;$i<count($extra_items);$i++){
-                            $items[] = $extra_items[$i];
-                        }
-                        
-                        @endphp
 
-                        @else
-                        @php
-                        $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
+                        for($i=0;$i<count($extra_items);$i++){ $items[]=$extra_items[$i]; } @endphp @else @php $items=App\Models\Cart::where('user_id',auth()->user()->id)->get();
 
-                        @endphp
-                        @endif
-                        @endif
-                        <form>
-                            {{-- @csrf --}}
-                            <div style="border: 1px solid #ededed;padding: 30px;" class="ec-checkout-wrap margin-bottom-30 padding-bottom-3">
+                            @endphp
+                            @endif
+                            @endif
+                            <form action="{{route('place.order')}}" method="post">
+                                @csrf
+                                <div style="border: 1px solid #ededed;padding: 30px;" class="ec-checkout-wrap margin-bottom-30 padding-bottom-3">
 
-                                {{-- {{ $sub_total }} --}}
-                                <div class="ec-checkout-block ec-check-bill">
-                                    <h3 style="margin-bottom: 21px;" class="ec-checkout-title">Billing Details</h3>
+                                    {{-- {{ $sub_total }} --}}
+                                    <div class="ec-checkout-block ec-check-bill">
+                                        <h3 style="margin-bottom: 21px;" class="ec-checkout-title">Billing Details</h3>
 
-                                    <div class="ec-bl-block-content">
-                                        {{-- <div class="ec-check-subtitle">Checkout Options</div>
+                                        <div class="ec-bl-block-content">
+                                            {{-- <div class="ec-check-subtitle">Checkout Options</div>
                                         <span class="ec-bill-option">
                                             <span>
                                                 <input type="radio" id="bill1" name="radio-group">
@@ -172,146 +160,146 @@
                                                 <label for="bill2">I want to use new address</label>
                                             </span>
                                         </span> --}}
-                                        <div class="ec-check-bill-form">
+                                            <div class="ec-check-bill-form">
 
-                                            <span class="ec-bill-wrap ec-bill-half">
-                                                <label>First Name*</label>
-                                                <input type="text" name="first_name" id="first_name" placeholder="Enter your first name" required />
+                                                <span class="ec-bill-wrap ec-bill-half">
+                                                    <label>First Name*</label>
+                                                    <input type="text" name="first_name" id="first_name" placeholder="Enter your first name" required />
 
-                                            </span>
-                                            <span class="ec-bill-wrap ec-bill-half">
-                                                <label>Last Name*</label>
-                                                <input type="text" name="last_name" id="last_name" placeholder="Enter your last name" required />
-
-
-                                            </span>
-                                            <span class="ec-bill-wrap">
-                                                <label>Address</label>
-                                                <input type="string" id="address" name="address" placeholder="Address Line 1" />
-
-
-
-                                            </span>
-                                            <span class="ec-bill-wrap ec-bill-half">
-                                                <label>City *</label>
-                                                <span class="ec-bl-select-inner">
-                                                    <select name="city" id="city" class="ec-bill-select">
-                                                        <option selected disabled>City</option>
-                                                        <option value="city one">City 1</option>
-                                                        <option value="city one">City 2</option>
-                                                        <option value="city one">City 3</option>
-                                                        <option value="city one">City 4</option>
-                                                        <option value="city one">City 5</option>
-                                                    </select>
                                                 </span>
-                                            </span>
-                                            <span class="ec-bill-wrap ec-bill-half">
-                                                <label>Post Code</label>
-                                                <input type="text" name="post_code" id="post_code" placeholder="Post Code" />
-
-                                            </span>
-                                            <span class="ec-bill-wrap ec-bill-half">
-                                                <label>Country *</label>
-                                                <span class="ec-bl-select-inner">
-                                                    <select name="country" id="country" class="ec-bill-select">
+                                                <span class="ec-bill-wrap ec-bill-half">
+                                                    <label>Last Name*</label>
+                                                    <input type="text" name="last_name" id="last_name" placeholder="Enter your last name" required />
 
 
-                                                        <option selected disabled>Country</option>
-                                                        <option value="country one">Country 1</option>
-                                                        <option value="country one">Country 2</option>
-                                                        <option value="country one">Country 3</option>
-                                                        <option value="country one">Country 4</option>
-                                                        <option value="country one">Country 5</option>
-                                                    </select>
                                                 </span>
-                                            </span>
-                                            <span class="ec-bill-wrap ec-bill-half">
-                                                <label>Region State</label>
-                                                <span class="ec-bl-select-inner">
-                                                    <select name="region" id="region" class="ec-bill-select">
+                                                <span class="ec-bill-wrap">
+                                                    <label>Address</label>
+                                                    <input type="string" id="address" name="address" placeholder="Address Line 1" />
 
 
-                                                        <option selected disabled>Region/State</option>
-                                                        <option value="state">Region/State 1</option>
-                                                        <option value="state">Region/State 2</option>
-                                                        <option value="state">Region/State 3</option>
-                                                        <option value="state">Region/State 4</option>
-                                                        <option value="state">Region/State 5</option>
-                                                    </select>
+
+                                                </span>
+                                                <span class="ec-bill-wrap ec-bill-half">
+                                                    <label>City *</label>
+                                                    <span class="ec-bl-select-inner">
+                                                        <select name="city" id="city" class="ec-bill-select">
+                                                            <option selected disabled>City</option>
+                                                            <option value="city one">City 1</option>
+                                                            <option value="city one">City 2</option>
+                                                            <option value="city one">City 3</option>
+                                                            <option value="city one">City 4</option>
+                                                            <option value="city one">City 5</option>
+                                                        </select>
+                                                    </span>
+                                                </span>
+                                                <span class="ec-bill-wrap ec-bill-half">
+                                                    <label>Post Code</label>
+                                                    <input type="text" name="post_code" id="post_code" placeholder="Post Code" />
+
+                                                </span>
+                                                <span class="ec-bill-wrap ec-bill-half">
+                                                    <label>Country *</label>
+                                                    <span class="ec-bl-select-inner">
+                                                        <select name="country" id="country" class="ec-bill-select">
+
+
+                                                            <option selected disabled>Country</option>
+                                                            <option value="country one">Country 1</option>
+                                                            <option value="country one">Country 2</option>
+                                                            <option value="country one">Country 3</option>
+                                                            <option value="country one">Country 4</option>
+                                                            <option value="country one">Country 5</option>
+                                                        </select>
+                                                    </span>
+                                                </span>
+                                                <span class="ec-bill-wrap ec-bill-half">
+                                                    <label>Region State</label>
+                                                    <span class="ec-bl-select-inner">
+                                                        <select name="region" id="region" class="ec-bill-select">
+
+
+                                                            <option selected disabled>Region/State</option>
+                                                            <option value="state">Region/State 1</option>
+                                                            <option value="state">Region/State 2</option>
+                                                            <option value="state">Region/State 3</option>
+                                                            <option value="state">Region/State 4</option>
+                                                            <option value="state">Region/State 5</option>
+                                                        </select>
+                                                        @php
+                                                        $delivery_charge = 80.00;
+                                                        $product_items = json_encode($items);
+
+
+                                                        @endphp
+
+                                                        <input type="hidden" name="items" id="items" value="{{ $product_items }}" />
+
+
+
+
+
+                                                        <input type="hidden" name="sub_total" id="sub_total" value="{{ $sub_total }}" />
+
+                                                        {{-- <input type="hidden" name="sub_total" id="sub_total" value="{{ $sub_total }}" /> --}}
+
+
+
+                                                        <input type="hidden" name="delivery_charge" id="delivery_charge" value="{{ $delivery_charge }}" />
+
+
+                                                        <input type="hidden" name="total_amount" id="total_amount" value="{{ $sub_total+$delivery_charge }}" />
+
+
+                                                    </span>
+
+                                                    @if($items)
+
+                                                    @foreach($items as $cart_item)
                                                     @php
-                                                    $delivery_charge = 80.00;
-                                                    $product_items = json_encode($items);
+                                                    $product_item = App\Models\Product::find($cart_item->product_id)->first();
+                                                    @endphp
+                                                    {{-- <input type="hidden" name="product_price[]" id="product_price" value="{{ $product_item->product_name }}" /> --}}
+
+
+                                                    @php
+
 
 
                                                     @endphp
+                                                    @if(isset($product_item->product_discount))
 
-                                                    <input type="hidden" name="items" id="items" value="{{ $product_items }}" />
+                                                    @php
+                                                    $price = $product_item->product_price*($product_item->product_discount/100)
+
+                                                    @endphp
+
+                                                    @else
+                                                    @php
+                                                    $price = $item->product_price
+
+                                                    @endphp
+                                                    @endif
+
+                                                    {{-- <input type="hidden" name="product_price[]" id="region" value="{{ $price }}" /> --}}
 
 
+                                                    {{-- <input type="hidden" name="images[]" value="{{ $product_item->product_image }}" /> --}}
 
-
-
-                                                    <input type="hidden" name="sub_total" id="sub_total" value="{{ $sub_total }}" />
-
-                                                    {{-- <input type="hidden" name="sub_total" id="sub_total" value="{{ $sub_total }}" /> --}}
-
-
-
-                                                    <input type="hidden" name="delivery_charge" id="delivery_charge" value="{{ $delivery_charge }}" />
-
-
-                                                    <input type="hidden" name="total_amount" id="total_amount" value="{{ $sub_total+$delivery_charge }}" />
-
+                                                    @endforeach
+                                                    @endif
 
                                                 </span>
+                                            </div>
 
-                                                @if($items)
-
-                                                @foreach($items as $cart_item)
-                                                @php
-                                                $product_item = App\Models\Product::find($cart_item->product_id)->first();
-                                                @endphp
-                                                {{-- <input type="hidden" name="product_price[]" id="product_price" value="{{ $product_item->product_name }}" /> --}}
-
-
-                                                @php
-
-
-
-                                                @endphp
-                                                @if(isset($product_item->product_discount))
-
-                                                @php
-                                                $price = $product_item->product_price*($product_item->product_discount/100)
-
-                                                @endphp
-
-                                                @else
-                                                @php
-                                                $price = $item->product_price
-
-                                                @endphp
-                                                @endif
-
-                                                {{-- <input type="hidden" name="product_price[]" id="region" value="{{ $price }}" /> --}}
-
-
-                                                {{-- <input type="hidden" name="images[]" value="{{ $product_item->product_image }}" /> --}}
-
-                                                @endforeach
-                                                @endif
-
-                                            </span>
                                         </div>
-
                                     </div>
-                                </div>
 
-                            </div>
-                            <span class="ec-check-order-btn">
-                                <button class="btn btn-primary place_order m-auto" type="button" href="#">Place Order</button>
-                            </span>
-                        </form>
+                                </div>
+                                <span class="ec-check-order-btn">
+                                    <button class="btn btn-primary place_order m-auto" type="submit" href="">Place Order</button>
+                                </span>
+                            </form>
 
                     </div>
                 </div>
@@ -361,7 +349,7 @@
 
                                 </div>
                             </div>
-                            
+
                             <div class="ec-checkout-pro">
                                 @foreach($items as $item)
                                 @php
