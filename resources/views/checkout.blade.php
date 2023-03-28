@@ -64,7 +64,6 @@
         margin-left: -61%;
 
     }
-
 </style>
 
 
@@ -129,17 +128,29 @@
 
                         </div> --}}
                         @if(auth()->check())
+                        @if(isset($exitems))
+                        @php
+                        $items = array();
+                        $ipAddr=\Request::ip();
+                        $extra_items = App\Models\Cart::where('ip',$ipAddr)->get();
+                        $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
+                        
+                        
+                        foreach($extra_items as $ex){
+                            
+                        }
+                        for($i=0;$i<count($extra_items);$i++){
+                            $items[] = $extra_items[$i];
+                        }
+                        
+                        @endphp
 
+                        @else
                         @php
                         $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
-                       
+
                         @endphp
-                        @elseif(isset($exitems))
-                        @php
-                        $ipAddr=\Request::ip();
-                        $items = App\Models\Cart::where('ip',$ipAddr)->get();
-                       
-                        @endphp
+                        @endif
                         @endif
                         <form>
                             {{-- @csrf --}}
@@ -334,10 +345,10 @@
                                 $total = $sub_total+$delivery_charge+60;
 
                                 @endphp
-                                <div>
+                                <!-- <div>
                                     <span class="text-left">Coupan Discount</span>
                                     <span class="text-right"><a class="ec-checkout-coupan">Apply Coupan</a></span>
-                                </div>
+                                </div> -->
                                 <div class="ec-checkout-coupan-content">
                                     <form class="ec-checkout-coupan-form" name="ec-checkout-coupan-form" method="post" action="#">
                                         <input class="ec-coupan" type="text" required="" placeholder="Enter Your Coupan Code" name="ec-coupan" value="">
@@ -350,9 +361,7 @@
 
                                 </div>
                             </div>
-                            @php
-                            $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
-                            @endphp
+                            
                             <div class="ec-checkout-pro">
                                 @foreach($items as $item)
                                 @php
@@ -401,11 +410,11 @@
 
                                                 <span class="new-price">${{ $price }}.00</span>
                                             </span>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 @endforeach
                             </div>
                         </div>
@@ -527,8 +536,8 @@
         </div>
         <div class="row">
             <!-- New Product Content -->
-        </div>
-    </div>
+</div>
+</div>
 </section> -->
 {{-- <script src="{{ asset('js/ajax.js')}}"></script> --}}
 
@@ -552,7 +561,6 @@
             pageLanguage: 'en'
         }, 'google_translate_element');
     }
-
 </script>
 <!-- Main Js -->
 <script src="{{ asset('assets/js/vendor/index.js')}}"></script>

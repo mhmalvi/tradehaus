@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -14,15 +15,31 @@ class CheckoutController extends Controller
      */
     public function index($total)
     {
+
         $ipAddr = \Request::ip();
-        $exitems = Cart::where('ip',$ipAddr)->get();
-        $sub_total = $total;
-        if(!$exitems->isEmpty()){
-            return view('checkout',compact('sub_total','exitems'));
-        }else{
-            return view('checkout',compact('sub_total'));
+        $exitems = Cart::where('ip', $ipAddr)->get();
+
+
+        if (!$exitems->isEmpty()) {
+            $total_price = 0;
+            for ($i = 0; $i < count($exitems); $i++) {
+                $price = ($exitems[$i]->product_price) * ($exitems[$i]->product_quantity);
+                $total_price = $price + $total_price;
+            }
+            // dd($total_price);
+            $prev_items_total = 0;
+            $prev_items = Cart::where('user_id', Auth::user()->id)->get();
+            for ($j = 0; $j < count($prev_items); $j++) {
+                $prev_price = $prev_items[$j]->product_price*$prev_items[$j]->product_quantity;
+                $prev_items_total = $prev_price + $prev_items_total;
+            }
+            $sub_total = $prev_items_total + $total_price;
+            // dd($sub_total);
+            return view('checkout', compact('sub_total', 'exitems'));
+        } else {
+            $sub_total = $total;
+            return view('checkout', compact('sub_total'));
         }
-        
     }
 
     /**

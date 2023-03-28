@@ -44,7 +44,8 @@
                             @php
                             $price = $cart_item->product_price * $cart_item->product_quantity;
 
-                            $total=$price+$total
+                            $total=$price+$total;
+
                             @endphp
                             <!-- {{$price}}
                         {{ $total }} -->
@@ -68,7 +69,6 @@
 
                     @endforeach
                     @php
-
 
 
                     @endphp
