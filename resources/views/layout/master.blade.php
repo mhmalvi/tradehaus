@@ -101,22 +101,22 @@
                     <!-- Header Top call Start -->
                     <div class="col header-top-center">
                         <!-- Language Start -->
-                        <div class="header-top-lan-curr header-top-lan dropdown">
+                        {{-- <div class="header-top-lan-curr header-top-lan dropdown">
                             <button class="dropdown-toggle" data-bs-toggle="dropdown">English <i class="ecicon eci-angle-down" aria-hidden="true"></i></button>
                             <ul class="dropdown-menu">
                                 <li class="active"><a class="dropdown-item" href="#">English</a></li>
                                 <li><a class="dropdown-item" href="#">Italiano</a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <!-- Language End -->
                         <!-- Currency Start -->
-                        <div class="header-top-lan-curr header-top-curr dropdown">
+                        {{-- <div class="header-top-lan-curr header-top-curr dropdown">
                             <button class="dropdown-toggle" data-bs-toggle="dropdown">USD <i class="ecicon eci-angle-down" aria-hidden="true"></i></button>
                             <ul class="dropdown-menu">
                                 <li class="active"><a class="dropdown-item" href="#">USD $</a></li>
                                 <li><a class="dropdown-item" href="#">EUR €</a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <!-- Currency End -->
 
                     </div>
