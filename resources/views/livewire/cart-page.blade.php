@@ -6,9 +6,12 @@
             {{-- @if( auth()->check())
             @php
 
-
+            $ipAddr=\Request::ip();
             $total=0;
+            @if( auth()->check())
             $cart_items=App\Models\Cart::where('user_id',auth()->user()->id)->get();
+            @elseif(isset($ipAddr))
+            $cart_items=App\Models\Cart::where('ip',$ipAddr)->get();
             @endphp
 
             @endif --}}
@@ -107,7 +110,11 @@
                         </tbody>
                     </table>
                 </div>
-                @if(auth()->check())
+                @php
+                $ipAddr=\Request::ip();
+                $ip_address = App\Models\Cart::where('ip',$ipAddr)->exists();
+                @endphp
+                @if(auth()->check()||isset($ip_address))
                 <div class="cart_btn">
                     {{-- <a href="cart.html" class="btn btn-primary">View Cart</a> --}}
                     {{-- @php

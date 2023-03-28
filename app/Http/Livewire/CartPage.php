@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class CartPage extends Component
 {
@@ -26,8 +27,10 @@ class CartPage extends Component
             $this->items = Cart::where('user_id', Auth::user()->id)->get();
             // dd($this->items);
             return view('livewire.cart-page', ['cart_items' => $this->items]);
+        } else if (isset($ipAddr)) {
+            $this->items = Cart::where('ip', $ipAddr)->get();
         } else {
-            return view('livewire.cart-page');
+            return view('livewire.cart-page', ['cart_items' => $this->items]);
         }
         // return view('livewire.cart-page', ['cart_items' => $cart_items]);
         // }
@@ -38,44 +41,81 @@ class CartPage extends Component
         $cart = Cart::find($id);
         $product = Product::find($cart->product_id);
         // dd($product);
-        $quantity = Cart::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if ($quantity) {
-            $product_quantity = $quantity->product_quantity;
-            $updated_quantity = $product_quantity + 1;
-            if ($updated_quantity <= $product->product_quantity) {                
-                $quantity->product_quantity = $updated_quantity;
-                $quantity->save();
-                $this->emit('cart_items');
-            } else {
-                $this->dispatchBrowserEvent('over_quantity');
+        $ipAddr = \Request::ip();
+        if (Auth::check()) {
+            $quantity = Cart::where('id', $id)->where('user_id', Auth::user()->id)->first();
+            if ($quantity) {
+                $product_quantity = $quantity->product_quantity;
+                $updated_quantity = $product_quantity + 1;
+                if ($updated_quantity <= $product->product_quantity) {
+                    $quantity->product_quantity = $updated_quantity;
+                    $quantity->save();
+                    $this->emit('cart_items');
+                } else {
+                    $this->dispatchBrowserEvent('over_quantity');
+                }
+                // $this->dispatchBrowserEvent('quantity_updated');
             }
-            // $this->dispatchBrowserEvent('quantity_updated');
+        } else if (isset($ipAddr)) {
+            $quantity = Cart::where('id', $id)->where('ip', $ipAddr)->first();
+            if ($quantity) {
+                $product_quantity = $quantity->product_quantity;
+                $updated_quantity = $product_quantity + 1;
+                if ($updated_quantity <= $product->product_quantity) {
+                    $quantity->product_quantity = $updated_quantity;
+                    $quantity->save();
+                    $this->emit('cart_items');
+                } else {
+                    $this->dispatchBrowserEvent('over_quantity');
+                }
+                // $this->dispatchBrowserEvent('quantity_updated');
+            }
         }
     }
 
     public function decrement($id)
     {
+        $ipAddr = \Request::ip();
         $cart = Cart::find($id);
         // $product = Product::find($cart->product_id);
-        $quantity = Cart::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if ($quantity) {
-            $product_quantity = $quantity->product_quantity;
-            $updated_quantity = $product_quantity - 1;
-            if ($updated_quantity > 0) {
-                $quantity->product_quantity = $updated_quantity;
-                $quantity->save();
-                $this->emit('cart_items');
-            } else {
-                $this->dispatchBrowserEvent('over_quantity');
+        if (Auth::check()) {
+            $quantity = Cart::where('id', $id)->where('user_id', Auth::user()->id)->first();
+            if ($quantity) {
+                $product_quantity = $quantity->product_quantity;
+                $updated_quantity = $product_quantity - 1;
+                if ($updated_quantity > 0) {
+                    $quantity->product_quantity = $updated_quantity;
+                    $quantity->save();
+                    $this->emit('cart_items');
+                } else {
+                    $this->dispatchBrowserEvent('over_quantity');
+                }
+                // $this->dispatchBrowserEvent('quantity_updated');
             }
-            // $this->dispatchBrowserEvent('quantity_updated');
+        } else if (isset($ipAddr)) {
+            $quantity = Cart::where('id', $id)->where('ip', $ipAddr)->first();
+            if ($quantity) {
+                $product_quantity = $quantity->product_quantity;
+                $updated_quantity = $product_quantity - 1;
+                if ($updated_quantity > 0) {
+                    $quantity->product_quantity = $updated_quantity;
+                    $quantity->save();
+                    $this->emit('cart_items');
+                } else {
+                    $this->dispatchBrowserEvent('over_quantity');
+                }
+                // $this->dispatchBrowserEvent('quantity_updated');
+            }
         }
     }
 
     function mount()
     {
+        $ipAddr = \Request::ip();
         if (Auth::check()) {
             $this->items = Cart::where('user_id', Auth::user()->id)->get();
+        } else if (isset($ipAddr)) {
+            $this->items = Cart::where('ip', $ipAddr)->get();
         }
     }
 
@@ -104,7 +144,7 @@ class CartPage extends Component
     {
         $cart = cart::find($id);
         $cart->delete();
-        // $this->emit('cart_items');
+        $this->emit('cart_items');
         $this->emit('count');
     }
 }

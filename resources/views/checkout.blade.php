@@ -134,6 +134,12 @@
                         $items = App\Models\Cart::where('user_id',auth()->user()->id)->get();
                        
                         @endphp
+                        @elseif(isset($exitems))
+                        @php
+                        $ipAddr=\Request::ip();
+                        $items = App\Models\Cart::where('ip',$ipAddr)->get();
+                       
+                        @endphp
                         @endif
                         <form>
                             {{-- @csrf --}}

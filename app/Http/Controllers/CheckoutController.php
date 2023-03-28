@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cart;
 
 class CheckoutController extends Controller
 {
@@ -13,8 +14,15 @@ class CheckoutController extends Controller
      */
     public function index($total)
     {
+        $ipAddr = \Request::ip();
+        $exitems = Cart::where('ip',$ipAddr)->get();
         $sub_total = $total;
-        return view('checkout',compact('sub_total'));
+        if(!$exitems->isEmpty()){
+            return view('checkout',compact('sub_total','exitems'));
+        }else{
+            return view('checkout',compact('sub_total'));
+        }
+        
     }
 
     /**

@@ -1,15 +1,16 @@
 <div>
 
-    <?php
-                                    if(auth()->check()){
-                                    $count = App\Models\Cart::where('user_id',Auth::user()->id)->count();
-                                    ?>
+    @php
+    $ipAddr = \Request::ip();
+    if (auth()->check()) {
+        $count = App\Models\Cart::where('user_id', Auth::user()->id)->count();
+    } else if (isset($ipAddr)) {
+        $cart_items=App\Models\Cart::where('ip',$ipAddr)->count();
+    }
+    @endphp
     <span class="ec-header-count ec-cart-count">{{ $count }}</span>
 
 
-    <?php
-                                    }
-                                    ?>
 
 
 </div>
@@ -32,5 +33,4 @@
 
 
     }
-
 </style>

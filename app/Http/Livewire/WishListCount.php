@@ -21,7 +21,9 @@ class WishListCount extends Component
 
     public function count()
     {
-        $count = Wishlist::where('user_id', Auth::user()->id)->count();
-        return view('livewire.wish-list-count', ['count' => $count]);
+        if (Auth::check()) {
+            $count = Wishlist::where('user_id', Auth::user()->id)->count();
+            return view('livewire.wish-list-count', ['count' => $count]);
+        }
     }
 }
