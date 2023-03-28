@@ -64,7 +64,7 @@ class HomeComponent extends Component
     public function add_to_wishlist($product_id, $price)
     {
         $product = Product::find($product_id)->first();
-        if (Auth::check()) {
+        // if (Auth::check()) {
             $wish_exist = Wishlist::where('product_id', $product_id)->where('user_id', Auth::user()->id)->exists();
             if ($wish_exist) {
                 $this->dispatchBrowserEvent('item_exists');
@@ -79,8 +79,8 @@ class HomeComponent extends Component
                 // $this->emit('wishlist_item');
                 $this->emit('count');
             }
-        } else {
-            $this->dispatchBrowserEvent('login');
-        }
+        // } else {
+        //     $this->dispatchBrowserEvent('login');
+        // }
     }
 }
