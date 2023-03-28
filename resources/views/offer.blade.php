@@ -39,7 +39,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 col-12 margin-b-30">
                 <div class="ec-offer-coupon">
                     <div class="ec-cpn-brand">
-                        <img class="ec-brand-img" src="assets/images/offer-image/2.jpg" alt="" />
+                        <img class="ec-brand-img" src="{{ asset('assets/img/offer/Madrid_Heathered-Grey_3-Quarter_Product-Card-1380.jpg') }}" alt="" />
+
                     </div>
                     <div class="ec-cpn-title">
                         <h2 class="coupon-title">Get 15% off on branded Shoes</h2>
@@ -56,7 +57,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 col-12 margin-b-30">
                 <div class="ec-offer-coupon">
                     <div class="ec-cpn-brand">
-                        <img class="ec-brand-img" src="assets/images/offer-image/3.jpg" alt="" />
+                        <img class="ec-brand-img" src="{{ asset('assets/img/offer/chair.jpg') }}" alt="" />
+
                     </div>
                     <div class="ec-cpn-title">
                         <h2 class="coupon-title">Get 30% off on branded chair</h2>
@@ -73,7 +75,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 col-12 m-auto">
                 <div class="ec-offer-coupon">
                     <div class="ec-cpn-brand">
-                        <img class="ec-brand-img" src="assets/images/offer-image/4.jpg" alt="" />
+                        <img class="ec-brand-img" src="{{ asset('assets/img/offer/handbag.jpg') }}" alt="" />
+
                     </div>
                     <div class="ec-cpn-title">
                         <h2 class="coupon-title">Get 50% off on branded Hand Bags</h2>
@@ -104,7 +107,8 @@
                 </div>
             </div>
         </div>
-        <div class="ec-line-offer" style="background-image: url('assets/images/offer-image/offer-banner-06.jpg');">
+        <div class="ec-line-offer" style="background-image: url('{{ asset('assets/img/offer/furniture-banner.jpg') }}');">
+
             <div class="ec-line-offer-info">
                 <div class="container">
                     <div class="row">

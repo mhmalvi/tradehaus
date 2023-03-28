@@ -30,7 +30,12 @@
     <!-- FAVICON -->
     <link href="{{ asset('admin/assets/img/favicon.png" rel="shortcut icon') }}" />
 
+    <style>
+        .active {
+            background: white;
+        }
 
+    </style>
 
 
 </head>
@@ -38,34 +43,35 @@
 <body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
 
 
-<div class="wrapper">
+    <div class="wrapper">
 
-    <!-- LEFT MAIN SIDEBAR -->
-    <div class="ec-left-sidebar ec-bg-sidebar">
-        <div id="sidebar" class="sidebar ec-sidebar-footer">
+        <!-- LEFT MAIN SIDEBAR -->
+        <div class="ec-left-sidebar ec-bg-sidebar">
+            <div id="sidebar" class="sidebar ec-sidebar-footer">
 
-            <div class="ec-brand">
-                <a href="index.html" title="Ekka">
-                    {{-- <img class="ec-brand-icon" src="assets/img/logo/ec-site-logo.png" alt="" /> --}}
-                    <span class="ec-brand-name text-truncate">TradeUs</span>
-                </a>
-            </div>
+                <div class="ec-brand">
+                    <a href="index.html" title="Ekka">
+                        {{-- <img class="ec-brand-icon" src="assets/img/logo/ec-site-logo.png" alt="" /> --}}
+                        <span class="ec-brand-name text-truncate">TradeUs</span>
+                    </a>
+                </div>
 
-            <!-- begin sidebar scrollbar -->
-            <div class="ec-navigation" data-simplebar>
-                <!-- sidebar menu -->
-                <ul class="nav sidebar-inner" id="sidebar-menu">
-                    <!-- Dashboard -->
-                    <li>
-                        <a class="sidenav-item-link" href="{{ route('admin.dashboard') }}">
-                            <i class="mdi mdi-view-dashboard-outline"></i>
-                            <span class="nav-text">Dashboard</span>
-                        </a>
-                        <hr>
-                    </li>
+                <!-- begin sidebar scrollbar -->
+                <div class="ec-navigation" data-simplebar>
+                    <!-- sidebar menu -->
+                    <ul class="nav sidebar-inner" id="sidebar-menu">
+                        <!-- Dashboard -->
+                        <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
 
-                    <!-- Vendors -->
-                    {{-- <li class="has-sub">
+                            <a class="sidenav-item-link" href="{{ route('admin.dashboard') }}">
+                                <i class="mdi mdi-view-dashboard-outline"></i>
+                                <span class="nav-text">Dashboard</span>
+                            </a>
+                            <hr>
+                        </li>
+
+                        <!-- Vendors -->
+                        {{-- <li class="has-sub">
                         <a class="sidenav-item-link" href="javascript:void(0)">
                             <i class="mdi mdi-account-group-outline"></i>
                             <span class="nav-text">Vendors</span> <b class="caret"></b>
@@ -121,52 +127,67 @@
                         <hr>
                     </li> --}}
 
-                    <!-- Category -->
-                    <li class="has-sub">
-                        <a class="sidenav-item-link" href="javascript:void(0)">
-                            <i class="mdi mdi-dns-outline"></i>
-                            <span class="nav-text">Categories</span> <b class="caret"></b>
-                        </a>
-                        <div class="collapse">
-                            <ul class="sub-menu" id="categorys" data-parent="#sidebar-menu">
-                                <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('add.category') }}">
+                        <!-- Category -->
+                        <li class="has-sub {{ (request()->routeIs('add.category') || request()->routeIs('add.subCategory')) ? 'active' : '' }}">
 
-                                        <span class="nav-text">Main Category</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('add.subCategory') }}">
+                            <a class="sidenav-item-link" href="javascript:void(0)">
+                                <i class="mdi mdi-dns-outline"></i>
+                                <span class="nav-text">Categories</span> <b class="caret"></b>
+                            </a>
+                            <div class="collapse {{ (request()->routeIs('add.category') || request()->routeIs('add.subCategory')) ? "show":"" }}">
 
-                                        <span class="nav-text">Sub Category</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- Products -->
-                    <li class="has-sub active expand">
-                        <a class="sidenav-item-link" href="javascript:void(0)">
-                            <i class="mdi mdi-palette-advanced"></i>
-                            <span class="nav-text">Products</span> <b class="caret"></b>
-                        </a>
-                        <div class="collapse show">
-                            <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
-                                <li class="active">
-                                    <a class="sidenav-item-link" href="{{ route('add.product') }}">
-
-                                        <span class="nav-text">Add Product</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('product.list') }}">
+                                <ul class="sub-menu" id="categorys" data-parent="#sidebar-menu">
+                                    <li class="{{ request()->routeIs('add.category') ? 'active' : '' }}">
 
 
-                                        <span class="nav-text">List Product</span>
-                                    </a>
-                                </li>
-                                {{-- <li class="">
+                                        <a class="sidenav-item-link" href="{{ route('add.category') }}">
+
+                                            <span class="nav-text">Main Category</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('add.subCategory') ? 'active' : '' }}">
+
+
+                                        <a class="sidenav-item-link" href="{{ route('add.subCategory') }}">
+
+                                            <span class="nav-text">Sub Category</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- Products -->
+                        <li class="has-sub {{ (request()->routeIs('add.product') || request()->routeIs('admin.new_arrival')|| request()->routeIs('product.list')) ? 'active' : '' }}">
+
+
+                            <a class="sidenav-item-link" href="javascript:void(0)">
+                                <i class="mdi mdi-palette-advanced"></i>
+                                <span class="nav-text">Products</span> <b class="caret"></b>
+                            </a>
+                            {{-- <div class="collapse show"> --}}
+                            <div class="collapse {{ (request()->routeIs('add.product') || request()->routeIs('admin.new_arrival')|| request()->routeIs('product.list')) ? "show":"" }}">
+
+
+                                <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
+                                    <li class="{{ request()->routeIs('add.product') ? 'active' : '' }}">
+
+
+                                        <a class="sidenav-item-link" href="{{ route('add.product') }}">
+
+                                            <span class="nav-text">Add Product</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('product.list') ? 'active' : '' }}">
+
+
+                                        <a class="sidenav-item-link" href="{{ route('product.list') }}">
+
+
+                                            <span class="nav-text">List Product</span>
+                                        </a>
+                                    </li>
+                                    {{-- <li class="">
                                     <a class="sidenav-item-link" href="product-grid.html">
                                         <span class="nav-text">Grid Product</span>
                                     </a>
@@ -176,80 +197,96 @@
                                         <span class="nav-text">Product Detail</span>
                                     </a>
                                 </li> --}}
-                                <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('admin.new_arrival') }}">
-                                        <span class="nav-text">New Arrival</span>
-                                    </a>
-                                </li>
+                                    <li class="{{ request()->routeIs('admin.new_arrival') ? 'active' : '' }}">
 
-                            </ul>
-                        </div>
-                    </li>
 
-                    <!-- Orders -->
-                    <li class="has-sub">
-                        <a class="sidenav-item-link" href="javascript:void(0)">
-                            <i class="mdi mdi-cart"></i>
-                            <span class="nav-text">Orders</span> <b class="caret"></b>
-                        </a>
-                        <div class="collapse">
-                            <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
-                                <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('new.order') }}">
-                                        <span class="nav-text">New Order</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('order.history') }}">
-                                        <span class="nav-text">Order History</span>
-                                    </a>
-                                </li>
-                                {{-- <li class="">
+                                        <a class="sidenav-item-link" href="{{ route('admin.new_arrival') }}">
+                                            <span class="nav-text">New Arrival</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- Orders -->
+                        <li class="has-sub {{ (request()->routeIs('new.order') || request()->routeIs('order.history')) ? 'active' : '' }}">
+
+
+
+                            <a class="sidenav-item-link" href="javascript:void(0)">
+                                <i class="mdi mdi-cart"></i>
+                                <span class="nav-text">Orders</span> <b class="caret"></b>
+                            </a>
+                            <div class="collapse {{ (request()->routeIs('new.order') || request()->routeIs('order.history')) ? "show":"" }}">
+
+
+                                <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+
+                                    <li class="{{ request()->routeIs('new.order') ? 'active' : '' }}">
+                                        <a class="sidenav-item-link" href="{{ route('new.order') }}">
+                                            <span class="nav-text">New Order</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="{{ request()->routeIs('order.history') ? 'active' : '' }}">
+                                        <a class="sidenav-item-link" href="{{ route('order.history') }}">
+                                            <span class="nav-text">Order History</span>
+                                        </a>
+                                    </li>
+                                    {{-- <li class="">
                                     <a class="sidenav-item-link" href="order-detail.html">
                                         <span class="nav-text">Order Detail</span>
                                     </a>
                                 </li> --}}
-                                <li class="">
+                                    {{-- <li class="">
                                     <a class="sidenav-item-link" href="invoice.html">
                                         <span class="nav-text">Invoice</span>
                                     </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="has-sub">
-                        <a class="sidenav-item-link" href="javascript:void(0)">
-                            <i class="mdi mdi-blogger"></i>
-                            <span class="nav-text">Blog</span> <b class="caret"></b>
-                        </a>
-                        <div class="collapse">
-                            <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
-                                <li class="">
-                                    <a class="sidenav-item-link" href="{{ route('add.blog') }}">
-                                        <span class="nav-text">Add Blog</span>
-                                    </a>
-                                </li>
-                                <li class="">
+                                </li> --}}
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="has-sub {{ (request()->routeIs('add.blog')) ? 'active' : '' }}">
+
+
+                            <a class="sidenav-item-link" href="javascript:void(0)">
+                                <i class="mdi mdi-blogger"></i>
+                                <span class="nav-text">Blog</span> <b class="caret"></b>
+                            </a>
+                            <div class="collapse {{ (request()->routeIs('add.blog')) ? "show":"" }}">
+
+                                <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+                                    <li class="{{ request()->routeIs('add.blog') ? 'active' : '' }}">
+
+
+                                        <a class="sidenav-item-link" href="{{ route('add.blog') }}">
+                                            <span class="nav-text">Add Blog</span>
+                                        </a>
+                                    </li>
+                                    {{-- <li class="{{ request()->routeIs('order.history') ? 'active' : '' }}">
+
+
                                     <a class="sidenav-item-link" href="{{ route('order.history') }}">
                                         <span class="nav-text">View Blogs</span>
                                     </a>
-                                </li>
-                                {{-- <li class="">
+                        </li> --}}
+                        {{-- <li class="">
                                     <a class="sidenav-item-link" href="order-detail.html">
                                         <span class="nav-text">Order Detail</span>
                                     </a>
                                 </li> --}}
-                                <!-- <li class="">
+                        <!-- <li class="">
                                     <a class="sidenav-item-link" href="invoice.html">
                                         <span class="nav-text">Invoice</span>
                                     </a>
                                 </li> -->
-                            </ul>
-                        </div>
-                    </li>
+                    </ul>
+                </div>
+                </li>
 
-                    <!-- Reviews -->
-                    {{-- <li>
+                <!-- Reviews -->
+                {{-- <li>
 
                         <a class="sidenav-item-link" href="review-list.html">
                             <i class="mdi mdi-star-half"></i>

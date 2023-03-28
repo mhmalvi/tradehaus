@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-3 ec-footer-news">
+                    {{-- <div class="col-sm-12 col-lg-3 ec-footer-news">
                         <div class="ec-footer-widget">
                             <h4 class="ec-footer-heading">Newsletter</h4>
                             <div class="ec-footer-links">
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
                     <!-- Footer Copyright Start -->
                     <div class="col text-center footer-copy">
                         <div class="footer-bottom-copy ">
-                            <div class="ec-copy">Copyright © 2021-2022 <a class="site-name text-upper" href="{{ url('/') }}">Trade TradeUs<span>.</span></a>. All Rights Reserved</div>
+                            <div class="ec-copy">Copyright © 2021-2023 <a class="site-name text-upper" href="{{ url('/') }}">Trade TradeUs<span>.</span></a>. All Rights Reserved</div>
                         </div>
                     </div>
                     <!-- Footer Copyright End -->

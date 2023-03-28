@@ -44,18 +44,20 @@
                             <div class="col-lg-4 col-md-6 col-sm-12 mb-6 ec-blog-block">
                                 <div class="ec-blog-inner">
                                     <div class="ec-blog-image">
-                                        <a href="blog-detail-left-sidebar.html">
+                                        <a href="{{url('/blog-details')}}">
+
                                             <img class="blog-image" src="{{env('APP_URL').'/'.$blogs->image}}" alt="Blog" />
                                         </a>
                                     </div>
                                     <div class="ec-blog-content">
-                                        <h5 class="ec-blog-title"><a href="blog-detail-left-sidebar.html">{{$blogs->title}}</a></h5>
+                                        <h5 class="ec-blog-title"><a href="{{url('/blog-details')}}">{{$blogs->title}}</a></h5>
+
 
                                         <!-- <div class="ec-blog-date"> / February 10, 2021-2022</div> -->
                                         <div class="ec-blog-desc">{{ $new_string = mb_strimwidth($blogs->short_description, 0, 40, "!!") }}</div>
 
                                         {{-- {{ $blogs->id }} --}}
-                                        <div class="ec-blog-btn"><a href="{{url('/blog-details')}}" class="btn btn-primary">Read More</a>
+                                        <div class="ec-blog-btn"><a href="{{route('blog.details',[$blogs->id])}}" class="btn btn-primary">Read More</a>
 
 
 
