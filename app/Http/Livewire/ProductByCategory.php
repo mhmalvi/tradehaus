@@ -24,31 +24,63 @@ class ProductByCategory extends Component
 
     public function add_to_cart($id, $price)
     {
-        // dd("hello");
+        $ipAddr = \Request::ip();
+        // dd($macAddr);
         if (Auth::check()) {
             $product = Product::find($id);
-            $cart_item = Cart::where('product_id', $id)->where('user_id', Auth::user()->id)->exists();
-            if ($cart_item) {
-                $this->dispatchBrowserEvent('item_exists');
+            if ($product->product_quantity > 0) {
+                $cart_item = Cart::where('product_id', $id)->where('user_id', Auth::user()->id)->exists();
+                if ($cart_item) {
+                    $this->dispatchBrowserEvent('item_exists');
+                } else {
+                    $cart = new Cart();
+                    $cart->product_name = $product->product_name;
+                    $cart->product_price = $price;
+                    // $cart->product_size = $request->size;
+                    // $cart->product_color = $request->color;
+                    $cart->product_image = $product->product_image;
+                    $cart->product_quantity = 1;
+                    $cart->product_id = $id;
+                    $cart->user_id = Auth::user()->id;
+                    // $cart->ip = $ipAddr;
+                    $cart->save();
+                    // Alert::success('Congrats', 'Added to cart');
+                    $this->dispatchBrowserEvent('add_to_cart');
+                    $this->emit('cart_items');
+                    $this->emit('count');
+                    // $cart_item = "";
+                }
             } else {
-                $cart = new Cart();
-                $cart->product_name = $product->product_name;
-                $cart->product_price = $price;
-                // $cart->product_size = $request->size;
-                // $cart->product_color = $request->color;
-                $cart->product_image = $product->product_image;
-                // $cart->product_quantity = $quantity;
-                $cart->product_id = $id;
-                $cart->user_id = Auth::user()->id;
-                $cart->save();
-                // Alert::success('Congrats', 'Added to cart');
-                $this->dispatchBrowserEvent('add_to_cart');
-                $this->emit('cart_items');
-                $this->emit('count');
-                // $cart_item = "";
+                $this->dispatchBrowserEvent('not_available');
             }
         } else {
-            $this->dispatchBrowserEvent('login');
+            // $this->dispatchBrowserEvent('login');
+            $product = Product::find($id);
+            if ($product->product_quantity > 0) {
+                $cart_item = Cart::where('product_id', $id)->where('ip', $ipAddr)->exists();
+                if ($cart_item) {
+                    $this->dispatchBrowserEvent('item_exists');
+                } else {
+                    $cart = new Cart();
+                    $cart->product_name = $product->product_name;
+                    $cart->product_price = $price;
+                    // $cart->product_size = $request->size;
+                    // $cart->product_color = $request->color;
+                    $cart->product_image = $product->product_image;
+                    $cart->product_quantity = 1;
+                    $cart->product_id = $id;
+                    $cart->ip = $ipAddr;
+                    // $cart->user_id = Auth::user()->id;
+                    $cart->save();
+                    // Alert::success('Congrats', 'Added to cart');
+                    $this->dispatchBrowserEvent('add_to_cart');
+                    $this->emit('cart_items');
+                    $this->emit('count');
+                    // $cart_item = "";
+                }
+            } else {
+                $this->dispatchBrowserEvent('not_available');
+            }
         }
     }
 

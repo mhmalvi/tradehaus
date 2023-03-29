@@ -27,7 +27,7 @@
 
                     @endphp
                     @if(isset($cart_items))
-<!-- @dump($cart_items) -->
+                    <!-- @dump($cart_items) -->
                     @foreach($cart_items as $cart_item)
 
                     <li>
@@ -53,11 +53,11 @@
 
 
                                 <!-- <input class="qty-input" wire:change="updateCart" type="number" wire:model="product_quantity" value="{{ $cart_item->product_quantity }}" /> -->
-                                <button type="button" wire:click="decrement({{$cart_item->id}})" class="btn"><span >-</span></button>
+                                <button type="button" wire:click="decrement({{$cart_item->id}})" class="btn"><span>-</span></button>
 
 
 
-                                <input class="qty-input" style="border: 1px solid #d3d3d3;height: 22px;    margin-top: 12px;width:3rem;" type="text" value="{{$cart_item->product_quantity}}"  /> 
+                                <input class="qty-input" style="border: 1px solid #d3d3d3;height: 22px;    margin-top: 12px;width:3rem;" type="text" value="{{$cart_item->product_quantity}}" />
                                 <button type="button" wire:click="increment({{$cart_item->id}})" class="btn">+</button>
                             </div>
                             <button wire:click="delete_cart_item({{$cart_item->id}})" class="remove">×</button>
@@ -93,7 +93,13 @@
                             </tr>
                             <tr>
                                 <td class="text-left">VAT (20%) :</td>
+                                @if($total!=0)
+
                                 <td class="text-right">$60.00</td>
+                                @else
+                                <td class="text-right">$0.00</td>
+                                @endif
+
                             </tr>
                             <tr>
                                 <td class="text-left">Total :</td>

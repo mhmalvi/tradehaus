@@ -24,7 +24,7 @@ class CheckoutController extends Controller
             $items->save();
         }
         // if($prev_items->isEmpty()){
-        if ($prev_items->isEmpty() && $prev_items[0]->user_id == "") {
+        if ($prev_items->isEmpty() ) {
             if (!$exitems->isEmpty()) {
 
                 $total_price = 0;

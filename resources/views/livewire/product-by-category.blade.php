@@ -779,10 +779,15 @@
 
                                 <div class="ec-pro-desc">{{ $data->product_short_description }} </div>
                                 <div class="ec-pro-actions">
-                                    <a class="ec-btn-group wishlist" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
-                                    <button title="Add To Cart" class="add-to-cart btn btn-primary">Add To
+                                    <a class="ec-btn-group wishlist" wire:click="add_to_wishlist({{$data->id}},{{$price}})" title="Wishlist"><img src="assets/images/icons/pro_wishlist.svg" class="svg_img pro_svg" alt="" /></a>
+
+
+                                    <button wire:click="add_to_cart({{$data->id}},{{$data->product_price}})" title="Add To Cart" class="add-to-cart btn btn-primary">Add To
+
+
+
                                         Cart</button>
-                                    <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
+                                    <a href="#"  class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><img src="assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" /></a>
                                 </div>
                             </div>
                         </div>
@@ -920,7 +925,11 @@
 
         <div class="ec-offer-inner ofr-img">
 
-            <img style="width: 26%;" src="{{ env('APP_URL').'/'.$data->product_image }}">
+
+            {{-- <img style="width: 26%;" src="{{ env('APP_URL').'/'.$data->product_image }}"> --}}
+            <img src="{{ asset('assets/black_friday/matebook.jpg') }}">
+
+
 
 
             <!-- <img src="assets/images/offer-image/offer_bg.png" alt="" class="offer_bg" /> -->
@@ -1751,7 +1760,7 @@
                         <img src="assets/images/icons/service_2.svg" class="svg_img" alt="" />
                     </div>
                     <div class="ec-service-desc">
-                        <h2>money gaurntee</h2>
+                        <h2>money guarantee</h2>
                         <p>30 days money back guarantee</p>
                     </div>
                 </div>

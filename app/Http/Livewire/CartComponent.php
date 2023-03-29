@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CartComponent extends Component
 {
     public $product_quantity;
-    protected $listeners = ['count' => 'cart_count'];
+    protected $listeners = ['cart_count' => 'cart_count'];
     public function render()
     {
         $ipAddr=\Request::ip();

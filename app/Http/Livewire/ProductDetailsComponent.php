@@ -44,6 +44,7 @@ class ProductDetailsComponent extends Component
     // }
     public function add_to_cart()
     {
+        $ipAddr = \Request::ip();
         // dd($this);
         // dd($this->color !== " ");
         // dd($this->product_quantity);
@@ -77,13 +78,34 @@ class ProductDetailsComponent extends Component
                                 $save = $cart->save();
                                 $this->dispatchBrowserEvent('add_to_cart');
                                 $this->emit('cart_items');
-                                $this->emit('count');
+                                $this->emit('cart_count');
                             }
                         } else {
                             $this->dispatchBrowserEvent('not_available');
                         }
                     } else {
-                        $this->dispatchBrowserEvent('login');
+                        if ($product->product_quantity > 0) {
+                            $cart_item = Cart::where('product_id', $this->product_id)->where('ip', $ipAddr)->exists();
+                            if ($cart_item) {
+                                $this->dispatchBrowserEvent('item_exists');
+                            } else {
+                                $cart = new Cart();
+                                $cart->product_id = $this->product_id;
+                                $cart->product_name = $this->product_name;
+                                $cart->product_quantity = $this->product_quantity;
+                                $cart->product_color = $this->color;
+                                $cart->product_size = $this->size;
+                                $cart->product_price = $this->product_price;
+                                $cart->product_image = $this->product_image;
+                                $cart->ip = $ipAddr;
+                                $save = $cart->save();
+                                $this->dispatchBrowserEvent('add_to_cart');
+                                $this->emit('cart_items');
+                                $this->emit('cart_count');
+                            }
+                        } else {
+                            $this->dispatchBrowserEvent('not_available');
+                        }
                     }
                 } else {
                     $this->dispatchBrowserEvent('over_quantity');
@@ -109,13 +131,34 @@ class ProductDetailsComponent extends Component
                             $save = $cart->save();
                             $this->dispatchBrowserEvent('add_to_cart');
                             $this->emit('cart_items');
-                            $this->emit('count');
+                            $this->emit('cart_count');
                         }
                     } else {
                         $this->dispatchBrowserEvent('not_available');
                     }
                 } else {
-                    $this->dispatchBrowserEvent('login');
+                    if ($product->product_quantity > 0) {
+                        $cart_item = Cart::where('product_id', $this->product_id)->where('ip', $ipAddr)->exists();
+                        if ($cart_item) {
+                            $this->dispatchBrowserEvent('item_exists');
+                        } else {
+                            $cart = new Cart();
+                            $cart->product_id = $this->product_id;
+                            $cart->product_name = $this->product_name;
+                            $cart->product_quantity = $this->product_quantity;
+                            $cart->product_color = $this->color;
+                            $cart->product_size = $this->size;
+                            $cart->product_price = $this->product_price;
+                            $cart->product_image = $this->product_image;
+                            $cart->ip = $ipAddr;
+                            $save = $cart->save();
+                            $this->dispatchBrowserEvent('add_to_cart');
+                            $this->emit('cart_items');
+                            $this->emit('cart_count');
+                        }
+                    } else {
+                        $this->dispatchBrowserEvent('not_available');
+                    }
                 }
             } else {
                 $this->dispatchBrowserEvent('over_quantity');

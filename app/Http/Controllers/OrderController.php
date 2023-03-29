@@ -81,9 +81,7 @@ class OrderController extends Controller
         foreach ($cart_items as $item) {
             $item->delete();
         }
-        return response()->json([
-            'status' => 'created'
-        ]);
+        return view('order-success');
     }
 
     /**

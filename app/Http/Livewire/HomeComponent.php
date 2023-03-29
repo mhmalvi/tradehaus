@@ -29,7 +29,7 @@ class HomeComponent extends Component
     {
         // dd($id);
         // $macAddr = exec('getmac');
-        $ipAddr=\Request::ip();
+        $ipAddr = \Request::ip();
         // dd($macAddr);
         if (Auth::check()) {
             $product = Product::find($id);
@@ -62,7 +62,7 @@ class HomeComponent extends Component
             // $this->dispatchBrowserEvent('login');
             $product = Product::find($id);
             if ($product->product_quantity > 0) {
-                $cart_item = Cart::where('product_id', $id)->where('ip',$ipAddr)->exists();
+                $cart_item = Cart::where('product_id', $id)->where('ip', $ipAddr)->exists();
                 if ($cart_item) {
                     $this->dispatchBrowserEvent('item_exists');
                 } else {
@@ -95,23 +95,23 @@ class HomeComponent extends Component
     public function add_to_wishlist($product_id, $price)
     {
         $product = Product::find($product_id)->first();
-        // if (Auth::check()) {
-        $wish_exist = Wishlist::where('product_id', $product_id)->where('user_id', Auth::user()->id)->exists();
-        if ($wish_exist) {
-            $this->dispatchBrowserEvent('item_exists');
+        if (Auth::check()) {
+            $wish_exist = Wishlist::where('product_id', $product_id)->where('user_id', Auth::user()->id)->exists();
+            if ($wish_exist) {
+                $this->dispatchBrowserEvent('item_exists');
+            } else {
+                $wishlist = new WishList();
+                $wishlist->product_name = $product->product_name;
+                $wishlist->product_price = $price;
+                $wishlist->product_id = $product_id;
+                $wishlist->user_id = Auth::user()->id;
+                $wishlist->save();
+                $this->dispatchBrowserEvent('add_to_wishlist');
+                // $this->emit('wishlist_item');
+                $this->emit('count');
+            }
         } else {
-            $wishlist = new WishList();
-            $wishlist->product_name = $product->product_name;
-            $wishlist->product_price = $price;
-            $wishlist->product_id = $product_id;
-            $wishlist->user_id = Auth::user()->id;
-            $wishlist->save();
-            $this->dispatchBrowserEvent('add_to_wishlist');
-            // $this->emit('wishlist_item');
-            $this->emit('count');
+            $this->dispatchBrowserEvent('login');
         }
-        // } else {
-        //     $this->dispatchBrowserEvent('login');
-        // }
     }
 }

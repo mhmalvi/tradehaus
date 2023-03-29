@@ -218,7 +218,7 @@
 <!-- Modal end -->
 
 <!-- Click To ChatPro -->
-<div class="ec-cp-style cp-right-bottom">
+{{-- <div class="ec-cp-style cp-right-bottom">
     <!-- Start Floating Panel Container -->
     <div class="cp-panel">
         <!-- Chat Button For Facebook Messenger -->
@@ -328,7 +328,7 @@
         <img src="assets/images/chat-pro/chat.png" alt="icon" />
     </div>
     <!--/ End Right Floating Button -->
-</div>
+</div> --}}
 <!-- Click To ChatPro end-->
 
 <!-- Newsletter Modal Start -->

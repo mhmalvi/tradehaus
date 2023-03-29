@@ -8,7 +8,8 @@
 </head>
 <body>
     <div style="text-align:center;">
-        <h1>Order successful</h1>
+        <h1>Order successful</h1><br>
+        <a href="{{ url('/') }}" type="btn btn-success">Go to home page</a>
     </div>
 </body>
 </html>

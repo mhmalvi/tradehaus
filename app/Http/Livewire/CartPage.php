@@ -145,6 +145,6 @@ class CartPage extends Component
         $cart = cart::find($id);
         $cart->delete();
         $this->emit('cart_items');
-        $this->emit('count');
+        $this->emit('cart_count');
     }
 }
