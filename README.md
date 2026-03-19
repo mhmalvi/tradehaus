@@ -1,64 +1,137 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# TradeHaus
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-featured trading and marketplace platform built with Laravel 8. TradeHaus provides a complete e-commerce experience with product catalogs, shopping cart, order management, wishlists, blog system, and a comprehensive admin panel.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Product Catalog** — Browse products by category with search functionality and detailed product pages
+- **Shopping Cart** — Dynamic cart with AJAX quantity updates and real-time total calculations
+- **Order Management** — Complete checkout flow with order placement, tracking, and history
+- **Wishlist** — Save favorite products for later purchase
+- **Admin Dashboard** — Full back-office panel for managing products, categories, orders, and content
+- **Blog System** — Admin-managed blog with comment support for content marketing
+- **New Arrivals** — Dedicated section for featuring latest products with CRUD management
+- **User Authentication** — Registration, login, and role-based access control (customer/admin)
+- **Category Management** — Hierarchical categories with sub-category support
+- **Order Tracking** — Customers can track order status and view order details
+- **Content Pages** — About Us, Contact Us, Privacy Policy, Terms & Conditions, and FAQ pages
+- **Offers & Promotions** — Dedicated offers page for marketing campaigns
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Component | Technology |
+|-----------|------------|
+| Framework | Laravel 8 |
+| Language | PHP 7.3+ / 8.0 |
+| Frontend | Blade, Livewire |
+| UI Components | SweetAlert2 |
+| Authentication | Laravel Breeze, Laravel UI |
+| Database | MySQL |
+| ORM | Eloquent |
 
-## Learning Laravel
+## Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 7.3+ or 8.0
+- Composer
+- MySQL 5.7+
+- Node.js (for asset compilation)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Getting Started
 
-## Laravel Sponsors
+### 1. Clone the Repository
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+git clone https://github.com/mhmalvi/tradehaus.git
+cd tradehaus
+```
 
-### Premium Partners
+### 2. Install Dependencies
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+composer install
+npm install && npm run dev
+```
 
-## Contributing
+### 3. Configure Environment
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Code of Conduct
+Edit `.env` with your database credentials:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=tradehaus
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Security Vulnerabilities
+### 4. Run Migrations and Seeders
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate --seed
+```
+
+### 5. Start the Server
+
+```bash
+php artisan serve
+```
+
+The application will be available at `http://localhost:8000`.
+
+## Key Routes
+
+### Storefront
+
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage with product listings |
+| `/product-details/{id}` | Product detail page |
+| `/product_by_category/{id}` | Products filtered by category |
+| `/search-item` | Product search |
+| `/cart-items` | Shopping cart |
+| `/checkout/{total}` | Checkout page |
+| `/blog-all` | Blog listing |
+| `/new-arrival/{slug}` | New arrival details |
+| `/offer` | Offers and promotions |
+
+### Admin Panel
+
+| Route | Description |
+|-------|-------------|
+| `/admin/dashboard` | Admin dashboard |
+| `/admin/add-product` | Add new product |
+| `/admin/get-productList` | Product management |
+| `/admin/add-category` | Category management |
+| `/admin/new-order` | New order processing |
+| `/admin/order-history` | Order history |
+| `/admin/add-blog` | Blog management |
+| `/admin/new-arrival` | New arrivals management |
+
+## Project Structure
+
+```
+tradehaus/
+├── app/
+│   ├── Console/Commands/         # Artisan commands (cart cleanup)
+│   ├── Http/
+│   │   ├── Controllers/          # Storefront controllers
+│   │   ├── Controllers/admin/    # Admin panel controllers
+│   │   └── Middleware/            # Auth middleware
+│   └── Models/                   # Eloquent models
+├── database/
+│   ├── factories/                # Model factories
+│   ├── migrations/               # Database migrations
+│   └── seeders/                  # Database seeders
+├── resources/views/              # Blade templates
+├── routes/web.php                # Web routes
+└── composer.json
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open source and available under the [MIT License](LICENSE).
