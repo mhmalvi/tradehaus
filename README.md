@@ -1,6 +1,8 @@
 <!-- repo-card -->
 ![tradehaus](docs/assets/social-card.png)
 
+![tradehaus — architecture](docs/assets/architecture.png)
+
 # TradeHaus
 
 A full-featured trading and marketplace platform built with Laravel 8. TradeHaus provides a complete e-commerce experience with product catalogs, shopping cart, order management, wishlists, blog system, and a comprehensive admin panel.
